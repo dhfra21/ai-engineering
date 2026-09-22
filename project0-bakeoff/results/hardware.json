@@ -1,0 +1,5 @@
+{
+  "hardware": "DESCRIBE THE MACHINE YOU RAN THE OPEN-WEIGHTS MODEL ON, e.g. 'RTX 4060 laptop GPU, 8GB VRAM' or 'M2 MacBook Air, 16GB unified memory (CPU-only)'",
+  "cost_per_hour_usd": null,
+  "notes": "How you priced this hour: e.g. a comparable on-demand cloud GPU instance's hourly rate, or (laptop wattage in kW) x (your electricity price per kWh) if running locally. Fill in cost_per_hour_usd as a number before running `python -m src.cost`."
+}
