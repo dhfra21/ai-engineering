@@ -15,16 +15,33 @@ Every call returns the same shape so run.py doesn't need to branch:
 """
 from __future__ import annotations
 
+import random
+import re
 import time
 from typing import Any
 
 import requests
+from google.genai import errors as genai_errors
 from google.genai import types as genai_types
 
 from src.config import MAX_OUTPUT_TOKENS, OLLAMA_BASE_URL, ModelSpec
 from src.prompt import SYSTEM_PROMPT, build_prompt
 
 CallResult = dict[str, Any]
+
+# Google AI Studio's free tier caps gemini-3.8-flash at 5 requests/minute
+# (gemini-3.5-flash-lite has more headroom but isn't unlimited either).
+# 429s come back with a structured suggested wait — "Please retry in
+# 32.7s." — which we parse and honor instead of guessing a backoff.
+_RETRYABLE_CODES = {429, 500, 502, 503, 504}
+_MAX_RETRIES = 6
+_BACKOFF_CAP_S = 90.0
+_RETRY_AFTER_RE = re.compile(r"retry in (\d+(?:\.\d+)?)s", re.IGNORECASE)
+
+
+def _suggested_retry_delay(exc: Exception) -> float | None:
+    match = _RETRY_AFTER_RE.search(str(exc))
+    return float(match.group(1)) if match else None
 
 
 def _empty_result(error: str) -> CallResult:
@@ -87,7 +104,13 @@ def call_claude(spec: ModelSpec, question: str, client) -> CallResult:
 def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
     """client is a google.genai.Client() instance, passed in so run.py
     creates it once and reuses it across all 50 calls. Reads
-    GEMINI_API_KEY from the environment automatically."""
+    GEMINI_API_KEY from the environment automatically.
+
+    Retries on 429 (rate limit) and 5xx (transient server errors) using
+    the server's own suggested wait when it provides one, falling back to
+    exponential backoff otherwise. A quota hit is Google's infrastructure,
+    not the model failing the question — it shouldn't get scored as wrong
+    just because we asked faster than the free tier allows."""
     prompt = build_prompt(question)
     config = genai_types.GenerateContentConfig(
         system_instruction=SYSTEM_PROMPT,
@@ -95,16 +118,51 @@ def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )
 
-    start = time.perf_counter()
-    try:
-        response = client.models.generate_content(
-            model=spec.model_id,
-            contents=prompt,
-            config=config,
-        )
-    except Exception as e:  # noqa: BLE001 — record every failure as a scored item, not a crash
-        return _empty_result(f"{type(e).__name__}: {e}")
-    latency_ms = (time.perf_counter() - start) * 1000
+    response = None
+    error_to_report = None
+    latency_ms = None
+    for attempt in range(_MAX_RETRIES + 1):
+        # Timed per attempt, not across the whole retry loop — rate-limit
+        # backoff sleeps are Google's free-tier quota, not the model's
+        # response time, and must not leak into the latency numbers.
+        attempt_start = time.perf_counter()
+        try:
+            response = client.models.generate_content(
+                model=spec.model_id,
+                contents=prompt,
+                config=config,
+            )
+            latency_ms = (time.perf_counter() - attempt_start) * 1000
+            error_to_report = None
+            break
+        except genai_errors.APIError as e:
+            latency_ms = (time.perf_counter() - attempt_start) * 1000
+            error_to_report = f"{type(e).__name__}: {e}"
+            code = getattr(e, "code", None)
+            if code in _RETRYABLE_CODES and attempt < _MAX_RETRIES:
+                delay = _suggested_retry_delay(e)
+                if delay is None:
+                    delay = min(2 ** attempt, _BACKOFF_CAP_S)
+                delay = min(delay + random.uniform(0.5, 2.0), _BACKOFF_CAP_S)
+                print(f"    [{spec.key}] {code} — retrying in {delay:.0f}s "
+                      f"(attempt {attempt + 1}/{_MAX_RETRIES})")
+                time.sleep(delay)
+                continue
+            break
+        except Exception as e:  # noqa: BLE001 — record every failure as a scored item, not a crash
+            latency_ms = (time.perf_counter() - attempt_start) * 1000
+            error_to_report = f"{type(e).__name__}: {e}"
+            break
+
+    if response is None:
+        return {
+            "raw_output": "",
+            "latency_ms": latency_ms,
+            "input_tokens": None,
+            "output_tokens": None,
+            "tokens_per_second": None,
+            "error": error_to_report or "unknown error",
+        }
 
     usage = response.usage_metadata
     return {
