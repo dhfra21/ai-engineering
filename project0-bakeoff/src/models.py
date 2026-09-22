@@ -1,7 +1,7 @@
-"""Thin, uniform wrappers around the backends used in the bake-off: the
-Gemini API (top + cheap model, on Google AI Studio's free tier), a local
-Ollama server (the open-weights model you run yourself), and — kept for
-reference — the Anthropic API, in case you get API access later.
+"""Thin, uniform wrappers around the backends used in the bake-off: Groq
+(top + cheap model, on its free tier), a local Ollama server (the
+open-weights model you run yourself), and — kept for reference, unused by
+default — the Anthropic and Gemini APIs, in case you swap a model back in.
 
 Every call returns the same shape so run.py doesn't need to branch:
     {
@@ -12,6 +12,11 @@ Every call returns the same shape so run.py doesn't need to branch:
         "tokens_per_second": float | None,   # only meaningful for Ollama
         "error": str | None,
     }
+
+The Anthropic and Google SDKs are imported lazily inside their respective
+call_*() functions rather than at module level, so this file — and a
+`python -m src.run` that only touches Groq + Ollama — doesn't need those
+packages installed. See requirements.txt.
 """
 from __future__ import annotations
 
@@ -21,21 +26,12 @@ import time
 from typing import Any
 
 import requests
-from google.genai import errors as genai_errors
-from google.genai import types as genai_types
 
 from src.config import MAX_OUTPUT_TOKENS, OLLAMA_BASE_URL, ModelSpec
 from src.prompt import SYSTEM_PROMPT, build_prompt
 
 CallResult = dict[str, Any]
 
-# Google AI Studio's free tier caps gemini-3.8-flash at 5 requests/minute
-# (gemini-3.5-flash-lite has more headroom but isn't unlimited either).
-# 429s come back with a structured suggested wait — "Please retry in
-# 32.7s." — which we parse and honor instead of guessing a backoff.
-_RETRYABLE_CODES = {429, 500, 502, 503, 504}
-_MAX_RETRIES = 6
-_BACKOFF_CAP_S = 90.0
 _RETRY_AFTER_RE = re.compile(r"retry in (\d+(?:\.\d+)?)s", re.IGNORECASE)
 
 
@@ -102,7 +98,8 @@ def call_claude(spec: ModelSpec, question: str, client) -> CallResult:
 
 
 def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
-    """client is a google.genai.Client() instance, passed in so run.py
+    """Not used by default (see src/config.py) — kept for reference.
+    client is a google.genai.Client() instance, passed in so run.py
     creates it once and reuses it across all 50 calls. Reads
     GEMINI_API_KEY from the environment automatically.
 
@@ -111,6 +108,13 @@ def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
     exponential backoff otherwise. A quota hit is Google's infrastructure,
     not the model failing the question — it shouldn't get scored as wrong
     just because we asked faster than the free tier allows."""
+    from google.genai import errors as genai_errors  # lazy: optional dependency
+    from google.genai import types as genai_types
+
+    retryable_codes = {429, 500, 502, 503, 504}
+    max_retries = 6
+    backoff_cap_s = 90.0
+
     prompt = build_prompt(question)
     config = genai_types.GenerateContentConfig(
         system_instruction=SYSTEM_PROMPT,
@@ -121,7 +125,7 @@ def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
     response = None
     error_to_report = None
     latency_ms = None
-    for attempt in range(_MAX_RETRIES + 1):
+    for attempt in range(max_retries + 1):
         # Timed per attempt, not across the whole retry loop — rate-limit
         # backoff sleeps are Google's free-tier quota, not the model's
         # response time, and must not leak into the latency numbers.
@@ -139,13 +143,13 @@ def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
             latency_ms = (time.perf_counter() - attempt_start) * 1000
             error_to_report = f"{type(e).__name__}: {e}"
             code = getattr(e, "code", None)
-            if code in _RETRYABLE_CODES and attempt < _MAX_RETRIES:
+            if code in retryable_codes and attempt < max_retries:
                 delay = _suggested_retry_delay(e)
                 if delay is None:
-                    delay = min(2 ** attempt, _BACKOFF_CAP_S)
-                delay = min(delay + random.uniform(0.5, 2.0), _BACKOFF_CAP_S)
+                    delay = min(2 ** attempt, backoff_cap_s)
+                delay = min(delay + random.uniform(0.5, 2.0), backoff_cap_s)
                 print(f"    [{spec.key}] {code} — retrying in {delay:.0f}s "
-                      f"(attempt {attempt + 1}/{_MAX_RETRIES})")
+                      f"(attempt {attempt + 1}/{max_retries})")
                 time.sleep(delay)
                 continue
             break
@@ -170,6 +174,43 @@ def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
         "latency_ms": latency_ms,
         "input_tokens": usage.prompt_token_count if usage else None,
         "output_tokens": usage.candidates_token_count if usage else None,
+        "tokens_per_second": None,
+        "error": None,
+    }
+
+
+def call_groq(spec: ModelSpec, question: str, client) -> CallResult:
+    """client is a groq.Groq() instance, created once in run.py and
+    reused across all 50 calls. Reads GROQ_API_KEY from the environment
+    automatically.
+
+    Unlike the Gemini client, the Groq SDK retries 429/5xx itself,
+    honoring the server's Retry-After header (see run.py for where
+    max_retries is set) — no manual backoff loop needed here."""
+    prompt = build_prompt(question)
+
+    start = time.perf_counter()
+    try:
+        response = client.chat.completions.create(
+            model=spec.model_id,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0,
+            max_tokens=MAX_OUTPUT_TOKENS,
+        )
+    except Exception as e:  # noqa: BLE001 — record every failure as a scored item, not a crash
+        return _empty_result(f"{type(e).__name__}: {e}")
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    text = response.choices[0].message.content or ""
+    usage = response.usage
+    return {
+        "raw_output": text,
+        "latency_ms": latency_ms,
+        "input_tokens": usage.prompt_tokens if usage else None,
+        "output_tokens": usage.completion_tokens if usage else None,
         "tokens_per_second": None,
         "error": None,
     }

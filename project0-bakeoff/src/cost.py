@@ -68,7 +68,13 @@ def main() -> None:
         p95 = percentile(latencies, 0.95)
 
         note = ""
-        if spec.kind in ("google", "anthropic"):
+        if spec.kind != "ollama":
+            # Any API-metered backend (groq, google, anthropic, ...) is
+            # priced the same way: real token usage x list price. Only
+            # "ollama" (self-hosted, no token pricing) takes the hardware
+            # branch below — keying off that one kind instead of naming
+            # every provider avoids silently mis-costing a model the next
+            # time a provider gets swapped in or out.
             in_toks = [int(r["input_tokens"]) for r in model_rows if r["input_tokens"]]
             out_toks = [int(r["output_tokens"]) for r in model_rows if r["output_tokens"]]
             avg_in = mean(in_toks) if in_toks else 0
@@ -118,7 +124,7 @@ def main() -> None:
 
     # ---- break-even volume: API vs self-hosted ----
     api_rows = [r for r in out_rows if r["cost_per_1k_requests_usd"] is not None
-                and MODEL_BY_KEY[r["model_key"]].kind in ("google", "anthropic")]
+                and MODEL_BY_KEY[r["model_key"]].kind != "ollama"]
     self_hosted = next((r for r in out_rows if MODEL_BY_KEY[r["model_key"]].kind == "ollama"), None)
     if self_hosted and hw_cost_per_hour and api_rows:
         print("\n--- break-even volume (requests/hour) vs. self-hosted ---")

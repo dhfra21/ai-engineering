@@ -1,7 +1,9 @@
-google-genai>=1.0
+groq>=0.9
 requests>=2.31
 python-dotenv>=1.0
 
-# Optional — only needed if you swap a model back to Anthropic
-# (src/models.py::call_claude still supports it, see src/config.py).
+# Optional — only needed if you swap a model back to Anthropic or Gemini
+# (src/models.py::call_claude / call_gemini still support them, see
+# src/config.py's commented-out ANTHROPIC_ALTERNATIVES / GOOGLE_ALTERNATIVES).
 # anthropic>=1.0
+# google-genai>=1.0

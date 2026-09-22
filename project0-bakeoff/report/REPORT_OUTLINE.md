@@ -28,9 +28,10 @@ item verbatim from `data/items.jsonl` (question + gold_sql).
   `results/per_item.csv`'s `model_id` column).
 - Settings: max output tokens, temperature 0 (all three models support it
   here — no deviation needed), single-call-per-item, no retrieval, no agent.
-- Note both API-tier models come from Google (see `postmortem.md` for why),
-  and that cost is computed at list price even though the free tier made
-  actual spend $0.
+- Note both API-tier models come from Groq and are the same OpenAI
+  GPT-OSS family at two sizes (see `postmortem.md` for why, and why we
+  moved off Gemini's free tier), and that cost is computed at list price
+  even though the free tier made actual spend $0.
 - Prompt: reference `src/prompt.py` (same prompt, byte-for-byte, all 3 models).
 - Hardware for the self-hosted model: `results/HARDWARE.md`.
 

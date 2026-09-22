@@ -3,14 +3,14 @@ next, calls made one after another (not concurrently) so latency numbers
 mean what the brief asks them to mean. Writes results/per_item.csv.
 
 Usage:
-    python -m src.run                        # all three models
-    python -m src.run --only gemini38flash    # just one, e.g. while debugging
+    python -m src.run                       # all three models
+    python -m src.run --only gptoss120b     # just one, e.g. while debugging
 
 Requires:
     - db/store.db built (python db/build_db.py)
     - data/items.jsonl generated (python data/make_items.py)
-    - GEMINI_API_KEY set (for gemini38flash / gemini35flashlite), free at
-      aistudio.google.com/apikey — see .env.example
+    - GROQ_API_KEY set (for gptoss120b / gptoss20b), free at
+      console.groq.com/keys — see .env.example
     - `ollama serve` running locally with the open-weights model pulled
       (for qwen7b) — see README.md
 """
@@ -28,9 +28,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from dotenv import load_dotenv  # noqa: E402
 
 from src.config import MODELS, RESULTS_DIR  # noqa: E402
-from src.models import call_claude, call_gemini, call_ollama  # noqa: E402
+from src.models import call_claude, call_gemini, call_groq, call_ollama  # noqa: E402
 
-load_dotenv()  # picks up GEMINI_API_KEY (and ANTHROPIC_API_KEY, if used) from a local .env
+load_dotenv()  # picks up GROQ_API_KEY (and GEMINI_API_KEY / ANTHROPIC_API_KEY, if used) from a local .env
 
 ITEMS_PATH = Path(__file__).parent.parent / "data" / "items.jsonl"
 OUT_PATH = Path(__file__).parent.parent / RESULTS_DIR / "per_item.csv"
@@ -52,10 +52,12 @@ def load_items() -> list[dict]:
     return items
 
 
-def run_model(spec, items: list[dict], anthropic_client=None, google_client=None) -> list[dict]:
+def run_model(spec, items: list[dict], groq_client=None, anthropic_client=None, google_client=None) -> list[dict]:
     rows = []
     for i, item in enumerate(items, start=1):
-        if spec.kind == "google":
+        if spec.kind == "groq":
+            result = call_groq(spec, item["question"], groq_client)
+        elif spec.kind == "google":
             result = call_gemini(spec, item["question"], google_client)
         elif spec.kind == "anthropic":
             result = call_claude(spec, item["question"], anthropic_client)
@@ -87,7 +89,7 @@ def run_model(spec, items: list[dict], anthropic_client=None, google_client=None
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--only", help="run a single model key (e.g. gemini38flash, gemini35flashlite, qwen7b)")
+    parser.add_argument("--only", help="run a single model key (e.g. gptoss120b, gptoss20b, qwen7b)")
     args = parser.parse_args()
 
     items = load_items()
@@ -96,6 +98,14 @@ def main() -> None:
     models_to_run = [m for m in MODELS if args.only is None or m.key == args.only]
     if not models_to_run:
         raise SystemExit(f"no model matches --only {args.only!r}")
+
+    groq_client = None
+    if any(m.kind == "groq" for m in models_to_run):
+        from groq import Groq
+        # Bump retries above the SDK default (2) — the free tier's request
+        # cap means a burst of 429s is expected, not exceptional, and the
+        # client already honors the server's Retry-After header per retry.
+        groq_client = Groq(max_retries=5)  # reads GROQ_API_KEY from env
 
     anthropic_client = None
     if any(m.kind == "anthropic" for m in models_to_run):
@@ -117,7 +127,7 @@ def main() -> None:
 
     for spec in models_to_run:
         print(f"\n=== Running {spec.key} ({spec.model_id}) — {len(items)} items ===")
-        all_rows.extend(run_model(spec, items, anthropic_client, google_client))
+        all_rows.extend(run_model(spec, items, groq_client, anthropic_client, google_client))
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUT_PATH.open("w", encoding="utf-8", newline="") as f:
