@@ -24,3 +24,8 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Project 1: generated DB, LLM response cache, mock-backend results
+project1-grader/db/store.db
+project1-grader/.cache/
+project1-grader/results/mock/
