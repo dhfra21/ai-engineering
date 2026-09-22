@@ -17,10 +17,18 @@ human in the scoring loop — see `src/db_utils.py::rows_match`.
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env          # then fill in ANTHROPIC_API_KEY
+cp .env.example .env          # then fill in GEMINI_API_KEY
 python db/build_db.py         # builds db/store.db (deterministic, seed=42)
 python data/make_items.py     # regenerates + verifies data/items.jsonl (optional — already committed)
 ```
+
+The two API-tier models run on Google AI Studio's Gemini API, which has a
+free tier for both — get a key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+(no credit card required). No API cost is incurred running this eval
+under the free tier; `results/cost_summary.csv` still reports the
+published *paid* list price, per the brief ("token counts x the list
+price"), which is also what makes the "cost at 100x traffic" projection
+meaningful — see `src/config.py` for the rates and the date they were checked.
 
 For the open-weights model, install [Ollama](https://ollama.com) and pull
 the model once:
@@ -38,17 +46,17 @@ python -m src.score           # scores per_item.csv -> results/summary.csv, prin
 python -m src.cost            # fill results/hardware.json first -> results/cost_summary.csv
 ```
 
-Run a single model while debugging: `python -m src.run --only opus5`.
+Run a single model while debugging: `python -m src.run --only gemini38flash`.
 
 ## Results
 
 _Populate after running the commands above — paste the console output of
 `python -m src.score` and `python -m src.cost`, or the CSVs' contents._
 
-| Model | Role | Accuracy | Easy | Medium | Hard | p50 latency | p95 latency | Cost / 1k requests |
+| Model | Role | Accuracy | Easy | Medium | Hard | p50 latency | p95 latency | Cost / 1k requests (list price) |
 |---|---|---|---|---|---|---|---|---|
-| `claude-opus-5` | top API | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
-| `claude-haiku-4-5` | cheap API | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
+| `gemini-3.8-flash` | top API | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
+| `gemini-3.5-flash-lite` | cheap API | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
 | `qwen2.5-coder:7b-instruct` | open-weights (self-hosted) | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
 
 **Which model would we choose, and when would we change?** _One paragraph
@@ -74,5 +82,5 @@ _One entry per team member — fill in before freezing the repo._
 
 ## No API keys in this repo
 
-`.env` is git-ignored. `ANTHROPIC_API_KEY` is read from the environment
-by `src/run.py` (via `python-dotenv`), never hardcoded.
+`.env` is git-ignored. `GEMINI_API_KEY` is read from the environment by
+`src/run.py` (via `python-dotenv`), never hardcoded.

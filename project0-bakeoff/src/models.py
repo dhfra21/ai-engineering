@@ -1,6 +1,7 @@
-"""Thin, uniform wrappers around the two backends used in the bake-off:
-the Anthropic API (top + cheap model) and a local Ollama server (the
-open-weights model you run yourself).
+"""Thin, uniform wrappers around the backends used in the bake-off: the
+Gemini API (top + cheap model, on Google AI Studio's free tier), a local
+Ollama server (the open-weights model you run yourself), and — kept for
+reference — the Anthropic API, in case you get API access later.
 
 Every call returns the same shape so run.py doesn't need to branch:
     {
@@ -18,6 +19,7 @@ import time
 from typing import Any
 
 import requests
+from google.genai import types as genai_types
 
 from src.config import MAX_OUTPUT_TOKENS, OLLAMA_BASE_URL, ModelSpec
 from src.prompt import SYSTEM_PROMPT, build_prompt
@@ -77,6 +79,39 @@ def call_claude(spec: ModelSpec, question: str, client) -> CallResult:
         "latency_ms": latency_ms,
         "input_tokens": response.usage.input_tokens,
         "output_tokens": response.usage.output_tokens,
+        "tokens_per_second": None,
+        "error": None,
+    }
+
+
+def call_gemini(spec: ModelSpec, question: str, client) -> CallResult:
+    """client is a google.genai.Client() instance, passed in so run.py
+    creates it once and reuses it across all 50 calls. Reads
+    GEMINI_API_KEY from the environment automatically."""
+    prompt = build_prompt(question)
+    config = genai_types.GenerateContentConfig(
+        system_instruction=SYSTEM_PROMPT,
+        temperature=0,
+        max_output_tokens=MAX_OUTPUT_TOKENS,
+    )
+
+    start = time.perf_counter()
+    try:
+        response = client.models.generate_content(
+            model=spec.model_id,
+            contents=prompt,
+            config=config,
+        )
+    except Exception as e:  # noqa: BLE001 — record every failure as a scored item, not a crash
+        return _empty_result(f"{type(e).__name__}: {e}")
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    usage = response.usage_metadata
+    return {
+        "raw_output": response.text or "",
+        "latency_ms": latency_ms,
+        "input_tokens": usage.prompt_token_count if usage else None,
+        "output_tokens": usage.candidates_token_count if usage else None,
         "tokens_per_second": None,
         "error": None,
     }

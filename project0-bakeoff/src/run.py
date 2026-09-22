@@ -3,13 +3,14 @@ next, calls made one after another (not concurrently) so latency numbers
 mean what the brief asks them to mean. Writes results/per_item.csv.
 
 Usage:
-    python -m src.run                  # all three models
-    python -m src.run --only opus5     # just one, e.g. while debugging
+    python -m src.run                        # all three models
+    python -m src.run --only gemini38flash    # just one, e.g. while debugging
 
 Requires:
     - db/store.db built (python db/build_db.py)
     - data/items.jsonl generated (python data/make_items.py)
-    - ANTHROPIC_API_KEY set (for opus5 / haiku45) — see .env.example
+    - GEMINI_API_KEY set (for gemini38flash / gemini35flashlite), free at
+      aistudio.google.com/apikey — see .env.example
     - `ollama serve` running locally with the open-weights model pulled
       (for qwen7b) — see README.md
 """
@@ -27,9 +28,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from dotenv import load_dotenv  # noqa: E402
 
 from src.config import MODELS, RESULTS_DIR  # noqa: E402
-from src.models import call_claude, call_ollama  # noqa: E402
+from src.models import call_claude, call_gemini, call_ollama  # noqa: E402
 
-load_dotenv()  # picks up ANTHROPIC_API_KEY from a local .env, if present
+load_dotenv()  # picks up GEMINI_API_KEY (and ANTHROPIC_API_KEY, if used) from a local .env
 
 ITEMS_PATH = Path(__file__).parent.parent / "data" / "items.jsonl"
 OUT_PATH = Path(__file__).parent.parent / RESULTS_DIR / "per_item.csv"
@@ -51,10 +52,12 @@ def load_items() -> list[dict]:
     return items
 
 
-def run_model(spec, items: list[dict], anthropic_client=None) -> list[dict]:
+def run_model(spec, items: list[dict], anthropic_client=None, google_client=None) -> list[dict]:
     rows = []
     for i, item in enumerate(items, start=1):
-        if spec.kind == "anthropic":
+        if spec.kind == "google":
+            result = call_gemini(spec, item["question"], google_client)
+        elif spec.kind == "anthropic":
             result = call_claude(spec, item["question"], anthropic_client)
         elif spec.kind == "ollama":
             result = call_ollama(spec, item["question"])
@@ -84,7 +87,7 @@ def run_model(spec, items: list[dict], anthropic_client=None) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--only", help="run a single model key (e.g. opus5, haiku45, qwen7b)")
+    parser.add_argument("--only", help="run a single model key (e.g. gemini38flash, gemini35flashlite, qwen7b)")
     args = parser.parse_args()
 
     items = load_items()
@@ -99,6 +102,11 @@ def main() -> None:
         import anthropic
         anthropic_client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
 
+    google_client = None
+    if any(m.kind == "google" for m in models_to_run):
+        from google import genai
+        google_client = genai.Client()  # reads GEMINI_API_KEY from env
+
     all_rows: list[dict] = []
     # Preserve prior results for models we didn't re-run this invocation.
     if OUT_PATH.exists():
@@ -109,7 +117,7 @@ def main() -> None:
 
     for spec in models_to_run:
         print(f"\n=== Running {spec.key} ({spec.model_id}) — {len(items)} items ===")
-        all_rows.extend(run_model(spec, items, anthropic_client))
+        all_rows.extend(run_model(spec, items, anthropic_client, google_client))
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUT_PATH.open("w", encoding="utf-8", newline="") as f:

@@ -68,7 +68,7 @@ def main() -> None:
         p95 = percentile(latencies, 0.95)
 
         note = ""
-        if spec.kind == "anthropic":
+        if spec.kind in ("google", "anthropic"):
             in_toks = [int(r["input_tokens"]) for r in model_rows if r["input_tokens"]]
             out_toks = [int(r["output_tokens"]) for r in model_rows if r["output_tokens"]]
             avg_in = mean(in_toks) if in_toks else 0
@@ -118,7 +118,7 @@ def main() -> None:
 
     # ---- break-even volume: API vs self-hosted ----
     api_rows = [r for r in out_rows if r["cost_per_1k_requests_usd"] is not None
-                and MODEL_BY_KEY[r["model_key"]].kind == "anthropic"]
+                and MODEL_BY_KEY[r["model_key"]].kind in ("google", "anthropic")]
     self_hosted = next((r for r in out_rows if MODEL_BY_KEY[r["model_key"]].kind == "ollama"), None)
     if self_hosted and hw_cost_per_hour and api_rows:
         print("\n--- break-even volume (requests/hour) vs. self-hosted ---")

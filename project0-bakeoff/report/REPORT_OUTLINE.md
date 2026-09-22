@@ -26,8 +26,11 @@ item verbatim from `data/items.jsonl` (question + gold_sql).
 
 - 3 model names + exact IDs and the date you ran them (from
   `results/per_item.csv`'s `model_id` column).
-- Settings: max output tokens, temperature (note the Opus 5 deviation —
-  see `postmortem.md`), single-call-per-item, no retrieval, no agent.
+- Settings: max output tokens, temperature 0 (all three models support it
+  here — no deviation needed), single-call-per-item, no retrieval, no agent.
+- Note both API-tier models come from Google (see `postmortem.md` for why),
+  and that cost is computed at list price even though the free tier made
+  actual spend $0.
 - Prompt: reference `src/prompt.py` (same prompt, byte-for-byte, all 3 models).
 - Hardware for the self-hosted model: `results/HARDWARE.md`.
 

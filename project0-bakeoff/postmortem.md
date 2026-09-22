@@ -23,15 +23,21 @@ questions.
 
 ## Known deviations from the brief
 
-- **Temperature 0 is not achievable on Claude Opus 5.** The brief asks
-  for identical sampling settings across all three models. Opus 5
-  rejects `temperature` entirely (its 4.6+-generation sampling
-  parameters were replaced by adaptive thinking + an `effort` control).
-  We left `temperature` unset for Opus 5 and pinned it to 0 for Haiku 4.5
-  and the Ollama model, which is the closest same-conditions setup the
-  current API allows. See `src/models.py` for where this is handled.
+- **Both API-tier models come from the same provider (Google).** The
+  brief's examples pair a top model and a cheap model either within one
+  provider (Claude Opus 5 / Claude Haiku 4.5) or across providers — using
+  Gemini for both tiers is explicitly one of the brief's own suggested
+  pairings ("the top GPT or Gemini model" / "'mini' or 'Flash' models").
+  We chose it specifically because Google AI Studio's free tier covers
+  both `gemini-3.8-flash` and `gemini-3.5-flash-lite` at $0 actual cost,
+  while `results/cost_summary.csv` still reports the published paid list
+  price per the brief's "token counts x list price" instruction.
+- **Cost figures reflect list price, not what we actually paid.** Actual
+  spend collecting all 50 x 2 API results was $0 (free tier). This is
+  intentional, not an oversight — see `src/config.py`'s top comment.
 - _(add any other deviation you hit — different tokenizer counts for the
-  self-hosted model, Ollama batching behavior, etc.)_
+  self-hosted model, Ollama batching behavior, Gemini free-tier rate
+  limits forcing a delay between calls, etc.)_
 
 ## What we'd do differently
 
