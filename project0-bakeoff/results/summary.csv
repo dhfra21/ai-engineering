@@ -1,0 +1,4 @@
+model_key,model_id,role,n_total,n_correct,accuracy,n_call_errors,n_sql_exec_errors,easy_acc,medium_acc,hard_acc
+gptoss120b,openai/gpt-oss-120b,top_api,50,50,1.0,0,0,15/15,19/19,16/16
+gptoss20b,openai/gpt-oss-20b,cheap_api,50,48,0.96,0,1,15/15,18/19,15/16
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,50,47,0.94,0,0,15/15,18/19,14/16

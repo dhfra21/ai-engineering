@@ -1,0 +1,484 @@
+model_key,model_id,role,item_id,difficulty,question,raw_output,latency_ms,input_tokens,output_tokens,tokens_per_second,call_error,exec_ok,exec_error,correct
+gptoss120b,openai/gpt-oss-120b,top_api,1,easy,"List the names of all customers from Tunisia, ordered alphabetically by name.",SELECT name FROM customers WHERE country = 'Tunisia' ORDER BY name ASC;,2170.418299996527,325,75,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,2,easy,What is the price of the product named 'Dune'?,SELECT price FROM products WHERE name = 'Dune';,1186.418600002071,322,60,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,3,easy,"List all product names that are currently out of stock, ordered by name.",SELECT name FROM products WHERE in_stock = 0 ORDER BY name;,3610.480600007577,325,65,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,4,easy,"List the 5 most expensive products with their prices, from most to least expensive.","SELECT name, price FROM products ORDER BY price DESC LIMIT 5;",488.63940000592265,327,68,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,5,easy,"List all order IDs with status 'cancelled', ordered by order ID.",SELECT order_id FROM orders WHERE status = 'cancelled' ORDER BY order_id;,301.45689999335445,325,72,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,6,easy,"What are the names of all categories, in alphabetical order?",SELECT name FROM categories ORDER BY name ASC;,243.67150000762194,321,56,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,7,easy,"List the names of customers who signed up in 2023, ordered by signup date.",SELECT name FROM customers WHERE signup_date >= '2023-01-01' AND signup_date <= '2023-12-31' ORDER BY signup_date;,528.5100000037346,328,106,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,8,easy,"List all order IDs placed in March 2024, ordered by order date.",SELECT order_id FROM orders WHERE order_date BETWEEN '2024-03-01' AND '2024-03-31' ORDER BY order_date;,535.167599999113,326,180,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,9,easy,How many products are currently in stock?,SELECT COUNT(*) FROM products WHERE in_stock = 1;,408.5477000044193,318,47,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,10,easy,"List the names of customers based in London, ordered by name.",SELECT name FROM customers WHERE city = 'London' ORDER BY name;,3632.916300004581,323,69,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,11,easy,"What is the average price of all products, rounded to 2 decimal places?","SELECT ROUND(AVG(price), 2) AS average_price FROM products;",475.7033999921987,325,81,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,12,easy,How many orders have status 'pending'?,SELECT COUNT(*) FROM orders WHERE status = 'pending';,1125.2050000039162,319,51,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,13,easy,What is the name of the most expensive product that is currently out of stock?,SELECT name FROM products WHERE in_stock = 0 ORDER BY price DESC LIMIT 1;,63928.03599999752,325,73,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,14,easy,"How many customers signed up in each year? Show year and count, ordered by year.","SELECT strftime('%Y', signup_date) AS year, COUNT(*) AS count FROM customers GROUP BY year ORDER BY year;",927.9679000028409,328,93,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,15,easy,What percentage of orders have status 'completed'? Round to 1 decimal place.,"SELECT ROUND((SUM(CASE WHEN status='completed' THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 1) AS completed_percentage FROM orders;",3099.431000009645,325,185,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,16,medium,"List all product names in the 'Electronics' category, ordered by price descending.",SELECT p.name FROM products p JOIN categories c ON p.category_id = c.category_id WHERE c.name = 'Electronics' ORDER BY p.price DESC;,514.5082000090042,327,106,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,17,medium,"How many products are there in each category? Show category name and count, ordered by category name.","SELECT c.name AS category_name, COUNT(p.product_id) AS product_count
+FROM categories c
+LEFT JOIN products p ON p.category_id = c.category_id
+GROUP BY c.category_id, c.name
+ORDER BY c.name;",540.1833999931114,330,178,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,18,medium,"What is the average price of products in each category? Show category name and average price rounded to 2 decimals, ordered by average price descending.","SELECT c.name AS category_name, ROUND(AVG(p.price), 2) AS average_price
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+GROUP BY c.category_id, c.name
+ORDER BY average_price DESC;",734.1480000031879,338,177,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,19,medium,"List the names of customers who have never placed an order, ordered by name.",SELECT c.name FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL ORDER BY c.name;,736.545899999328,326,107,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,20,medium,"How many orders has each customer placed? Show customer name and order count, ordered by order count descending, then by name.","SELECT c.name, COUNT(o.order_id) AS order_count
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+ORDER BY order_count DESC, c.name;",1016.5828999888618,335,183,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,21,medium,"List the names of products in the 'Books' category that cost less than 20, ordered by name.","SELECT p.name
+FROM products p
+JOIN categories c ON p.category_id = c.category_id
+WHERE c.name = 'Books' AND p.price < 20
+ORDER BY p.name;",373.54420000337996,332,117,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,22,medium,What is the total quantity of 'Yoga Mat' units sold across all orders?,"SELECT COALESCE(SUM(oi.quantity), 0) AS total_quantity
+FROM order_items AS oi
+JOIN products AS p ON oi.product_id = p.product_id
+WHERE p.name = 'Yoga Mat';",790.9427000122378,325,155,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,23,medium,"How many orders are there for each status? Show status and count, ordered by status name.","SELECT status, COUNT(*) AS count FROM orders GROUP BY status ORDER BY status;",1738.8651999935973,329,73,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,24,medium,"What is the total revenue (quantity times unit price) from all order items, rounded to 2 decimals?","SELECT ROUND(SUM(quantity * unit_price), 2) AS total_revenue FROM order_items;",440.6238000083249,331,75,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,25,medium,"List the names of customers from 'France' who signed up before 2023-06-01, ordered by name.",SELECT name FROM customers WHERE country = 'France' AND signup_date < '2023-06-01' ORDER BY name;,513.640100005432,335,105,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,26,medium,"List the 5 products with the highest total quantity sold, showing product name and total quantity.","SELECT p.name, SUM(oi.quantity) AS total_quantity
+FROM products p
+JOIN order_items oi ON p.product_id = oi.product_id
+GROUP BY p.product_id, p.name
+ORDER BY total_quantity DESC
+LIMIT 5;",824.0114999935031,329,166,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,27,medium,"List the distinct names of customers who placed at least one 'cancelled' order, ordered by name.",SELECT DISTINCT c.name FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.status = 'cancelled' ORDER BY c.name;,509.14159999229014,331,106,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,28,medium,"List the names of products that have never appeared in any order, ordered by name.",SELECT p.name FROM products p WHERE NOT EXISTS (SELECT 1 FROM order_items oi WHERE oi.product_id = p.product_id) ORDER BY p.name;,435.00549999589566,327,112,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,29,medium,"List the top 3 customers by number of orders placed, showing name and order count.","SELECT c.name, COUNT(o.order_id) AS order_count
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+ORDER BY order_count DESC
+LIMIT 3;",635.6812000012724,328,167,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,30,medium,"How many orders were placed in each month of 2024? Show month as YYYY-MM and count, ordered by month.","SELECT substr(order_date, 1, 7) AS month, COUNT(*) AS order_count
+FROM orders
+WHERE order_date BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY month
+ORDER BY month;",2306.4088000101037,335,124,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,31,medium,"List the names of customers and the date of their most recent order, for customers who have placed at least one order, ordered by most recent order date descending.","SELECT c.name, MAX(o.order_date) AS most_recent_order_date
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+ORDER BY most_recent_order_date DESC;",1217.8453999949852,342,173,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,32,medium,"List the names of categories that have more than 5 products, with the product count, ordered by count descending.","SELECT c.name, COUNT(p.product_id) AS product_count
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+GROUP BY c.category_id, c.name
+HAVING COUNT(p.product_id) > 5
+ORDER BY product_count DESC;",533.2515000045532,333,166,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,33,medium,"List the names of products that cost more than the average product price, ordered by name.",SELECT name FROM products WHERE price > (SELECT AVG(price) FROM products) ORDER BY name;,299.25809999986086,328,80,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,34,medium,"List the names of products priced within 10% of the most expensive product in the store, ordered by price descending.",SELECT name FROM products WHERE price >= (SELECT MAX(price) FROM products) * 0.9 ORDER BY price DESC;,514.3693999998504,334,125,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,35,hard,How many distinct products has the customer 'James Smith' ordered?,"SELECT COUNT(DISTINCT p.product_id) AS distinct_product_count
+FROM customers c
+JOIN orders o ON o.customer_id = c.customer_id
+JOIN order_items oi ON oi.order_id = o.order_id
+JOIN products p ON p.product_id = oi.product_id
+WHERE c.name = 'James Smith';",409.94680000585504,323,129,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,36,hard,"List the top 5 customers by total revenue (quantity times unit price) from completed orders, showing name and revenue rounded to 2 decimals.","SELECT c.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY c.customer_id, c.name
+ORDER BY revenue DESC
+LIMIT 5;",2962.4100000073668,339,274,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,37,hard,"List the distinct names of customers who have ordered the product 'Ergonomic Chair', ordered by name.","SELECT DISTINCT c.name
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+WHERE p.name = 'Ergonomic Chair'
+ORDER BY c.name;",4016.636100001051,331,176,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,38,hard,"List the names of customers who have placed 5 or more orders, with their order count, ordered by order count descending then name.","SELECT c.name, COUNT(o.order_id) AS order_count
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+HAVING COUNT(o.order_id) >= 5
+ORDER BY order_count DESC, c.name;",4724.4856999896,337,193,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,39,hard,"List the names of categories that have no products priced above 100, ordered by name.","SELECT c.name
+FROM categories c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM products p
+    WHERE p.category_id = c.category_id
+      AND p.price > 100
+)
+ORDER BY c.name;",3753.037400005269,328,134,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,40,hard,"For each category, what is the name and price of its most expensive product? Show category name, product name, and price, ordered by category name.","SELECT c.name AS category_name, p.name AS product_name, p.price
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+WHERE p.price = (
+    SELECT MAX(price)
+    FROM products
+    WHERE category_id = c.category_id
+)
+ORDER BY c.name;",5038.45910000382,340,196,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,41,hard,"What is the total revenue (quantity times unit price) from completed orders only, rounded to 2 decimals?","SELECT ROUND(SUM(oi.quantity * oi.unit_price), 2) AS total_revenue FROM orders o JOIN order_items oi ON o.order_id = oi.order_id WHERE o.status = 'completed';",2810.356600006344,331,133,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,42,hard,"Which 3 countries generated the most total revenue from completed orders? Show country and revenue rounded to 2 decimals, ordered by revenue descending.","SELECT c.country, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN order_items oi ON oi.order_id = o.order_id
+WHERE o.status = 'completed'
+GROUP BY c.country
+ORDER BY revenue DESC
+LIMIT 3;",6695.539299995289,338,220,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,43,hard,"List the names of customers whose number of orders is above the average number of orders per customer, counting only customers with at least one order, ordered by name.","SELECT c.name
+FROM customers c
+JOIN (
+    SELECT customer_id, COUNT(*) AS order_cnt
+    FROM orders
+    GROUP BY customer_id
+) oc ON c.customer_id = oc.customer_id
+WHERE oc.order_cnt > (
+    SELECT AVG(order_cnt)
+    FROM (
+        SELECT customer_id, COUNT(*) AS order_cnt
+        FROM orders
+        GROUP BY customer_id
+    ) sub
+)
+ORDER BY c.name;",926.1294000025373,342,262,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,44,hard,"List the 5 products that generated the most total revenue (quantity times unit price), showing product name and revenue rounded to 2 decimals.","SELECT p.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM products p
+JOIN order_items oi ON p.product_id = oi.product_id
+GROUP BY p.product_id, p.name
+ORDER BY revenue DESC
+LIMIT 5;",3816.559999992023,338,190,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,45,hard,"Which customers have spent more than 300 in total on completed orders? Show name and total spent rounded to 2 decimals, ordered by total spent descending.","SELECT c.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS total_spent
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY c.customer_id, c.name
+HAVING SUM(oi.quantity * oi.unit_price) > 300
+ORDER BY total_spent DESC;",3978.3984000096098,341,286,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,46,hard,"For each category, how many distinct customers have bought at least one product from it? Show category name and customer count, ordered by customer count descending then category name.","SELECT c.name AS category_name, COUNT(DISTINCT o.customer_id) AS customer_count
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+JOIN order_items oi ON oi.product_id = p.product_id
+JOIN orders o ON o.order_id = oi.order_id
+GROUP BY c.category_id, c.name
+ORDER BY customer_count DESC, category_name ASC;",5224.70940000494,342,285,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,47,hard,"List the names of customers who have ordered products from at least 3 different categories, with the category count, ordered by category count descending then name.","SELECT c.name, COUNT(DISTINCT cat.category_id) AS category_count
+FROM customers c
+JOIN orders o ON o.customer_id = c.customer_id
+JOIN order_items oi ON oi.order_id = o.order_id
+JOIN products p ON p.product_id = oi.product_id
+JOIN categories cat ON cat.category_id = p.category_id
+GROUP BY c.customer_id, c.name
+HAVING COUNT(DISTINCT cat.category_id) >= 3
+ORDER BY category_count DESC, c.name;",4086.5516000048956,340,330,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,48,hard,What is the name of the product that generated the single highest revenue (quantity times unit price) from a single order item row?,"SELECT p.name
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+ORDER BY oi.quantity * oi.unit_price DESC
+LIMIT 1;",5625.285899994196,335,150,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,49,hard,"List the names of customers who have never ordered a product from the 'Electronics' category, ordered by name.","SELECT c.name
+FROM customers c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM orders o
+    JOIN order_items oi ON o.order_id = oi.order_id
+    JOIN products p ON oi.product_id = p.product_id
+    JOIN categories cat ON p.category_id = cat.category_id
+    WHERE o.customer_id = c.customer_id
+      AND cat.name = 'Electronics'
+)
+ORDER BY c.name;",4954.645500009065,333,242,,,True,,True
+gptoss120b,openai/gpt-oss-120b,top_api,50,hard,"What is the average order value (sum of quantity times unit price per order), rounded to 2 decimals, considering only completed orders?","SELECT ROUND(AVG(order_total), 2) AS avg_order_value
+FROM (
+    SELECT oi.order_id, SUM(oi.quantity * oi.unit_price) AS order_total
+    FROM order_items oi
+    JOIN orders o ON oi.order_id = o.order_id
+    WHERE o.status = 'completed'
+    GROUP BY oi.order_id
+);",1488.6827000009362,336,226,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,1,easy,"List the names of all customers from Tunisia, ordered alphabetically by name.",SELECT name FROM customers WHERE country = 'Tunisia' ORDER BY name;,510.4220999928657,325,84,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,2,easy,What is the price of the product named 'Dune'?,SELECT price FROM products WHERE name = 'Dune';,474.4137000088813,322,68,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,3,easy,"List all product names that are currently out of stock, ordered by name.",SELECT name FROM products WHERE in_stock = 0 ORDER BY name;,7473.697599998559,325,96,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,4,easy,"List the 5 most expensive products with their prices, from most to least expensive.","SELECT name, price FROM products ORDER BY price DESC LIMIT 5;",564.2179999995278,327,115,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,5,easy,"List all order IDs with status 'cancelled', ordered by order ID.",SELECT order_id FROM orders WHERE status='cancelled' ORDER BY order_id;,1001.6181000100914,325,77,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,6,easy,"What are the names of all categories, in alphabetical order?",SELECT name FROM categories ORDER BY name;,243.6569999990752,321,55,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,7,easy,"List the names of customers who signed up in 2023, ordered by signup date.",SELECT name FROM customers WHERE signup_date LIKE '2023-%' ORDER BY signup_date;,1247.9574999888428,328,145,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,8,easy,"List all order IDs placed in March 2024, ordered by order date.",SELECT order_id FROM orders WHERE order_date >= '2024-03-01' AND order_date <= '2024-03-31' ORDER BY order_date;,1568.2937000092352,326,168,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,9,easy,How many products are currently in stock?,SELECT COUNT(*) FROM products WHERE in_stock = 1;,385.8937000040896,318,52,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,10,easy,"List the names of customers based in London, ordered by name.",SELECT name FROM customers WHERE city = 'London' ORDER BY name;,283.32159999990836,323,77,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,11,easy,"What is the average price of all products, rounded to 2 decimal places?","SELECT ROUND(AVG(price), 2) AS avg_price FROM products;",1093.7745999981416,325,100,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,12,easy,How many orders have status 'pending'?,SELECT COUNT(*) FROM orders WHERE status = 'pending';,457.80019999074284,319,51,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,13,easy,What is the name of the most expensive product that is currently out of stock?,SELECT name FROM products WHERE in_stock = 0 ORDER BY price DESC LIMIT 1;,1001.218899997184,325,231,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,14,easy,"How many customers signed up in each year? Show year and count, ordered by year.","SELECT strftime('%Y', signup_date) AS year, COUNT(*) AS count FROM customers GROUP BY year ORDER BY year;",3202.035000009346,328,127,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,15,easy,What percentage of orders have status 'completed'? Round to 1 decimal place.,"SELECT ROUND(100.0 * SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) / COUNT(*), 1) AS completed_percentage FROM orders;",459.46519999415614,325,121,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,16,medium,"List all product names in the 'Electronics' category, ordered by price descending.",SELECT p.name FROM products p JOIN categories c ON p.category_id = c.category_id WHERE c.name = 'Electronics' ORDER BY p.price DESC;,485.7726000045659,327,154,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,17,medium,"How many products are there in each category? Show category name and count, ordered by category name.","SELECT c.name AS category_name, COUNT(p.product_id) AS product_count
+FROM categories c
+LEFT JOIN products p ON c.category_id = p.category_id
+GROUP BY c.name
+ORDER BY c.name;",311.48940000275616,330,96,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,18,medium,"What is the average price of products in each category? Show category name and average price rounded to 2 decimals, ordered by average price descending.","SELECT c.name AS category_name, ROUND(AVG(p.price), 2) AS avg_price
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+GROUP BY c.category_id, c.name
+ORDER BY avg_price DESC;",629.2626000067685,338,331,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,19,medium,"List the names of customers who have never placed an order, ordered by name.",SELECT name FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.customer_id) ORDER BY name;,324.1639999905601,326,122,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,20,medium,"How many orders has each customer placed? Show customer name and order count, ordered by order count descending, then by name.","SELECT c.name, COUNT(o.order_id) AS order_count
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+ORDER BY order_count DESC, c.name;",559.7167999949306,335,248,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,21,medium,"List the names of products in the 'Books' category that cost less than 20, ordered by name.",SELECT p.name FROM products p JOIN categories c ON p.category_id = c.category_id WHERE c.name = 'Books' AND p.price < 20 ORDER BY p.name;,422.43239999515936,332,166,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,22,medium,What is the total quantity of 'Yoga Mat' units sold across all orders?,"SELECT SUM(oi.quantity) AS total_quantity
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+WHERE p.name = 'Yoga Mat';",873.1116000126349,325,157,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,23,medium,"How many orders are there for each status? Show status and count, ordered by status name.","SELECT status, COUNT(*) AS order_count FROM orders GROUP BY status ORDER BY status;",642.4819999956526,329,97,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,24,medium,"What is the total revenue (quantity times unit price) from all order items, rounded to 2 decimals?","SELECT ROUND(SUM(quantity * unit_price), 2) AS total_revenue FROM order_items;",1579.075899993768,331,101,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,25,medium,"List the names of customers from 'France' who signed up before 2023-06-01, ordered by name.",SELECT name FROM customers WHERE country='France' AND signup_date < '2023-06-01' ORDER BY name;,3338.7120999977924,335,134,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,26,medium,"List the 5 products with the highest total quantity sold, showing product name and total quantity.","SELECT p.name, SUM(oi.quantity) AS total_quantity
+FROM products p
+JOIN order_items oi ON p.product_id = oi.product_id
+JOIN orders o ON oi.order_id = o.order_id
+WHERE o.status = 'completed'
+GROUP BY p.product_id, p.name
+ORDER BY total_quantity DESC
+LIMIT 5;",3663.88239999651,329,334,,,True,,False
+gptoss20b,openai/gpt-oss-20b,cheap_api,27,medium,"List the distinct names of customers who placed at least one 'cancelled' order, ordered by name.","SELECT DISTINCT c.name
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+WHERE o.status = 'cancelled'
+ORDER BY c.name;",5510.850899998331,331,153,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,28,medium,"List the names of products that have never appeared in any order, ordered by name.","SELECT p.name
+FROM products p
+LEFT JOIN order_items oi ON p.product_id = oi.product_id
+WHERE oi.order_item_id IS NULL
+ORDER BY p.name;",2631.598699997994,327,253,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,29,medium,"List the top 3 customers by number of orders placed, showing name and order count.","SELECT customers.name, COUNT(orders.order_id) AS order_count
+FROM customers
+JOIN orders ON customers.customer_id = orders.customer_id
+GROUP BY customers.customer_id, customers.name
+ORDER BY order_count DESC
+LIMIT 3;",4419.262099996558,328,183,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,30,medium,"How many orders were placed in each month of 2024? Show month as YYYY-MM and count, ordered by month.","SELECT strftime('%Y-%m', order_date) AS month, COUNT(*) AS count
+FROM orders
+WHERE order_date >= '2024-01-01' AND order_date < '2025-01-01'
+GROUP BY month
+ORDER BY month;",4217.329100007191,335,198,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,31,medium,"List the names of customers and the date of their most recent order, for customers who have placed at least one order, ordered by most recent order date descending.","SELECT c.name, MAX(o.order_date) AS most_recent_order
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+ORDER BY most_recent_order DESC;",7405.625599989435,342,413,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,32,medium,"List the names of categories that have more than 5 products, with the product count, ordered by count descending.","SELECT c.name, COUNT(p.product_id) AS product_count
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+GROUP BY c.category_id, c.name
+HAVING COUNT(p.product_id) > 5
+ORDER BY product_count DESC;",1585.7752000010805,333,208,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,33,medium,"List the names of products that cost more than the average product price, ordered by name.",SELECT name FROM products WHERE price > (SELECT AVG(price) FROM products) ORDER BY name;,4512.197999996715,328,118,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,34,medium,"List the names of products priced within 10% of the most expensive product in the store, ordered by price descending.",SELECT name FROM products WHERE price >= (SELECT MAX(price) FROM products) * 0.9 ORDER BY price DESC;,17755.68439999188,334,298,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,35,hard,How many distinct products has the customer 'James Smith' ordered?,SELECT COUNT(DISTINCT oi.product_id) FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id WHERE c.name = 'James Smith';,497.8608999954304,323,164,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,36,hard,"List the top 5 customers by total revenue (quantity times unit price) from completed orders, showing name and revenue rounded to 2 decimals.","SELECT c.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY c.customer_id, c.name
+ORDER BY revenue DESC
+LIMIT 5;",1015.4408999951556,339,267,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,37,hard,"List the distinct names of customers who have ordered the product 'Ergonomic Chair', ordered by name.","SELECT DISTINCT c.name
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+WHERE p.name = 'Ergonomic Chair'
+ORDER BY c.name;",564.9322999961441,331,225,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,38,hard,"List the names of customers who have placed 5 or more orders, with their order count, ordered by order count descending then name.","SELECT c.name, COUNT(o.order_id) AS order_count
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+HAVING COUNT(o.order_id) >= 5
+ORDER BY order_count DESC, c.name;",959.660000007716,337,296,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,39,hard,"List the names of categories that have no products priced above 100, ordered by name.",SELECT name FROM categories c WHERE NOT EXISTS (SELECT 1 FROM products p WHERE p.category_id = c.category_id AND p.price > 100) ORDER BY name;,4303.335200005677,328,115,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,40,hard,"For each category, what is the name and price of its most expensive product? Show category name, product name, and price, ordered by category name.","SELECT c.name AS category_name, p.name AS product_name, p.price
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+WHERE p.price = (
+    SELECT MAX(price) FROM products WHERE category_id = c.category_id
+)
+ORDER BY c.name;",3893.9331000001403,340,508,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,41,hard,"What is the total revenue (quantity times unit price) from completed orders only, rounded to 2 decimals?","SELECT ROUND(SUM(oi.quantity * oi.unit_price), 2) AS total_revenue
+FROM order_items oi
+JOIN orders o ON oi.order_id = o.order_id
+WHERE o.status = 'completed';",6650.057699996978,331,176,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,42,hard,"Which 3 countries generated the most total revenue from completed orders? Show country and revenue rounded to 2 decimals, ordered by revenue descending.","SELECT c.country, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY c.country
+ORDER BY revenue DESC
+LIMIT 3;",4436.480499993195,338,284,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,43,hard,"List the names of customers whose number of orders is above the average number of orders per customer, counting only customers with at least one order, ordered by name.","SELECT c.name
+FROM customers c
+JOIN (
+    SELECT customer_id, COUNT(*) AS order_count
+    FROM orders
+    GROUP BY customer_id
+) o ON c.customer_id = o.customer_id
+WHERE o.order_count > (
+    SELECT AVG(order_count)
+    FROM (
+        SELECT customer_id, COUNT(*) AS order_count
+        FROM orders
+        GROUP BY customer_id
+    )
+)
+ORDER BY c.name;",4191.74509998993,342,441,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,44,hard,"List the 5 products that generated the most total revenue (quantity times unit price), showing product name and revenue rounded to 2 decimals.","SELECT p.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM products p
+JOIN order_items oi ON p.product_id = oi.product_id
+GROUP BY p.product_id, p.name
+ORDER BY revenue DESC
+LIMIT 5;",4647.045500008971,338,285,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,45,hard,"Which customers have spent more than 300 in total on completed orders? Show name and total spent rounded to 2 decimals, ordered by total spent descending.",,5176.58030000166,341,512,,,False,rejected: not a single read-only SELECT,False
+gptoss20b,openai/gpt-oss-20b,cheap_api,46,hard,"For each category, how many distinct customers have bought at least one product from it? Show category name and customer count, ordered by customer count descending then category name.","SELECT c.name AS category_name, COUNT(DISTINCT cu.customer_id) AS customer_count
+FROM categories c
+JOIN products p ON p.category_id = c.category_id
+JOIN order_items oi ON oi.product_id = p.product_id
+JOIN orders o ON o.order_id = oi.order_id
+JOIN customers cu ON cu.customer_id = o.customer_id
+GROUP BY c.category_id, c.name
+ORDER BY customer_count DESC, c.name;",20577.835000003688,342,485,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,47,hard,"List the names of customers who have ordered products from at least 3 different categories, with the category count, ordered by category count descending then name.","SELECT c.name, COUNT(DISTINCT cat.category_id) AS category_count
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+JOIN categories cat ON p.category_id = cat.category_id
+GROUP BY c.customer_id, c.name
+HAVING COUNT(DISTINCT cat.category_id) >= 3
+ORDER BY category_count DESC, c.name;",860.3758999961428,340,356,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,48,hard,What is the name of the product that generated the single highest revenue (quantity times unit price) from a single order item row?,"SELECT p.name
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+ORDER BY oi.quantity * oi.unit_price DESC
+LIMIT 1;",493.3604999969248,335,217,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,49,hard,"List the names of customers who have never ordered a product from the 'Electronics' category, ordered by name.","SELECT c.name
+FROM customers c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM orders o
+    JOIN order_items oi ON o.order_id = oi.order_id
+    JOIN products p ON oi.product_id = p.product_id
+    JOIN categories cat ON p.category_id = cat.category_id
+    WHERE o.customer_id = c.customer_id
+      AND cat.name = 'Electronics'
+)
+ORDER BY c.name;",753.3320000075037,333,251,,,True,,True
+gptoss20b,openai/gpt-oss-20b,cheap_api,50,hard,"What is the average order value (sum of quantity times unit price per order), rounded to 2 decimals, considering only completed orders?","SELECT ROUND(AVG(order_total), 2) AS avg_order_value
+FROM (
+    SELECT o.order_id, SUM(oi.quantity * oi.unit_price) AS order_total
+    FROM orders o
+    JOIN order_items oi ON o.order_id = oi.order_id
+    WHERE o.status = 'completed'
+    GROUP BY o.order_id
+);",3635.402799991425,336,345,,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,1,easy,"List the names of all customers from Tunisia, ordered alphabetically by name.",SELECT name FROM customers WHERE country = 'Tunisia' ORDER BY name ASC;,19675.507499996456,263,18,3.651000830602689,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,2,easy,What is the price of the product named 'Dune'?,SELECT price FROM products WHERE name = 'Dune';,6896.6669000074035,260,12,3.749079132438095,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,3,easy,"List all product names that are currently out of stock, ordered by name.",SELECT name FROM products WHERE in_stock = 0 ORDER BY name;,7870.854200009489,263,15,3.7084981966809436,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,4,easy,"List the 5 most expensive products with their prices, from most to least expensive.","SELECT name, price FROM products ORDER BY price DESC LIMIT 5;",7758.785500001977,265,15,3.7020821003343225,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,5,easy,"List all order IDs with status 'cancelled', ordered by order ID.",SELECT order_id FROM orders WHERE status = 'cancelled' ORDER BY order_id;,8397.034699999494,262,17,3.6859165465130146,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,6,easy,"What are the names of all categories, in alphabetical order?",SELECT name FROM categories ORDER BY name ASC;,6383.68939999782,259,10,3.8445746131973477,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,7,easy,"List the names of customers who signed up in 2023, ordered by signup date.",SELECT name FROM customers WHERE signup_date LIKE '2023%' ORDER BY signup_date;,9178.18139999872,268,20,3.707657164806473,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,8,easy,"List all order IDs placed in March 2024, ordered by order date.",SELECT order_id FROM orders WHERE order_date LIKE '2024-03-%' ORDER BY order_date;,10687.31179999304,266,25,3.630525750956099,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,9,easy,How many products are currently in stock?,SELECT SUM(in_stock) FROM products WHERE in_stock = 1;,7734.993799997028,255,15,3.743801201161177,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,10,easy,"List the names of customers based in London, ordered by name.",SELECT name FROM customers WHERE city = 'London' ORDER BY name;,7792.477399998461,261,15,3.7398248714809186,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,11,easy,"What is the average price of all products, rounded to 2 decimal places?",SELECT AVG(price) AS average_price FROM products;,6645.711199991638,263,11,3.8304530067837326,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,12,easy,How many orders have status 'pending'?,SELECT COUNT(order_id) FROM orders WHERE status = 'pending';,7462.622499995632,256,14,3.7640803491345842,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,13,easy,What is the name of the most expensive product that is currently out of stock?,SELECT name FROM products WHERE in_stock = 0 ORDER BY price DESC LIMIT 1;,8859.439399995608,263,19,3.685108631183855,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,14,easy,"How many customers signed up in each year? Show year and count, ordered by year.","SELECT strftime('%Y', signup_date) AS year, COUNT(customer_id) AS count FROM customers GROUP BY year ORDER BY year;",11236.428900010651,265,27,3.6439194321315957,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,15,easy,What percentage of orders have status 'completed'? Round to 1 decimal place.,"SELECT ROUND(SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) * 100.0 / COUNT(order_id), 1) AS percentage_completed FROM orders;",15475.75469998992,263,42,3.597162968954428,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,16,medium,"List all product names in the 'Electronics' category, ordered by price descending.",SELECT p.name FROM products p JOIN categories c ON p.category_id = c.category_id WHERE c.name = 'Electronics' ORDER BY p.price DESC;,12705.093399999896,265,32,3.596662611804224,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,17,medium,"How many products are there in each category? Show category name and count, ordered by category name.","SELECT c.name, COUNT(p.product_id) AS product_count FROM categories c JOIN products p ON c.category_id = p.category_id GROUP BY c.category_id ORDER BY c.name;",14075.534100004006,267,37,3.5869890406820786,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,18,medium,"What is the average price of products in each category? Show category name and average price rounded to 2 decimals, ordered by average price descending.","SELECT c.name, AVG(p.price) AS avg_price FROM categories c JOIN products p ON c.category_id = p.category_id GROUP BY c.category_id ORDER BY avg_price DESC;",14047.02840000391,276,37,3.593119777716015,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,19,medium,"List the names of customers who have never placed an order, ordered by name.",SELECT name FROM customers WHERE customer_id NOT IN (SELECT customer_id FROM orders) ORDER BY name;,9519.265299997642,264,21,3.6835830247163157,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,20,medium,"How many orders has each customer placed? Show customer name and order count, ordered by order count descending, then by name.","SELECT c.name, COUNT(o.order_id) AS order_count FROM customers c JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id ORDER BY order_count DESC, c.name;",15268.824400001904,272,41,3.541998207057786,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,21,medium,"List the names of products in the 'Books' category that cost less than 20, ordered by name.",SELECT p.name FROM products p JOIN categories c ON p.category_id = c.category_id WHERE c.name = 'Books' AND p.price < 20 ORDER BY p.name;,14196.772900002543,271,37,3.5756230257366584,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,22,medium,What is the total quantity of 'Yoga Mat' units sold across all orders?,SELECT SUM(order_items.quantity) FROM order_items JOIN products ON order_items.product_id = products.product_id WHERE products.name = 'Yoga Mat';,12103.37929999514,264,30,3.6182892949676817,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,23,medium,"How many orders are there for each status? Show status and count, ordered by status name.","SELECT status, COUNT(*) FROM orders GROUP BY status ORDER BY status;",7839.608299997053,266,15,3.724670379087019,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,24,medium,"What is the total revenue (quantity times unit price) from all order items, rounded to 2 decimals?","SELECT ROUND(SUM(order_items.quantity * order_items.unit_price), 2) AS total_revenue FROM order_items;",10784.242800000357,269,25,3.6205747705895206,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,25,medium,"List the names of customers from 'France' who signed up before 2023-06-01, ordered by name.",SELECT name FROM customers WHERE country = 'France' AND signup_date < '2023-06-01' ORDER BY name;,12400.273299994296,277,31,3.6144669623145185,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,26,medium,"List the 5 products with the highest total quantity sold, showing product name and total quantity.","SELECT p.name, SUM(oi.quantity) AS total_quantity FROM products p JOIN order_items oi ON p.product_id = oi.product_id GROUP BY p.product_id ORDER BY total_quantity DESC LIMIT 5;",15529.32200000214,267,42,3.551244457522043,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,27,medium,"List the distinct names of customers who placed at least one 'cancelled' order, ordered by name.",SELECT DISTINCT c.name FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.status = 'cancelled' ORDER BY c.name;,12319.775299998582,268,31,3.5844954614506013,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,28,medium,"List the names of products that have never appeared in any order, ordered by name.",SELECT name FROM products WHERE product_id NOT IN (SELECT product_id FROM order_items) ORDER BY name;,9830.972300012945,265,22,3.671311487583708,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,29,medium,"List the top 3 customers by number of orders placed, showing name and order count.","SELECT c.name, COUNT(o.order_id) AS order_count FROM customers c JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id ORDER BY order_count DESC LIMIT 3;",14887.519399999292,266,41,3.675978787629919,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,30,medium,"How many orders were placed in each month of 2024? Show month as YYYY-MM and count, ordered by month.","SELECT strftime('%Y-%m', order_date) AS month, COUNT(order_id) AS count FROM orders WHERE order_date LIKE '2024-%' GROUP BY month ORDER BY month;",16111.493200005498,274,40,3.226095759555212,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,31,medium,"List the names of customers and the date of their most recent order, for customers who have placed at least one order, ordered by most recent order date descending.","SELECT c.name, MAX(o.order_date) AS most_recent_order_date FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.status = 'completed' GROUP BY c.customer_id ORDER BY most_recent_order_date DESC;",17575.377400004072,280,49,3.5764026906810185,,True,,False
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,32,medium,"List the names of categories that have more than 5 products, with the product count, ordered by count descending.","SELECT c.name, COUNT(p.product_id) AS product_count FROM categories c JOIN products p ON c.category_id = p.category_id GROUP BY c.category_id HAVING product_count > 5 ORDER BY product_count DESC;",16349.148199995398,271,45,3.5552535784614836,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,33,medium,"List the names of products that cost more than the average product price, ordered by name.",SELECT name FROM products WHERE price > (SELECT AVG(price) FROM products) ORDER BY name;,9015.138500006287,266,20,3.728194489467571,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,34,medium,"List the names of products priced within 10% of the most expensive product in the store, ordered by price descending.",SELECT p.name FROM products p WHERE p.price BETWEEN (SELECT MAX(price) * 0.9 FROM products) AND (SELECT MAX(price) FROM products) ORDER BY p.price DESC;,14502.540799992858,273,39,3.636746130502117,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,35,hard,How many distinct products has the customer 'James Smith' ordered?,SELECT COUNT(DISTINCT p.product_id) FROM products p JOIN order_items oi ON p.product_id = oi.product_id JOIN orders o ON oi.order_id = o.order_id JOIN customers c ON o.customer_id = c.customer_id WHERE c.name = 'James Smith';,19038.01580000436,260,55,3.6055494782016018,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,36,hard,"List the top 5 customers by total revenue (quantity times unit price) from completed orders, showing name and revenue rounded to 2 decimals.","SELECT c.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY c.customer_id
+ORDER BY revenue DESC
+LIMIT 5;",24271.30789999501,277,73,3.546976472224818,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,37,hard,"List the distinct names of customers who have ordered the product 'Ergonomic Chair', ordered by name.",SELECT DISTINCT c.name FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id JOIN products p ON oi.product_id = p.product_id WHERE p.name = 'Ergonomic Chair' ORDER BY c.name;,19727.708199992776,269,57,3.58069732761251,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,38,hard,"List the names of customers who have placed 5 or more orders, with their order count, ordered by order count descending then name.","SELECT c.name, COUNT(o.order_id) AS order_count FROM customers c JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id HAVING order_count >= 5 ORDER BY order_count DESC, c.name;",17066.485799994553,275,48,3.6049500470333324,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,39,hard,"List the names of categories that have no products priced above 100, ordered by name.",SELECT c.name FROM categories c WHERE NOT EXISTS (SELECT 1 FROM products p WHERE p.category_id = c.category_id AND p.price > 100) ORDER BY c.name;,14403.126300006988,268,39,3.62291746111518,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,40,hard,"For each category, what is the name and price of its most expensive product? Show category name, product name, and price, ordered by category name.","SELECT c.name AS category_name, p.name AS product_name, p.price AS price
+FROM categories c
+JOIN products p ON c.category_id = p.category_id
+WHERE p.price = (
+    SELECT MAX(price)
+    FROM products
+    WHERE category_id = c.category_id
+)
+ORDER BY c.name;",21489.746899998863,278,64,3.6044675798697923,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,41,hard,"What is the total revenue (quantity times unit price) from completed orders only, rounded to 2 decimals?","SELECT ROUND(SUM(order_items.quantity * order_items.unit_price), 2) AS total_revenue FROM order_items JOIN orders ON order_items.order_id = orders.order_id WHERE orders.status = 'completed';",15352.051000008942,269,42,3.594200090659419,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,42,hard,"Which 3 countries generated the most total revenue from completed orders? Show country and revenue rounded to 2 decimals, ordered by revenue descending.","SELECT c.country, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN customers c ON o.customer_id = c.customer_id
+WHERE o.status = 'completed'
+GROUP BY c.country
+ORDER BY revenue DESC
+LIMIT 3;",23865.011000001687,276,72,3.5855225562983066,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,43,hard,"List the names of customers whose number of orders is above the average number of orders per customer, counting only customers with at least one order, ordered by name.","SELECT c.name FROM customers c JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id HAVING COUNT(o.order_id) > (SELECT AVG(order_count) FROM (SELECT customer_id, COUNT(order_id) AS order_count FROM orders GROUP BY customer_id)) ORDER BY c.name;",20857.693700003438,280,62,3.6120388322138637,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,44,hard,"List the 5 products that generated the most total revenue (quantity times unit price), showing product name and revenue rounded to 2 decimals.","SELECT p.name, ROUND(SUM(oi.quantity * oi.unit_price), 2) AS revenue FROM products p JOIN order_items oi ON p.product_id = oi.product_id GROUP BY p.product_id ORDER BY revenue DESC LIMIT 5;",17173.440800004755,276,49,3.629096555668897,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,45,hard,"Which customers have spent more than 300 in total on completed orders? Show name and total spent rounded to 2 decimals, ordered by total spent descending.","SELECT c.name, SUM(oi.quantity * oi.unit_price) AS total_spent
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY c.customer_id
+HAVING total_spent > 300
+ORDER BY total_spent DESC;",25872.32949999452,281,79,3.5886828025959168,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,46,hard,"For each category, how many distinct customers have bought at least one product from it? Show category name and customer count, ordered by customer count descending then category name.","SELECT c.name, COUNT(DISTINCT o.customer_id) AS customer_count
+FROM categories c
+JOIN products p ON c.category_id = p.category_id
+JOIN order_items oi ON p.product_id = oi.product_id
+JOIN orders o ON oi.order_id = o.order_id
+WHERE o.status = 'completed'
+GROUP BY c.category_id
+ORDER BY customer_count DESC, c.name;",26120.940799999516,280,80,3.581319087562267,,True,,False
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,47,hard,"List the names of customers who have ordered products from at least 3 different categories, with the category count, ordered by category count descending then name.","SELECT c.name, COUNT(DISTINCT p.category_id) AS category_count
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY c.customer_id
+HAVING category_count >= 3
+ORDER BY category_count DESC, c.name;",26342.0674999943,278,81,3.6002337751798015,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,48,hard,What is the name of the product that generated the single highest revenue (quantity times unit price) from a single order item row?,SELECT p.name FROM products p JOIN order_items oi ON p.product_id = oi.product_id ORDER BY oi.quantity * oi.unit_price DESC LIMIT 1;,12503.654100000858,273,32,3.6871877484890883,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,49,hard,"List the names of customers who have never ordered a product from the 'Electronics' category, ordered by name.",SELECT name FROM customers WHERE customer_id NOT IN (SELECT customer_id FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN products ON order_items.product_id = products.product_id JOIN categories ON products.category_id = categories.category_id WHERE categories.name = 'Electronics') ORDER BY name;,20503.666699994938,271,61,3.6279366586049155,,True,,True
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,50,hard,"What is the average order value (sum of quantity times unit price per order), rounded to 2 decimals, considering only completed orders?","SELECT ROUND(SUM(order_items.quantity * order_items.unit_price), 2) AS average_order_value FROM orders JOIN order_items ON orders.order_id = order_items.order_id WHERE orders.status = 'completed';",15274.780899999314,274,42,3.6600717112621712,,True,,False

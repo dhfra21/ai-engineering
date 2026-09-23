@@ -1,5 +1,5 @@
 {
-  "hardware": "DESCRIBE THE MACHINE YOU RAN THE OPEN-WEIGHTS MODEL ON, e.g. 'RTX 4060 laptop GPU, 8GB VRAM' or 'M2 MacBook Air, 16GB unified memory (CPU-only)'",
-  "cost_per_hour_usd": null,
-  "notes": "How you priced this hour: e.g. a comparable on-demand cloud GPU instance's hourly rate, or (laptop wattage in kW) x (your electricity price per kWh) if running locally. Fill in cost_per_hour_usd as a number before running `python -m src.cost`."
+  "hardware": "MSI Thin GF63 12UCX laptop — Intel Core i5-12450H (8C/12T), 23.7 GB RAM, NVIDIA GeForce RTX 2050 with 4 GB VRAM, Windows 11 Pro. Ollama 0.34.2 serving qwen2.5-coder:7b-instruct (Q4, ~4.7 GB), which exceeds 4 GB of VRAM, so Ollama offloads part of the model to CPU — this is why tokens/sec is low relative to a GPU-resident run.",
+  "cost_per_hour_usd": 0.0144,
+  "notes": "ASSUMPTION — CHECK THIS NUMBER BEFORE SUBMITTING. Priced as electricity only, for a laptop we already own: 120 W sustained draw under inference load (65 W CPU package + GPU + display, estimated, not measured with a wall meter) = 0.120 kW, times the STEG residential tariff of roughly 0.36 TND/kWh ~ USD 0.12/kWh, giving 0.120 x 0.12 = USD 0.0144/hour. This deliberately EXCLUDES hardware amortisation and our own time; the report should state that, because including either one moves the break-even volume a lot. If you want the amortised figure instead: (laptop price / expected lifetime hours) + electricity."
 }

@@ -51,18 +51,72 @@ Run a single model while debugging: `python -m src.run --only gptoss120b`.
 
 ## Results
 
-_Populate after running the commands above — paste the console output of
-`python -m src.score` and `python -m src.cost`, or the CSVs' contents._
+Run date: **2026-09-23**. All 50 items, one call per item, temperature 0,
+`max_tokens=512`, same prompt byte-for-byte across all three models
+(`src/prompt.py`). No call errors on any model.
 
 | Model | Role | Accuracy | Easy | Medium | Hard | p50 latency | p95 latency | Cost / 1k requests (list price) |
 |---|---|---|---|---|---|---|---|---|
-| `openai/gpt-oss-120b` (Groq) | top API | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
-| `openai/gpt-oss-20b` (Groq) | cheap API | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
-| `qwen2.5-coder:7b-instruct` | open-weights (self-hosted) | _/50 | _/15 | _/19 | _/16 | _ ms | _ ms | $_ |
+| `openai/gpt-oss-120b` (Groq) | top API | **50/50 (100%)** | 15/15 | 19/19 | 16/16 | 972 ms | 5,445 ms | $0.136 |
+| `openai/gpt-oss-20b` (Groq) | cheap API | 48/50 (96%) | 15/15 | 18/19 | 15/16 | 1,055 ms | 7,443 ms | $0.086 |
+| `qwen2.5-coder:7b-instruct` | open-weights (self-hosted) | 47/50 (94%) | 15/15 | 18/19 | 14/16 | 14,136 ms | 25,152 ms | $0.057 † |
 
-**Which model would we choose, and when would we change?** _One paragraph
-— see `report/REPORT_OUTLINE.md` section 5 for the full version that
-belongs in `report.pdf`._
+† The self-hosted figure is electricity-only at **100% utilisation** — it
+assumes the laptop runs requests back-to-back, which at a 14.2 s average
+is ~253 requests/hour. It is not "cheaper than the API at any volume":
+the $0.0144/hour hardware cost is fixed whether the box is busy or idle,
+so below ~106 requests/hour (vs the 120B) or ~167 requests/hour (vs the
+20B) the API is cheaper per request. Self-hosting only wins inside the
+106–253 req/hour window; above ~253 the laptop simply cannot keep up.
+See `results/hardware.json` for the cost assumption, which excludes
+hardware amortisation.
+
+### What the 5 misses look like
+
+All three models handled every *easy* item. The failures cluster on two
+things, and only one of them is really about SQL ability:
+
+- **Unrequested `WHERE status = 'completed'` filters — 3 of the 5 misses.**
+  `gptoss20b` item 26 and `qwen7b` items 31 and 46 each produced
+  well-formed SQL that answered a slightly narrower question than the one
+  asked. This is the dominant failure mode, and it is a prompt/spec
+  ambiguity as much as a model error.
+- **`qwen7b` item 50** is a genuine aggregation error: it returned
+  `SUM(quantity * unit_price)` over all completed orders where the
+  question asked for the *average per order*, missing the required
+  `GROUP BY order_id` subquery.
+- **`gptoss20b` item 45 returned an empty string** and was scored wrong
+  ("not a single read-only SELECT"). It is not a SQL failure: the
+  response hit the 512-token cap (`output_tokens = 512`) with reasoning
+  tokens before emitting any answer content. GPT-OSS models bill
+  reasoning against the same budget, and the 20B reasons more verbosely
+  than the 120B (205 vs 144 average output tokens). A higher
+  `MAX_OUTPUT_TOKENS` would likely recover this item — worth noting as a
+  harness limitation rather than a capability gap.
+
+### Note on determinism
+
+Temperature 0 did not give byte-identical output across runs. Re-running
+the two Groq models produced different SQL on 14/50 (120B) and 8/50 (20B)
+items versus the previous day's run, with no accuracy change. Expected
+for batched MoE serving, but it means single-run accuracy differences of
+1–2 items should not be read as meaningful separation between models.
+
+**Which model would we choose, and when would we change?** At this
+task's volume we would ship **`openai/gpt-oss-120b` on Groq**: it was
+perfect on all 50 items, its p50 latency (972 ms) is the lowest of the
+three, and at $0.136 per 1,000 requests the cost is negligible — the
+accuracy gap over the cheap model costs about five cents per thousand
+queries, which is not a trade worth making for a user-facing feature.
+Three things would flip that. **Volume:** sustained traffic in the
+106–253 requests/hour band makes the self-hosted 7B cheaper per request,
+though the 14 s p50 rules it out for anything interactive. **Privacy:**
+if schemas or questions could not leave our infrastructure, `qwen7b`
+becomes the only option, and 94% accuracy for zero marginal cost is a
+genuinely good showing for a 7B running partly on CPU. **Latency
+budget:** none of the three is fast enough for a sub-500 ms
+interaction — that would need a smaller model, caching, or dropping the
+one-call-per-question design.
 
 ## Repo layout
 

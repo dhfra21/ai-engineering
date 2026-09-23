@@ -1,0 +1,4 @@
+model_key,model_id,role,p50_latency_ms,p95_latency_ms,cost_per_1k_requests_usd,cost_per_1k_requests_usd_at_100x,note
+gptoss120b,openai/gpt-oss-120b,top_api,972.3,5445.0,0.136,0.136,
+gptoss20b,openai/gpt-oss-20b,cheap_api,1054.6,7443.1,0.0863,0.0863,
+qwen7b,qwen2.5-coder:7b-instruct,open_weights,14136.2,25151.9,0.0569,0.0569,avg 3.6 tok/s
