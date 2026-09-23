@@ -57,8 +57,13 @@ def main() -> None:
 
     hardware = load_hardware()
     hw_cost_per_hour = hardware.get("cost_per_hour_usd")
+    # "hardware" is a full multi-sentence description meant for the report;
+    # take just the machine name for inline use in the break-even lines.
+    hw_label = (hardware.get("hardware_short")
+                or hardware.get("hardware", "open model").split(" — ")[0].strip())
 
     out_rows = []
+    self_hosted_rph = None   # throughput ceiling of the self-hosted box, filled in below
     print(f"{'model':10s} {'p50 ms':>8s} {'p95 ms':>8s} {'cost/1k':>10s} {'note'}")
 
     for model_key, model_rows in by_model.items():
@@ -93,6 +98,7 @@ def main() -> None:
             else:
                 avg_latency_s = mean(latencies) / 1000
                 requests_per_hour = 3600 / avg_latency_s
+                self_hosted_rph = requests_per_hour
                 cost_per_request = hw_cost_per_hour / requests_per_hour
                 cost_per_1k = cost_per_request * 1000
                 # At 100x traffic, a fixed-cost box already running has spare
@@ -134,7 +140,11 @@ def main() -> None:
                 breakeven = hw_cost_per_hour / api_cost_per_request
                 print(f"  {r['model_key']} vs {self_hosted['model_key']}: "
                       f"break-even at ~{breakeven:.0f} requests/hour "
-                      f"(above this, self-hosting the {hardware.get('hardware', 'open model')} is cheaper)")
+                      f"(above this, self-hosting on the {hw_label} is cheaper)")
+        if self_hosted_rph:
+            print(f"  ceiling: the {hw_label} sustains only ~{self_hosted_rph:.0f} requests/hour "
+                  f"back-to-back, so self-hosting wins only between the break-even "
+                  f"and that ceiling — above it you need more than one box.")
     else:
         print("\nSet results/hardware.json to compute the API-vs-self-hosted break-even volume.")
 
