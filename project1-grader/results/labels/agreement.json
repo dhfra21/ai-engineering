@@ -184,8 +184,8 @@
   "golden": {
     "items": 161,
     "label_counts": {
-      "good": 98,
-      "bad": 63
+      "good": 85,
+      "bad": 76
     },
     "by_split": {
       "dev": 60,
@@ -197,6 +197,71 @@
         "item_id": "c-q102",
         "final": "bad",
         "reason": "Both labellers said good, but the explanation never mentions the ORDER BY times_ordered DESC; rule 3.3 requires the sort order and direction. Planted missing_condition error. claude-b's note ('most first') describes text that is not there. [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q017",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'every product category in the database', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q020",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'every customer's name', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q046",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'lists each product category' (categories with no sales are dropped), but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q088",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'lists each product category name' (categories with no order lines are dropped), but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q097",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'lists each product category', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q098",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'lists each product category name', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q099",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'lists each product category', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q103",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'lists every product' (unsold products are dropped), but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q111",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'every customer's name', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q138",
+        "final": "bad",
+        "reason": "Rule 3.12 (guide v3): says 'the biggest purchase made by every customer', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q128",
+        "final": "bad",
+        "reason": "Says the result is 'a list of customer names' and never mentions the total-spend column the query also returns (\u00a72 completeness test: same columns). Found via a judge v1 dev disagreement; not swept for, so other column omissions may remain. [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q108",
+        "final": "bad",
+        "reason": "Rule 3.12: says 'lists every order that is still pending', but the inner join drops orders with no match. Missed by the first rule-3.12 sweep (kept as good because orders without items don't occur in this data, which is judging by data, not SQL); surfaced by judge v2 on dev. [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q095",
+        "final": "bad",
+        "reason": "Rule 3.12: says 'lists every order in the database', but the inner join drops orders with no match. Missed by the first rule-3.12 sweep for the same reason; found while fixing c-q108, not by the judge. [Corrected by Claude (orchestrating session), at the team's request.]"
       }
     ],
     "pending_adjudication": [],

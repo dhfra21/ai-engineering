@@ -30,4 +30,5 @@ score.
 
 | Version | Change | Why | Agreement / κ / bad caught (dev) before → after | Run dir |
 |---|---|---|---|---|
-| v1 | Rubric condensed from LABELLING_GUIDE v1; reason before grade; explicit "length is not quality" | — | — → 54/60 (90.0%) / κ 0.797 / bad caught 23/24 | `results/judge/v1_gptoss120b_dev` |
+| v1 | Rubric condensed from LABELLING_GUIDE v1; reason before grade; explicit "length is not quality" | — | — → 53/60 (88.3%) / κ 0.768 / bad caught 27/33, precision 27/28. (54/60 against the labels before guide v3; most of its disagreements turned out to be label errors, see postmortem) | `results/judge/v1_gptoss120b_dev` |
+| v2 | Synced to guide v3: rules 3.10–3.12 written out, rule 3.1 (silence is fine) made explicit, clause-by-clause restatement fails "clear" | v1 missed "each category" over inner joins (c-q046, c-q098, c-q099) and a planted jargon error (c-q140), and failed c-q083 for silence | 53/60 → 53/60 (88.3%) / κ 0.765 / bad caught 27/33 → 29/33, precision 27/28 → 29/32. Fixed c-q046, c-q098; now over-applies rule 3.12 to "for each product" (c-q127) and fails c-q126 for an ordering detail; c-q083, c-q099 and c-q140 still wrong. A tie, not an improvement. **Chosen** for its higher recall and because it states the rules the labels use | `results/judge/v2_gptoss120b_dev` |

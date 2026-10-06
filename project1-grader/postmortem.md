@@ -36,6 +36,17 @@ do differently._
   raw κ was _ before adjudication_
 
 ### The judge
+- **The judge found label errors before we found judge errors.** Judge v1 on
+  dev disagreed 6 times, 5 of them stricter than the labels. On 4 of those,
+  re-reading the guide showed the judge was right: "lists every customer"
+  over an inner join (c-q020, c-q111, and "each category" c-q097) and a
+  missing output column (c-q128). We wrote rule 3.12 for the first pattern
+  and swept all 161 items for it, test included, before the judge had seen
+  test: 10 labels changed good -> bad. The column omission was fixed only
+  where found, so others may remain. Risk to report: these fixes were
+  prompted by the judge, which nudges dev agreement up (v1 went from 54/60
+  to 55/60 on the corrected labels). The sweep over test is by rule, not by
+  judge output.
 - _e.g. it misses `wrong_join_semantics` errors: _/_ caught on golden-test;
   item ids …_
 

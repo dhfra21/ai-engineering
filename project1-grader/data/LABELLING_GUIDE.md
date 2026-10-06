@@ -1,6 +1,6 @@
 # Labelling guide: SQL explanations
 
-**Version 2.** If you change a rule, bump the version and add a line under
+**Version 3.** If you change a rule, bump the version and add a line under
 "Changes" at the bottom. Then check that `prompts/judge/*.md` still says the
 same thing, because the judge is graded against labels made with this guide.
 
@@ -81,6 +81,12 @@ When you choose **bad**, tick every criterion that fails.
     customers / products" is a **correct** failure when the query only
     covers a subset (e.g. customers with completed orders, products that
     sold). Judge against the SQL, not against this particular data.
+12. **"Lists every X" must be true of the rows.** If the query joins X to
+    another table with a plain (inner) `JOIN`, X's with no match are left
+    out. "Lists every customer / each category" is then a **correct**
+    failure, unless a stated condition already explains it ("customers who
+    have ordered", "categories with more than five products"). "For each X,
+    it computes …" describes the calculation and is fine.
 
 ## 4. How we label
 
@@ -169,3 +175,7 @@ dataset labels.
 - v2 (after adjudication, 2026-10-06): added rules 3.10 and 3.11. The four
   disagreements were c-q091 (mechanism) and c-q135/c-q161 ("all"), plus
   c-q078, already covered by rule 3.8.
+- v3 (2026-10-06): added rule 3.12. Triggered by judge v1 disagreements on
+  dev (c-q020, c-q097, c-q111), then applied by a sweep over all 161 items,
+  test included, before the judge had seen test. 10 labels changed
+  good -> bad (`data/labels/overrides.jsonl`).

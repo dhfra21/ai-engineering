@@ -12,15 +12,15 @@
         94.2
       ]
     },
-    "cohen_kappa": 0.768,
+    "cohen_kappa": 0.765,
     "confusion_rows_a_cols_b": {
       "good": {
-        "good": 26,
-        "bad": 1
+        "good": 24,
+        "bad": 3
       },
       "bad": {
-        "good": 6,
-        "bad": 27
+        "good": 4,
+        "bad": 29
       }
     },
     "a_bad_rate": {
@@ -33,30 +33,30 @@
       ]
     },
     "b_bad_rate": {
-      "n": 28,
+      "n": 32,
       "of": 60,
-      "pct": 46.7,
+      "pct": 53.3,
       "ci95_pct": [
-        34.6,
-        59.1
+        40.9,
+        65.4
       ]
     },
     "recall_of_bad": {
-      "n": 27,
+      "n": 29,
       "of": 33,
-      "pct": 81.8,
+      "pct": 87.9,
       "ci95_pct": [
-        65.6,
-        91.4
+        72.7,
+        95.2
       ]
     },
     "precision_of_bad": {
-      "n": 27,
-      "of": 28,
-      "pct": 96.4,
+      "n": 29,
+      "of": 32,
+      "pct": 90.6,
       "ci95_pct": [
-        82.3,
-        99.4
+        75.8,
+        96.8
       ]
     }
   },
@@ -83,12 +83,12 @@
     },
     "hard": {
       "agreement": {
-        "n": 19,
+        "n": 17,
         "of": 21,
-        "pct": 90.5,
+        "pct": 81.0,
         "ci95_pct": [
-          71.1,
-          97.3
+          60.0,
+          92.3
         ]
       },
       "bad_caught": {
@@ -103,21 +103,21 @@
     },
     "medium": {
       "agreement": {
-        "n": 17,
+        "n": 19,
         "of": 22,
-        "pct": 77.3,
+        "pct": 86.4,
         "ci95_pct": [
-          56.6,
-          89.9
+          66.7,
+          95.3
         ]
       },
       "bad_caught": {
-        "n": 10,
+        "n": 12,
         "of": 14,
-        "pct": 71.4,
+        "pct": 85.7,
         "ci95_pct": [
-          45.4,
-          88.3
+          60.1,
+          96.0
         ]
       }
     }
@@ -125,21 +125,21 @@
   "by_source": {
     "baseline": {
       "agreement": {
-        "n": 27,
+        "n": 28,
         "of": 32,
-        "pct": 84.4,
+        "pct": 87.5,
         "ci95_pct": [
-          68.2,
-          93.1
+          71.9,
+          95.0
         ]
       },
       "bad_caught": {
-        "n": 7,
+        "n": 10,
         "of": 12,
-        "pct": 58.3,
+        "pct": 83.3,
         "ci95_pct": [
-          32.0,
-          80.7
+          55.2,
+          95.3
         ]
       }
     },
@@ -165,21 +165,21 @@
     },
     "weak": {
       "agreement": {
-        "n": 9,
+        "n": 8,
         "of": 10,
-        "pct": 90.0,
+        "pct": 80.0,
         "ci95_pct": [
-          59.6,
-          98.2
+          49.0,
+          94.3
         ]
       },
       "bad_caught": {
-        "n": 3,
+        "n": 2,
         "of": 3,
-        "pct": 100.0,
+        "pct": 66.7,
         "ci95_pct": [
-          43.8,
-          100.0
+          20.8,
+          93.9
         ]
       }
     }
@@ -306,27 +306,19 @@
       }
     }
   },
-  "cost_usd_per_item": 0.00046029,
+  "cost_usd_per_item": 0.00050703,
   "latency_ms": {
-    "p50": 1515.7,
-    "p95": 2918.2
+    "p50": 1752.5,
+    "p95": 4263.4
   },
   "disagreements": [
-    {
-      "item_id": "c-q046",
-      "source": "baseline",
-      "error_type": null,
-      "human": "bad",
-      "judge": "good",
-      "judge_reason": "The explanation accurately describes the query\u2019s behavior, includes all relevant aspects (category grouping, distinct customer count, sorting), adds no unsupported details, and is clear for a non\u2011SQL audience."
-    },
     {
       "item_id": "c-q083",
       "source": "weak",
       "error_type": null,
       "human": "good",
       "judge": "bad",
-      "judge_reason": "The explanation omits that customers with multiple completed orders will appear once for each order, which affects the number of rows returned."
+      "judge_reason": "The explanation omits that customers with multiple completed orders will appear once for each order, so it does not fully describe all rows the query returns."
     },
     {
       "item_id": "c-q095",
@@ -334,15 +326,7 @@
       "error_type": null,
       "human": "bad",
       "judge": "good",
-      "judge_reason": "The explanation accurately describes all selected columns, the join to get the customer's country, includes all orders, and correctly notes the ascending date order. It mentions no extra details and is clear for a non\u2011SQL audience."
-    },
-    {
-      "item_id": "c-q098",
-      "source": "baseline",
-      "error_type": null,
-      "human": "bad",
-      "judge": "good",
-      "judge_reason": "The explanation accurately describes the query\u2019s behavior, includes all relevant operations (grouping, counting, total count, percentage calculation, rounding), does not add any unsupported details, and is written in plain language understandable to a non\u2011SQL audience."
+      "judge_reason": "The explanation accurately describes all selected columns, the join relationship, and the ascending date order without adding any incorrect or extra details, and it is clear for a non\u2011SQL audience."
     },
     {
       "item_id": "c-q099",
@@ -350,15 +334,31 @@
       "error_type": null,
       "human": "bad",
       "judge": "good",
-      "judge_reason": "The explanation accurately describes the query\u2019s behavior, mentions all relevant operations (join, grouping, max aggregation), adds no unsupported details, and is written in clear plain language."
+      "judge_reason": "The explanation accurately describes the query\u2019s behavior, mentions all relevant operations (join, grouping, max price), does not add any unsupported claims, and is written in clear plain language."
     },
     {
-      "item_id": "c-q108",
+      "item_id": "c-q126",
       "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that the query orders the rows by month (ascending) for the change calculation, so it does not mention all ordering details required for completeness."
+    },
+    {
+      "item_id": "c-q127",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says the query shows each product\u2019s share of its category revenue for every product, but the query only includes products that have order items (inner join), so it misstates which rows are returned and omits that filter. This makes it both incorrect and incomplete."
+    },
+    {
+      "item_id": "c-q134",
+      "source": "weak",
       "error_type": null,
       "human": "bad",
       "judge": "good",
-      "judge_reason": "The explanation accurately describes the pending orders filter, the total cost calculation per order, and the descending sort, without adding any incorrect or extra details, and is clear for a non\u2011SQL audience."
+      "judge_reason": "The explanation accurately describes the query\u2019s behavior, mentions the grouping by country and category, the revenue sum, the HAVING filter >200, and the descending order, without adding any incorrect or invented details, and is clear for a non\u2011SQL audience."
     },
     {
       "item_id": "c-q140",
@@ -366,10 +366,10 @@
       "error_type": "jargon",
       "human": "bad",
       "judge": "good",
-      "judge_reason": "The explanation accurately describes every part of the query, mentions all filters, grouping, aggregation, and ordering, adds no extra information, and is expressed in plain language suitable for a non\u2011SQL audience."
+      "judge_reason": "The explanation accurately describes every part of the query, mentions all filters, grouping, aggregation, and ordering, adds no unsupported details, and is written in plain language suitable for a non\u2011SQL audience."
     }
   ],
-  "judge_prompt": "judge/v1",
+  "judge_prompt": "judge/v2",
   "judge_model": "gptoss120b",
   "split": "dev"
 }
