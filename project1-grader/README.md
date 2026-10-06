@@ -92,7 +92,7 @@ percentages, never a single number on its own._
 | Items dropped / adjudicated / overridden | 0 / 4 / 1 | same |
 | Golden set | 161: 98 good, 63 bad (dev 60, test 101) | `data/golden.jsonl` |
 | Judge vs human, golden **test** | _/_ (_%), κ = _, bad caught _/_ | `results/judge/<v>_gptoss120b_test/summary.md` |
-| Position bias: verdict flips when A/B swapped | _/_ (_%) | `results/bias/<v>_test/position.json` |
+| Position bias: verdict flips when A/B swapped | 8/101 (7.9%); first slot won 49/202 (24.3%), second 46/202 (22.8%); picked the unbroken original in both orders 30/35 (85.7%) | `results/bias/v2_test/position.json` |
 | Verbosity bias: human-bad answers rescued by padding | template _/_, llm _/_ | `results/bias/<v>_test/verbosity-*.json` |
 | System on test: v1 → final | _/101 → _/101 | `results/history.csv` |
 | Cost per 1k requests (system / + 10% judged) | $_ / $_ | `results/cost/<run_id>.json` |

@@ -1,0 +1,86 @@
+{
+  "pairs": 101,
+  "errors": 0,
+  "consistent": {
+    "n": 93,
+    "of": 101,
+    "pct": 92.1,
+    "ci95_pct": [
+      85.1,
+      95.9
+    ]
+  },
+  "flipped": {
+    "n": 8,
+    "of": 101,
+    "pct": 7.9,
+    "ci95_pct": [
+      4.1,
+      14.9
+    ]
+  },
+  "flipped_to_same_slot": {
+    "n": 1,
+    "of": 101,
+    "pct": 1.0,
+    "ci95_pct": [
+      0.2,
+      5.4
+    ]
+  },
+  "slot_wins_over_all_verdicts": {
+    "A_first": {
+      "n": 49,
+      "of": 202,
+      "pct": 24.3,
+      "ci95_pct": [
+        18.9,
+        30.6
+      ]
+    },
+    "B_second": {
+      "n": 46,
+      "of": 202,
+      "pct": 22.8,
+      "ci95_pct": [
+        17.5,
+        29.0
+      ]
+    },
+    "tie": {
+      "n": 107,
+      "of": 202,
+      "pct": 53.0,
+      "ci95_pct": [
+        46.1,
+        59.7
+      ]
+    }
+  },
+  "known_better_pairs": {
+    "n": 35,
+    "picked_original_both_orders": {
+      "n": 30,
+      "of": 35,
+      "pct": 85.7,
+      "ci95_pct": [
+        70.6,
+        93.7
+      ]
+    },
+    "picked_broken_in_either_order": {
+      "n": 2,
+      "of": 35,
+      "pct": 5.7,
+      "ci95_pct": [
+        1.6,
+        18.6
+      ]
+    }
+  },
+  "cost_usd_total": 0.09132,
+  "judge": "v2",
+  "judge_model": "gptoss120b",
+  "split": "test",
+  "limit": null
+}

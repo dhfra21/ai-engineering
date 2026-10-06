@@ -59,6 +59,15 @@ do differently._
   a cached rerun retried only that call and it succeeded.
 - **Windows bugs found on first real run**: the mock test assumed
   `data/labels/` existed, and report printing crashed on cp1252 consoles.
+- **The Groq free tier was the bottleneck, not our code.** The cap is
+  200K tokens/day per model per *organization* (a second key in the same
+  account shares it), and it is a rolling window, so tokens return slowly.
+  Position bias (step 6) stopped at 83/101 on the first key and finished on
+  a key from a second account; verbosity-template (step 7) then stopped at
+  32/101 on that key. Steps 7 to 9 need roughly a week of one key, so we
+  split them across teammates' own accounts. Cached calls are not in git
+  (`.cache/` is ignored), so a teammate cannot resume another machine's
+  partial run.
 - _e.g. hit the Groq daily cap on day N; json_schema fallback triggered for
   model …; N schema violations_
 
