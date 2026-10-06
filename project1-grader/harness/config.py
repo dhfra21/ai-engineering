@@ -13,8 +13,15 @@ https://console.groq.com/docs/models — re-check before you submit.
 from __future__ import annotations
 
 import os
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+
+# Windows consoles default to cp1252, which can't print the arrows and Greek
+# letters in our reports. Every harness module imports this one, so fix it here.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -45,14 +52,17 @@ MODELS: dict[str, ModelSpec] = {
                   extra={"reasoning_effort": "low"}),
         ModelSpec("gptoss120b", "openai/gpt-oss-120b", 0.15, 0.60,
                   extra={"reasoning_effort": "medium"}),
-        ModelSpec("llama8b", "llama-3.1-8b-instant", 0.05, 0.08,
+        # Replaces llama-3.1-8b-instant, which returns 404 for our key since
+        # 2026-10 (Groq has no small Llama chat model left; allam-2-7b failed
+        # JSON output 4/4). Stronger than "weak", so it adds few natural errors.
+        ModelSpec("qwen27b", "qwen/qwen3.8-27b", 0.80, 4.00,
                   structured="json_object"),
     ]
 }
 
 SYSTEM_MODEL = "gptoss20b"    # the system under test
 JUDGE_MODEL = "gptoss120b"    # the LLM judge
-WEAK_MODEL = "llama8b"        # only used to make candidate answers for labelling
+WEAK_MODEL = "qwen27b"        # only used to make candidate answers for labelling
 PERTURB_MODEL = "gptoss120b"  # only used to plant errors in candidate answers
 PAD_MODEL = "gptoss20b"       # only used for the verbosity-bias check
 

@@ -52,7 +52,7 @@ run on the mock backend).
 | Step | Command | Model calls (free tier: ~1,000/day/model) |
 |---|---|---|
 | 1. Build the 161 queries (verified against the DB, dev/test split fixed) | `python data/make_queries.py` | 0 |
-| 2. Generate one blind candidate per query (baseline / weak model / planted error) | `python -m harness.candidates` | 161 × 20b, ~105 × 8b, ~56 × 120b |
+| 2. Generate one blind candidate per query (baseline / weak model / planted error) | `python -m harness.candidates` | 161 × 20b, ~105 × qwen27b, ~56 × 120b |
 | 3. **Two people label independently** ([guide](data/LABELLING_GUIDE.md)) | `python -m harness.label --labeller <name>` | 0 |
 | 4. Agreement between labellers, adjudication, golden set | `python -m harness.golden --a <name> --b <name>` | 0 |
 | 5. Judge vs humans (tune on dev, report on test) | `python -m harness.judge_eval --split dev` | 1 × 120b per item |
@@ -71,7 +71,7 @@ where it left off without spending quota twice.
 |---|---|---|
 | System under test | `openai/gpt-oss-20b` | cheap tier from Project 0 |
 | Judge | `openai/gpt-oss-120b` | stronger model grading a weaker one |
-| Weak candidates (labelling only) | `llama-3.1-8b-instant` | produces realistic mistakes |
+| Second-model candidates (labelling only) | `qwen/qwen3.8-27b` | a different model's wording; `llama-3.1-8b-instant` is no longer served to our key, so most bad answers come from planted errors |
 | Planting errors (labelling only) | `openai/gpt-oss-120b` | |
 
 All model ids and prices live in [`harness/config.py`](harness/config.py).

@@ -8,7 +8,7 @@ that always says "good". So each query gets ONE candidate to label, drawn
 from a seeded mix of sources:
 
     baseline   the system (system/v1 on SYSTEM_MODEL)       ~45%
-    weak       the same prompt on a small model (WEAK_MODEL) ~20%
+    weak       the same prompt on a second model (WEAK_MODEL) ~20%
     perturbed  a baseline answer with one planted mistake    ~35%
                (wrong_filter, missing_condition, wrong_aggregation,
                 wrong_join_semantics, invented_detail, jargon)

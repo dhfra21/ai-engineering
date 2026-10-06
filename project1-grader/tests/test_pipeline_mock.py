@@ -43,6 +43,7 @@ class TestPipelineMock(unittest.TestCase):
 
         rng = random.Random(0)
         labels = self.tmp / "data" / "labels"
+        labels.mkdir(parents=True, exist_ok=True)
         for name in ("a", "b"):
             with (labels / f"{name}.jsonl").open("w") as f:
                 for c in cands:
