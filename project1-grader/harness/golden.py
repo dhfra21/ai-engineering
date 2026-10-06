@@ -12,6 +12,11 @@
    rows are kept across reruns.
 4. Writes data/golden.jsonl: every item with a final label. Items still
    awaiting adjudication and dropped items are left out, and counted.
+5. data/labels/overrides.jsonl (optional, hand-written) corrects items both
+   labellers AGREED on but got wrong against the guide, e.g. a planted error
+   both missed. One row per item: item_id, final, final_failed_criteria,
+   reason. Use sparingly; every override is flagged on the item and listed
+   in the report. Raw agreement is unaffected.
 """
 from __future__ import annotations
 
@@ -24,6 +29,7 @@ from harness.config import GOLDEN_PATH, LABELS_DIR, RESULTS_DIR
 from harness.data import load_candidates, load_queries, read_jsonl, write_jsonl
 
 ADJ_PATH = LABELS_DIR / "adjudication.jsonl"
+OVERRIDES_PATH = LABELS_DIR / "overrides.jsonl"
 
 
 def latest_labels(name: str) -> dict[str, dict]:
@@ -96,6 +102,10 @@ def main() -> None:
     adj = {r["item_id"]: r for r in adj_rows}
 
     # ---- golden set
+    overrides = {r["item_id"]: r for r in read_jsonl(OVERRIDES_PATH)}
+    clash = sorted(set(overrides) & set(adj))
+    if clash:
+        raise SystemExit(f"{clash} are in both adjudication and overrides; decide them in adjudication only.")
     golden, dropped, pending = [], [], []
     for i in both:
         a, b = la[i], lb[i]
@@ -116,6 +126,13 @@ def main() -> None:
             final = a["grade"]
             crit = sorted(set(a["failed_criteria"]) | set(b["failed_criteria"])) if final == "bad" else []
             adjudicated = False
+        overridden = i in overrides
+        if overridden:
+            final = overrides[i]["final"]
+            if final == "drop":
+                dropped.append({"item_id": i, "reason": overrides[i]["reason"], "how": "override"})
+                continue
+            crit = overrides[i]["final_failed_criteria"] if final == "bad" else []
 
         c = candidates[i]
         q = queries[c["query_id"]]
@@ -123,7 +140,7 @@ def main() -> None:
             "id": i, "query_id": c["query_id"], "split": c["split"], "difficulty": c["difficulty"],
             "sql": q["sql"], "intent": q["intent"], "watch_for": q["watch_for"],
             "explanation": c["explanation"],
-            "label": final, "failed_criteria": crit, "adjudicated": adjudicated,
+            "label": final, "failed_criteria": crit, "adjudicated": adjudicated, "overridden": overridden,
             "label_a": a["grade"], "label_b": b["grade"],
             # analysis-only fields — never shown to the judge
             "source": c["source"], "perturbation": c["perturbation"],
@@ -136,6 +153,7 @@ def main() -> None:
         "label_counts": dict(Counter(g["label"] for g in golden)),
         "by_split": dict(Counter(g["split"] for g in golden)),
         "adjudicated": sum(g["adjudicated"] for g in golden),
+        "overrides": [{"item_id": i, "final": o["final"], "reason": o["reason"]} for i, o in overrides.items()],
         "pending_adjudication": pending,
         "dropped": dropped,
     }
@@ -181,6 +199,8 @@ def to_markdown(r: dict) -> str:
         "",
         f"## Golden set: {gd['items']} items",
         f"- Labels: {gd['label_counts']} · split: {gd['by_split']} · resolved by adjudication: {gd['adjudicated']}",
+        f"- Overridden after agreement: {len(gd['overrides'])}",
+        *[f"  - {o['item_id']} -> {o['final']}: {o['reason']}" for o in gd["overrides"]],
         f"- Pending adjudication: {len(gd['pending_adjudication'])}",
         f"- Dropped: {len(gd['dropped'])}",
     ]

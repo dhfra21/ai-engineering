@@ -265,6 +265,10 @@ def _mock_call(spec: ModelSpec, messages: list[dict], schema_name: str) -> LLMRe
     elif schema_name == "perturb":
         data = {"explanation": "[mock] This query returns rows, but only for 2023.",
                 "change_made": "[mock] invented a date filter"}
+    elif schema_name == "label":
+        grade = "good" if h % 10 < 6 else "bad"
+        data = {"reason": "[mock] hash-based label", "grade": grade,
+                "failed_criteria": [schemas.CRITERIA[h % 4]] if grade == "bad" else []}
     elif schema_name == "pad":
         data = {"explanation": "[mock] Great question! " + "Padding sentence. " * (3 + h % 5)}
     else:

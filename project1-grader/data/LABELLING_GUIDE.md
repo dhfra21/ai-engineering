@@ -1,6 +1,6 @@
 # Labelling guide: SQL explanations
 
-**Version 1.** If you change a rule, bump the version and add a line under
+**Version 2.** If you change a rule, bump the version and add a line under
 "Changes" at the bottom. Then check that `prompts/judge/*.md` still says the
 same thing, because the judge is graded against labels made with this guide.
 
@@ -73,6 +73,14 @@ When you choose **bad**, tick every criterion that fails.
    attentive reader would come away believing.
 9. **Unsure?** Re-read §2, pick the label you'd defend, and write a note.
    Don't use **d** to dodge a hard call.
+10. **How it works must be true too.** The reader doesn't need the
+    mechanism, but if the explanation states one, it must be right.
+    "Uses a LEFT JOIN" for a `NOT IN` query is a **correct** failure even
+    though the rows are the same.
+11. **"All" must mean all.** An average, total or comparison "across all
+    customers / products" is a **correct** failure when the query only
+    covers a subset (e.g. customers with completed orders, products that
+    sold). Judge against the SQL, not against this particular data.
 
 ## 4. How we label
 
@@ -156,4 +164,8 @@ dataset labels.
 
 ## 7. Changes
 
-- v1: first version.
+- v1: first version. Both labellers (two Claude instances, instructor-approved)
+  labelled the dataset with v1.
+- v2 (after adjudication, 2026-10-06): added rules 3.10 and 3.11. The four
+  disagreements were c-q091 (mechanism) and c-q135/c-q161 ("all"), plus
+  c-q078, already covered by rule 3.8.

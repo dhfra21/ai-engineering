@@ -13,7 +13,9 @@ queries run on the same retail database as Project 0, so every claim can be
 checked against real results.
 
 **What's in here:**
-- a 161-item golden set, labelled by two people with a written guide
+- a 161-item golden set, labelled independently by two Claude instances (instructor-approved)
+  from a written guide; the 4 disagreements and 1 agreed-but-wrong item were
+  decided by Claude at the team's request (`data/labels/adjudication.jsonl`, `overrides.jsonl`)
 - a harness that grades every item, not just the overall score
 - an LLM judge with a reliability report and position/verbosity bias checks
 - versioned prompts whose changelog ties every change to a score
@@ -53,8 +55,8 @@ run on the mock backend).
 |---|---|---|
 | 1. Build the 161 queries (verified against the DB, dev/test split fixed) | `python data/make_queries.py` | 0 |
 | 2. Generate one blind candidate per query (baseline / weak model / planted error) | `python -m harness.candidates` | 161 × 20b, ~105 × qwen27b, ~56 × 120b |
-| 3. **Two people label independently** ([guide](data/LABELLING_GUIDE.md)) | `python -m harness.label --labeller <name>` | 0 |
-| 4. Agreement between labellers, adjudication, golden set | `python -m harness.golden --a <name> --b <name>` | 0 |
+| 3. **Two AI labellers label independently** from the full [guide](data/LABELLING_GUIDE.md) (instructor-approved in place of two humans): two separate Claude Code subagents, each given a blind packet | `python -m harness.claude_label export` → agent → `python -m harness.claude_label import` | 0 Groq calls. Optional extra raters on Groq: `python -m harness.ai_label` (~3k tokens per item) |
+| 4. Agreement between labellers; adjudicate the disagreements (and any agreed-but-wrong items in `overrides.jsonl`); golden set | `python -m harness.golden --a claude-a --b claude-b` | 0 |
 | 5. Judge vs humans (tune on dev, report on test) | `python -m harness.judge_eval --split dev` | 1 × 120b per item |
 | 6. Position bias | `python -m harness.bias position --split test` | 2 × 120b per item |
 | 7. Verbosity bias | `python -m harness.bias verbosity --split test --pad template` (and `--pad llm`) | ~3 × 120b per item |
@@ -73,6 +75,7 @@ where it left off without spending quota twice.
 | Judge | `openai/gpt-oss-120b` | stronger model grading a weaker one |
 | Second-model candidates (labelling only) | `qwen/qwen3.8-27b` | a different model's wording; `llama-3.1-8b-instant` is no longer served to our key, so most bad answers come from planted errors |
 | Planting errors (labelling only) | `openai/gpt-oss-120b` | |
+| Labellers A and B | Claude Opus 5.5, two separate Claude Code subagents | a different model family from the judge and the system, so judge-vs-label agreement isn't self-agreement and no labeller grades its own answers |
 
 All model ids and prices live in [`harness/config.py`](harness/config.py).
 Prices are Groq's paid list rate (the free tier costs $0), so the cost model
@@ -85,8 +88,9 @@ percentages, never a single number on its own._
 
 | What | Number | Source |
 |---|---|---|
-| Labeller agreement (raw, before adjudication) | _/_ (_%), κ = _ | `results/labels/agreement.md` |
-| Items dropped / adjudicated | _ / _ | same |
+| Labeller agreement (raw, before adjudication) | 157/161 (97.5%), κ = 0.947 — two Claude instances, so an upper bound | `results/labels/agreement.md` |
+| Items dropped / adjudicated / overridden | 0 / 4 / 1 | same |
+| Golden set | 161: 98 good, 63 bad (dev 60, test 101) | `data/golden.jsonl` |
 | Judge vs human, golden **test** | _/_ (_%), κ = _, bad caught _/_ | `results/judge/<v>_gptoss120b_test/summary.md` |
 | Position bias: verdict flips when A/B swapped | _/_ (_%) | `results/bias/<v>_test/position.json` |
 | Verbosity bias: human-bad answers rescued by padding | template _/_, llm _/_ | `results/bias/<v>_test/verbosity-*.json` |

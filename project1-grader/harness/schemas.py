@@ -53,9 +53,23 @@ PERTURB = {
     "additionalProperties": False,
 }
 
+# A model labeller answers like a human labeller: good, bad, or drop (the
+# item is broken as data), with the reason kept as the label's note.
+LABEL = {
+    "type": "object",
+    "properties": {
+        "reason": {"type": "string", "minLength": 1},
+        "failed_criteria": {"type": "array", "items": {"type": "string", "enum": CRITERIA}},
+        "grade": {"type": "string", "enum": ["good", "bad", "drop"]},
+    },
+    "required": ["reason", "failed_criteria", "grade"],
+    "additionalProperties": False,
+}
+
 PAD = SYSTEM  # a padded explanation has the same shape as a normal one
 
-BY_NAME = {"system": SYSTEM, "judge": JUDGE, "pairwise": PAIRWISE, "perturb": PERTURB, "pad": PAD}
+BY_NAME = {"system": SYSTEM, "judge": JUDGE, "pairwise": PAIRWISE, "perturb": PERTURB, "pad": PAD,
+           "label": LABEL}
 
 
 class SchemaError(ValueError):

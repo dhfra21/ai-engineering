@@ -1,0 +1,205 @@
+{
+  "labellers": [
+    "claude-a",
+    "claude-b"
+  ],
+  "items_total": 161,
+  "labelled_by_both": 161,
+  "labelled_by_one_only": 0,
+  "labelled_by_neither": 0,
+  "drop_proposed": {
+    "by_both": 0,
+    "by_one": 0
+  },
+  "grade_agreement": {
+    "n": 161,
+    "agreement": {
+      "n": 157,
+      "of": 161,
+      "pct": 97.5,
+      "ci95_pct": [
+        93.8,
+        99.0
+      ]
+    },
+    "cohen_kappa": 0.947,
+    "confusion_rows_a_cols_b": {
+      "good": {
+        "good": 99,
+        "bad": 2
+      },
+      "bad": {
+        "good": 2,
+        "bad": 58
+      }
+    },
+    "a_bad_rate": {
+      "n": 60,
+      "of": 161,
+      "pct": 37.3,
+      "ci95_pct": [
+        30.2,
+        45.0
+      ]
+    },
+    "b_bad_rate": {
+      "n": 60,
+      "of": 161,
+      "pct": 37.3,
+      "ci95_pct": [
+        30.2,
+        45.0
+      ]
+    },
+    "recall_of_bad": {
+      "n": 58,
+      "of": 60,
+      "pct": 96.7,
+      "ci95_pct": [
+        88.6,
+        99.1
+      ]
+    },
+    "precision_of_bad": {
+      "n": 58,
+      "of": 60,
+      "pct": 96.7,
+      "ci95_pct": [
+        88.6,
+        99.1
+      ]
+    }
+  },
+  "by_split": {
+    "dev": {
+      "agreement": {
+        "n": 58,
+        "of": 60,
+        "pct": 96.7,
+        "ci95_pct": [
+          88.6,
+          99.1
+        ]
+      },
+      "cohen_kappa": 0.93
+    },
+    "test": {
+      "agreement": {
+        "n": 99,
+        "of": 101,
+        "pct": 98.0,
+        "ci95_pct": [
+          93.1,
+          99.5
+        ]
+      },
+      "cohen_kappa": 0.957
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "agreement": {
+        "n": 44,
+        "of": 45,
+        "pct": 97.8,
+        "ci95_pct": [
+          88.4,
+          99.6
+        ]
+      },
+      "cohen_kappa": 0.949
+    },
+    "hard": {
+      "agreement": {
+        "n": 55,
+        "of": 57,
+        "pct": 96.5,
+        "ci95_pct": [
+          88.1,
+          99.0
+        ]
+      },
+      "cohen_kappa": 0.923
+    },
+    "medium": {
+      "agreement": {
+        "n": 58,
+        "of": 59,
+        "pct": 98.3,
+        "ci95_pct": [
+          91.0,
+          99.7
+        ]
+      },
+      "cohen_kappa": 0.965
+    }
+  },
+  "by_source": {
+    "baseline": {
+      "agreement": {
+        "n": 71,
+        "of": 73,
+        "pct": 97.3,
+        "ci95_pct": [
+          90.5,
+          99.2
+        ]
+      },
+      "cohen_kappa": 0.842
+    },
+    "perturbed": {
+      "agreement": {
+        "n": 55,
+        "of": 56,
+        "pct": 98.2,
+        "ci95_pct": [
+          90.6,
+          99.7
+        ]
+      },
+      "cohen_kappa": 0.879
+    },
+    "weak": {
+      "agreement": {
+        "n": 31,
+        "of": 32,
+        "pct": 96.9,
+        "ci95_pct": [
+          84.3,
+          99.4
+        ]
+      },
+      "cohen_kappa": 0.652
+    }
+  },
+  "both_bad_same_criteria": {
+    "n": 53,
+    "of": 58,
+    "pct": 91.4,
+    "ci95_pct": [
+      81.4,
+      96.3
+    ]
+  },
+  "golden": {
+    "items": 161,
+    "label_counts": {
+      "good": 98,
+      "bad": 63
+    },
+    "by_split": {
+      "dev": 60,
+      "test": 101
+    },
+    "adjudicated": 4,
+    "overrides": [
+      {
+        "item_id": "c-q102",
+        "final": "bad",
+        "reason": "Both labellers said good, but the explanation never mentions the ORDER BY times_ordered DESC; rule 3.3 requires the sort order and direction. Planted missing_condition error. claude-b's note ('most first') describes text that is not there. [Corrected by Claude (orchestrating session), at the team's request.]"
+      }
+    ],
+    "pending_adjudication": [],
+    "dropped": []
+  }
+}

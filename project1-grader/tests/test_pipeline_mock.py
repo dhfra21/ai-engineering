@@ -41,6 +41,12 @@ class TestPipelineMock(unittest.TestCase):
         cands = [json.loads(l) for l in (self.tmp / "data" / "candidates.jsonl").read_text().splitlines()]
         self.assertGreaterEqual(len(cands), 150)
 
+        self.sh("-m", "harness.ai_label", "--limit", "3")
+        ai = (self.tmp / "data" / "labels" / "ai-qwen27b.jsonl").read_text(encoding="utf-8").splitlines()
+        self.assertEqual(len(ai), 3)
+        for f in (self.tmp / "data" / "labels").glob("ai-*.jsonl"):
+            f.unlink()
+
         rng = random.Random(0)
         labels = self.tmp / "data" / "labels"
         labels.mkdir(parents=True, exist_ok=True)

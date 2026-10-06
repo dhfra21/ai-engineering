@@ -50,6 +50,9 @@ MODELS: dict[str, ModelSpec] = {
     m.key: m for m in [
         ModelSpec("gptoss20b", "openai/gpt-oss-20b", 0.075, 0.30,
                   extra={"reasoning_effort": "low"}),
+        # Same model as the system, thinking harder. Used only as a labeller.
+        ModelSpec("gptoss20bhigh", "openai/gpt-oss-20b", 0.075, 0.30,
+                  extra={"reasoning_effort": "high"}),
         ModelSpec("gptoss120b", "openai/gpt-oss-120b", 0.15, 0.60,
                   extra={"reasoning_effort": "medium"}),
         # Replaces llama-3.1-8b-instant, which returns 404 for our key since
@@ -65,10 +68,15 @@ JUDGE_MODEL = "gptoss120b"    # the LLM judge
 WEAK_MODEL = "qwen27b"        # only used to make candidate answers for labelling
 PERTURB_MODEL = "gptoss120b"  # only used to plant errors in candidate answers
 PAD_MODEL = "gptoss20b"       # only used for the verbosity-bias check
+# The two labellers that make the golden set (approved by the instructor in
+# place of two human labellers; humans adjudicate where they disagree).
+# Neither is the judge, or judge/label agreement would be self-agreement.
+LABELLER_MODELS = ["qwen27b", "gptoss20bhigh"]
 
 TEMPERATURE = 0
 # Reasoning tokens count against this budget on gpt-oss, so it is not tight.
-MAX_TOKENS = {"system": 1024, "judge": 1536, "pairwise": 1536, "perturb": 1536, "pad": 1536}
+MAX_TOKENS = {"system": 1024, "judge": 1536, "pairwise": 1536, "perturb": 1536, "pad": 1536,
+              "label": 4096}
 
 # Same schema text Project 0 used, so explanations can name real columns.
 SCHEMA_TEXT = """\
