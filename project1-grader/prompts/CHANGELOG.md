@@ -30,4 +30,4 @@ score.
 
 | Version | Change | Why | Agreement / κ / bad caught (dev) before → after | Run dir |
 |---|---|---|---|---|
-| v1 | Rubric condensed from LABELLING_GUIDE v1; reason before grade; explicit "length is not quality" | — | — → _ | _ |
+| v1 | Rubric condensed from LABELLING_GUIDE v1; reason before grade; explicit "length is not quality" | — | — → 54/60 (90.0%) / κ 0.797 / bad caught 23/24 | `results/judge/v1_gptoss120b_dev` |

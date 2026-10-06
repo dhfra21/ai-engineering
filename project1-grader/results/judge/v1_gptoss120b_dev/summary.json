@@ -1,0 +1,367 @@
+{
+  "n_items": 60,
+  "judge_errors": 0,
+  "human_vs_judge": {
+    "n": 60,
+    "agreement": {
+      "n": 54,
+      "of": 60,
+      "pct": 90.0,
+      "ci95_pct": [
+        79.9,
+        95.3
+      ]
+    },
+    "cohen_kappa": 0.797,
+    "confusion_rows_a_cols_b": {
+      "good": {
+        "good": 31,
+        "bad": 5
+      },
+      "bad": {
+        "good": 1,
+        "bad": 23
+      }
+    },
+    "a_bad_rate": {
+      "n": 24,
+      "of": 60,
+      "pct": 40.0,
+      "ci95_pct": [
+        28.6,
+        52.6
+      ]
+    },
+    "b_bad_rate": {
+      "n": 28,
+      "of": 60,
+      "pct": 46.7,
+      "ci95_pct": [
+        34.6,
+        59.1
+      ]
+    },
+    "recall_of_bad": {
+      "n": 23,
+      "of": 24,
+      "pct": 95.8,
+      "ci95_pct": [
+        79.8,
+        99.3
+      ]
+    },
+    "precision_of_bad": {
+      "n": 23,
+      "of": 28,
+      "pct": 82.1,
+      "ci95_pct": [
+        64.4,
+        92.1
+      ]
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "agreement": {
+        "n": 17,
+        "of": 17,
+        "pct": 100.0,
+        "ci95_pct": [
+          81.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    },
+    "hard": {
+      "agreement": {
+        "n": 19,
+        "of": 21,
+        "pct": 90.5,
+        "ci95_pct": [
+          71.1,
+          97.3
+        ]
+      },
+      "bad_caught": {
+        "n": 12,
+        "of": 13,
+        "pct": 92.3,
+        "ci95_pct": [
+          66.7,
+          98.6
+        ]
+      }
+    },
+    "medium": {
+      "agreement": {
+        "n": 18,
+        "of": 22,
+        "pct": 81.8,
+        "ci95_pct": [
+          61.5,
+          92.7
+        ]
+      },
+      "bad_caught": {
+        "n": 7,
+        "of": 7,
+        "pct": 100.0,
+        "ci95_pct": [
+          64.6,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_source": {
+    "baseline": {
+      "agreement": {
+        "n": 29,
+        "of": 32,
+        "pct": 90.6,
+        "ci95_pct": [
+          75.8,
+          96.8
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    },
+    "perturbed": {
+      "agreement": {
+        "n": 17,
+        "of": 18,
+        "pct": 94.4,
+        "ci95_pct": [
+          74.2,
+          99.0
+        ]
+      },
+      "bad_caught": {
+        "n": 17,
+        "of": 18,
+        "pct": 94.4,
+        "ci95_pct": [
+          74.2,
+          99.0
+        ]
+      }
+    },
+    "weak": {
+      "agreement": {
+        "n": 8,
+        "of": 10,
+        "pct": 80.0,
+        "ci95_pct": [
+          49.0,
+          94.3
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_error_type": {
+    "invented_detail": {
+      "agreement": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    },
+    "jargon": {
+      "agreement": {
+        "n": 2,
+        "of": 3,
+        "pct": 66.7,
+        "ci95_pct": [
+          20.8,
+          93.9
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 3,
+        "pct": 66.7,
+        "ci95_pct": [
+          20.8,
+          93.9
+        ]
+      }
+    },
+    "missing_condition": {
+      "agreement": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    },
+    "wrong_aggregation": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "wrong_filter": {
+      "agreement": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      }
+    },
+    "wrong_join_semantics": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    }
+  },
+  "cost_usd_per_item": 0.00046029,
+  "latency_ms": {
+    "p50": 1515.7,
+    "p95": 2918.2
+  },
+  "disagreements": [
+    {
+      "item_id": "c-q020",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says the query lists every customer\u2019s name and their order count, implying customers with zero orders are included and that each distinct customer is counted separately. In fact, the inner join excludes customers with no orders and grouping by name merges customers sharing the same name, so the description is incorrect, incomplete, and invents behavior not present."
+    },
+    {
+      "item_id": "c-q083",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that customers with multiple completed orders will appear once for each order, which affects the number of rows returned."
+    },
+    {
+      "item_id": "c-q097",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says the query lists each product category, implying all categories are returned, but the inner join excludes categories with no products, so the statement about which rows are returned is incorrect and incomplete. It also omits that categories without products are omitted, a detail that affects the result set."
+    },
+    {
+      "item_id": "c-q111",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says the query lists every customer\u2019s name, but the inner join means only customers with at least one order are returned, so it misstates the result set and omits that customers without orders are excluded. This makes it both incorrect and incomplete."
+    },
+    {
+      "item_id": "c-q128",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation leaves out that the query returns both the customer name and the total spend amount, mentioning only names, so it does not fully describe all output columns."
+    },
+    {
+      "item_id": "c-q140",
+      "source": "perturbed",
+      "error_type": "jargon",
+      "human": "bad",
+      "judge": "good",
+      "judge_reason": "The explanation accurately describes every part of the query, mentions all filters, grouping, aggregation, and ordering, adds no extra information, and is expressed in plain language suitable for a non\u2011SQL audience."
+    }
+  ],
+  "judge_prompt": "judge/v1",
+  "judge_model": "gptoss120b",
+  "split": "dev"
+}
