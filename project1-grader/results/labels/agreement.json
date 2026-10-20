@@ -184,8 +184,8 @@
   "golden": {
     "items": 161,
     "label_counts": {
-      "good": 83,
-      "bad": 78
+      "good": 82,
+      "bad": 79
     },
     "by_split": {
       "dev": 60,
@@ -272,6 +272,11 @@
         "item_id": "c-q130",
         "final": "bad",
         "reason": "Rule 3.1: 'products that have been purchased' clearly implies completed sales, but the query has no status filter, so pending and cancelled orders count too (40 products qualify vs 35 with completed orders only). Surfaced by a gpt-5-mini judge v1 dev disagreement (2026-10-20). [Corrected by Claude (orchestrating session), at the team's request.]"
+      },
+      {
+        "item_id": "c-q107",
+        "final": "bad",
+        "reason": "Rule 3.3: the query (UNION ALL) has no ORDER BY, but the explanation promises 'all cities followed by all countries'. SQLite returns that order in practice, but rule 3.11 says judge against the SQL, not this engine/data. Surfaced by a gpt-5-mini judge v2 dev disagreement (2026-10-20). [Corrected by Claude (orchestrating session), at the team's request.]"
       }
     ],
     "pending_adjudication": [],

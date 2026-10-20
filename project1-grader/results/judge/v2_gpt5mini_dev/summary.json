@@ -1,0 +1,367 @@
+{
+  "n_items": 60,
+  "judge_errors": 0,
+  "human_vs_judge": {
+    "n": 60,
+    "agreement": {
+      "n": 54,
+      "of": 60,
+      "pct": 90.0,
+      "ci95_pct": [
+        79.9,
+        95.3
+      ]
+    },
+    "cohen_kappa": 0.783,
+    "confusion_rows_a_cols_b": {
+      "good": {
+        "good": 18,
+        "bad": 6
+      },
+      "bad": {
+        "good": 0,
+        "bad": 36
+      }
+    },
+    "a_bad_rate": {
+      "n": 36,
+      "of": 60,
+      "pct": 60.0,
+      "ci95_pct": [
+        47.4,
+        71.4
+      ]
+    },
+    "b_bad_rate": {
+      "n": 42,
+      "of": 60,
+      "pct": 70.0,
+      "ci95_pct": [
+        57.5,
+        80.1
+      ]
+    },
+    "recall_of_bad": {
+      "n": 36,
+      "of": 36,
+      "pct": 100.0,
+      "ci95_pct": [
+        90.4,
+        100.0
+      ]
+    },
+    "precision_of_bad": {
+      "n": 36,
+      "of": 42,
+      "pct": 85.7,
+      "ci95_pct": [
+        72.2,
+        93.3
+      ]
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "agreement": {
+        "n": 16,
+        "of": 17,
+        "pct": 94.1,
+        "ci95_pct": [
+          73.0,
+          99.0
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    },
+    "hard": {
+      "agreement": {
+        "n": 20,
+        "of": 21,
+        "pct": 95.2,
+        "ci95_pct": [
+          77.3,
+          99.2
+        ]
+      },
+      "bad_caught": {
+        "n": 17,
+        "of": 17,
+        "pct": 100.0,
+        "ci95_pct": [
+          81.6,
+          100.0
+        ]
+      }
+    },
+    "medium": {
+      "agreement": {
+        "n": 18,
+        "of": 22,
+        "pct": 81.8,
+        "ci95_pct": [
+          61.5,
+          92.7
+        ]
+      },
+      "bad_caught": {
+        "n": 15,
+        "of": 15,
+        "pct": 100.0,
+        "ci95_pct": [
+          79.6,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_source": {
+    "baseline": {
+      "agreement": {
+        "n": 28,
+        "of": 32,
+        "pct": 87.5,
+        "ci95_pct": [
+          71.9,
+          95.0
+        ]
+      },
+      "bad_caught": {
+        "n": 14,
+        "of": 14,
+        "pct": 100.0,
+        "ci95_pct": [
+          78.5,
+          100.0
+        ]
+      }
+    },
+    "perturbed": {
+      "agreement": {
+        "n": 18,
+        "of": 18,
+        "pct": 100.0,
+        "ci95_pct": [
+          82.4,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 18,
+        "of": 18,
+        "pct": 100.0,
+        "ci95_pct": [
+          82.4,
+          100.0
+        ]
+      }
+    },
+    "weak": {
+      "agreement": {
+        "n": 8,
+        "of": 10,
+        "pct": 80.0,
+        "ci95_pct": [
+          49.0,
+          94.3
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_error_type": {
+    "invented_detail": {
+      "agreement": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    },
+    "jargon": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "missing_condition": {
+      "agreement": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    },
+    "wrong_aggregation": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "wrong_filter": {
+      "agreement": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      }
+    },
+    "wrong_join_semantics": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    }
+  },
+  "cost_usd_per_item": 0.00217708,
+  "latency_ms": {
+    "p50": 8727.8,
+    "p95": 19032.2
+  },
+  "disagreements": [
+    {
+      "item_id": "c-q014",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate and clear but omits the ORDER BY direction. The query orders the results by year in ascending order; the explanation only says \"sorted by year\" without specifying the direction."
+    },
+    {
+      "item_id": "c-q030",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation implies it lists counts for \u201ceach month in the year 2024,\u201d which suggests all 12 months will appear; the query only returns months present in the orders table within that date range (months with zero orders are omitted). Otherwise the description correctly states the YYYY\u2011MM format, counting orders per month for 2024 and ordering by month."
+    },
+    {
+      "item_id": "c-q083",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits an important row-level detail: a customer with multiple completed orders will appear once for each completed order (multiple rows), and it doesn't state that the missing order ID will be NULL (the query returns NULL, not a non-SQL-specific \u201cblank\u201d). Because it fails to mention how multiple orders affect the returned rows, it is incomplete."
+    },
+    {
+      "item_id": "c-q106",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation correctly says the query returns names from both tables and that UNION removes duplicates, and it is clear. However it is incomplete because it doesn't state anything about ordering: the query has no ORDER BY, so the row order is not guaranteed. A reader reproducing the result would not know the (unspecified) order."
+    },
+    {
+      "item_id": "c-q112",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation implies it reports counts \u201con each day of the week\u201d (i.e., all seven days). The query groups only the weekdays that actually appear in the orders table, so days with zero orders will not be shown. Otherwise the description of how weekdays are encoded, that it counts orders per weekday, and that results are ordered Sunday-to-Saturday is correct and clear."
+    },
+    {
+      "item_id": "c-q127",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits an important filter: the query only uses products that have matching order_items (products with sales), because it INNER JOINs products to order_items and groups on those rows. Saying \u201cfor each product\u201d and \u201csum of revenue for all products in the same category\u201d implies it covers unsold products too; the category total and percentages are computed only from products that have revenue. Because it leaves out that exclusion, it is not correct or complete."
+    }
+  ],
+  "judge_prompt": "judge/v2",
+  "judge_model": "gpt5mini",
+  "split": "dev"
+}

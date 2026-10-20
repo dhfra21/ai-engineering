@@ -23,8 +23,8 @@
 | source=weak | 31/32 (96.9%) | 0.652 |
 
 ## Golden set: 161 items
-- Labels: {'good': 83, 'bad': 78} · split: {'dev': 60, 'test': 101} · resolved by adjudication: 4
-- Overridden after agreement: 16
+- Labels: {'good': 82, 'bad': 79} · split: {'dev': 60, 'test': 101} · resolved by adjudication: 4
+- Overridden after agreement: 17
   - c-q102 -> bad: Both labellers said good, but the explanation never mentions the ORDER BY times_ordered DESC; rule 3.3 requires the sort order and direction. Planted missing_condition error. claude-b's note ('most first') describes text that is not there. [Corrected by Claude (orchestrating session), at the team's request.]
   - c-q017 -> bad: Rule 3.12 (guide v3): says 'every product category in the database', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]
   - c-q020 -> bad: Rule 3.12 (guide v3): says 'every customer's name', but the inner join drops those with no matching rows, so the stated row set is wrong. Found by a rule sweep over all 161 items, triggered by judge v1 dev disagreements (c-q020, c-q097, c-q111). [Corrected by Claude (orchestrating session), at the team's request.]
@@ -41,5 +41,6 @@
   - c-q095 -> bad: Rule 3.12: says 'lists every order in the database', but the inner join drops orders with no match. Missed by the first rule-3.12 sweep for the same reason; found while fixing c-q108, not by the judge. [Corrected by Claude (orchestrating session), at the team's request.]
   - c-q145 -> bad: Rule 3.12: says the first step 'lists every order', but the CTE inner-joins orders to order_items, so orders with no items are dropped and the stated row set is wrong (rule 3.11: judge against the SQL, not this data, which has no such orders). Missed by the guide-v3 rule sweep; surfaced by a gpt-5-mini judge v1 dev disagreement (2026-10-20). [Corrected by Claude (orchestrating session), at the team's request.]
   - c-q130 -> bad: Rule 3.1: 'products that have been purchased' clearly implies completed sales, but the query has no status filter, so pending and cancelled orders count too (40 products qualify vs 35 with completed orders only). Surfaced by a gpt-5-mini judge v1 dev disagreement (2026-10-20). [Corrected by Claude (orchestrating session), at the team's request.]
+  - c-q107 -> bad: Rule 3.3: the query (UNION ALL) has no ORDER BY, but the explanation promises 'all cities followed by all countries'. SQLite returns that order in practice, but rule 3.11 says judge against the SQL, not this engine/data. Surfaced by a gpt-5-mini judge v2 dev disagreement (2026-10-20). [Corrected by Claude (orchestrating session), at the team's request.]
 - Pending adjudication: 0
 - Dropped: 0

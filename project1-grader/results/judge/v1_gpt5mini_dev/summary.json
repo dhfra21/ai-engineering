@@ -4,32 +4,32 @@
   "human_vs_judge": {
     "n": 60,
     "agreement": {
-      "n": 55,
+      "n": 54,
       "of": 60,
-      "pct": 91.7,
+      "pct": 90.0,
       "ci95_pct": [
-        81.9,
-        96.4
+        79.9,
+        95.3
       ]
     },
-    "cohen_kappa": 0.826,
+    "cohen_kappa": 0.789,
     "confusion_rows_a_cols_b": {
       "good": {
-        "good": 21,
+        "good": 20,
         "bad": 4
       },
       "bad": {
-        "good": 1,
+        "good": 2,
         "bad": 34
       }
     },
     "a_bad_rate": {
-      "n": 35,
+      "n": 36,
       "of": 60,
-      "pct": 58.3,
+      "pct": 60.0,
       "ci95_pct": [
-        45.7,
-        69.9
+        47.4,
+        71.4
       ]
     },
     "b_bad_rate": {
@@ -43,11 +43,11 @@
     },
     "recall_of_bad": {
       "n": 34,
-      "of": 35,
-      "pct": 97.1,
+      "of": 36,
+      "pct": 94.4,
       "ci95_pct": [
-        85.5,
-        99.5
+        81.9,
+        98.5
       ]
     },
     "precision_of_bad": {
@@ -103,21 +103,21 @@
     },
     "medium": {
       "agreement": {
-        "n": 21,
+        "n": 20,
         "of": 22,
-        "pct": 95.5,
+        "pct": 90.9,
         "ci95_pct": [
-          78.2,
-          99.2
+          72.2,
+          97.5
         ]
       },
       "bad_caught": {
         "n": 14,
-        "of": 14,
-        "pct": 100.0,
+        "of": 15,
+        "pct": 93.3,
         "ci95_pct": [
-          78.5,
-          100.0
+          70.2,
+          98.8
         ]
       }
     }
@@ -125,21 +125,21 @@
   "by_source": {
     "baseline": {
       "agreement": {
-        "n": 30,
+        "n": 29,
         "of": 32,
-        "pct": 93.8,
+        "pct": 90.6,
         "ci95_pct": [
-          79.9,
-          98.3
+          75.8,
+          96.8
         ]
       },
       "bad_caught": {
         "n": 13,
-        "of": 13,
-        "pct": 100.0,
+        "of": 14,
+        "pct": 92.9,
         "ci95_pct": [
-          77.2,
-          100.0
+          68.5,
+          98.7
         ]
       }
     },
@@ -327,6 +327,14 @@
       "human": "good",
       "judge": "bad",
       "judge_reason": "The explanation misses an important detail: customers with more than one completed order will appear multiple times (one row per completed order). It also uses \u201cblank\u201d instead of stating the order_id is NULL for customers without completed orders, but the main omission is the multiplicity of rows per customer."
+    },
+    {
+      "item_id": "c-q107",
+      "source": "baseline",
+      "error_type": null,
+      "human": "bad",
+      "judge": "good",
+      "judge_reason": "The explanation correctly and completely describes that the query returns one column containing every city value from customers followed by every country value, and explicitly notes that duplicates are not removed (UNION ALL). It makes no claims beyond what the SQL does and is expressed in clear, non\u2011SQL language."
     },
     {
       "item_id": "c-q126",
