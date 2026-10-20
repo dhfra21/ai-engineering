@@ -1,7 +1,7 @@
 """Model labellers -> data/labels/ai-<model>.jsonl
 
     python -m harness.ai_label                      # both labellers, all items
-    python -m harness.ai_label --model qwen27b      # one labeller
+    python -m harness.ai_label --model gpt4omini    # one labeller
     python -m harness.ai_label --limit 5            # smoke test
 
 The instructor approved model labellers in place of two human labellers.
@@ -10,7 +10,7 @@ and sees what the human labelling tool (harness/label.py) shows: the SQL, the
 real result rows and the reference notes. Never the candidate's source.
 
 Rows have the same shape as human labels, plus provenance (model, prompt,
-guide sha), so `python -m harness.golden --a ai-qwen27b --b ai-gptoss20bhigh`
+guide sha), so `python -m harness.golden --a ai-gpt4omini --b ai-gpt5nanohigh`
 works unchanged. Humans then adjudicate the disagreements.
 
 Neither labeller may be the judge model: the judge is evaluated against these

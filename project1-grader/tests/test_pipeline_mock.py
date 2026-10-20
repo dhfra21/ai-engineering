@@ -23,7 +23,7 @@ class TestPipelineMock(unittest.TestCase):
                                                           "*.jsonl.bak", "__pycache__"))
         for f in (self.tmp / "data" / "labels").glob("*.jsonl"):
             f.unlink()
-        self.env = {**os.environ, "GRADER_BACKEND": "mock", "GROQ_API_KEY": ""}
+        self.env = {**os.environ, "GRADER_BACKEND": "mock", "OPENAI_API_KEY": ""}
 
     def tearDown(self):
         shutil.rmtree(self.tmp)
@@ -42,7 +42,7 @@ class TestPipelineMock(unittest.TestCase):
         self.assertGreaterEqual(len(cands), 150)
 
         self.sh("-m", "harness.ai_label", "--limit", "3")
-        ai = (self.tmp / "data" / "labels" / "ai-qwen27b.jsonl").read_text(encoding="utf-8").splitlines()
+        ai = (self.tmp / "data" / "labels" / "ai-gpt4omini.jsonl").read_text(encoding="utf-8").splitlines()
         self.assertEqual(len(ai), 3)
         for f in (self.tmp / "data" / "labels").glob("ai-*.jsonl"):
             f.unlink()

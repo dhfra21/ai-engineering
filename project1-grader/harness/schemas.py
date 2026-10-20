@@ -1,5 +1,5 @@
 """The fixed JSON schemas every model call must answer in, plus a small
-validator. Groq enforces the schema server-side in strict mode; we validate
+validator. OpenAI enforces the schema server-side in strict mode; we validate
 again locally anyway, because (a) json_object-mode models are not enforced
 and (b) scoring must never depend on trusting the provider.
 

@@ -3,13 +3,12 @@
     python -m harness.cost                          # latest non-mock run in history.csv
     python -m harness.cost --run <run_id> --daily-requests 2000 --judge-sample 0.05
 
-Uses the measured tokens per item (system and judge) x Groq's published paid
+Uses the measured tokens per item (system and judge) x OpenAI's list
 price (harness/config.py). Reports:
   - cost per 1,000 requests: system alone, and system + judge
   - monthly cost at today's traffic and at 100x, where "traffic" is the
     --daily-requests assumption and the judge grades a --judge-sample
     fraction of production answers (monitoring), not all of them
-  - whether that traffic fits Groq's free tier (1,000 requests/day/model)
 
 The daily-traffic number is an assumption — state it in the report.
 """
@@ -22,8 +21,6 @@ import json
 from harness import stats
 from harness.config import MODELS, results_root
 from harness.data import read_jsonl
-
-FREE_TIER_RPD = 1000
 
 
 def main() -> None:
@@ -56,8 +53,7 @@ def main() -> None:
         system_m = daily * 30 * sys_cost
         judge_m = daily * 30 * args.judge_sample * jdg_cost
         return {"daily_requests": daily, "system_usd": round(system_m, 2), "judge_usd": round(judge_m, 2),
-                "total_usd": round(system_m + judge_m, 2),
-                "fits_free_tier": daily <= FREE_TIER_RPD and daily * args.judge_sample <= FREE_TIER_RPD}
+                "total_usd": round(system_m + judge_m, 2)}
 
     sys_model = MODELS[rows[0]["system_model"]]
     jdg_model = MODELS[rows[0]["judge_model"]]
@@ -78,8 +74,8 @@ def main() -> None:
         "monthly_today": monthly(args.daily_requests),
         "monthly_at_100x": monthly(args.daily_requests * 100),
         "assumptions": {"daily_requests_today": args.daily_requests, "judge_sample": args.judge_sample,
-                        "prices": "Groq paid list price, see harness/config.py", "days_per_month": 30,
-                        "note": "output tokens include gpt-oss reasoning tokens, which are billed"},
+                        "prices": "OpenAI list price, see harness/config.py", "days_per_month": 30,
+                        "note": "output tokens include gpt-5 reasoning tokens, which are billed"},
     }
     out = root / "cost" / f"{run_id}.json"
     out.parent.mkdir(parents=True, exist_ok=True)

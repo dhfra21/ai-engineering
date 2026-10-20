@@ -26,9 +26,9 @@ checked against real results.
 cp .env.example .env && python db/build_db.py && python data/make_queries.py
 ```
 
-Then put your Groq key in `.env` ([free, no card](https://console.groq.com/keys)).
+Then put the OpenAI key in `.env` (`OPENAI_API_KEY=...`).
 You need Python 3.10+ and **nothing to install**: the harness uses only the
-standard library and calls Groq's HTTP API directly.
+standard library and calls OpenAI's HTTP API directly.
 
 To try everything offline with fake, hash-based answers, add
 `GRADER_BACKEND=mock` in front of any command. Mock output goes to
@@ -69,17 +69,16 @@ where it left off without spending quota twice.
 
 ## Models
 
-| Role | Model (Groq) | Why |
+| Role | Model (OpenAI) | Why |
 |---|---|---|
-| System under test | `openai/gpt-oss-20b` | cheap tier from Project 0 |
-| Judge | `openai/gpt-oss-120b` | stronger model grading a weaker one |
-| Second-model candidates (labelling only) | `qwen/qwen3.8-27b` | a different model's wording; `llama-3.1-8b-instant` is no longer served to our key, so most bad answers come from planted errors |
-| Planting errors (labelling only) | `openai/gpt-oss-120b` | |
+| System under test | `gpt-5-nano` (low reasoning) | cheapest tier |
+| Judge | `gpt-5-mini` (medium reasoning) | stronger model grading a weaker one |
+| Second-model candidates (labelling only) | `gpt-4o-mini` | a different, older model's wording, with more natural errors |
+| Planting errors (labelling only) | `gpt-5-mini` | |
 | Labellers A and B | Claude Opus 5.5, two separate Claude Code subagents | a different model family from the judge and the system, so judge-vs-label agreement isn't self-agreement and no labeller grades its own answers |
 
 All model ids and prices live in [`harness/config.py`](harness/config.py).
-Prices are Groq's paid list rate (the free tier costs $0), so the cost model
-also holds for traffic past the free tier.
+Prices are OpenAI's standard list rates.
 
 ## Results
 
@@ -106,7 +105,7 @@ data/      make_queries.py → queries.jsonl  161 SQL inputs + reference notes +
            labels/<name>.jsonl              raw labels per labeller; adjudication.jsonl
            golden.jsonl                     final golden set
            LABELLING_GUIDE.md
-harness/   run.py (the one command), system.py, judge.py, llm.py (Groq client, cache,
+harness/   run.py (the one command), system.py, judge.py, llm.py (OpenAI client, cache,
            structured output), schemas.py (fixed JSON schemas), prompts.py,
            candidates.py, label.py, golden.py, judge_eval.py, bias.py, cost.py, stats.py
 prompts/   system/, judge/, judge_pairwise/, perturb/, pad/  — <version>.md each
@@ -125,5 +124,5 @@ _One entry per team member. Fill this in before freezing the repo._
 
 ## No API keys in this repo
 
-`.env` is git-ignored. `GROQ_API_KEY` is read from the environment (or
+`.env` is git-ignored. `OPENAI_API_KEY` is read from the environment (or
 `.env`) in `harness/llm.py` and is never hardcoded.

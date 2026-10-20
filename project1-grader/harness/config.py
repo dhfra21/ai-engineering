@@ -1,14 +1,13 @@
 """Models, prices, paths. The one place to change which model plays which role.
 
-All models run on Groq's free tier (console.groq.com — no card; limits are
-per model, roughly 30 requests/minute and 1,000 requests/day, plus a daily
-token cap — check https://console.groq.com/docs/rate-limits). $0 is spent
-collecting results; the prices below are Groq's published *paid* rates, so
-the cost model (harness/cost.py) reflects what the same traffic would cost
-once it outgrows the free tier.
+All models run on the OpenAI API, with the key the instructor provided.
+Rate limits depend on the key's usage tier
+(https://platform.openai.com/settings/organization/limits). The prices below
+are OpenAI's standard (non-batch) list rates and feed the cost model
+(harness/cost.py).
 
-Pricing and model ids checked: 2026-09-22 against
-https://console.groq.com/docs/models — re-check before you submit.
+Model ids checked against /v1/models for our key on 2026-10-20. Prices are
+from https://openai.com/api/pricing — re-check before you submit.
 """
 from __future__ import annotations
 
@@ -39,42 +38,40 @@ CACHE_DIR = ROOT / ".cache" / "llm"
 class ModelSpec:
     key: str                      # short id used in result files
     model_id: str                 # exact string sent to the API
-    input_price_per_mtok: float   # USD per 1M input tokens (Groq paid tier)
+    input_price_per_mtok: float   # USD per 1M input tokens
     output_price_per_mtok: float  # USD per 1M output tokens (includes reasoning tokens)
-    rpm: int = 30                 # free-tier requests/minute, used for client-side pacing
+    rpm: int = 300                # requests/minute, used for client-side pacing
     structured: str = "json_schema"   # "json_schema" (strict) or "json_object" (validated locally)
+    temperature: bool = True      # reasoning models (gpt-5 family) reject `temperature`
     extra: dict = field(default_factory=dict)  # model-specific request params
 
 
 MODELS: dict[str, ModelSpec] = {
     m.key: m for m in [
-        ModelSpec("gptoss20b", "openai/gpt-oss-20b", 0.075, 0.30,
+        ModelSpec("gpt5nano", "gpt-5-nano", 0.05, 0.40, temperature=False,
                   extra={"reasoning_effort": "low"}),
         # Same model as the system, thinking harder. Used only as a labeller.
-        ModelSpec("gptoss20bhigh", "openai/gpt-oss-20b", 0.075, 0.30,
+        ModelSpec("gpt5nanohigh", "gpt-5-nano", 0.05, 0.40, temperature=False,
                   extra={"reasoning_effort": "high"}),
-        ModelSpec("gptoss120b", "openai/gpt-oss-120b", 0.15, 0.60,
+        ModelSpec("gpt5mini", "gpt-5-mini", 0.25, 2.00, temperature=False,
                   extra={"reasoning_effort": "medium"}),
-        # Replaces llama-3.1-8b-instant, which returns 404 for our key since
-        # 2026-10 (Groq has no small Llama chat model left; allam-2-7b failed
-        # JSON output 4/4). Stronger than "weak", so it adds few natural errors.
-        ModelSpec("qwen27b", "qwen/qwen3.8-27b", 0.80, 4.00,
-                  structured="json_object"),
+        # Non-reasoning and older, so its candidates make more natural errors.
+        ModelSpec("gpt4omini", "gpt-4o-mini", 0.15, 0.60),
     ]
 }
 
-SYSTEM_MODEL = "gptoss20b"    # the system under test
-JUDGE_MODEL = "gptoss120b"    # the LLM judge
-WEAK_MODEL = "qwen27b"        # only used to make candidate answers for labelling
-PERTURB_MODEL = "gptoss120b"  # only used to plant errors in candidate answers
-PAD_MODEL = "gptoss20b"       # only used for the verbosity-bias check
+SYSTEM_MODEL = "gpt5nano"     # the system under test
+JUDGE_MODEL = "gpt5mini"      # the LLM judge
+WEAK_MODEL = "gpt4omini"      # only used to make candidate answers for labelling
+PERTURB_MODEL = "gpt5mini"    # only used to plant errors in candidate answers
+PAD_MODEL = "gpt5nano"        # only used for the verbosity-bias check
 # The two labellers that make the golden set (approved by the instructor in
 # place of two human labellers; humans adjudicate where they disagree).
 # Neither is the judge, or judge/label agreement would be self-agreement.
-LABELLER_MODELS = ["qwen27b", "gptoss20bhigh"]
+LABELLER_MODELS = ["gpt4omini", "gpt5nanohigh"]
 
-TEMPERATURE = 0
-# Reasoning tokens count against this budget on gpt-oss, so it is not tight.
+TEMPERATURE = 0  # sent only to models with temperature=True
+# Reasoning tokens count against this budget on gpt-5, so it is not tight.
 MAX_TOKENS = {"system": 1024, "judge": 1536, "pairwise": 1536, "perturb": 1536, "pad": 1536,
               "label": 4096}
 
@@ -105,7 +102,7 @@ def is_mock() -> bool:
     """GRADER_BACKEND=mock swaps every API call for a fake, deterministic answer.
     Used by the tests and for trying the pipeline without a key. Mock results
     are written under results/mock/ and never mixed with real ones."""
-    return os.environ.get("GRADER_BACKEND", "groq").lower() == "mock"
+    return os.environ.get("GRADER_BACKEND", "openai").lower() == "mock"
 
 
 def results_root() -> Path:
