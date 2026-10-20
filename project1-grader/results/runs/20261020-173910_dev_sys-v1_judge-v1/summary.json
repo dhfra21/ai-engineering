@@ -1,0 +1,83 @@
+{
+  "n_items": 60,
+  "scored": 60,
+  "good": {
+    "n": 43,
+    "of": 60,
+    "pct": 71.7,
+    "ci95_pct": [
+      59.2,
+      81.5
+    ]
+  },
+  "bad": {
+    "n": 17,
+    "of": 60,
+    "pct": 28.3,
+    "ci95_pct": [
+      18.5,
+      40.8
+    ]
+  },
+  "errors": {
+    "system": 0,
+    "judge": 0
+  },
+  "by_difficulty": {
+    "easy": {
+      "n": 16,
+      "of": 17,
+      "pct": 94.1,
+      "ci95_pct": [
+        73.0,
+        99.0
+      ]
+    },
+    "medium": {
+      "n": 15,
+      "of": 22,
+      "pct": 68.2,
+      "ci95_pct": [
+        47.3,
+        83.6
+      ]
+    },
+    "hard": {
+      "n": 12,
+      "of": 21,
+      "pct": 57.1,
+      "ci95_pct": [
+        36.5,
+        75.5
+      ]
+    }
+  },
+  "failed_criteria_counts": {
+    "correct": 13,
+    "complete": 13,
+    "no_invention": 9,
+    "clear": 0
+  },
+  "cost_usd": {
+    "system_total": 0.0084,
+    "judge_total": 0.134841,
+    "system_per_item": 0.00013999,
+    "judge_per_item": 0.00224734
+  },
+  "latency_ms": {
+    "system_p50": 3233.1,
+    "system_p95": 5570.1,
+    "judge_p50": 9682.1,
+    "judge_p95": 21666.5
+  },
+  "run_id": "20261020-173910_dev_sys-v1_judge-v1",
+  "split": "dev",
+  "system_prompt": "system/v1",
+  "system_sha": "b330de8a52",
+  "system_model": "gpt5nano",
+  "judge_prompt": "judge/v1",
+  "judge_sha": "855813d6f7",
+  "judge_model": "gpt5mini",
+  "limit": null,
+  "note": "judge max_tokens 1536->4096"
+}

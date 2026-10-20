@@ -1,0 +1,359 @@
+{
+  "n_items": 60,
+  "judge_errors": 0,
+  "human_vs_judge": {
+    "n": 60,
+    "agreement": {
+      "n": 55,
+      "of": 60,
+      "pct": 91.7,
+      "ci95_pct": [
+        81.9,
+        96.4
+      ]
+    },
+    "cohen_kappa": 0.826,
+    "confusion_rows_a_cols_b": {
+      "good": {
+        "good": 21,
+        "bad": 4
+      },
+      "bad": {
+        "good": 1,
+        "bad": 34
+      }
+    },
+    "a_bad_rate": {
+      "n": 35,
+      "of": 60,
+      "pct": 58.3,
+      "ci95_pct": [
+        45.7,
+        69.9
+      ]
+    },
+    "b_bad_rate": {
+      "n": 38,
+      "of": 60,
+      "pct": 63.3,
+      "ci95_pct": [
+        50.7,
+        74.4
+      ]
+    },
+    "recall_of_bad": {
+      "n": 34,
+      "of": 35,
+      "pct": 97.1,
+      "ci95_pct": [
+        85.5,
+        99.5
+      ]
+    },
+    "precision_of_bad": {
+      "n": 34,
+      "of": 38,
+      "pct": 89.5,
+      "ci95_pct": [
+        75.9,
+        95.8
+      ]
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "agreement": {
+        "n": 16,
+        "of": 17,
+        "pct": 94.1,
+        "ci95_pct": [
+          73.0,
+          99.0
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    },
+    "hard": {
+      "agreement": {
+        "n": 18,
+        "of": 21,
+        "pct": 85.7,
+        "ci95_pct": [
+          65.4,
+          95.0
+        ]
+      },
+      "bad_caught": {
+        "n": 16,
+        "of": 17,
+        "pct": 94.1,
+        "ci95_pct": [
+          73.0,
+          99.0
+        ]
+      }
+    },
+    "medium": {
+      "agreement": {
+        "n": 21,
+        "of": 22,
+        "pct": 95.5,
+        "ci95_pct": [
+          78.2,
+          99.2
+        ]
+      },
+      "bad_caught": {
+        "n": 14,
+        "of": 14,
+        "pct": 100.0,
+        "ci95_pct": [
+          78.5,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_source": {
+    "baseline": {
+      "agreement": {
+        "n": 30,
+        "of": 32,
+        "pct": 93.8,
+        "ci95_pct": [
+          79.9,
+          98.3
+        ]
+      },
+      "bad_caught": {
+        "n": 13,
+        "of": 13,
+        "pct": 100.0,
+        "ci95_pct": [
+          77.2,
+          100.0
+        ]
+      }
+    },
+    "perturbed": {
+      "agreement": {
+        "n": 17,
+        "of": 18,
+        "pct": 94.4,
+        "ci95_pct": [
+          74.2,
+          99.0
+        ]
+      },
+      "bad_caught": {
+        "n": 17,
+        "of": 18,
+        "pct": 94.4,
+        "ci95_pct": [
+          74.2,
+          99.0
+        ]
+      }
+    },
+    "weak": {
+      "agreement": {
+        "n": 8,
+        "of": 10,
+        "pct": 80.0,
+        "ci95_pct": [
+          49.0,
+          94.3
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_error_type": {
+    "invented_detail": {
+      "agreement": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    },
+    "jargon": {
+      "agreement": {
+        "n": 2,
+        "of": 3,
+        "pct": 66.7,
+        "ci95_pct": [
+          20.8,
+          93.9
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 3,
+        "pct": 66.7,
+        "ci95_pct": [
+          20.8,
+          93.9
+        ]
+      }
+    },
+    "missing_condition": {
+      "agreement": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 2,
+        "of": 2,
+        "pct": 100.0,
+        "ci95_pct": [
+          34.2,
+          100.0
+        ]
+      }
+    },
+    "wrong_aggregation": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    },
+    "wrong_filter": {
+      "agreement": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      }
+    },
+    "wrong_join_semantics": {
+      "agreement": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 3,
+        "of": 3,
+        "pct": 100.0,
+        "ci95_pct": [
+          43.8,
+          100.0
+        ]
+      }
+    }
+  },
+  "cost_usd_per_item": 0.00200855,
+  "latency_ms": {
+    "p50": 8452.9,
+    "p95": 17564.2
+  },
+  "disagreements": [
+    {
+      "item_id": "c-q014",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is correct and clear about the table, grouping and count, but it\u2019s incomplete because it doesn\u2019t state the ORDER BY direction. The query orders years in ascending order (ORDER BY year), and the explanation only says \u201csorted by year\u201d without specifying that."
+    },
+    {
+      "item_id": "c-q083",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation misses an important detail: customers with more than one completed order will appear multiple times (one row per completed order). It also uses \u201cblank\u201d instead of stating the order_id is NULL for customers without completed orders, but the main omission is the multiplicity of rows per customer."
+    },
+    {
+      "item_id": "c-q126",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate and clear about the main result, but it omits some details that affect the returned rows and values: it doesn\u2019t say that the revenue comes from the joined order_items (so completed orders with no items won\u2019t appear), it doesn\u2019t mention that the month is created by taking the first 7 characters of order_date (YYYY-MM), and it doesn\u2019t state that the month-over-month difference uses the previous row as determined by ordering months (i.e. LAG over months) nor that the first month\u2019s change will be NULL. Those omissions affect which rows/values appear, so the explanation is incomplete."
+    },
+    {
+      "item_id": "c-q127",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says it computes totals \u201cfor every product\u201d and describes revenue as \u201cprice times quantity sold,\u201d but the query sums order_items.unit_price * quantity and uses an inner join between products and order_items \u2014 so products with no order_items (no sales) are excluded. The explanation fails to mention this exclusion (and thus overstates coverage), so it is incomplete and makes a claim the query does not support. The parts about dividing by the category total and rounding to one decimal are correct and clear."
+    },
+    {
+      "item_id": "c-q140",
+      "source": "perturbed",
+      "error_type": "jargon",
+      "human": "bad",
+      "judge": "good",
+      "judge_reason": "The explanation correctly and completely states the selected columns, the inner join on customer_id, the COUNT(DISTINCT substr(...)) counting distinct year-month buckets, the GROUP BY by customer, the HAVING filter for at least six active months, and the ORDER BY active_months DESC; it uses plain-language phrasing that a non-SQL reader can follow. No behavior or filter is invented or misstated."
+    }
+  ],
+  "judge_prompt": "judge/v1",
+  "judge_model": "gpt5mini",
+  "split": "dev"
+}
