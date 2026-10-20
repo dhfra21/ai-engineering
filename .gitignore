@@ -29,3 +29,10 @@ Thumbs.db
 project1-grader/db/store.db
 project1-grader/.cache/
 project1-grader/results/mock/
+
+# Project 2: venv, built index, model cache
+project2-librarian/.venv/
+project2-librarian/data/index/
+
+# Project 2: raw scraped PDFs (re-fetchable)
+project2-librarian/data/corpus/raw/
