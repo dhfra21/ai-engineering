@@ -1,0 +1,35 @@
+Loi n° 2013-10 du 12 avril 2013, modifiant et complétant le code des télécommunications (1). 
+Au nom du peuple, 
+L’assemblée nationale constituante ayant adopté,
+Le Président de la République promulgue la loi dont la teneur suit :
+Article premier - Les dispositions de l'article 28 (bis), du troisième paragraphe de l'article 57, du tiret n° 3 de l'article 74 et l'article 75 du code des télécommunications promulgué par la loi n° 2001-1 du 15 janvier 2001, tel que modifié et complété par la loi n° 2002-46 du 7 mai 2002 et la loi n° 2008-1 du 8 janvier 2008, sont abrogées et remplacées par ce qui suit :
+____________ 
+(1) Travaux préparatoires :
+Discussion et adoption par l’assemblée nationale constituante dans sa séance du 3 avril 2013.
+Article 28 bis (nouveau) - Toute capacité excédentaire des ressources de télécommunications disponible sur les réseaux des services publics peut être louée aux opérateurs des réseaux publics des télécommunications.
+Les offres techniques et financières relatives à la location de la capacité excédentaire des ressources prévues à l'alinéa premier du présent article doivent être publiées et ce après approbation de l'instance nationale des télécommunications.
+La location de la capacité excédentaire des ressources de télécommunications disponible sur les réseaux des services publics fait l'objet d'une convention qui fixe les conditions techniques et financières de l'exploitation, une copie de cette convention est transmise à l'instance nationale des télécommunications, pour information.
+Article 57 (troisième paragraphe nouveau) - Les ministères de la défense nationale et de l’intérieur procèdent, chacun en ce qui le concerne, et au cas où l’utilisation des équipements radioélectriques serait de nature à nuire à la défense nationale et à la sécurité publique, à la recherche des stations clandestines et au contrôle de la teneur de leurs émissions.
+Article 74 (tiret n° 3 nouveau) - Si le contrevenant ne se conforme pas à l’injonction indiquée ci-dessus, l’instance nationale des télécommunications lui inflige une amende ne dépassant pas 3% de son chiffre d’affaires réalisé durant l'exercice comptable de l'année précédente hors taxes.
+Article 75 (nouveau) - Les décisions de l’instance, rendues en matière d'examen des litiges prévus au tiret 4 de l’article 63 et conformément aux procédures prévues aux articles 67, 68 et 69 du code des télécommunications, doivent être motivées et sont revêtues de la formule exécutoire par son président, et le cas échéant par le vice président. 
+Linstance peut, dans les cas d'extrême urgence, ordonner l’exécution immédiate de ses décisions nonobstant l’appel. 
+Ces décisions sont notifiées aux intéressés par exploit d'huissier de justice. Elles sont susceptibles de recours devant la cour d’appel de Tunis dans un délai de 20 jours à partir de la date de leur notification.
+Art. 2 - Sont ajoutés au code des télécommunications promulgué par la loi n°2001-1 du 15 janvier 2001 les tirets 28, 29, 30, 31, 32, 33 à l’article 2, l’article 31 ter, l’article 31 quater, l’article 31 quinquies, un deuxième paragraphe au tiret n°3 de l'article 74, et l’article 75 bis comme ce qui suit :
+Article 2 :
+Tiret 28 - Opérateur d’un réseau virtuel des télécommunications : toute personne morale titulaire d'une autorisation pour la fourniture des services des télécommunications au moyen d'un réseau des télécommunications et des fréquences radioélectriques dont il ne dispose pas. 
+Tiret 29 - Services Internet : Les services qui assurent la connexion du public à Internet à travers un réseau public des télécommunications et la fourniture des services basés sur le protocole Internet.
+Tiret 30 - Service d'accès à Internet : Le service offert au public à travers un réseau public des télécommunications connecté à Internet et qui permet l'accès aux données en vue de les consulter ou de les consulter et les échanger. 
+Tiret 31- Fournisseur des services internet : toute personne physique ou morale répondant aux conditions légales et réglementaires et qui assure la fourniture des services Internet. 
+Tiret 32 - Point d'échange internet : Le service qui assure l'acheminement du trafic Internet entre les fournisseurs d'accès Internet et/ou les opérateurs des réseaux publics des télécommunications entre eux et sa connexion au réseau mondial de l'Internet. 
+Tiret 33 - Fournisseur d'un point d'échange internet : toute personne morale titulaire d'une autorisation pour assurer un point d'échange internet à l’échelle nationale et internationale.
+Article 31 (ter) - L’exploitation d'un réseau virtuel des télécommunications est soumise à l'autorisation préalable du ministre chargé des télécommunications après avis de l’instance nationale des télécommunications. Une convention est conclue à cet effet avec l'opérateur de réseau public des télécommunications concerné. Les conditions et les procédures d’attribution de cette autorisation sont fixées par décret.
+L'attribution de l'autorisation est soumise au paiement d’une redevance fixée par le décret prévu au premier paragraphe du présent article. 
+Article 31 (quater) - L’activité de fournisseur des services internet est soumise à l'autorisation préalable du ministre chargé des télécommunications, après avis du ministre de l'intérieur et de l’instance nationale des télécommunications. Les conditions et les procédures d’attribution de cette autorisation sont fixées par décret.
+L'attribution de l'autorisation est soumise au paiement d’une redevance fixée par le décret prévu au premier paragraphe du présent article. 
+Article 31 (quinquies) - La fourniture d'un point d'échange internet est soumise à l'autorisation préalable du ministre chargé des télécommunications, après avis de l’instance nationale des télécommunications. Les conditions et les procédures d’attribution de cette autorisation sont fixées par décret. L'attribution de l'autorisation est soumise au paiement d’une redevance fixée conformément aux critères déterminés par le décret prévu au premier paragraphe du présent article. 
+Article 74 (tiret n° 3 deuxième paragraphe nouveau) - L’instance peut ordonner la publication des décisions infligeant des sanctions aux opérateurs des réseaux publics des télécommunications ou aux fournisseurs des services des télécommunications dans des journaux qu’elle désigne, et ce, aux frais du contrevenant. 
+Article 75 bis - Les décisions rendues par l’instance nationale des télécommunications en dehors de ses attributions citées au niveau du tiret 4 de l’article 63 sont considérées des décisions administratives et susceptibles de recours pour excès de pouvoir devant le tribunal administratif. 
+La présente loi sera publiée au Journal Officiel de la République Tunisienne et exécutée comme loi de l'Etat.
+Tunis, le 12 avril 2013.
+Le Président de la République
+Mohamed Moncef El Marzougui

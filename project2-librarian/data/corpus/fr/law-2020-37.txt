@@ -1,0 +1,232 @@
+Loi n° 2020-37 du 6 août 2020, relative au « Crowdfunding » (1).
+Au nom du peuple,
+L’Assemblée des représentants du peuple ayant adopté,
+Le Président de la République promulgue la loi dont la teneur suit :
+CHAPITRE PREMIER
+Dispositions générales
+Article premier - La présente loi a pour objectif d’organiser le « Crowdfunding » pour fournir le financement nécessaire aux projets et aux sociétés en vue de promouvoir l'investissement, l’entrepreneuriat, la créativité et l’innovation.
+Art. 2 - Au sens de la présente loi, on entend par :
+- « Crowdfunding » : le mode de financement qui repose sur la levée de fonds auprès du public via une plateforme internet dédiée à cet effet en vue de financer de projets ou de sociétés à travers l’investissement dans des valeurs mobilières, des prêts, des dons ou des libéralités.
+- Prestataire en « Crowdfunding » : société spécialisée dans l’activité de « Crowdfunding », à travers la création et l’administration de plateformes en ligne mettant en relation le public avec les sociétés et les projets dont les porteurs désirent obtenir un financement. Le Prestataire en « Crowdfunding » est un opérateur de plateforme internet au sens de la législation en vigueur.
+- Plateforme de « Crowdfunding »: site Web ou application mobile mis à la disposition des usagers dans le but de mettre en relation le public avec la société et le projet pour bénéficier des services de « Crowdfunding ». 
+- Contributeur : toute personne physique ou morale résident ou non résident qui contribue au financement d’une société ou d’un projet à travers le « Crowdfunding ».
+____________ 
+(1) Travaux préparatoires :
+Discussion et adoption par l’Assemblée des représentants du peuple dans sa séance du 21 juillet 2020.
+- Porteur de projet : toute personne physique ou morale désirant obtenir un financement à travers le « Crowdfunding ».
+- Le projet : chaque initiative à but lucratif que le porteur de projet présente pour obtenir un financement en « Crowdfunding ». Le projet présenté sur la plateforme internet « Crowdfunding » doit être réalisé en Tunisie.
+-Autorités de régulation : le Conseil du marché financier, la Banque centrale de Tunisie et l’Autorité de contrôle de microfinance.
+Art. 3 - Le « Crowdfunding » se distingue en : 
+• « Crowdfunding » en investissement dans des valeurs mobilières,
+• « Crowdfunding » en prêts,
+• « Crowdfunding » en dons et libéralités.
+Art. 4 - L’activité de « Crowdfunding » est obligatoirement exercée à travers la création d’une société anonyme dont le siège social est situé en Tunisie. 
+Il est interdit à la société prestataire en « Crowdfunding » de s’adonner à plus qu’une catégorie d’activité de « Crowdfunding ». 
+ Le capital minimum et les conditions de sa libération pour chaque forme de sociétés prestataires en « Crowdfunding » sont fixés par décret gouvernemental.
+Art. 5 - L'activité principale de la société prestataire en « Crowdfunding » consiste en l’administration de la plateforme « Crowdfunding », notamment à travers:
+- La publication de la note de présentation du projet sur la plateforme,
+-La préparation du contrat type relatif aux opérations de « Crowdfunding »,
+- La sécurisation du transfert des fonds collectés auprès des contributeurs au profit du porteur de projet ou de la société par l'intermédiaire du dépositaire teneur de comptes,
+- La publication de l’architecture technique de la plateforme et son système d’information. 
+La société prestataire en « Crowdfunding » peut également fournir des services liés à son activité principale à savoir :
+- La fourniture de conseils au porteur de projet,
+- La publicité exclusivement via la plateforme des projets qui lui sont présentés.
+Art. 6 - Toute opération de « Crowdfunding » doit faire l’objet d’un contrat conclu entre le porteur de projet et le contributeur, et ce, selon un contrat type élaboré par la société prestataire en « Crowdfunding ». Le contrat type est soumis à l'approbation des autorités de régulation.
+Art. 7 - Le porteur de projet doit présenter une note de présentation du projet à la société prestataire en « Crowdfunding », qui comprend toutes les informations juridiques, financières et techniques relatives au projet à réaliser, en plus de la détermination du montant et de la structure du financement qu’il souhaite collecter à travers l’opération de « Crowdfunding ».
+Art. 8 - La société prestataire en « Crowdfunding » collecte les fonds dans un compte spécial séparé et ouvert en son nom auprès d'une banque ou de l’office national des postes, dans lequel les fonds sont déposés, en vertu d’un contrat entre la société prestataire en « Crowdfunding » et le dépositaire teneur du compte. Le contrat mentionné détermine notamment les conditions de gestion des fonds déposés sur le compte.
+Le dépositaire teneur du compte, le divise en sous-comptes liés à chaque projet.
+Il est interdit d’opérer toute transaction sur le compte sans l'autorisation de la société prestataire en « Crowdfunding ».
+Art. 9 - Le dépositaire teneur de compte doit détenir un état des opérations de « Crowdfunding » réalisées et vérifier que les opérations réalisées par la société prestataire en « Crowdfunding » sur le compte, correspondent aux termes du contrat prévu au premier alinéa de l’article 8 de la présente loi.
+Le dépositaire teneur du compte doit également notifier aux autorités de régulation de toute violation constatée en application des dispositions du premier alinéa du présent article.
+Art. 10 - Il est interdit à la société prestataire en « Crowdfunding » de présenter le même projet sur plus d’une plateforme « Crowdfunding » d’une même catégorie en même temps.
+Art. 11 - Il est interdit à la société prestataire en « Crowdfunding » d'utiliser les fonds collectés pour un projet ou une société à des fins autres que celles pour lesquelles ils ont été collectés.
+Les fonds collectés dans le cadre du « Crowdfunding » ne peuvent faire l’objet d’une saisie au profit des créanciers de la société prestataire en « Crowdfunding ».
+Art. 12 - Le Président directeur général, le directeur général , le directeur général adjoint , le membre du conseil d'administration et le membre du conseil de surveillance d’une société prestataire en « Crowdfunding » doivent justifier des qualifications scientifiques et des compétences requises pour les fonctions qu’ils sont appelés à exercer, et ce, conformément aux conditions fixées par décret gouvernemental.
+La société prestataire en « Crowdfunding » doit notifier aux autorités de régulation selon la catégorie d'activité à laquelle elle appartient, de tout projet de nomination dans les fonctions mentionnées au premier alinéa du présent article, accompagné des pièces justifiant la conformité aux conditions exigées.
+L'autorité de régulation peut, dans un délai d'un mois à compter de la date de sa notification, s'opposer au projet de nomination en se basant sur les conditions fixées par le décret gouvernemental prévu au premier alinéa du présent article. L’opposition doit être motivée.
+Art. 13 - Ne peut créer, diriger, gérer, administrer ou contrôler une société prestataire en « Crowdfunding » quiconque :
+- aura fait l’objet d’un jugement irrévocable pour faux en écriture, fraude, vol, abus de confiance, escroquerie ou extorsion de fonds commise par un fonctionnaire public ou assimilé, un dépositaire public ou un comptable public,ou qui leur était due de dette fiscale, émission de chèque sans provision, ou évasion fiscale ou participer à toutes ces infractions ou violation de la réglementation des changes ou de la législation relative à la lutte contre le financement du terrorisme et le blanchiment d’argent, 
+- aura fait l’objet d'un jugement irrévocable de faillite ou s’il a été gérant ou mandataire de société déclarée en faillite, condamnée en vertu des articles 288 et 289 du code pénal relatifs à la banqueroute,
+- aura fait l’objet d’une sanction de radiation ou de privation d’exercice d’une activité régie par un texte législatif ou réglementaire, 
+- aura fait l’objet d’une sanction de cessation de fonctions d’administration ou de gestion d’une entreprise infligée par une autorité de régulation.
+Il est interdit de cumuler l’administration, la direction ou la gestion d’une société prestataire en « Crowdfunding » avec l’administration, la direction ou la gestion d'une banque, d'un établissement financier ou d'une société d'assurance.
+Il est interdit de cumuler, de manière directe ou à travers des filiales de sociétés, l’activité des banques, des établissements financiers, des institutions d’assurance ou de la micro finance avec l’activité de « Crowdfunding ». 
+Art. 14 - La société prestataire en « Crowdfunding » doit prendre les mesures nécessaires pour assurer la collecte de fonds auprès des contributeurs par virement électronique de fonds et par virement bancaire, et tout système de paiement autorisé par la Banque centrale de Tunisie.
+Il est interdit à la société prestataire en « Crowdfunding » de recevoir de fonds auprès des contributeurs par tous autres moyens que ceux prévus au premier alinéa du présent article.
+CHAPITRE II
+Obligations de la société prestataire en « Crowdfunding » relatif à l’exercice de son activité
+Art. 15 - La société prestataire en « Crowdfunding » assure le bon fonctionnement de la plateforme « Crowdfunding », notamment à travers :
+- La présentation de garanties suffisantes en ce qui concerne l’organisation, les moyens techniques et les ressources humaines.
+- La mise en place d’un dispositif de gouvernance efficace qui assure la pérennité de la plateforme et préserve les intérêts des contributeurs et des porteurs de projets.
+- L’exercice de l'activité avec la diligence d’un entrepreneur avisé et d’un mandataire honnête au profit des contributeurs.
+- L’évitement des conflits d'intérêts, et le cas échéant, leur résolution de manière équitable, en tenant compte de l'intérêt des contributeurs.
+- la mise en place de moyens et de mesures qui sont en mesure d’assurer la supervision des activités pour s’assurer du respect des règles de bonne conduite dans tous les aspects de la relation avec les contributeurs.
+- L’identification des capacités financières, des objectifs et des aspirations financières des contributeurs.
+- La garantie de la protection des données à caractère personnel et de la sécurité informatique conformément à la législation en vigueur.
+Les autorités de régulation fixent les modalités d'application des dispositions du premier alinéa du présent article.
+Art. 16 - La société prestataire en « Crowdfunding » doit publier sur la première page de la plateforme « Crowdfunding » de manière lisible et indiquer dans tous ses documents et moyens de communication la dénomination de la société, l'adresse de son siège social, l'adresse de son courrier électronique, le numéro de son immatriculation dans le Registre national des entreprises et la référence de l’agrément qui lui a été accordée et sa date, en plus de la dénomination et de l'adresse du dépositaire teneur de compte qui détient ses comptes prévu par l’article 8 de la présente loi.
+Art. 17 - La société prestataire en «Crowdfunding» doit permettre au public de consulter les projets présentés sur la plateforme et de s'inscrire pour participer à ces projets de manière claire, transparente et simplifiée. Les autorités de régulation fixent les conditions d'application des dispositions du présent article selon la réglementation en vigueur. 
+Art. 18 - La société prestataire en «Crowdfunding» doit, avant de présenter un projet sur la plateforme, exercer la diligence nécessaire pour :
+- Vérifier l'identité du porteur de projet, des actionnaires et des administrateurs de la société, et du bénéficiaire effectif, et l'absence d’interdictions légales et judiciaires à leur encontre, et remplir les conditions légales relatives à la réalisation du projet,
+- S’assurer de l'existence réelle du projet et de la capacité de la personne physique ou de la société intéressée à s’endetter.
+-Informer le porteur de projet des risques liés à l’opération de « Crowdfunding » et des obligations qui en découlent notamment envers des contributeurs. 
+Art. 19 - La société prestataire en «Crowdfunding» doit exercer la diligence nécessaire pour vérifier l'identité de chaque contributeur avant de l'inscrire sur la plateforme et l’informer des données suivantes :
+-les conditions de financement du projet auquel il souhaite contribuer.
+- informer les contributeurs des risques liés à la nature des opérations qu'ils souhaitent réaliser, notamment les risques liés à la perte du capital investi ou des fonds mis à disposition sous forme de prêt.
+- les responsabilités et droits de toutes les parties prenantes dans l’opération de « Crowdfunding » telles que la société prestataire en « Crowdfunding », le porteur de projet et le contributeur.
+- informer les contributeurs des cas et modalités de récupération de leur argent.
+Art. 20 - La société prestataire en « Crowdfunding » doit informer les contributeurs via la plateforme de manière claire, de ce qui suit :
+- Le compte bancaire ou postal dans lequel les fonds collectés seront déposés, les conditions de leur gestion pour chaque projet et les conditions de remboursement en ce qui concerne le « Crowdfunding ».
+-Toute information ou document ou décision des autorités de régulation compétentes.
+Art. 21 - Les états financiers des sociétés prestataires en « Crowdfunding » sont soumis à la certification d’un commissaire aux comptes inscrit au tableau de l’ordre des experts comptables de Tunisie. Le commissaire aux comptes est désigné pour une durée de trois ans renouvelable une seule fois.
+Art. 22 - La société prestataire en « Crowdfunding » doit élaborer un rapport annuel sur ses activités, comportant les états financiers et le rapport du commissaire aux comptes y afférent, qui sera obligatoirement publié sur le site électronique de la plateforme, dans un délai n’excédant pas trois mois à compter de la clôture de l'exercice comptable, et envoyer une copie à l'autorité de régulation dont elle relève.
+Les autorités de régulation compétentes, chacune en ce qui la concerne, fixent le contenu du rapport annuel.
+Chapitre III
+Les conditions d’exercice de l’activité de « Crowdfunding »
+Section première
+Conditions d'exercice de l'activité de « Crowdfunding » en investissement dans des valeurs mobilières
+Art. 23 - L’exercice de l’activité de « Crowdfunding » en investissement dans des valeurs mobilières est soumis à un agrément accordé par le Conseil du marché financier conformément aux conditions fixées par décret gouvernemental.
+Le Conseil du marché financier procède à la publication de la décision d’octroi de l’agrément dans son bulletin officiel et sur son site électronique.
+Art. 24 - Les intermédiaires en bourse et les sociétés de gestion de portefeuilles pour le compte de tiers et les sociétés d’investissement à capital risque qui gèrent des fonds pour le compte de tiers, agréés par le Conseil du marché financier peuvent exercer l’activité de « Crowdfunding » en investissement dans des valeurs mobilières à condition d’en informer au préalable le Conseil du marché financier.
+Les personnes mentionnées au premier alinéa du présent article sont soumises, dans le cadre de l’exercice de l’activité, aux obligations professionnelles incombant aux sociétés prestataires en « Crowdfunding ». 
+Art. 25 - Le Conseil du marché financier peut procéder au retrait de l’agrément prévu à l’article 23 de la présente loi ou à la suspension de l'activité autorisée conformément aux dispositions de son article 24 dans les cas suivants :
+- à la demande du titulaire de l’agrément ou des personnes qui ont exercé l'activité de « Crowdfunding » conformément aux dispositions de l’article 24 de la présente loi.
+- ne pas avoir entamé l’exercice de l’activité dans un délai maximum de douze (12) mois à compter de la date d’octroi de l’agrément ou de l’information d’exercice de l'activité conformément aux dispositions de l’article 24 de la présente loi,
+- l’interruption de l’exercice de l'activité principale pour une durée de douze (12) mois de manière continue. Ce délai peut être prorogé de six (6) mois supplémentaires une seule fois. 
+La décision de retrait de l’agrément indique sa date de prise d’effet.
+Art. 26 - Le Conseil du marché financier tient une liste des sociétés prestataires en « Crowdfunding » en investissement dans des valeurs mobilières agréés à exercer l'activité, comportant toutes les données nécessaires permettant d’identifier la forme de la société, sa raison sociale, l'adresse de son siège principal ainsi que la liste de ses actionnaires, ses dirigeants, les membres de son conseil d'administration, les membres de son directoire et les membres de son conseil de surveillance.
+Le Conseil du marché financier procède à la publication de cette liste sur son site électronique.
+La société prestataire en « Crowdfunding » en investissement dans des valeurs mobilières, doit communiquer au Conseil du marché financier tous les documents nécessaires pour la tenue et la mise à jour de cette liste.
+Le Conseil du marché financier procède à la publication de la décision de retrait de l’agrément ou de la suspension temporaire de l'exercice de l’activité sur son site électronique et la mise à jour de la liste des sociétés prestataires en « Crowdfunding » en investissement dans des valeurs mobilières prévue au premier alinéa du présent article.
+Art. 27 - Les participations des contributeurs à la société présentée sur la plateforme « Crowdfunding » doivent avoir lieu sous forme de souscription à des actions ordinaires, des sukuks ou des obligations.
+Les valeurs mobilières des sociétés présentées ne doivent pas être admises à la cote de la bourse des valeurs mobilières de Tunis et ne doivent pas avoir fait précédemment l’objet d’une offre visée par le Conseil du marché financier.
+Les conditions d’investissement dans les valeurs mobilières via les plateformes de « Crowdfunding » sont fixées par décret gouvernemental.
+Art. 28 - Le « Crowdfunding » en investissement dans des valeurs mobilières ne constitue pas une activité de gestion de portefeuille pour le compte de tiers.
+Art. 29 - La société ayant recours à une plateforme « Crowdfunding » ne sont pas considérées comme des sociétés faisant appel public à l’épargne au sens de l’article premier de la loi n° 94-117 du 14 novembre 1994 relative à la réorganisation du marché financier.
+Il est interdit de recourir au démarchage pour faire la publicité du projet présenté sur la plateforme « Crowdfunding ». Le porteur de projet ne peut recourir à la publicité concernant le projet présenté qu’à travers la plateforme.
+Ces dispositions s'appliquent aux intermédiaires en bourse et aux sociétés de gestion de portefeuilles pour le compte de tiers ainsi qu’aux sociétés d’investissement à capital risque qui gèrent des fonds pour le compte de tiers qui exercent une activité de « Crowdfunding ».
+Art. 30 - Les projets présentés sur la plateforme « Crowdfunding » en investissement dans des valeurs mobilières sont dispensés de l’obligation de préparation d’un prospectus.
+Les porteurs de projet doivent remettre au Conseil du marché financier une note abrégée qui comporte notamment la description du projet, de l’activité de la société, de la structure de son capital et des données financières y afférentes, et ce, conformément au modèle fixé par règlement du Conseil du marché financier.
+Les porteurs de projet doivent également publier la note prévue au deuxième alinéa du présent article, sur la plateforme avant de procéder à la collecte de fonds.
+Le Conseil du marché financier peut demander toute information supplémentaire qu’il juge nécessaire pour aider les contributeurs dans la prise de décisions.
+Art. 31 - La société prestataire en « Crowdfunding » en investissement dans des valeurs mobilières doit remettre au Conseil du marché financier toutes les informations et les statistiques qu’il demande, sur son activité.
+Un règlement du Conseil du marché financier détermine le contenu, la périodicité et les modalités de transmission des informations et des statistiques demandées.
+Section 2
+Conditions d'exercice de l'activité de « Crowdfunding » en prêts
+Art. 32 - L’exercice de l’activité de « Crowdfunding » en prêts est soumis à un agrément accordé par le Gouverneur de la Banque centrale de Tunisie, conformément aux conditions fixées par décret gouvernemental.
+La Banque centrale de Tunisie procède à la publication de la décision d’octroi de l’agrément sur son site électronique.
+Art. 33 - La Banque centrale de Tunisie peut retirer l’agrément mentionné à l’article 32 de la présente loi dans les cas suivants :
+- à la demande du titulaire de l’agrément, 
+- ne pas avoir entamé l’exercice de l’activité dans un délai maximum de douze (12) mois à compter de la date de l’obtention de l’agrément,
+- l’interruption de l’exercice de l'activité principale pour une période de douze (12) mois de manière continue. Ce délai peut être prorogé de six (6) mois supplémentaires une seule fois. 
+La décision de retrait de l’agrément indique sa date de prise d’effet 
+Art. 34 - La Banque centrale de Tunisie tient un registre spécial pour les sociétés prestataires en « Crowdfunding » en prêts agréées à exercer l'activité, comportant toutes les données nécessaires permettant d’identifier la forme de la société, sa raison sociale, l'adresse de son siège principal ainsi que la liste de ses actionnaires, ses dirigeants, les membres de son conseil d'administration, les membres de son directoire et les membres de son conseil de surveillance.
+ La Banque centrale de Tunisie procède à la mise à disposition du public de ce registre, sur son site électronique. 
+La société prestataire en « Crowdfunding » en prêts, doit remettre à la Banque centrale de Tunisie tous les documents nécessaires pour la tenue et la mise à jour de ce registre.
+La Banque centrale de Tunisie procède à la publication de la décision de retrait de l’agrément sur son site électronique et à la mise à jour du registre des sociétés prestataires en « Crowdfunding » en prêts prévue au premier alinéa du présent article.
+Art. 35 - Le montant maximum des prêts avec ou sans intérêt que le porteur du projet peut obtenir à travers une plateforme de « Crowdfunding » ou que le contributeur peut les octroyer, est fixé par décret gouvernemental.
+Les opérations de versement de fonds de la part des contributeurs via la plateforme de « Crowdfunding » dans la limite des montants fixés par le décret gouvernemental mentionné au premier alinéa du présent article, ne sont pas considérées comme des opérations de prêt au sens de la loi 
+n° 2016-48 du 11 juillet 2016 relative aux banques et aux établissements financiers.
+Art. 36 - Les dispositions législatives et réglementaires relatives au taux d'intérêt effectif et à la limite du taux d'intérêt excessif prévues par la loi n°99-64 du 15 juillet 1999 relative au taux d'intérêt excessif, ne s’appliquent pas aux prêts octroyés via des plateformes de « Crowdfunding ».
+Le plafond du taux d'intérêt pour cette catégorie de « Crowdfunding » est fixé par circulaire du Gouverneur de la Banque centrale de Tunisie.
+Art. 37 - La société prestataire en « Crowdfunding » en prêts doit remettre à la Banque centrale de Tunisie toutes les informations et statistiques qu’elle demande, sur son activité.
+La Banque centrale de Tunisie détermine par circulaire le contenu, la périodicité et les modalités de transmission des informations et statistiques demandées.
+Section 3
+Conditions d'exercice de l'activité de « Crowdfunding » en dons et libéralités
+Art. 38 - L’exercice de l’activité de « Crowdfunding » en dons et libéralité est soumis à un agrément accordé par l’Autorité de contrôle de la microfinance, conformément aux conditions fixées par décret gouvernemental.
+L’activité de « Crowdfunding » en dons et libéralités n’est pas soumise aux dispositions du décret beylical du 8 mai 1922 relatif aux souscriptions publiques.
+L’Autorité de contrôle de la microfinance procède à la publication de la décision d’octroi de l’agrément sur son site électronique.
+Art. 39 - L’Autorité de contrôle de la microfinance mentionnée à l’article 38 de la présente loi, peut retirer l’agrément prévu par le même article de la présente loi, dans les cas suivants :
+- à la demande du titulaire de l’agrément ; 
+- ne pas avoir entamé l’exercice de l’activité dans un délai maximum de douze (12) mois à compter de la date de sa notification ;
+- l’interruption de l’exercice de l'activité principale prévue à l’article 5 de la présente loi pour une période de douze (12) mois de manière continue. Ce délai peut être prorogé de six (6) mois supplémentaires une seule fois. 
+La décision de retrait de l’agrément indique sa date de prise d’effet 
+Art. 40 - L’Autorité de contrôle de la microfinance tient un registre spécial pour les sociétés prestataires en « Crowdfunding » en dons et libéralités, agréées à exercer l'activité, comportant toutes les données nécessaires permettant d’identifier la forme de la société, sa raison sociale, l'adresse de son siège principal ainsi que la liste de ses actionnaires, ses dirigeants, les membres de son conseil d'administration, les membres de son directoire et les membres de son conseil de surveillance. L’Autorité de contrôle de la microfinance procède à la mise à disposition du public de ce registre sur son site électronique.
+La société prestataire en « Crowdfunding » en dons et libéralité, doit remettre à l’Autorité de contrôle de la microfinance tous les documents nécessaires pour la tenue et la mise à jour de ce registre.
+L’Autorité de contrôle de la microfinance procède à la publication de la décision de retrait de l’agrément sur son site électronique et la mise à jour du registre des sociétés prestataires en « Crowdfunding » en dons et libéralités prévues au premier alinéa du présent article.
+Art. 41 - La société prestataire en « Crowdfunding » en dons et libéralité peut collecter des dons et libéralités avec ou sans contrepartie.
+ Les conditions des contreparties sont fixées par décret gouvernemental.
+Art. 42 - La société prestataire en « Crowdfunding » en dons et libéralités doit remettre à l’Autorité de contrôle de la microfinance toutes les informations et statistiques qu’elle demande, sur son activité.
+L’Autorité de contrôle de la microfinance détermine par décision le contenu, la périodicité et les modalités de transmission des informations et statistiques demandées.
+CHAPITRE IV
+Mesures de précaution et contrôle des sociétés prestataires en « Crowdfunding »
+Section première
+Mesures de précaution
+Art. 43 - Les sociétés prestataires en « Crowdfunding » sont soumises aux obligations d’investigation et d’enquête prévues par la loi organique n°2015- 26 du 7 août 2015, relative à la lutte contre le terrorisme et la prévention du blanchiment d’argent, telle que modifiée par la loi organique n° 2019-9 du 23 janvier 2019.
+Art. 44 - La société prestataire en « Crowdfunding » doit conclure un contrat d'assurance afin de couvrir les incidences financières résultant du manquement aux obligations professionnelles qui lui incombent à l’occasion de l’exercice de ses fonctions.
+Art. 45 - Il est interdit à la société prestataire en « Crowdfunding » de contribuer au financement d'un projet présenté sur sa plateforme ou d’y avoir un intérêt de manière direct ou indirect.
+Dans le cas où l'un des personnels de la société prestataire en « Crowdfunding » ou l'un de ses actionnaires se trouve dans l’une des situations prévues au premier alinéa du présent article, la société prestataire en « Crowdfunding » doit en informer au préalable les contributeurs.
+Art. 46 - Le porteur de projet doit informer régulièrement la société prestataire en « Crowdfunding » de l’évolution de l'activité du projet et de sa situation financière et, le cas échéant, des difficultés qu’il a rencontrées. La société prestataire en « Crowdfunding » procède à la publication d’une note concernant le projet, laquelle est élaborée et mise à jour périodiquement. Cette note est mise à la disposition des contributeurs. Les autorités de régulation compétentes déterminent, chacun en ce qui le concerne, le contenu et la périodicité de la note.
+Art. 47 - Toute modification des éléments sur la base desquels l’agrément a été octroyé à la société prestataire en « Crowdfunding », est soumise à l’autorisation préalable des autorités de régulation compétentes, conformément aux conditions fixées par décret gouvernemental.
+Art. 48 - La société prestataire en « Crowdfunding » est responsable devant les contributeurs, les porteurs de projets et les tiers en cas de violation de la législation en vigueur régissant l'activité de « Crowdfunding ».
+Art. 49 - La décision de retrait de l’agrément entraîne la fermeture de la plateforme qui est dirigé par la société prestataire en « Crowdfunding » et le transfert de ses activités vers un ou plusieurs autres sociétés de la même catégorie, en vertu d’une décision des autorités de régulation dont elles relèvent.
+La décision prévue au premier alinéa du présent article détermine les conditions de l’opération de transfert et les procédures nécessaires pour protéger les intérêts des contributeurs et des porteurs de projets.
+Art. 50 - Les dispositions régissant la dissolution et la liquidation prévues par le code des sociétés commerciales, s'appliquent aux sociétés prestataires en « Crowdfunding » de toute catégorie.
+Section 2
+Contrôle des sociétés prestataires en « Crowdfunding » en investissement dans des valeurs mobilières
+Art. 51 - Sont soumis au contrôle du Conseil du marché financier et à son autorité disciplinaire, les sociétés prestataires en « Crowdfunding » en investissement dans des valeurs mobilières et leurs dirigeants et personnels, et ce, dans le but de s’assurer de la conformité de leur activité aux dispositions de la présente loi et de ses textes d'application ainsi qu’aux dispositions législatives et réglementaires en vigueur.
+Les dispositions des articles 36 à 39, 41 à 44, 48 à 52 et 84 de la loi n°94-117 du 14 novembre 1994 relative à la réorganisation du marché financier, s'appliquent aux sociétés et personnes mentionnées au premier alinéa du présent article.
+Dans le cadre de sa mission de contrôle, le Conseil du marché financier peut demander tous les documents et les renseignements qu'il juge nécessaires et peut mener sur place toutes les investigations.
+Art. 52 - Le Conseil du marché financier peut, après audition du représentant légal de la société prestataire en « Crowdfunding » en investissement dans les valeurs mobilières, et en cas de constatation de non-respect des dispositions de la présente loi ou de ses textes d'application, ou des règlements qu’il émet, lui infliger une amende dont le montant ne dépasse pas 50% du capital minimum requis, ou suspendre temporairement ou définitivement l’activité de la société. 
+Le montant de l’amende mentionné au premier alinéa du présent article est recouvré au profit de la trésorerie générale de Tunisie au moyen d’un état de liquidation décerné et rendu exécutoire par le Président du Conseil du marché financier ou celui qui le supplée légalement. L’état de liquidation est notifié et exécuté conformément à la législation en vigueur. 
+Le Conseil du marché financier retire l’agrément mentionné à l’article 23 de la présente loi dans les cas suivants :
+- absence de l'une des conditions sur la base desquelles l’agrément a été accordé,
+- non-respect par le titulaire de l’agrément de la législation ou de la réglementation en vigueur en matière de « Crowdfunding »,
+- obtention de l’agrément par l’intéressé au moyen de fausses déclarations ou par tout autre moyen illégal.
+La décision de retrait indique sa date de prise d’effet.
+Le Conseil du marché financier procède à la publication de la décision de retrait de l’agrément sur son site électronique et à la mise à jour de la liste des sociétés prestataires en « Crowdfunding » en investissement dans des valeurs mobilières prévue à l’article 26 de la présente loi.
+Les décisions du Conseil du marché financier sont notifiées par tout moyen laissant une trace écrite.
+Le Conseil du marché financier peut suspendre temporairement ou définitivement l’exercice de l’activité du « Crowdfunding » des intermédiaires en bourse, des sociétés de gestion de portefeuilles pour le compte de tiers ou des sociétés d’investissement à capital risque qui gèrent des fonds pour le compte de tiers, en cas de non-respect de la législation et de la règlementation en vigueur.
+Art. 53 - La société prestataire en « Crowdfunding » en investissement dans des valeurs mobilières demeure soumise au contrôle du Conseil du marché financier et à son autorité disciplinaire, à compter de la date de prise de la décision de suspension temporaire et jusqu’à ce qu’elle cesse d’avoir effet, ainsi que tout au long de l’accomplissement des actes de la liquidation en ce qui concerne la décision de la suspension définitive et de retrait de l’agrément.
+En cas de prise de décision de suspension définitive et de retrait de l’agrément, la société prestataire en « Crowdfunding » en investissement dans des valeurs mobilières se limite à l’accomplissement des opérations nécessaires à sa liquidation.
+La décision de suspension définitive et de retrait de l’agrément fixe les opérations nécessaires à la liquidation de la société.
+Section 3
+Contrôle des sociétés prestataires en « Crowdfunding » en prêts
+Art. 54 - Sont soumises au contrôle de la Banque centrale de Tunisie et à son autorité disciplinaire, les sociétés prestataires en « Crowdfunding » en prêts et leurs dirigeants et personnels, dans le but de s’assurer de la conformité de leur activité aux dispositions de la présente loi et de ses textes d'application ainsi qu’aux dispositions législatives et réglementaires en vigueur.
+Les dispositions des articles 65, 67 et 72 de la loi n° 2016-48 du 11 juillet 2016 relative aux banques et aux établissements financiers s'appliquent aux personnes mentionnées au premier alinéa du présent article.
+Dans le cadre de sa mission de contrôle, la Banque centrale de Tunisie peut demander tous les documents et les renseignements qu'elle juge nécessaires et mener sur place toutes les investigations.
+Le secret professionnel ne peut être opposé aux agents de la Banque centrale de Tunisie chargés du contrôle.
+Art. 55 - La Banque centrale de Tunisie peut, après audition du représentant légal de la société prestataire en « Crowdfunding » en prêts, en cas de constatation de non-respect des dispositions de la présente loi ou de ses textes d'application, ou des règlements qu’elle émet, décider d’infliger une amende à l’encontre de la société dont le montant ne dépasse pas 50% du capital minimum requis, ou la suspension temporaire ou définitive de l’activité de la société.
+Le montant de l’amende mentionnée au premier alinéa du présent article est recouvré au profit de la trésorerie générale de Tunisie au moyen d’un état de liquidation décerné et rendu exécutoire par le Gouverneur de la Banque centrale de Tunisie ou celui qui le supplée légalement. L’état de liquidation est notifié et exécuté conformément à la législation en vigueur. 
+La Banque centrale de Tunisie retire l’agrément mentionné à l’article 32 de la présente loi dans les cas suivants :
+- absence de l'une des conditions sur la base desquelles l’agrément a été accordé,
+- non-respect par le titulaire de l’agrément de la législation ou de la réglementation en vigueur relative au « Crowdfunding »,
+- obtention d’un agrément par l’intéressé au moyen de fausses déclarations ou par tout autre moyen illégal.
+La décision de retrait indique sa date de prise d’effet.
+La Banque centrale de Tunisie procède à la publication de la décision de retrait de l’agrément sur son site électronique et à la mise à jour du registre des sociétés prestataires en « Crowdfunding » en prêts mentionnées à l’article 34 de la présente loi.
+Les décisions de la Banque centrale de Tunisie sont notifiées par tout moyen laissant une trace écrite.
+Art. 56 - La société prestataire en « Crowdfunding » en prêts demeure soumise au contrôle de la Banque centrale de Tunisie et à son autorité disciplinaire, à compter de la date de prise de la décision de suspension temporaire, ainsi que tout au long de l’accomplissement des actes de la liquidation en ce qui concerne la décision de la suspension définitive et de retrait de l’agrément.
+En cas de décision de suspension définitive et de retrait de l’agrément, la société prestataire en « Crowdfunding » en prêts se limite à l’accomplissement des opérations nécessaires à sa liquidation.
+La décision de suspension définitive et de retrait de l’agrément fixe les opérations nécessaires à la liquidation de la société.
+Section 4
+Contrôle des sociétés prestataires en « Crowdfunding » en dons et libéralités
+Art. 57 - Sont soumises au contrôle de l’Autorité de contrôle de la microfinance et à son autorité disciplinaire, les sociétés prestataires en « Crowdfunding » en dons et libéralités et leurs dirigeants et personnels, et ce, dans le but de s’assurer de la conformité de leur activité aux dispositions de la présente loi et ses textes d'application ainsi qu’aux dispositions législatives et réglementaires en vigueur.
+Dans le cadre de sa mission de contrôle, l’Autorité de contrôle de la microfinance peut demander tous les documents et les renseignements qu'elle juge nécessaires et mener sur place toutes les investigations.
+Art. 58 - L’Autorité de contrôle de la microfinance peut, après audition du représentant légal de la société prestataire en « Crowdfunding » en dons et libéralités, décider la suspension temporaire ou définitive de son activité.
+L’Autorité de contrôle de la microfinance retire l’agrément mentionné à l’article 38 de la présente loi dans les cas suivants :
+- incapacité du titulaire de l’agrément à continuer à répondre aux conditions sur la base desquelles l’agrément a été accordé,
+- non-respect par le titulaire de l’agrément de la législation ou de la réglementation en vigueur,
+- obtention de l’agrément par l’intéressé au moyen de fausses déclarations ou par tout autre moyen illégal.
+La décision de retrait indique sa date de prise d’effet.
+L’Autorité de contrôle de la microfinance procède à la publication de la décision de retrait de l’agrément sur son site électronique et à la mise à jour du registre des sociétés prestataires en « Crowdfunding » en dons et libéralités mentionné à l’article 40 de la présente loi.
+Art. 59 - La société prestataire en « Crowdfunding » en dons et libéralité demeure soumise au contrôle de l’Autorité de contrôle de la microfinance et à son autorité disciplinaire, et ce, à compter de la date de la prise de décision de suspension temporaire ou définitive et de retrait de l’agrément jusqu’à sa date d’effet.
+L’Autorité de contrôle de la microfinance informe les personnes faisant l’objet de suspension temporaire ou définitive et de retrait de l’agrément pour l’exercice de leur activité, par tout moyen laissant une trace écrite.
+La société prestataire en « Crowdfunding » en dons et libéralités ne peut qu’accomplir les opérations nécessaires à sa liquidation. La décision de suspension temporaire ou définitive et de retrait de l’agrément fixe les opérations nécessaires à la liquidation de la société.
+CHAPITRE V
+Des sanctions
+Art. 60 - Est puni d’une amende de 100.000 dinars, toute personne physique ou le représentant légal de toute société non agréée en qualité de société prestataire en « Crowdfunding », qui aura utilisé dans son activité de quelque manière que ce soit, des termes susceptibles de créer dans l’esprit des tiers une confusion quant à l’exercice de l’activité de « Crowdfunding ».
+Art. 61 - Est puni d’une amende de 50.000 dinars, le porteur de projet qui aura omis sciemment d’informer la société prestataire en « Crowdfunding », dans un délai d’un mois, de tout changement survenu dans la situation du projet, ou qui aura fourni des informations fausses ou trompeuses.
+Art. 62 - Est puni d’un emprisonnement de 3 mois à un an et d’une amende de 100.000 dinars à 150.000 dinars ou de l’une de ces deux peines :
+- Le représentant légal de toute société qui exerce à titre habituel l’activité de « Crowdfunding » en investissement dans des valeurs mobilières sans avoir obtenu l’agrément mentionné à l’article 23 de la présente loi ou sans avoir fait la déclaration mentionnée dans son article 24 ou aura poursuivi l’exercice de l’activité après la suspension temporaire de l’activité ou le retrait de l’agrément.
+- Le représentant légal de toute société qui exerce à titre habituel l’activité de « Crowdfunding » en prêts sans avoir obtenu l’agrément mentionné à l’article 32 de la présente loi ou aura poursuivi l’exercice de l’activité après la suspension temporaire de l’activité ou le retrait de l’agrément. 
+- Le représentant légal de toute société qui exerce à titre habituel l’activité de « Crowdfunding » en dons et libéralités sans avoir obtenu l’agrément mentionné à l’article 38 de la présente loi ou aura poursuivi l’exercice de l’activité après la suspension temporaire de l’activité ou le retrait de l’agrément. 
+En cas de récidive, les amendes prévues par le présent article sont portées au double. 
+Art. 63 - Est puni d’une amende de 20.000 dinars toute société prestataire en « Crowdfunding » en investissement dans des valeurs mobilières , tout intermédiaire en bourse, société de gestion de portefeuilles pour le compte de tiers ou société d’investissement à capital risque qui gère des fonds pour le compte de tiers, qui présente des projets à financer sur la plateforme, sans avoir mis la note abrégée mentionnée à l’article 30 de la présente loi sur la plateforme à la disposition des contributeurs, et ce, avant de procéder à la collecte de leurs fonds.
+CHAPITRE VI
+Dispositions diverses
+Art. 64 - Les sociétés prestataires en « Crowdfunding » doivent constituer une association professionnelle pour servir d’intermédiaire entre ses membres et les autorités publiques compétentes en ce qui concerne toutes les questions intéressant l’activité de « Crowdfunding ». L’adhésion à cette association est obligatoire.
+Art. 65 - L’association professionnelle instaure un code de déontologie qui s’impose à tous ses membres. Elle œuvre à le respecter.
+La présente loi sera publiée au Journal officiel de la République tunisienne et exécutée comme loi de l'Etat.
+Tunis, le 6 août 2020.
+Le Président de la République
+Kaïs Saïed
