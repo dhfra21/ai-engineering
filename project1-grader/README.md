@@ -82,19 +82,26 @@ Prices are OpenAI's standard list rates.
 
 ## Results
 
-_Fill these in from the files named in each row. Report counts and
-percentages, never a single number on its own._
+Final configuration: system **v3** on `gpt-5-nano`, judge **v1** on `gpt-5-mini`
+(OpenAI, since 2026-10-20). Counts and percentages; 95% CIs are Wilson intervals.
 
 | What | Number | Source |
 |---|---|---|
 | Labeller agreement (raw, before adjudication) | 157/161 (97.5%), κ = 0.947 — two Claude instances, so an upper bound | `results/labels/agreement.md` |
-| Items dropped / adjudicated / overridden | 0 / 4 / 1 | same |
-| Golden set | 161: 98 good, 63 bad (dev 60, test 101) | `data/golden.jsonl` |
-| Judge vs human, golden **test** | _/_ (_%), κ = _, bad caught _/_ | `results/judge/<v>_gptoss120b_test/summary.md` |
-| Position bias: verdict flips when A/B swapped | 8/101 (7.9%); first slot won 49/202 (24.3%), second 46/202 (22.8%); picked the unbroken original in both orders 30/35 (85.7%) | `results/bias/v2_test/position.json` |
-| Verbosity bias: human-bad answers rescued by padding | template _/_, llm _/_ | `results/bias/<v>_test/verbosity-*.json` |
-| System on test: v1 → final | _/101 → _/101 | `results/history.csv` |
-| Cost per 1k requests (system / + 10% judged) | $_ / $_ | `results/cost/<run_id>.json` |
+| Items dropped / adjudicated / overridden | 0 / 4 / 17 (each override cites a guide rule) | same |
+| Golden set | 161: 82 good, 79 bad (dev 60: 24 good / 36 bad; test 101: 58 good / 43 bad) | `data/golden.jsonl` |
+| Judge vs human, golden **dev** | 54/60 (90.0%), κ = 0.79, bad caught 34/36, precision 34/38 | `results/judge/v1_gpt5mini_dev/summary.md` |
+| Judge vs human, golden **test** | **65/101 (64.4%, CI 54.6–73.0%), κ = 0.33**, bad caught 40/43 (93.0%), precision 40/73 (54.8%); hard items 14/36 | `results/judge/v1_gpt5mini_test/summary.md` |
+| Position bias: verdict flips when A/B swapped | 14/101 (13.9%), same slot both times 4/101; first slot won 61/202 (30.2%), second 63/202 (31.2%); picked the unbroken original in both orders 31/35 (88.6%) | `results/bias/v1_test/position.json` |
+| Verbosity bias: judge-caught human-bad answers rescued by padding | template 2/40 (5.0%); llm 5/40 (12.5%, overstated: the pad model fixed 4 of them) | `results/bias/v1_test/verbosity-*.json` |
+| System on dev: v1 → v3 | 43/60 and 40/60 (two runs) → 51/59 and 47/59 | `results/history.csv`, `prompts/CHANGELOG.md` |
+| System on test, v3 (3 runs) | 78, 76, 80 of 101: mean 77.2%, range 75.2–79.2% | `results/history.csv` |
+| Cost per 1k requests (system / + 10% judged) | $0.19 / $0.39; ~$5.90/month at 500 requests/day, ~$588 at 100× | `results/cost/20261021-101225_test_sys-v3_judge-v1.json` |
+
+Read the test score together with the judge's test agreement: the judge fails
+a third of human-good test answers, so 77% is a judge-graded number with fair
+(κ 0.33) agreement with humans, not a direct measure of quality. See
+`report/report.pdf` §4.
 
 ## Repo layout
 
@@ -118,9 +125,11 @@ postmortem.md
 
 ## Contributions
 
-_One entry per team member. Fill this in before freezing the repo._
+From the commit history (git usernames). Replace with real names and add
+anything that never showed up as a commit before freezing the repo.
 
-- _Name: what they did_
+- **dhfra21:** candidate generation; golden-set labelling, adjudication and guide v2–v3; judge v1/v2 and its evaluation; label fixes; switch from Groq to OpenAI; steps 6–9 on gpt-5-mini (bias checks, system prompts v2–v3, final test runs, cost model); README, postmortem and report.
+- **OKmimech:** Project 1 scaffold (harness, judge, schemas, tests); step 6 position bias on Groq.
 
 ## No API keys in this repo
 

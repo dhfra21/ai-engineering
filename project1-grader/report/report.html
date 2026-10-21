@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL Explainer Evaluation</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm 14mm 15mm; }
+  :root { --ink: #1a1a1a; --muted: #555; --rule: #d0d0d0; --accent: #1f4e79; --bg: #ffffff; --soft: #f3f6f9; }
+  body { background: var(--bg); color: var(--ink); font: 9.6pt/1.38 "Segoe UI", Arial, sans-serif; margin: 0; }
+  main { max-width: 180mm; margin: 0 auto; }
+  h1 { font-size: 16pt; margin: 0 0 1mm; color: var(--accent); }
+  .sub { color: var(--muted); margin: 0 0 3mm; font-size: 9pt; }
+  h2 { font-size: 11.5pt; color: var(--accent); margin: 4mm 0 1.2mm; padding-bottom: .6mm; border-bottom: 1px solid var(--rule); }
+  h3 { font-size: 10pt; margin: 2.5mm 0 .8mm; }
+  p { margin: 0 0 1.6mm; }
+  ul { margin: 0 0 1.6mm; padding-left: 5mm; }
+  li { margin: 0 0 .5mm; }
+  table { border-collapse: collapse; width: 100%; margin: 1mm 0 2mm; font-size: 8.8pt; }
+  th, td { border-bottom: 1px solid var(--rule); padding: .8mm 1.4mm; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  .box { background: var(--soft); border-left: 3px solid var(--accent); padding: 1.6mm 2.4mm; margin: 1.5mm 0 2mm; }
+  .ex { font-size: 8.8pt; }
+  .ex b { color: var(--accent); }
+  code { font: 8.4pt Consolas, monospace; background: var(--soft); padding: 0 .6mm; }
+  .tag { font-size: 8pt; color: var(--muted); }
+  .key { font-weight: 600; }
+  .avoid { break-inside: avoid; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Evaluating a SQL explainer with a golden set and an LLM judge</h1>
+<p class="sub">Project 1 report · CS496 · 2026-10-21 · repo <code>project1-grader</code> · final system: prompt v3 on <code>gpt-5-nano</code>, judge v1 on <code>gpt-5-mini</code> (OpenAI)</p>
+
+<div class="box">
+<span class="key">Summary.</span> On 101 held-out test queries, system v3 is rated good on <b>78.0/101 (77.2%)</b>, the mean of three runs (75.2–79.2%), up from about 69% for the baseline prompt on dev. That score comes from an LLM judge that agrees with our golden labels on <b>65/101 test items (64.4%, κ 0.33)</b>, against 90% on dev. The gap comes from fixing dev labels where the judge disagreed, plus a judge that is too strict. The judge catches 93% of bad answers and shows no position or length preference. Running the system costs <b>$0.19 per 1,000 requests</b>.
+</div>
+
+<h2>1. The task, and why exact match isn't enough</h2>
+<p>Input: a SQLite query over a five-table shop schema. Output: a plain-language explanation for a reader who doesn't know SQL. An explanation is <b>good</b> only if it is correct, complete (every filter, grouping, aggregate, limit and sort direction), invents nothing, and is clear to that reader. There are many right answers and one wrong word can break one, so neither exact match nor word overlap works:</p>
+<div class="box ex avoid">
+<code>SELECT DISTINCT price FROM products ORDER BY price DESC LIMIT 1 OFFSET 1;</code> (c-q117)<br>
+<b>Good A:</b> "…orders them from most expensive to least, <u>skips the top (most expensive) price</u>, and then returns the next one."<br>
+<b>Good B</b> (system v3): "The query returns the second-highest distinct price… skips the very first (highest) price, and then returns the next one. If there aren't at least two distinct prices, it returns no rows."<br>
+<b>Wrong</b> (planted): identical to A except "<u>skips the top two</u> (most expensive) prices".<br>
+Word overlap (Jaccard): A vs B <b>0.42</b>, both good. A vs Wrong <b>0.97</b>, one is wrong. Overlap would rank the wrong answer highest.
+</div>
+
+<h2>2. The golden set</h2>
+<p><b>Queries.</b> 161 queries: 50 from Project 0 and 111 new ones aimed at traps (inner vs left joins, NULLs, <code>DISTINCT</code>, window functions, missing <code>ORDER BY</code>). All were checked against the database. They are split 60 dev / 101 test, stratified by difficulty (45 easy, 59 medium, 57 hard).</p>
+<p><b>Candidates.</b> Each query has one blind candidate explanation: 73 baseline (system model), 32 from a second, weaker model, and 56 with a planted error. The planted errors are six types (wrong_filter 10, missing_condition 10, wrong_join_semantics 9, wrong_aggregation 9, invented_detail 9, jargon 9). We mixed sources so that bad answers include both natural and known errors. Labellers never saw the source.</p>
+<p><b>Guide and labelling.</b> <code>data/LABELLING_GUIDE.md</code> (v3) defines the four criteria and twelve decision rules. The rules people disputed most: silence about an edge case is fine but implying the wrong behaviour is not (3.1); sort direction is required (3.3); "all" must mean all (3.11); and "lists every X" is wrong over an inner join (3.12). With instructor approval, two independent Claude Opus 5.5 subagents labelled everything from blind packets.</p>
+<table class="avoid">
+<tr><th>Agreement (claude-a vs claude-b)</th><th class="n">Result</th></tr>
+<tr><td>Raw agreement / Cohen's κ</td><td class="n">157/161 (97.5%, CI 93.8–99.0) / 0.947</td></tr>
+<tr><td>Confusion (a × b): good-good / good-bad / bad-good / bad-bad</td><td class="n">99 / 2 / 2 / 58</td></tr>
+<tr><td>By difficulty: easy / medium / hard</td><td class="n">97.8% / 98.3% / 96.5%</td></tr>
+<tr><td>By source: baseline / weak / perturbed (κ)</td><td class="n">0.84 / 0.65 / 0.88</td></tr>
+<tr><td>Dropped / adjudicated / overridden after agreement</td><td class="n">0 / 4 / 17</td></tr>
+<tr><td>Final golden set (dev; test)</td><td class="n">82 good / 79 bad (24/36; 58/43)</td></tr>
+</table>
+<p>High agreement between two copies of one model shows consistency, not correctness: both labellers passed 4 of 55 planted errors. The 4 disagreements were adjudicated, which added rules 3.10 and 3.11 in guide v2. We then made 17 overrides where both labellers agreed but broke a guide rule, each citing the rule in <code>data/labels/overrides.jsonl</code>. Rule 3.12 came from the judge's dev disagreements and was applied by a sweep over all 161 items, which changed 10 labels. Later fixes (c-q108, c-q095, c-q145, c-q130, c-q107) were made <b>on dev only</b>, which matters in §4.</p>
+
+<h2>3. The harness</h2>
+<p><code>python -m harness.run --split test --system v3</code> runs the system on every query, grades each answer with the judge, and writes one row per item: input, output, grade, reason, failed criteria, tokens, latency, cost and any error. It also appends a line to <code>results/history.csv</code>, and if an earlier run exists it lists exactly which items changed grade. Every model call must answer in a fixed JSON schema (strict <code>json_schema</code>, validated again locally). A reply that doesn't match is retried once, then recorded as an error row, never parsed out of free text and never counted as a zero. Responses are cached by exact request, so interrupted runs resume for free. A mock backend and 12 unit and end-to-end tests run offline. We moved from Groq to OpenAI mid-project (an instructor-provided key; Groq's daily cap blocked steps 6–9). Only the client and model table changed, plus a flag because gpt-5 models reject <code>temperature</code>.</p>
+
+<h2>4. The judge: reliability report</h2>
+<p>The judge is prompt v1 on gpt-5-mini. Prompt v2, which writes guide v3's rules into the prompt, tied it on dev at 54/60 but marked more good answers bad (precision 36/42 vs 34/38), so we kept v1.</p>
+<table class="avoid">
+<tr><th>Judge vs golden labels</th><th class="n">Dev (60)</th><th class="n">Test (101)</th></tr>
+<tr><td>Agreement (95% CI)</td><td class="n">54/60 (90.0%)</td><td class="n"><b>65/101 (64.4%, 54.6–73.0)</b></td></tr>
+<tr><td>Cohen's κ</td><td class="n">0.79</td><td class="n"><b>0.33</b></td></tr>
+<tr><td>Recall of bad (human-bad also judged bad)</td><td class="n">34/36</td><td class="n">40/43 (93.0%)</td></tr>
+<tr><td>Precision of bad (judge-bad that humans call bad)</td><td class="n">34/38</td><td class="n">40/73 (54.8%)</td></tr>
+<tr><td>Agreement: easy / medium / hard</td><td class="n">94 / 95 / 86%</td><td class="n">79 / 78 / <b>39%</b></td></tr>
+</table>
+<p><b>Why test is so much lower.</b> (1) <i>Label fixing was one-sided.</i> Dev labels were corrected where the judge exposed rule violations, but test labels were not, and can't be now without relabelling after seeing the judge's verdicts. Several test disagreements follow the patterns we fixed on dev: "purchased/bought/sold" with no status filter (c-q035, c-q037, c-q136, c-q146) and "every order" over an inner join (c-q050, c-q156). (2) <i>The judge is too strict.</i> About 23 of its 33 false "bad" calls demand details that rules 3.1–3.2 say may be left out: rows merged by <code>GROUP BY name</code> (c-q026, c-q029, c-q038, c-q044), exclusions the explanation never denies (c-q018, c-q043, c-q123, c-q148), unstated default ascending sort (c-q060, c-q118), rounding, and currency (c-q053). <b>Test agreement (64%) is the honest reliability number.</b></p>
+<p><b>Planted errors caught on test:</b> invented_detail 7/7, missing_condition 7/7, wrong_join_semantics 6/6, wrong_filter 5/5, wrong_aggregation 4/4, jargon 5/6. The judge almost never lets a planted error through, but its "bad" verdicts are only right about half the time.</p>
+<h3>Position bias (pairwise judge, original vs alternative, both orders, test)</h3>
+<p>The judge gave the same verdict in both orders on 87/101 pairs (86.1%). Only 4/101 picked the same slot both times; the other flips switched between a tie and a winner. First slot won 61/202 (30.2%), second 63/202 (31.2%), tie 78/202 (38.6%). On 35 pairs with a known better answer, it picked the unbroken original in both orders 31/35 (88.6%) and the broken one in either order 2/35. <b>No slot preference.</b></p>
+<h3>Verbosity bias (the same answer padded to about 2.8× its length)</h3>
+<table class="avoid">
+<tr><th></th><th class="n">Template padding</th><th class="n">LLM padding</th></tr>
+<tr><td>Grades changed</td><td class="n">12/101 (11.9%)</td><td class="n">19/101 (18.8%)</td></tr>
+<tr><td>Judge-caught human-bad answers rescued by padding</td><td class="n"><b>2/40 (5.0%)</b></td><td class="n">5/40 (12.5%)*</td></tr>
+<tr><td>Human-good answers penalised by padding</td><td class="n">5/25 (20.0%)</td><td class="n">5/25 (20.0%)</td></tr>
+<tr><td>Pairwise: padded / original / tie</td><td class="n">25 / <b>35</b> / 142</td><td class="n">60 / 31 / 111*</td></tr>
+</table>
+<p>Template padding adds a fixed preamble and generic SQL facts, so the content is provably unchanged. On that clean test, padding rarely rescues a bad answer and the judge slightly prefers the original: <b>no reward for length</b>. *The LLM-padding numbers overstate the bias. Spot checks show the pad model rewrote jargon into plain words (c-q027, c-q086, c-q089) and dropped an invented detail (c-q150), so some padded answers really were better.</p>
+<h3>Where the judge fails</h3>
+<ul>
+<li><b>Too strict on hard queries</b>: 14/36 agreement on test. It treats "for each X, it computes…" as a claim that every X appears (c-q030, c-q112 with v2; c-q114).</li>
+<li><b>Fails answers for things the guide allows them to leave out</b>: c-q083 (rows repeated per order), c-q126 (first month's NULL), c-q061 (NULL countries).</li>
+<li><b>Misses clause-by-clause jargon</b>: c-q140 (dev) and c-q120 (test), for both prompt versions and both providers.</li>
+<li><b>Borderline on default sort direction</b> (c-q014, c-q060, c-q118). The guide doesn't settle whether "sorted by year" has to say ascending.</li>
+</ul>
+
+<h2>5. The system: score history</h2>
+<p>gpt-5-nano and gpt-5-mini don't accept <code>temperature</code>, so runs aren't repeatable. Two identical v1 dev runs scored 43 and 40, with 19 items changing grade. We therefore count a version as better only if it beats the baseline across reruns.</p>
+<table class="avoid">
+<tr><th>Version</th><th>One change</th><th class="n">Dev (judge v1)</th><th>Effect</th></tr>
+<tr><td>v1</td><td>Baseline: "explain in plain words"</td><td class="n">43/60, 40/60</td><td>7 of 17 failures were row scope, 3 were row order</td></tr>
+<tr><td>v2</td><td>Be exact about which rows: an inner join drops unmatched rows; no invented status filter</td><td class="n">43/60</td><td>No change: 9 items better, 9 worse, the same as noise. Fixed join wording but started inventing row orders (c-q075, c-q127)</td></tr>
+<tr><td><b>v3</b></td><td>v2 + describe order only from <code>ORDER BY</code>, with direction</td><td class="n"><b>51/59, 47/59</b></td><td>Both runs beat both v1 runs (about +8 items). Fixed c-q046, c-q107, c-q154, c-q075, c-q127</td></tr>
+</table>
+<p><b>Test, v3, three runs:</b> 78, 76, 80 of 101, so a mean of <b>77.2%</b> (range 75.2–79.2%; per-run CI about ±8 points). By difficulty, the mean was easy 90%, medium 82%, hard 62% (20–26 of 36, the most variable). For test the system's token limit went from 1,024 to 2,048 because v3 hit the cap on dev q159. Read this score together with §4: the judge fails about a third of human-good test answers, so true quality is likely somewhat higher than this score.</p>
+
+<h2>6. Cost model</h2>
+<p>From the third test run, at OpenAI list prices; reasoning tokens are billed as output.</p>
+<table class="avoid">
+<tr><th></th><th class="n">System (gpt-5-nano)</th><th class="n">Judge (gpt-5-mini)</th></tr>
+<tr><td>Tokens in / out per item</td><td class="n">457 / 408</td><td class="n">950 / 913</td></tr>
+<tr><td>Cost per item</td><td class="n">$0.000186</td><td class="n">$0.00206</td></tr>
+<tr><td>Latency p50 / p95</td><td class="n">3.7 s / 5.5 s</td><td class="n">10.0 s / 18.6 s</td></tr>
+</table>
+<p>Per 1,000 requests: <b>$0.19</b> for the system alone, $2.25 with every answer judged, and <b>$0.39</b> with a 10% judged sample for monitoring. Assuming 500 requests/day (our assumption, not measured), that's about <b>$5.90/month</b>, and about <b>$588/month at 100×</b>. The judge costs about 11 times more per item than the system, so judge a sample, not every answer. Our OpenAI spend for the whole evaluation was about $4 (estimated: $2.24 is logged in run, judge and position-bias files, and the two verbosity checks made about 600 more judge calls). Groq's free tier had been enough for candidate generation and the early judge work, but not for steps 6–9, which is why we switched.</p>
+
+</main>
+</body>
+</html>
