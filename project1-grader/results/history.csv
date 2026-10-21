@@ -1,3 +1,7 @@
 run_id,finished_at,split,n_items,system_prompt,system_sha,system_model,judge_prompt,judge_sha,judge_model,good,bad,errors,pct_good,cost_usd_total,note
 20261020-171723_dev_sys-v1_judge-v1,2026-10-20T17:17:23+00:00,dev,60,system/v1,b330de8a52,gpt5nano,judge/v1,855813d6f7,gpt5mini,38,19,3,66.7,0.130846,"first OpenAI run (gpt-5-nano system, gpt-5-mini judge)"
 20261020-173910_dev_sys-v1_judge-v1,2026-10-20T17:39:10+00:00,dev,60,system/v1,b330de8a52,gpt5nano,judge/v1,855813d6f7,gpt5mini,43,17,0,71.7,0.143241,judge max_tokens 1536->4096
+20261020-231149_dev_sys-v2_judge-v1,2026-10-20T23:11:49+00:00,dev,60,system/v2,a685e74120,gpt5nano,judge/v1,855813d6f7,gpt5mini,43,17,0,71.7,0.13596,"system v2: row scope (inner joins, no invented status filter)"
+20261020-232532_dev_sys-v3_judge-v1,2026-10-20T23:25:32+00:00,dev,60,system/v3,d5ac2dc5fb,gpt5nano,judge/v1,855813d6f7,gpt5mini,51,8,1,86.4,0.132457,system v3: v2 + row order only from ORDER BY
+20261020-233804_dev_sys-v1_judge-v1,2026-10-20T23:38:04+00:00,dev,60,system/v1,b330de8a52,gpt5nano,judge/v1,855813d6f7,gpt5mini,40,20,0,66.7,0.13723,noise check: v1 rerun without cache (gpt-5 models ignore temperature)
+20261020-235312_dev_sys-v3_judge-v1,2026-10-20T23:53:12+00:00,dev,60,system/v3,d5ac2dc5fb,gpt5nano,judge/v1,855813d6f7,gpt5mini,47,12,1,79.7,0.13558,noise check: v3 rerun without cache

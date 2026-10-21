@@ -1,0 +1,83 @@
+{
+  "n_items": 60,
+  "scored": 60,
+  "good": {
+    "n": 40,
+    "of": 60,
+    "pct": 66.7,
+    "ci95_pct": [
+      54.1,
+      77.3
+    ]
+  },
+  "bad": {
+    "n": 20,
+    "of": 60,
+    "pct": 33.3,
+    "ci95_pct": [
+      22.7,
+      45.9
+    ]
+  },
+  "errors": {
+    "system": 0,
+    "judge": 0
+  },
+  "by_difficulty": {
+    "easy": {
+      "n": 16,
+      "of": 17,
+      "pct": 94.1,
+      "ci95_pct": [
+        73.0,
+        99.0
+      ]
+    },
+    "medium": {
+      "n": 15,
+      "of": 22,
+      "pct": 68.2,
+      "ci95_pct": [
+        47.3,
+        83.6
+      ]
+    },
+    "hard": {
+      "n": 9,
+      "of": 21,
+      "pct": 42.9,
+      "ci95_pct": [
+        24.5,
+        63.5
+      ]
+    }
+  },
+  "failed_criteria_counts": {
+    "correct": 11,
+    "complete": 16,
+    "no_invention": 2,
+    "clear": 0
+  },
+  "cost_usd": {
+    "system_total": 0.008379,
+    "judge_total": 0.128851,
+    "system_per_item": 0.00013965,
+    "judge_per_item": 0.00214752
+  },
+  "latency_ms": {
+    "system_p50": 2784.4,
+    "system_p95": 4823.8,
+    "judge_p50": 8711.7,
+    "judge_p95": 15463.7
+  },
+  "run_id": "20261020-233804_dev_sys-v1_judge-v1",
+  "split": "dev",
+  "system_prompt": "system/v1",
+  "system_sha": "b330de8a52",
+  "system_model": "gpt5nano",
+  "judge_prompt": "judge/v1",
+  "judge_sha": "855813d6f7",
+  "judge_model": "gpt5mini",
+  "limit": null,
+  "note": "noise check: v1 rerun without cache (gpt-5 models ignore temperature)"
+}
