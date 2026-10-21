@@ -32,6 +32,13 @@ baseline across reruns, not by one run's flips.
 
 Reading: v2 is **no change**. Its 18 flips are the same size as the noise between two identical v1 runs (19), so it neither helped nor hurt; the row-scope items it fixed went back and forth in the v1 reruns too. v3 is a **real improvement**: both v3 runs (51, 47) beat both v1 runs (43, 40), by about 8 items (~14 points) on average. v3 is the version to report.
 
+**Reported test score, system v3 (judge v1 on gpt-5-mini), 3 runs, 2026-10-21:**
+78/101 (77.2%), 76/101 (75.2%), 80/101 (79.2%). Mean 78.0/101 (77.2%), range
+75.2–79.2%. Hard queries vary most across runs (21, 20, 26 of 36). For the test
+runs the system's `max_completion_tokens` was raised from 1,024 to 2,048, because
+v3 hit the cap on q159 in both dev runs; none of the three test runs was cut off.
+Run ids `20261021-080824`, `20261021-083154`, `20261021-101225`.
+
 ## Judge prompt
 
 Changes to the judge are measured by **agreement with humans on golden-dev**

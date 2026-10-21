@@ -1,0 +1,83 @@
+{
+  "n_items": 101,
+  "scored": 101,
+  "good": {
+    "n": 76,
+    "of": 101,
+    "pct": 75.2,
+    "ci95_pct": [
+      66.0,
+      82.6
+    ]
+  },
+  "bad": {
+    "n": 25,
+    "of": 101,
+    "pct": 24.8,
+    "ci95_pct": [
+      17.4,
+      34.0
+    ]
+  },
+  "errors": {
+    "system": 0,
+    "judge": 0
+  },
+  "by_difficulty": {
+    "easy": {
+      "n": 25,
+      "of": 28,
+      "pct": 89.3,
+      "ci95_pct": [
+        72.8,
+        96.3
+      ]
+    },
+    "medium": {
+      "n": 31,
+      "of": 37,
+      "pct": 83.8,
+      "ci95_pct": [
+        68.9,
+        92.3
+      ]
+    },
+    "hard": {
+      "n": 20,
+      "of": 36,
+      "pct": 55.6,
+      "ci95_pct": [
+        39.6,
+        70.5
+      ]
+    }
+  },
+  "failed_criteria_counts": {
+    "correct": 19,
+    "complete": 21,
+    "no_invention": 7,
+    "clear": 1
+  },
+  "cost_usd": {
+    "system_total": 0.018333,
+    "judge_total": 0.214597,
+    "system_per_item": 0.00018151,
+    "judge_per_item": 0.00212473
+  },
+  "latency_ms": {
+    "system_p50": 3572.7,
+    "system_p95": 5290.0,
+    "judge_p50": 9339.0,
+    "judge_p95": 17078.9
+  },
+  "run_id": "20261021-083154_test_sys-v3_judge-v1",
+  "split": "test",
+  "system_prompt": "system/v3",
+  "system_sha": "d5ac2dc5fb",
+  "system_model": "gpt5nano",
+  "judge_prompt": "judge/v1",
+  "judge_sha": "855813d6f7",
+  "judge_model": "gpt5mini",
+  "limit": null,
+  "note": "final test run 2/3 (system v3, judge v1, system max_tokens 2048)"
+}

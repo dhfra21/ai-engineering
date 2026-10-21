@@ -1,0 +1,43 @@
+{
+  "run_id": "20261021-101225_test_sys-v3_judge-v1",
+  "system": {
+    "model": "gpt-5-nano",
+    "avg_input_tokens": 457.1,
+    "avg_output_tokens": 407.6,
+    "usd_per_request": 0.00018588,
+    "latency_ms_p50": 3679.0,
+    "latency_ms_p95": 5536.1
+  },
+  "judge": {
+    "model": "gpt-5-mini",
+    "avg_input_tokens": 950.0,
+    "avg_output_tokens": 912.5,
+    "usd_per_judged_item": 0.00206259,
+    "latency_ms_p50": 10013.1,
+    "latency_ms_p95": 18558.0
+  },
+  "per_1k_requests_usd": {
+    "system_only": 0.1859,
+    "system_plus_judge_every_answer": 2.2485,
+    "system_plus_judge_10%_sample": 0.3921
+  },
+  "monthly_today": {
+    "daily_requests": 500,
+    "system_usd": 2.79,
+    "judge_usd": 3.09,
+    "total_usd": 5.88
+  },
+  "monthly_at_100x": {
+    "daily_requests": 50000,
+    "system_usd": 278.82,
+    "judge_usd": 309.39,
+    "total_usd": 588.21
+  },
+  "assumptions": {
+    "daily_requests_today": 500,
+    "judge_sample": 0.1,
+    "prices": "OpenAI list price, see harness/config.py",
+    "days_per_month": 30,
+    "note": "output tokens include gpt-5 reasoning tokens, which are billed"
+  }
+}

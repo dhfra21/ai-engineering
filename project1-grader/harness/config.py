@@ -72,7 +72,7 @@ LABELLER_MODELS = ["gpt4omini", "gpt5nanohigh"]
 
 TEMPERATURE = 0  # sent only to models with temperature=True
 # Reasoning tokens count against this budget on gpt-5, so it is not tight.
-MAX_TOKENS = {"system": 1024, "judge": 4096, "pairwise": 4096, "perturb": 1536, "pad": 1536,
+MAX_TOKENS = {"system": 2048, "judge": 4096, "pairwise": 4096, "perturb": 1536, "pad": 1536,
               "label": 4096}
 
 # Same schema text Project 0 used, so explanations can name real columns.
