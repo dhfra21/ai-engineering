@@ -23,9 +23,9 @@ need no measurement.
 | Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | Next. Switches now reach the whole pipeline: `--n-candidates`, `--rerank-max-length`, `--skip-rerank-gap` in both eval scripts, and `N_CANDIDATES` / `SKIP_RERANK_GAP` / `INDEX` env vars in the service. Plan: choose the variant on retrieval only (cheap), confirm with one generation run |
 | Record before/after numbers in `optimisation.md` | DF | 27 Nov | After the optimisation runs |
 | Write `design.md` | DF | 4 Dec | **Done**: chunking (with the ablation), index choice, retrieval, generation, 8 known failure cases. Generation results get added after the baseline |
-| Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | Moved from DF. Inputs: per-request tokens and $ in `results/generation_baseline.json` (`gen_cost`, `cost_per_request_usd`), index build cost in `data/index/*/meta.json`, prices in `src/config.py`. Include the query-embedding call for `-oai` indexes and the hosting cost |
-| Write `postmortem.md` | **OK** | 4 Dec | Moved from DF. Material: the Windows `open()` encoding issue (needs `PYTHONUTF8=1`), the duplicated hour-long index builds before indexes were shared, the e5 vs OpenAI-embedding switch mid-project, the mislabelled source files, and whatever the baseline failures show |
-| Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | Moved from DF. Do it after the last push |
+| Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | **Script + preliminary numbers done**: `python -m eval.cost_model` writes `results/cost_model.md` (about $0.00023 per request, 7.6 s p50; $0.68/month today, $68/month fees + about $120 hosting at 100x, assumptions listed). Preliminary because it uses 7 real service requests. **Re-run on the baseline when DF pushes `results/generation_baseline.json`:** `python -m eval.cost_model` |
+| Write `postmortem.md` | **OK** | 4 Dec | **Written** (`postmortem.md`): corpus, scraper, index builds, embedding switch, easy eval set, amending laws, latency, smaller problems. Section 9 (generation failures) is **[TO FILL]** from the baseline rows |
+| Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | **Preliminary check done** on a fresh clone (see below). **Run it again after the last push** |
 
 ## OK
 

@@ -109,15 +109,19 @@ The rule is a 50% cut in cost or p95 latency with at most 2 points of accuracy l
 - **Coverage.** 2013-2026 only, none for 2022, and the Arabic side is thinner than the French.
 - **Latency.** The reranker makes every request 7-9 s on CPU.
 
-**Cost model** (preliminary, list prices to be re-checked):
+**Cost model** (preliminary: measured on 7 real service requests; `eval/cost_model.py` recomputes it from the
+generation baseline, full table in `results/cost_model.md`; list prices to be re-checked):
 
 | Item | Value |
 |---|---|
 | Index build, once | $0.135 (6.76 M tokens), 166 s |
-| Question embedding | about 20 tokens: negligible ($0.02 per M tokens) |
-| Generation (`gpt-4o-mini`, 5 chunks, about 1,000 prompt tokens) | about $0.0002 per request (range $0.0001 to $0.0004 over 7 test requests; refused Arabic questions had longer prompts) |
-| Today: a class of 10 asking 1 question a day, 10 requests per day. At 100 times: 1,000 requests per day | about $0.002 per day today and $0.20 per day at 100 times, in model fees; the server is the larger cost |
-| Hosting | free CPU Space (16 GB RAM); at 100 times the traffic the reranker would need a faster machine or a smaller model, because it is 7-9 s of CPU per request |
+| Question embedding | about 25 tokens: $0.0000005 per request |
+| Generation (`gpt-4o-mini`, 5 chunks, about 1,000 prompt tokens) | $0.00023 per request (refused Arabic questions had longer prompts) |
+| **Per request** | **about $0.00023, 7.6 s p50 / 8.8 s p95** |
+| Today: 100 requests per day (a class demo) | $0.68 per month in model fees; free CPU Space, 1 worker |
+| At 100 times: 10,000 requests per day | $68 per month in model fees; 4 workers at 25% utilisation, about $120 per month if a worker costs $30 (an assumed price) |
+
+Hosting grows with the reranker's CPU time, not with model fees, which is why it is the Week 8 target.
 
 **[TO FILL]** after the generation eval and the Week 8 changes: measured cost per request with the judge's
 numbers, p50/p95 latency before and after, and feedback from real users.
