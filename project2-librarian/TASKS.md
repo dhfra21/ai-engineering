@@ -19,12 +19,12 @@ need no measurement.
 | Choose and justify the vector DB / index | DF | 13 Nov | **Done**: flat files + brute-force cosine, justified in `design.md` |
 | Write `eval/generation_eval.py` | DF | 20 Nov | **Done**, first real run in progress (see "Currently running"). Rows now also store the top retrieval score, and the models are warmed up before timing |
 | Baseline numbers: p50/p95 latency, cost, accuracy | DF | 27 Nov | Running now on `article-oai`, 124 questions, `hybrid+rerank`, k = 5 → `results/generation_baseline.json` |
-| Tune abstention threshold, fix prompt failures | DF | 20 Nov | Next, from the baseline rows (threshold tuned offline on `top_score`, no re-run) |
+| Tune abstention threshold, fix prompt failures | DF | 20 Nov | **Done by DF** (prompt fix + threshold 2.0: correctness 87% to 96%, refusals 22 to 23 of 24). **Still to check:** the threshold was tuned on the same 124 questions it is scored on; run the paraphrased set (`--set qa_hard`) to see whether 2.0 refuses real answers there |
 | Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | Next. Switches now reach the whole pipeline: `--n-candidates`, `--rerank-max-length`, `--skip-rerank-gap` in both eval scripts, and `N_CANDIDATES` / `SKIP_RERANK_GAP` / `INDEX` env vars in the service. Plan: choose the variant on retrieval only (cheap), confirm with one generation run |
 | Record before/after numbers in `optimisation.md` | DF | 27 Nov | After the optimisation runs |
 | Write `design.md` | DF | 4 Dec | **Done**: chunking (with the ablation), index choice, retrieval, generation, 8 known failure cases. Generation results get added after the baseline |
 | Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | **Script + preliminary numbers done**: `python -m eval.cost_model` writes `results/cost_model.md` (about $0.00023 per request, 7.6 s p50; $0.68/month today, $68/month fees + about $120 hosting at 100x, assumptions listed). Preliminary because it uses 7 real service requests. **Re-run on the baseline when DF pushes `results/generation_baseline.json`:** `python -m eval.cost_model` |
-| Write `postmortem.md` | **OK** | 4 Dec | **Written** (`postmortem.md`): corpus, scraper, index builds, embedding switch, easy eval set, amending laws, latency, smaller problems. Section 9 (generation failures) is **[TO FILL]** from the baseline rows |
+| Write `postmortem.md` | **OK** | 4 Dec | **Done** (including section 9, generation failures). Add anything the Week 8 runs teach us |
 | Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | **Preliminary check done** on a fresh clone (see below). **Run it again after the last push** |
 
 ## OK
@@ -41,12 +41,15 @@ need no measurement.
 | pytest tests: chunking, gold matching, scraper parsers | 27 Nov | **Done:** 37 tests (`.venv/bin/python -m pytest -q`) |
 | Report (max 6 pages) + README with Contributions | 4 Dec | README done (confirm the Contributions names). Report draft is 3 pages (`report/report.md`, PDF with `python report/build_pdf.py`); sections 4 and 5 and the cost numbers are marked **[TO FILL]** and depend on DF's runs |
 
-## Currently running (on DF's machine, 3 Nov 2026)
+## Currently running (3 Nov 2026, evening)
 
-The generation baseline: `python -m eval.generation_eval --tag baseline --strategy article-oai`
-(124 questions, about 6 s each, done around 21:50). Intermediate count: 84 of 96 correct. Do not
-run heavy jobs on DF's machine until the optimisation runs are done, since they set the latency
-numbers.
+Nothing on OK's machine. On DF's machine: the Week 8 optimisation runs, when they start. Do not run heavy jobs
+on DF's machine while they run, since they set the latency numbers.
+
+Generation results so far (`results/`): `generation_baseline.json` (DF), `generation_tuned.json` (DF: prompt fix +
+threshold 2.0) and `generation_tuned_judgefix.json` (OK: the same configuration after fixing the faithfulness
+judge, which numbered the cited sources wrongly; faithfulness 83% -> 96%; its latency is from a slower machine and is
+not comparable). **DF: pull before the next run**, so it uses the fixed judge.
 
 On Windows, run Python with `PYTHONUTF8=1`: several `open()` calls rely on the default encoding,
 which is cp1252 there and fails on Arabic text.

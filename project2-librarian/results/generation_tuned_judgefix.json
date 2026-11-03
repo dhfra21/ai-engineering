@@ -1,0 +1,3121 @@
+{
+ "config": {
+  "tag": "tuned_judgefix",
+  "set": "qa",
+  "mode": "hybrid+rerank",
+  "k": 5,
+  "strategy": "article-oai",
+  "model": null,
+  "min_score": 2.0,
+  "limit": 0,
+  "n_candidates": 30,
+  "rerank_max_length": 384,
+  "skip_rerank_gap": null
+ },
+ "summary": {
+  "n": 124,
+  "n_answerable": 100,
+  "n_unanswerable": 24,
+  "correctness": 0.95,
+  "faithfulness": 0.96,
+  "citation_hit": 0.99,
+  "citation_precision": 0.9075,
+  "retrieval_hit": 1.0,
+  "abstain_when_unanswerable": 0.9583333333333334,
+  "over_abstention": 0.0,
+  "latency_p50_s": 7.9750111475004815,
+  "latency_p95_s": 9.113588412999889,
+  "cost_per_request_usd": 0.00018695322580645162,
+  "judge_cost_total_usd": 0.0325596
+ },
+ "rows": [
+  {
+   "id": "q001-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les entreprises concernées par l'article 30 (nouveau) doivent se conformer à l'obligation d'employer des personnes handicapées ou d'appliquer l'une des alternatives prévues à l'article 31 de la loi d'orientation n°2005-83 dans un délai d'une année, à compter de la date d'entrée en vigueur de la loi n° 2016-41 [1].",
+   "latency": {
+    "search": 6.183424830999684,
+    "generate": 1.331688029000361,
+    "total": 7.515112860000045
+   },
+   "gen_cost": 0.00021315,
+   "judge_cost": 0.00027800000000000004,
+   "n_citations": 1,
+   "top_score": 10.402024269104004,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the one-year compliance deadline from the law's entry into force, matching the reference.",
+   "cited_ids": [
+    "law-2016-41:fr:4"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q001-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتعين على كل منشأة أو مؤسسة معنية بتطبيق الفصل 30 (جديد) الامتثال لإلزامية تشغيل الأشخاص ذوي الإعاقة أو العمل بإحدى البدائل المنصوص عليها بالفصل 31 من القانون التوجيهي عدد 83 لسنة 2005 في أجل سنة من تاريخ دخول هذا القانون حيز التنفيذ [1].",
+   "latency": {
+    "search": 6.642688177000309,
+    "generate": 1.3427196110005752,
+    "total": 7.9854077880008845
+   },
+   "gen_cost": 0.00022904999999999998,
+   "judge_cost": 0.0002668,
+   "n_citations": 1,
+   "top_score": 9.3027925491333,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the one-year deadline from the law's entry into force, matching the reference.",
+   "cited_ids": [
+    "law-2016-41:ar:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q002-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les régies de recettes et les régies d’avances d'une collectivité locale sont instituées par arrêté du ministre des Finances ou de la personne ayant reçu délégation de sa part à cet effet, sur proposition du président de la collectivité locale [1].",
+   "latency": {
+    "search": 6.275184271999024,
+    "generate": 1.3030360430002474,
+    "total": 7.578220314999271
+   },
+   "gen_cost": 0.0001728,
+   "judge_cost": 0.0002672,
+   "n_citations": 1,
+   "top_score": 10.32365608215332,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the instituting act as an arrêté du ministre des Finances or delegated person, on proposal of the local authority president.",
+   "cited_ids": [
+    "law-2018-29:fr:201"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q002-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تحدث وكالات المقابيض ووكالات الدفوعات بقرار من وزير المالية أو من يفوض له وزير المالية ذلك باقتراح من رئيس الجماعة المحلية، وفقًا للفصل 188 من قانون عدد 29 لسنة 2018 [1].",
+   "latency": {
+    "search": 6.931662872999368,
+    "generate": 1.4814368629995442,
+    "total": 8.413099735998912
+   },
+   "gen_cost": 0.0002382,
+   "judge_cost": 0.0002488,
+   "n_citations": 1,
+   "top_score": 7.715457439422607,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the decision authority and proposal as the reference answer.",
+   "cited_ids": [
+    "law-2018-29:ar:166"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q003-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "En cas de désaccord sur la valeur de l'indemnité d'expropriation, l'exproprié peut requérir du tribunal de première instance saisi de l'affaire un jugement l'autorisant à percevoir le montant consigné en sa faveur, et ce, dans la limite de l'offre de l'expropriant, à condition de satisfaire aux exigences de l'inscription ou de la publicité mentionnées aux articles 36 et 38 de la loi n° 2016-53 [1].",
+   "latency": {
+    "search": 7.090576927001166,
+    "generate": 1.9079752819998248,
+    "total": 8.99855220900099
+   },
+   "gen_cost": 0.00022889999999999998,
+   "judge_cost": 0.0003524,
+   "n_citations": 1,
+   "top_score": 7.77498722076416,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the judgment, the amount consigned, the limit of the offer, and the conditions related to articles 36 and 38.",
+   "cited_ids": [
+    "law-2016-53:fr:39"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q003-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "في صورة عدم الاتفاق حول قيمة الغرامة رضائيا واللجوء إلى ضبطها قضائيا، يمكن للمنتزع منه أن يطلب من المحكمة الابتدائية المتعهدة بالقضية الحكم له بسحب المبلغ المؤمّن لفائدته، وذلك في حدود عرض المنتزع وبشرط استيفاء موجبات الترسيم أو الإشهار المشار إليها بالفصلين 36 و 38 من هذا القانون [1].",
+   "latency": {
+    "search": 7.380384199999753,
+    "generate": 1.6318966090002505,
+    "total": 9.012280809000004
+   },
+   "gen_cost": 0.00026984999999999997,
+   "judge_cost": 0.000348,
+   "n_citations": 1,
+   "top_score": 10.217909812927246,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the right to request the secured amount within the limits of the expropriated offer and the conditions of registration or publication per articles 36 and 38.",
+   "cited_ids": [
+    "law-2016-53:ar:31"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q004-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Sont considérés comme emplois supérieurs diplomatiques selon la loi n° 2015-32 : \n- ambassadeur, \n- délégué permanent ou représentant permanent, \n- chargé d'affaires chef de mission, \n- chef de mission diplomatique ou permanente adjoint, \n- consul général, \n- consul, \n- secrétaire général du ministère chargée des affaires étrangères, \n- les directeurs généraux supervisant les services diplomatiques au ministère chargée des affaires étrangères [1][3].",
+   "latency": {
+    "search": 5.7462925870004256,
+    "generate": 1.7301213999999163,
+    "total": 7.476413987000342
+   },
+   "gen_cost": 0.00022455,
+   "judge_cost": 0.0003384,
+   "n_citations": 2,
+   "top_score": 10.806050300598145,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key positions listed in the reference with correct titles and authorities.",
+   "cited_ids": [
+    "law-2015-32:fr:5",
+    "law-2015-32:ar:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q004-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تُعد الوظائف العليا الدبلوماسية وفق القانون عدد 32 لسنة 2015 كما يلي: \n- سفير،\n- مندوب دائم أو ممثل دائم،\n- قائم بالأعمال رئيس بعثة،\n- رئيس بعثة دبلوماسية أو دائمة مساعد،\n- قنصل عام،\n- قنصل،\n- كاتب عام الوزارة المكلفة بالشؤون الخارجية،\n- المديرون العامون المشرفون على المصالح الدبلوماسية بالوزارة المكلفة بالشؤون الخارجية [1][3].",
+   "latency": {
+    "search": 7.046763185999225,
+    "generate": 1.7317324949999602,
+    "total": 8.778495680999185
+   },
+   "gen_cost": 0.00025455000000000003,
+   "judge_cost": 0.00034720000000000004,
+   "n_citations": 2,
+   "top_score": 10.840907096862793,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer lists all the key diplomatic senior positions as stated in the reference answer.",
+   "cited_ids": [
+    "law-2015-32:ar:3",
+    "law-2015-32:fr:5"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q005-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Un organisme peut refuser l'accès à l'information dans les cas suivants : lorsque cela entraînerait un préjudice à la sécurité ou à la défense nationale, ou aux relations internationales y liées, ou encore aux droits d'un tiers concernant la protection de sa vie privée, de ses données personnelles et de sa propriété intellectuelle [1]. \n\nCependant, ces domaines ne sont pas considérés comme des exceptions absolues au droit d'accès à l'information ; ils sont soumis à un test de préjudice, qui doit être grave, qu'il soit concomitant ou postérieur [1]. De plus, chaque demande d'accès doit être évaluée en fonction de l'intérêt public de l'accessibilité ou de l'inaccessibilité à l'information [1]. La proportionnalité entre les intérêts à protéger et la raison de la demande d'accès sera également prise en compte [1]. \n\nEn cas de refus, le demandeur doit être informé par une lettre motivée, et l'effet de refus prend fin avec l'expiration des motifs exprimés dans la réponse à la demande d'accès [1].",
+   "latency": {
+    "search": 5.938602352000089,
+    "generate": 2.453990625001097,
+    "total": 8.392592977001186
+   },
+   "gen_cost": 0.00029519999999999997,
+   "judge_cost": 0.0004372,
+   "n_citations": 1,
+   "top_score": 7.809695720672607,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about refusal cases and adds correct procedural details.",
+   "cited_ids": [
+    "law-2016-22:fr:23"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q005-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يمكن للهيكل المعني رفض طلب النفاذ إلى المعلومة في الحالات التالية:\n\n1. إذا كان ذلك يؤدي إلى إلحاق ضرر بالأمن العام أو بالدفاع الوطني أو بالعلاقات الدولية فيما يتصل بهما أو بحقوق الغير في حماية حياته الخاصة ومعطياته الشخصية وملكيته الفكرية [1].\n2. يجب أن يكون الضرر جسيماً سواء كان آنياً أو لاحقاً، كما يجب أن يكون هناك تقدير للمصلحة العامة من تقديم المعلومة أو من عدم تقديمها بالنسبة لكل طلب [1].\n3. يجب مراعاة التناسب بين المصالح المراد حمايتها والغاية من مطلب النفاذ [1].\n\nوفي حالة الرفض، يجب على الهيكل المعني إعلام طالب النفاذ بذلك بجواب معلّل، وينتهي مفعول الرفض بزوال أسبابه المبينة في الجواب على مطلب النفاذ [1].",
+   "latency": {
+    "search": 7.117985790000603,
+    "generate": 2.703443297999911,
+    "total": 9.821429088000514
+   },
+   "gen_cost": 0.00028034999999999996,
+   "judge_cost": 0.0004156,
+   "n_citations": 1,
+   "top_score": 8.34262752532959,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the conditions for refusal, matching the reference answer's criteria.",
+   "cited_ids": [
+    "law-2016-22:ar:20"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q006-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Quiconque organise sciemment un spectacle artistique sans respecter les conditions énoncées à l'article 21 de la loi relative à l'artiste et aux métiers artistiques encourt une amende allant de 5 000 dinars à 10 000 dinars [1] . La même peine s'applique au propriétaire de l'espace ou à son gestionnaire, selon le cas [1] . En cas de récidive, la peine est portée au double [1] .",
+   "latency": {
+    "search": 5.328676568999072,
+    "generate": 1.720499072000166,
+    "total": 7.049175640999238
+   },
+   "gen_cost": 0.000219,
+   "judge_cost": 0.00030960000000000004,
+   "n_citations": 1,
+   "top_score": 10.21585750579834,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the fine amounts, affected parties, and doubling in case of recurrence.",
+   "cited_ids": [
+    "law-2026-8:fr:41"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q006-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يعاقب بخطية تتراوح بين 5000 دينار و10000 دينار كل من يتعمد تنظيم العرض الفني المنصوص عليه بالفصل 21 من هذا القانون دون احترام الشروط الواردة بالفقرة الثانية من نفس الفصل، كما يعاقب بنفس العقوبة صاحب الفضاء أو صاحب الحق في التصرف فيه بحسب الحالة [1][2]. وفي حالة العود، تضاعف العقوبة [1][2].",
+   "latency": {
+    "search": 6.9756058160000975,
+    "generate": 1.6055066129993065,
+    "total": 8.581112428999404
+   },
+   "gen_cost": 0.00021525,
+   "judge_cost": 0.0003796,
+   "n_citations": 2,
+   "top_score": 9.001791000366211,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts: fine amount, punished parties, and doubling of the penalty for repeat offenses.",
+   "cited_ids": [
+    "law-2026-8:fr:41",
+    "law-2026-8:ar:31"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q007-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Pour les livres et les œuvres musicales, le dépôt légal doit être effectué dans un délai d'un mois à compter de la date de mise de l'œuvre à la disposition du public [1]. En ce qui concerne les œuvres périodiques, le délai est de 48 heures à compter de la date de mise à la disposition du public [1][4].",
+   "latency": {
+    "search": 6.423402714999611,
+    "generate": 1.4616593650007417,
+    "total": 7.885062080000353
+   },
+   "gen_cost": 0.00019769999999999998,
+   "judge_cost": 0.0003528,
+   "n_citations": 2,
+   "top_score": 7.9875969886779785,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer correctly states the one-month delay for books and musical works and the 48-hour delay for periodical works as per the reference.",
+   "cited_ids": [
+    "law-2015-37:fr:7",
+    "law-2015-37:fr:9"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q007-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "بالنسبة إلى الكتب والمؤلفات الموسيقية، يجب القيام بالإيداع القانوني في أجل شهر من تاريخ وضع المصنف على ذمة العموم [1]، بينما بالنسبة إلى المصنفات الدورية، يجب القيام بالإيداع في أجل 48 ساعة من تاريخ وضع المصنف على ذمة العموم [1].",
+   "latency": {
+    "search": 7.041714455001056,
+    "generate": 1.5419930019997992,
+    "total": 8.583707457000855
+   },
+   "gen_cost": 0.00022964999999999997,
+   "judge_cost": 0.00031040000000000006,
+   "n_citations": 1,
+   "top_score": 5.406707286834717,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the deposit deadlines for books and musical works as one month and for periodicals as 48 hours, matching the reference.",
+   "cited_ids": [
+    "law-2015-37:ar:7"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q008-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Un bulletin de vote est nul lors de l'élection des membres du Conseil supérieur de la magistrature dans les cas suivants : \n\n1. Si le bulletin n'est pas établi pour le scrutin ou contient un nombre de candidats supérieur à celui prévu pour chaque ordre ou grade, ou n'exprime pas clairement la volonté de l'électeur, ou est contraire aux principes de confidentialité ou de liberté du suffrage [1].\n2. Si le bulletin méconnaît le principe de parité quant au nombre de candidats à choisir pour chaque ordre, sauf dans les cas où le nombre de candidats de l'un des deux sexes est insuffisant [1].\n3. Si le bulletin est annulé au sens de l’article 3 de la loi n° 2014-16, ce qui inclut notamment : \n   - le bulletin non cacheté par le Président du bureau de vote,\n   - le bulletin comportant un signe ou une mention identifiant l’électeur,\n   - le bulletin comportant remplacement ou ajout d’un ou plusieurs candidats ou d’un nom d’une personne non candidate,\n   - le bulletin comportant un vote pour plus d’une liste de candidats ou plus d’un candidat aux élections présidentielles,\n   - le bulletin comportant des réponses contradictoires au référendum [2].\n\nLes bulletins blancs ne sont pas comptabilisés dans les résultats du scrutin [1][2].",
+   "latency": {
+    "search": 6.213290793999477,
+    "generate": 3.596737713998664,
+    "total": 9.81002850799814
+   },
+   "gen_cost": 0.00033825,
+   "judge_cost": 0.0005664000000000001,
+   "n_citations": 2,
+   "top_score": 5.33800745010376,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": false,
+   "why": "The candidate includes additional conditions from another law and election types not relevant to the question, which are not in the reference answer.",
+   "cited_ids": [
+    "law-2016-34:fr:24",
+    "law-2014-16:fr:131"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q008-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تعتبر ورقة التصويت ملغاة في انتخاب أعضاء المجلس الأعلى للقضاء في الحالات التالية:\n\n1. إذا كانت الورقة غير معدة للغرض المحدد.\n2. إذا احتوت على أكثر من العدد المقرر لكل رتبة أو صنف.\n3. إذا لم تعبر بوضوح عن إرادة الناخب.\n4. إذا تعارضت مع مبادئ سرية أو حرية الاقتراع.\n5. إذا لم تحترم مبدأ التناصف في عدد المترشحين الذين يختارهم الناخب لكل صنف، وذلك في حدود ما يحتمه العدد الفردي من المقاعد المخصصة لكل صنف ورتبة، مع استثناء الحالات التي لا يترشح فيها عدد كاف من المترشحين من أحد الجنسين.\n6. لا يتم احتساب الأوراق البيضاء ضمن النتائج [1].",
+   "latency": {
+    "search": 7.110671930000535,
+    "generate": 2.41238936100126,
+    "total": 9.523061291001795
+   },
+   "gen_cost": 0.0002673,
+   "judge_cost": 0.000404,
+   "n_citations": 1,
+   "top_score": 4.422863006591797,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts and conditions stated in the reference answer, including the exceptions and treatment of blank ballots.",
+   "cited_ids": [
+    "law-2016-34:ar:21"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q009-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La loi relative à l'économie sociale et solidaire prévoit qu'il est réservé un pourcentage des commandes publiques au profit des entreprises de l’économie sociale et solidaire, tout en respectant les principes de concurrence et d’égalité des chances entre elles conformément à la législation en vigueur [1]. Ce pourcentage ainsi que les conditions requises seront fixés par décret gouvernemental, en fonction de la nature des entreprises et des projets concernés par cette mesure [1].",
+   "latency": {
+    "search": 5.887720456999887,
+    "generate": 1.8957311060003121,
+    "total": 7.783451563000199
+   },
+   "gen_cost": 0.00022395,
+   "judge_cost": 0.0002928,
+   "n_citations": 1,
+   "top_score": 5.643256187438965,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the reserved percentage, respect for competition and equality, and the fixing of conditions by government decree.",
+   "cited_ids": [
+    "law-2020-30:fr:21"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q009-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "ينص القانون المتعلق بالاقتصاد الاجتماعي والتضامني على تخصيص نسبة من الطلبات العمومية لفائدة مؤسسات الاقتصاد الاجتماعي والتضامني، مع احترام مبدأ المنافسة وتكافؤ الفرص بينها، وذلك طبقًا للتشريع الجاري به العمل [1] . وتضبط هذه النسبة والشروط المستوجبة حسب طبيعة المشاريع والمؤسسات المعنية بهذا الإجراء بأمر حكومي [1] .",
+   "latency": {
+    "search": 6.782492459000423,
+    "generate": 1.7773265089999768,
+    "total": 8.5598189680004
+   },
+   "gen_cost": 0.00025394999999999997,
+   "judge_cost": 0.00028440000000000003,
+   "n_citations": 1,
+   "top_score": 7.184989929199219,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the reserved percentage, respect for competition and equal opportunity, and regulation by government order.",
+   "cited_ids": [
+    "law-2020-30:ar:18"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q010-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les banques doivent rééchelonner les créances bancaires des agriculteurs sur une durée maximale de 7 ans, dont une année de grâce, et il faut payer 5% du principal de la dette lors du dépôt de la demande de régularisation [1].",
+   "latency": {
+    "search": 6.818368164000276,
+    "generate": 1.6691868779998913,
+    "total": 8.487555042000167
+   },
+   "gen_cost": 0.0002526,
+   "judge_cost": 0.0002992,
+   "n_citations": 1,
+   "top_score": 6.66315221786499,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer matches the reference on duration, grace period, and payment percentage.",
+   "cited_ids": [
+    "law-2026-5:fr:1"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q010-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "المدة القصوى لإعادة جدولة الديون البنكية للفلاحين هي 7 سنوات، منها سنة إمهال، ويجب دفع 5% من قيمة أصل الدين عند تقديم مطلب التسوية [1].",
+   "latency": {
+    "search": 6.819633055998565,
+    "generate": 1.1322509379988333,
+    "total": 7.951883993997399
+   },
+   "gen_cost": 0.00027929999999999996,
+   "judge_cost": 0.0003072,
+   "n_citations": 1,
+   "top_score": 3.932499408721924,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer matches the reference in duration, grace period, and payment percentage.",
+   "cited_ids": [
+    "law-2026-5:ar:0"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q011-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le conseil créé par la loi n° 2017-54 transmet son rapport annuel au président de la République, au chef du gouvernement et au président de l’assemblée des représentants du peuple, et ce, au cours du premier trimestre de l’année suivante [1]. Le rapport est également publié sur le site électronique du conseil [1].",
+   "latency": {
+    "search": 5.864449186999991,
+    "generate": 1.5093714590002492,
+    "total": 7.37382064600024
+   },
+   "gen_cost": 0.0001692,
+   "judge_cost": 0.0002588,
+   "n_citations": 1,
+   "top_score": 10.205498695373535,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about recipients, timing, and publication as in the reference.",
+   "cited_ids": [
+    "law-2017-54:fr:6"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q011-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتولى المجلس المحدث بالقانون عدد 54 لسنة 2017 توجيه تقريره السنوي إلى كل من رئيس الجمهورية ورئيس الحكومة ورئيس مجلس نواب الشعب وذلك خلال الثلاثية الأولى من السنة الموالية [1].",
+   "latency": {
+    "search": 6.912992592000592,
+    "generate": 1.179153144999873,
+    "total": 8.092145737000465
+   },
+   "gen_cost": 0.00016035,
+   "judge_cost": 0.000238,
+   "n_citations": 1,
+   "top_score": 8.392528533935547,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the recipients and the timing of the annual report as in the reference.",
+   "cited_ids": [
+    "law-2017-54:ar:6"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q012-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le règlement intérieur de la mutuelle créée par la loi n° 2018-38 est approuvé par arrêté conjoint du ministre de la justice, du ministre des finances et du ministre des affaires sociales [1].",
+   "latency": {
+    "search": 5.297884551000607,
+    "generate": 1.5653721279995807,
+    "total": 6.863256679000187
+   },
+   "gen_cost": 0.0001506,
+   "judge_cost": 0.0002388,
+   "n_citations": 1,
+   "top_score": 10.498696327209473,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts as the reference answer.",
+   "cited_ids": [
+    "law-2018-38:fr:6"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q012-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تتم المصادقة على النظام الداخلي للتعاونية المحدثة بالقانون عدد 38 لسنة 2018 بقرار مشترك من وزير العدل ووزير المالية ووزير الشؤون الاجتماعية [1][4].",
+   "latency": {
+    "search": 6.764672467999844,
+    "generate": 1.320123292000062,
+    "total": 8.084795759999906
+   },
+   "gen_cost": 0.00019274999999999997,
+   "judge_cost": 0.00029360000000000003,
+   "n_citations": 2,
+   "top_score": 10.707609176635742,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer states the same key authorities as the reference answer.",
+   "cited_ids": [
+    "law-2018-38:ar:4",
+    "law-2018-36:ar:9"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q013-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le règlement intérieur de la mutuelle créée par la loi n° 2016-31 est approuvé par arrêté conjoint du ministre de la défense nationale, du ministre des finances et du ministre des affaires sociales [1].",
+   "latency": {
+    "search": 5.486192616999688,
+    "generate": 1.169757274001313,
+    "total": 6.655949891001001
+   },
+   "gen_cost": 0.0001527,
+   "judge_cost": 0.00024720000000000005,
+   "n_citations": 1,
+   "top_score": 10.556904792785645,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the approving authorities as the reference answer.",
+   "cited_ids": [
+    "law-2016-31:fr:6"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q013-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تتم المصادقة على النظام الداخلي للتعاونية المحدثة بالقانون عدد 31 لسنة 2016 بقرار مشترك من وزير الدفاع الوطني ووزير المالية ووزير الشؤون الاجتماعية [1][2].",
+   "latency": {
+    "search": 7.126647576998948,
+    "generate": 1.3732120040003792,
+    "total": 8.499859580999328
+   },
+   "gen_cost": 0.00016289999999999998,
+   "judge_cost": 0.0002904,
+   "n_citations": 2,
+   "top_score": 10.81593132019043,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer states the same authorities involved in the joint decision as the reference answer.",
+   "cited_ids": [
+    "law-2016-31:ar:4",
+    "law-2016-31:ar:0"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q014-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les contributeurs peuvent participer à une société présentée sur une plateforme de « Crowdfunding » sous forme de souscription à des actions ordinaires, des sukuks ou des obligations [1]. Les valeurs mobilières des sociétés présentées ne doivent pas être admises à la cote de la bourse des valeurs mobilières de Tunis et ne doivent pas avoir fait précédemment l’objet d’une offre visée par le Conseil du marché financier [1]. Les conditions d’investissement dans les valeurs mobilières via les plateformes de « Crowdfunding » sont fixées par décret gouvernemental [1].",
+   "latency": {
+    "search": 6.030798985999354,
+    "generate": 1.8311722350008495,
+    "total": 7.8619712210002035
+   },
+   "gen_cost": 0.00021885,
+   "judge_cost": 0.0002964,
+   "n_citations": 1,
+   "top_score": 10.436928749084473,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key forms of participation as the reference answer.",
+   "cited_ids": [
+    "law-2020-37:fr:28"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q014-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يجب أن تكون مساهمات المشاركين في الشركة المعروضة على منصة التمويل التشاركي في شكل اكتتاب في أسهم عادية أو صكوك أو رقاع، كما يجب أن تكون القيم المنقولة للشركات المقدمة غير مقبولة في بورصة القيم المنقولة بتونس ولم يسبق أن كانت موضوع عرض مصادق عليه من قبل مجلس السوق المالية [1][2].",
+   "latency": {
+    "search": 6.262545854000564,
+    "generate": 1.811328763000347,
+    "total": 8.07387461700091
+   },
+   "gen_cost": 0.0002541,
+   "judge_cost": 0.00036920000000000003,
+   "n_citations": 2,
+   "top_score": 8.689654350280762,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key forms of contributions as in the reference and adds extra correct details.",
+   "cited_ids": [
+    "law-2020-37:ar:23",
+    "law-2020-37:fr:28"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q015-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "L'Instance mène ses enquêtes et ses séances d'audition de manière confidentielle afin de protéger les témoins et les victimes, notamment les enfants, tout en assurant la protection de leur intégrité physique et celle du parcours professionnel des témoins de violations des droits de l'Homme et des libertés [1].",
+   "latency": {
+    "search": 6.376601637999556,
+    "generate": 1.3028062889989087,
+    "total": 7.679407926998465
+   },
+   "gen_cost": 0.00019289999999999997,
+   "judge_cost": 0.0002724,
+   "n_citations": 1,
+   "top_score": 10.64791202545166,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about confidentiality, protection of physical integrity, professional path, and special mention of children.",
+   "cited_ids": [
+    "law-2018-51:fr:23"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q015-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تقوم الهيئة بإجراءات البحث وإجراء جلسات استماع في كنف السرية لحماية الشهود والضحايا، وخاصة من الأطفال، مع ضمان حماية الحرمة الجسدية لهم [1] كما تتولى الهيئة اتخاذ التدابير والوسائل الكفيلة بضمان سلامة المبلغين ومقدمي الشكايات ومسارهم المهني وحمايتهم بالتنسيق مع الجهات المعنية، طبقا للتشريع المتعلق بحماية الشهود والمبلغين [2].",
+   "latency": {
+    "search": 6.817021376000412,
+    "generate": 2.091828483000427,
+    "total": 8.908849859000838
+   },
+   "gen_cost": 0.00024825,
+   "judge_cost": 0.0003512,
+   "n_citations": 2,
+   "top_score": 9.55119514465332,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about confidentiality, protection of physical integrity, professional path, and special care for children as stated in the reference.",
+   "cited_ids": [
+    "law-2018-51:ar:18",
+    "law-2018-51:ar:17"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q016-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "L’Instance proclame les résultats définitifs des élections dans un délai de 48 heures de la réception du dernier arrêté de l’assemblée plénière du tribunal administratif concernant les recours liés aux résultats préliminaires des élections et du référendum ou après expiration des délais de recours [1].",
+   "latency": {
+    "search": 5.997520695000276,
+    "generate": 1.2720273969989648,
+    "total": 7.269548091999241
+   },
+   "gen_cost": 0.0001893,
+   "judge_cost": 0.0002728,
+   "n_citations": 1,
+   "top_score": 8.77550220489502,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same 48-hour deadline after receiving the last administrative tribunal decision or after the expiry of appeal periods.",
+   "cited_ids": [
+    "law-2014-16:fr:145"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q016-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تصرح الهيئة بالنتائج النهائية للانتخابات في أجل 48 ساعة من توصّلها بآخر حكم صادر عن الجلسة العامة القضائية للمحكمة الإدارية في خصوص الطعون المتعلقة بالنتائج الأولية للانتخابات أو بعد انقضاء أجل الطعن، وذلك بقرار ينشر بالموقع الإلكتروني للهيئة وبالرائد الرسمي للجمهورية التونسية [2][4].",
+   "latency": {
+    "search": 7.034562390999781,
+    "generate": 1.4367740550005692,
+    "total": 8.47133644600035
+   },
+   "gen_cost": 0.0002742,
+   "judge_cost": 0.0004980000000000001,
+   "n_citations": 2,
+   "top_score": 10.240839958190918,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes the same key facts about the 48-hour deadline after receiving the last judicial ruling or after the expiry of the appeal period.",
+   "cited_ids": [
+    "law-2014-16:ar:119",
+    "law-2014-16:ar:115"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q017-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La nomination aux emplois civils supérieurs autres que ceux prévus par l'article 2 de la loi n° 2015-33 se fait par décret gouvernemental, conformément à la réglementation en vigueur, sur proposition du ministre intéressé et après délibération du Conseil des ministres, et le Président de la République en est informé [2]. Toutefois, pour les emplois autres que supérieurs à la Présidence de la République, aux hautes instances et aux établissements publics à caractère administratif, la nomination se fait par arrêté du ministre directeur du cabinet Présidentiel [3].",
+   "latency": {
+    "search": 5.9947359889993095,
+    "generate": 2.0933870600001683,
+    "total": 8.088123048999478
+   },
+   "gen_cost": 0.00020355000000000001,
+   "judge_cost": 0.0005012,
+   "n_citations": 2,
+   "top_score": 10.571949005126953,
+   "gold_retrieved": true,
+   "gold_cited": false,
+   "citation_precision": 0.0,
+   "correct": false,
+   "why": "The candidate answer incorrectly states the nomination is by government decree and adds conditions not in the reference; it misses the key fact that nomination is by arrêté of the head of government on minister's proposal, except for certain entities.",
+   "cited_ids": [
+    "law-2015-33:fr:3",
+    "law-2015-32:fr:7"
+   ],
+   "faithful": false,
+   "unsupported": [
+    "La nomination aux emplois civils supérieurs autres que ceux prévus par l'article 2 de la loi n° 2015-33 se fait par décret gouvernemental, conformément à la réglementation en vigueur, sur proposition du ministre intéressé et après délibération du Conseil des ministres, et le Président de la République en est informé"
+   ]
+  },
+  {
+   "id": "q017-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتم التعيين في الوظائف المدنية العليا غير المنصوص عليها بالفصل 2 من القانون عدد 33 لسنة 2015 بقرار من رئيس الحكومة وباقتراح من الوزير الذي يمارس سلطة التسلسل أو الإشراف الإداري إزاء الأعوان المعنيين، وذلك باستثناء الوظائف المتعلقة بالمنشآت العمومية والمؤسسات العمومية التي لا تكتسي صبغة إدارية والهيئات التعديلية غير المنصوص عليها بالدستور، التي تبقى خاضعة للنصوص المنظمة لها [1][5].",
+   "latency": {
+    "search": 6.805862354000055,
+    "generate": 2.4112640139992436,
+    "total": 9.217126367999299
+   },
+   "gen_cost": 0.00025154999999999996,
+   "judge_cost": 0.00039840000000000003,
+   "n_citations": 2,
+   "top_score": 9.8248872756958,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about appointment by decision of the Prime Minister upon proposal of the supervising minister, with the same exceptions as the reference.",
+   "cited_ids": [
+    "law-2015-33:ar:3",
+    "law-2015-32:ar:8"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q018-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les centres de formation et de préparation de l’élite sportive peuvent être créés sous forme d’établissements publics à caractère administratif, dotés de la personnalité morale et de l’autonomie financière, et sont soumis à la tutelle du ministère chargé des sports [1].",
+   "latency": {
+    "search": 7.008859481999025,
+    "generate": 1.3868262710002455,
+    "total": 8.39568575299927
+   },
+   "gen_cost": 0.00017294999999999998,
+   "judge_cost": 0.0002528,
+   "n_citations": 1,
+   "top_score": 10.175663948059082,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the legal form, personality, financial autonomy, and ministry supervision.",
+   "cited_ids": [
+    "law-2016-33:fr:1"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q018-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يمكن إحداث \"مراكز تكوين وإعداد رياضيي النخبة\" في شكل مؤسسات عمومية ذات صبغة إدارية، تتمتع بالشخصية المعنوية والاستقلال المالي، وتخضع لإشراف الوزارة المكلفة بالرياضة، حيث تلحق ميزانيتها ترتيبيا بميزانية الدولة [1].",
+   "latency": {
+    "search": 6.816222170000401,
+    "generate": 1.697704068999883,
+    "total": 8.513926239000284
+   },
+   "gen_cost": 0.00019875,
+   "judge_cost": 0.000312,
+   "n_citations": 1,
+   "top_score": 9.737924575805664,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the legal form, administrative status, legal personality, financial independence, and supervision by the ministry, matching the reference answer.",
+   "cited_ids": [
+    "law-2016-33:ar:0"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q019-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les agents de l’instance doivent respecter le code de conduite approuvé par le conseil de l’instance dans un délai n’excédant pas six mois à compter de la date de prise de fonctions de l’instance [1].",
+   "latency": {
+    "search": 6.082091492999098,
+    "generate": 1.0854224289996637,
+    "total": 7.167513921998761
+   },
+   "gen_cost": 0.00022559999999999995,
+   "judge_cost": 0.000264,
+   "n_citations": 1,
+   "top_score": 9.775650978088379,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the six-month deadline from the date of taking office.",
+   "cited_ids": [
+    "law-2018-47:fr:15"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q019-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يلتزم أعوان الهيئة باحترام مقتضيات مدونة سلوك وأخلاقيات العون العمومي ومدونة السلوك التي يصادق عليها مجلس الهيئة في أجل لا يتجاوز ستّة أشهر من تاريخ مباشرة الهيئة لمهامها [1].",
+   "latency": {
+    "search": 7.087104842999906,
+    "generate": 1.7193031389997486,
+    "total": 8.806407981999655
+   },
+   "gen_cost": 0.00020805000000000002,
+   "judge_cost": 0.0002672,
+   "n_citations": 1,
+   "top_score": 10.843880653381348,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key fact of the six-month deadline from the start of the authority's duties.",
+   "cited_ids": [
+    "law-2018-47:ar:13"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q020-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le salaire d'un travailleur domestique est payé une fois par mois, sauf accord contraire des deux parties [3][4]. Le paiement doit avoir lieu directement à la travailleuse ou au travailleur domestique, contre récépissé ou tout autre moyen laissant une trace écrite [3][4]. Cette trace écrite doit contenir notamment l'identité du travailleur ou de la travailleuse domestique et de l'employeur, la durée du travail accompli, le montant du salaire et la date de paiement [3][4]. De plus, le salaire ne peut être inférieur au salaire minimum garanti applicable dans les différents secteurs, basé sur un régime de 48 heures de travail par semaine [1][2].",
+   "latency": {
+    "search": 5.851079771999139,
+    "generate": 1.9304500199996255,
+    "total": 7.781529791998764
+   },
+   "gen_cost": 0.00020444999999999998,
+   "judge_cost": 0.0004408000000000001,
+   "n_citations": 4,
+   "top_score": 3.338317394256592,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about frequency, payment method, and required written proof as in the reference answer.",
+   "cited_ids": [
+    "law-2021-37:fr:10",
+    "law-2021-37:ar:7",
+    "law-2021-37:fr:11",
+    "law-2021-37:ar:8"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q020-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يدفع أجر العامل المنزلي مرة واحدة في الشهر ما لم يتفق الطرفان على خلاف ذلك [1][4]، ويتم الدفع نقدا أو بكل طريقة خلاص معتمدة [2][3]، ويجب أن يكون الأجر لا يقل عن الأجر الأدنى المضمون المعمول به [2][3].",
+   "latency": {
+    "search": 7.018696721999731,
+    "generate": 1.480301685998711,
+    "total": 8.498998407998442
+   },
+   "gen_cost": 0.00018209999999999998,
+   "judge_cost": 0.0003696,
+   "n_citations": 4,
+   "top_score": 2.9865407943725586,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about payment frequency, method, and agreement as the reference answer.",
+   "cited_ids": [
+    "law-2021-37:ar:8",
+    "law-2021-37:ar:7",
+    "law-2021-37:fr:10",
+    "law-2021-37:fr:11"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q021-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les candidats peuvent introduire un recours contre les décisions de la commission parlementaire devant la Cour administrative d’appel de Tunis dans un délai de sept jours à compter de la date de publication de la liste des candidats, conformément à l'article 39 de la loi n° 2017-59 [1].",
+   "latency": {
+    "search": 6.632502988999477,
+    "generate": 1.3552787899989198,
+    "total": 7.9877817789983965
+   },
+   "gen_cost": 0.0002196,
+   "judge_cost": 0.000298,
+   "n_citations": 1,
+   "top_score": 10.234564781188965,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the seven-day deadline, the authority, and the starting point of the delay.",
+   "cited_ids": [
+    "law-2017-59:fr:38"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q021-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يمكن للمترشحين الطعن في قرارات اللجنة البرلمانية في أجل سبعة أيام من تاريخ نشر قائمة المترشحين أمام المحكمة الإدارية الاستئنافية بتونس [1].",
+   "latency": {
+    "search": 6.956375597999795,
+    "generate": 1.12653104400124,
+    "total": 8.082906642001035
+   },
+   "gen_cost": 0.00023625,
+   "judge_cost": 0.0002844,
+   "n_citations": 1,
+   "top_score": 10.742743492126465,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts as the reference answer regarding the seven-day period and the authority involved.",
+   "cited_ids": [
+    "law-2017-59:ar:32"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q022-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La Banque centrale doit aliéner les immeubles acquis pour garantir le recouvrement de créances douteuses dans un délai de deux ans, à moins qu'ils ne soient utilisés pour les besoins de l'exploitation conformément à la législation en vigueur [1].",
+   "latency": {
+    "search": 5.9771598979987175,
+    "generate": 1.0880098520010506,
+    "total": 7.065169749999768
+   },
+   "gen_cost": 0.00022949999999999997,
+   "judge_cost": 0.0002764,
+   "n_citations": 1,
+   "top_score": 8.08350944519043,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the two-year deadline and the exception for use in exploitation.",
+   "cited_ids": [
+    "law-2016-35:fr:36"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q022-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يجب على البنك المركزي التفويت في العقارات والمكاسب المشتراة لضمان استخلاص الديون المشكوك فيها في ظرف عامين، إلا إذا تم استعمالها من قبله لحاجيات الاستغلال وفقا للتشريع الجاري به العمل [1].",
+   "latency": {
+    "search": 6.805448313998568,
+    "generate": 1.2845448609987216,
+    "total": 8.08999317499729
+   },
+   "gen_cost": 0.0002961,
+   "judge_cost": 0.00028440000000000003,
+   "n_citations": 1,
+   "top_score": 5.443302631378174,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the two-year period and the exception for use by the bank for exploitation needs.",
+   "cited_ids": [
+    "law-2016-35:ar:17"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q023-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le mode de calcul et le montant des transferts financiers directs versés chaque mois aux catégories pauvres sont fixés par un arrêté conjoint du ministre chargé des affaires sociales et du ministre chargé des finances, conformément à l'article 11 de la loi n° 2019-10 [1].",
+   "latency": {
+    "search": 6.503237197999624,
+    "generate": 1.1755072769992694,
+    "total": 7.678744474998894
+   },
+   "gen_cost": 0.0001827,
+   "judge_cost": 0.00026240000000000004,
+   "n_citations": 1,
+   "top_score": 9.772290229797363,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the mode of calculation and amount being fixed by a joint order of the ministers responsible for social affairs and finance.",
+   "cited_ids": [
+    "law-2019-10:fr:9"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q023-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تضبط طريقة احتساب ومقدار التحويلات المالية المباشرة التي تسند للفئات الفقيرة بقرار مشترك من الوزير المكلف بالشؤون الاجتماعية والوزير المكلف بالمالية، وفقًا للفصل 11 من قانون عدد 10 لسنة 2019 [1].",
+   "latency": {
+    "search": 7.25441621400023,
+    "generate": 1.3026310090008337,
+    "total": 8.557047223001064
+   },
+   "gen_cost": 0.0002169,
+   "judge_cost": 0.0002932,
+   "n_citations": 1,
+   "top_score": 5.794395923614502,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states that the calculation method and amount are set by a joint decision of the ministers responsible for social affairs and finance, matching the reference.",
+   "cited_ids": [
+    "law-2019-10:ar:8"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q024-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La Cour constitutionnelle présente son rapport annuel au Président de la République, au Chef du Gouvernement et au Président de l'Assemblée des représentants du peuple au cours du deuxième trimestre suivant l'année du rapport [1].",
+   "latency": {
+    "search": 5.107128512001509,
+    "generate": 1.156333827000708,
+    "total": 6.263462339002217
+   },
+   "gen_cost": 0.0001326,
+   "judge_cost": 0.0002256,
+   "n_citations": 1,
+   "top_score": 7.939054489135742,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the recipients and timing of the report.",
+   "cited_ids": [
+    "law-2015-50:fr:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q024-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تقدم المحكمة الدستورية تقريرها السنوي إلى رئيس الجمهورية ورئيس الحكومة ورئيس مجلس نواب الشعب خلال الثلاثية الثانية الموالية لسنة التقرير، ويتم نشره بالرائد الرسمي للجمهورية التونسية وبموقعها الإلكتروني [1][2].",
+   "latency": {
+    "search": 5.836839887000679,
+    "generate": 1.32660181600113,
+    "total": 7.1634417030018085
+   },
+   "gen_cost": 0.00014744999999999998,
+   "judge_cost": 0.00027079999999999997,
+   "n_citations": 2,
+   "top_score": 5.652507781982422,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about recipients, timing, and publication as in the reference.",
+   "cited_ids": [
+    "law-2015-50:ar:2",
+    "law-2015-50:fr:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q025-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "L'ordonnateur des recettes et des dépenses du budget des conseils locaux, régionaux et de districts est le président du conseil, conformément aux dispositions de la législation et de la réglementation en vigueur [1].",
+   "latency": {
+    "search": 5.59152321700094,
+    "generate": 1.1662904330005404,
+    "total": 6.757813650001481
+   },
+   "gen_cost": 0.00017655,
+   "judge_cost": 0.0002308,
+   "n_citations": 1,
+   "top_score": 9.822813987731934,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate correctly identifies the president of the council as the ordonnateur, matching the reference answer.",
+   "cited_ids": [
+    "law-2025-4:fr:5"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q025-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يعتبر رئيس المجلس آمر قبض وصرف الميزانية وفقا لمقتضيات التشريع والتراتيب الجاري بها العمل [1].",
+   "latency": {
+    "search": 5.486635395000121,
+    "generate": 0.8323304139994434,
+    "total": 6.318965808999565
+   },
+   "gen_cost": 0.00022514999999999997,
+   "judge_cost": 0.000232,
+   "n_citations": 1,
+   "top_score": 8.282950401306152,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "Candidate correctly identifies the رئيس المجلس as the amir of budget collection and disbursement.",
+   "cited_ids": [
+    "law-2025-4:ar:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q026-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le montant des crédits délégués aux postes diplomatiques et consulaires à l'étranger pour l'année 2011, selon la loi de règlement du budget n° 2016-24, est arrêté à 95 215 886.342 Dinars [1].",
+   "latency": {
+    "search": 6.730587419000585,
+    "generate": 1.2561852319995523,
+    "total": 7.986772651000138
+   },
+   "gen_cost": 0.0001914,
+   "judge_cost": 0.0002704,
+   "n_citations": 1,
+   "top_score": 10.907140731811523,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate provides the exact total amount matching the reference answer.",
+   "cited_ids": [
+    "law-2016-24:fr:7"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q026-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "بلغت الاعتمادات المفوضة إلى المراكز الدبلوماسية والقنصلية بالخارج لسنة 2011، دون اعتبار المساهمات بعنوان نظامي التقاعد والحيطة الاجتماعية، ما جملته 95 215 886.342 دينار وفق قانون ختم الميزانية عدد 24 لسنة 2016 [1][2].",
+   "latency": {
+    "search": 6.848909271000593,
+    "generate": 1.3423196860003372,
+    "total": 8.19122895700093
+   },
+   "gen_cost": 0.00019559999999999998,
+   "judge_cost": 0.00034120000000000005,
+   "n_citations": 2,
+   "top_score": 10.88100528717041,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": false,
+   "why": "Candidate answer omits the breakdown into payments and surplus amounts.",
+   "cited_ids": [
+    "law-2016-24:ar:5",
+    "law-2016-24:fr:7"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q027-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le montant des crédits délégués aux postes diplomatiques et consulaires à l'étranger pour l'année 2019 est arrêté à 217 179 625,875 Dinars, compte non tenu de la contribution au titre des régimes de la retraite et de la prévoyance sociale, selon l'article 6 de la loi n° 2024-20 [1].",
+   "latency": {
+    "search": 7.112867689000268,
+    "generate": 1.385609677001412,
+    "total": 8.49847736600168
+   },
+   "gen_cost": 0.0001968,
+   "judge_cost": 0.00029640000000000005,
+   "n_citations": 1,
+   "top_score": 10.91203784942627,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": false,
+   "why": "Candidate answer omits the breakdown of expenses and surplus amounts present in the reference answer.",
+   "cited_ids": [
+    "law-2024-20:fr:7"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q027-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "بلغت الإعتمـادات المفوضة إلى المراكز الديبلوماسية والقنصلية بالخارج لسنة 2019 ما جملته 217 179 625,875 دينار وفق القانون عدد 20 لسنة 2024 المتعلق بختم الميزانية [1].",
+   "latency": {
+    "search": 6.970382588000575,
+    "generate": 1.3222784209992824,
+    "total": 8.292661008999858
+   },
+   "gen_cost": 0.00017729999999999997,
+   "judge_cost": 0.0002864,
+   "n_citations": 1,
+   "top_score": 10.476641654968262,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the total amount and references the correct law, matching the key facts of the reference answer.",
+   "cited_ids": [
+    "law-2024-20:ar:6"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q028-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le tuteur qui s'abstient d'inscrire son pupille ayant interrompu précocement sa scolarité au cycle préparatoire ou à la formation professionnelle encourt une amende de 20 à 200 dinars, après avoir été officiellement informé par un moyen laissant une trace écrite [1]. En cas de récidive, l'amende est portée à 400 dinars [1].",
+   "latency": {
+    "search": 6.039569770000526,
+    "generate": 1.4351609549994464,
+    "total": 7.474730724999972
+   },
+   "gen_cost": 0.00017865,
+   "judge_cost": 0.0003076,
+   "n_citations": 1,
+   "top_score": 10.456475257873535,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the fine amounts and conditions as the reference answer.",
+   "cited_ids": [
+    "law-2017-13:fr:4"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q028-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يعاقب كل ولي يمتنع، بعد إعلامه رسميا بما يترك أثرا كتابيا، عن إلحاق منظوره، المنقطع مبكرا عن التعليم، ولم يندمج في الحياة المهنية، حسب الحالة بالمرحلة التحضيرية أو بالتكوين المهني، بخطية من 20 إلى 200 دينار. وفي صورة العود، ترفع الخطية إلى 400 دينار [1][2].",
+   "latency": {
+    "search": 7.360816596999939,
+    "generate": 1.5485502219999034,
+    "total": 8.909366818999843
+   },
+   "gen_cost": 0.00026355000000000004,
+   "judge_cost": 0.00037600000000000003,
+   "n_citations": 2,
+   "top_score": 5.8862481117248535,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same fines and conditions as the reference answer.",
+   "cited_ids": [
+    "law-2017-13:ar:2",
+    "law-2017-13:fr:4"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q029-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La valeur de l’amende est réduite de 30% pour les bâtiments situés dans les zones d’encouragement du développement régional définies conformément à la législation et la réglementation en vigueur ou pour les bâtiments réalisés dans le cadre de projets de logement social financés par le fonds de promotion du logement pour les salariés [1].",
+   "latency": {
+    "search": 6.395084975998543,
+    "generate": 1.8712368960004824,
+    "total": 8.266321871999025
+   },
+   "gen_cost": 0.00020130000000000001,
+   "judge_cost": 0.00024240000000000004,
+   "n_citations": 1,
+   "top_score": 10.302979469299316,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate states the 30% reduction clearly, matching the reference answer.",
+   "cited_ids": [
+    "law-2015-11:fr:19"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q029-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتم التخفيض من قيمة الغرامة المستوجبة بنسبة %30 بالنسبة للبناءات المتواجدة داخل مناطق تشجيع التنمية الجهوية المحددة طبقا للتشريع والتراتيب الجاري بها العمل أو البناءات المنجزة في إطار مشاريع السكن الاجتماعي الممولة عن طريق صندوق النهوض بالمسكن لفائدة الأجراء [1].",
+   "latency": {
+    "search": 7.313783633999265,
+    "generate": 1.374240371000269,
+    "total": 8.688024004999534
+   },
+   "gen_cost": 0.00030179999999999996,
+   "judge_cost": 0.00025600000000000004,
+   "n_citations": 1,
+   "top_score": 10.74256420135498,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states the 30% reduction for buildings in regional development promotion areas.",
+   "cited_ids": [
+    "law-2015-11:ar:14"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q030-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les contrats de travail à durée déterminée qui ne sont pas inclus dans les cas exceptionnels prévus à l’article 6-4 (nouveau) du Code du travail se transforment en contrats de travail à durée indéterminée, indépendamment de leurs délais d'expiration ou de l'achèvement des travaux faisant l'objet du contrat [1]. \n\nLes dispositions de cet article s'appliquent aux contrats conclus avant l'entrée en vigueur de la présente loi et qui sont encore en cours d'exécution, ou qui ont été rompus après le 14 mars 2025 [1]. Dans ce cas, l'ancienneté de travail acquise en vertu des contrats de travail à durée déterminée est prise en compte pour fixer l'ancienneté générale du salarié, à condition que la relation de travail ait été régulière et n'ait pas été interrompue par des périodes dépassant une année continue [1].",
+   "latency": {
+    "search": 6.085096734999752,
+    "generate": 2.2104345230000035,
+    "total": 8.295531257999755
+   },
+   "gen_cost": 0.00026595,
+   "judge_cost": 0.0004268,
+   "n_citations": 1,
+   "top_score": 10.727702140808105,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the transformation of fixed-term contracts into indefinite ones, including dates, conditions, and applicability.",
+   "cited_ids": [
+    "law-2025-9:fr:17"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q030-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تتحول عقود الشغل معينة المدة غير المشمولة بالحالات الاستثنائية الواردة بالفصل 4-6 جديد من مجلة الشغل إلى عقود شغل غير معينة المدة، دون اعتبار لآجال انتهائها أو إنهاء الأعمال موضوع العقد [1][3]. تنطبق أحكام هذه الفقرة على العقود المبرمة قبل دخول هذا القانون حيز النفاذ والتي لا تزال جارية التنفيذ أو التي تم قطعها بعد تاريخ 14 مارس 2025 [1][3]. في هذه الحالة، تحتسب الأقدمية في العمل المكتسبة بموجب عقود الشغل معينة المدة في ضبط الأقدمية العامة للأجير، بشرط أن تكون العلاقة الشغلية منتظمة ولم تتخللها فترات انقطاع تتجاوز سنة مسترسلة [1][3].",
+   "latency": {
+    "search": 6.694258744999388,
+    "generate": 2.4193296680005005,
+    "total": 9.113588412999889
+   },
+   "gen_cost": 0.00027104999999999995,
+   "judge_cost": 0.0004988000000000001,
+   "n_citations": 2,
+   "top_score": 10.274076461791992,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the key facts about conversion to indefinite contracts, applicability to contracts before and after 14 March 2025, and conditions for seniority, matching the reference answer.",
+   "cited_ids": [
+    "law-2025-9:ar:14",
+    "law-2025-9:fr:17"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q031-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Chaque fonds d'investissement islamique doit disposer d’une unité d’audit charaïque interne chargée de l’examen et du contrôle de la conformité du fonds avec les normes charaïques conformément aux fatouas et décisions du comité de contrôle charaïque, et d’en faire des rapports périodiques à présenter au comité et au conseil d’administration ou au conseil de surveillance [1]. L’unité d’audit charaïque interne se compose d’un ou plusieurs membres spécialistes en doctrine des transactions islamiques, et sa composition est approuvée par le comité de contrôle charaïque [1].",
+   "latency": {
+    "search": 5.508408723000684,
+    "generate": 1.76213503299914,
+    "total": 7.2705437559998245
+   },
+   "gen_cost": 0.0002298,
+   "judge_cost": 0.0003444,
+   "n_citations": 1,
+   "top_score": 7.954930305480957,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the internal Sharia audit unit, its role, and reporting duties as the reference answer.",
+   "cited_ids": [
+    "law-2013-48:fr:9"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q031-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتعين أن تكون لدى كل صندوق استثمار إسلامي وحدة للتدقيق الشرعي الداخلي تتولى فحص ومراقبة مدى التزام الصندوق بالمعايير الشرعية وفق فتاوى وقرارات هيئة الرقابة الشرعية وإعداد تقارير دورية في الغرض ترفع لأنظار الهيئة ومجلس الإدارة أو مجلس المراقبة [1].",
+   "latency": {
+    "search": 6.763534338000682,
+    "generate": 1.3259742119989824,
+    "total": 8.089508549999664
+   },
+   "gen_cost": 0.00020114999999999998,
+   "judge_cost": 0.0003084,
+   "n_citations": 1,
+   "top_score": 7.682636737823486,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the internal Sharia audit unit, its role, and reporting authorities as stated in the reference.",
+   "cited_ids": [
+    "law-2013-48:ar:8"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q032-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les autorités civiles, sécuritaires et militaires sont tenues, lorsqu’elles sont sollicitées, de prêter la main forte aux agents visés à l’article 64 de la loi n° 2019-25 lors de l’accomplissement de leurs missions [1]. De plus, les entrepreneurs de transport sont également tenus de ne pas entraver les opérations de contrôle, de constatation, de prélèvement d’échantillons ou de saisie, et de présenter les titres de transport ou connaissements, les récépissés et les déclarations dont ils sont détenteurs [1].",
+   "latency": {
+    "search": 5.685330447000524,
+    "generate": 1.862015925000378,
+    "total": 7.547346372000902
+   },
+   "gen_cost": 0.00025485,
+   "judge_cost": 0.0003148,
+   "n_citations": 1,
+   "top_score": 7.93874454498291,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about authorities and transport entrepreneurs' obligations as in the reference.",
+   "cited_ids": [
+    "law-2019-25:fr:82"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q032-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتعين على السلط المدنية والأمنية والعسكرية أن تقدم عند الطلب يد المساعدة للأعوان المشار إليهم بالفصل 64 من هذا القانون عند القيام بمهامهم [1]. كما يتعين على أصحاب مؤسسات النقل أن لا يعرقلوا عمليات المراقبة أو المعاينة أو اقتطاع العينات أو الحجز وأن يقدموا مستندات النقل أو الشحن والوصولات والتصريحات التي تكون في حوزتهم [1].",
+   "latency": {
+    "search": 6.5422968009988836,
+    "generate": 1.7149456570004986,
+    "total": 8.257242457999382
+   },
+   "gen_cost": 0.00029625,
+   "judge_cost": 0.00030159999999999996,
+   "n_citations": 1,
+   "top_score": 9.557829856872559,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the authorities required to assist and the obligation of transport institution owners not to obstruct inspections.",
+   "cited_ids": [
+    "law-2019-25:ar:61"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q033-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les ressources de chaque mutuelle créée par la loi n° 2016-32 sont composées des éléments suivants : les montants des cotisations retenus directement des traitements des adhérents, au titre d’adhésion d’office, ainsi que les montants payés, au titre des cotisations des agents retraités ; les subventions versées, le cas échéant, par l’Etat ; les revenus provenant des biens et acquis de la mutuelle ; les dons et legs après autorisation du ministre concerné ; et les revenus des activités diverses de la mutuelle [1][3].",
+   "latency": {
+    "search": 4.989752845000112,
+    "generate": 1.9908393979985703,
+    "total": 6.980592242998682
+   },
+   "gen_cost": 0.00019304999999999998,
+   "judge_cost": 0.000362,
+   "n_citations": 2,
+   "top_score": 10.916682243347168,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the composition of the resources as stated in the reference answer.",
+   "cited_ids": [
+    "law-2016-32:fr:8",
+    "law-2016-32:fr:0"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q033-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تتكون موارد كل تعاونية محدثة بالقانون عدد 32 لسنة 2016 من ما يلي:\n\n1. مبالغ الانخراط المحجوزة مباشرة من مرتبات المنخرطين بعنوان اشتراكات وجوبية، والمبالغ المدفوعة بعنوان اشتراكات الأعوان المتقاعدين.\n2. المنح التي تدفعها الدولة عند الاقتضاء.\n3. المداخيل المتأتية من أملاك التعاونية ومكاسبها.\n4. الهبات والتبرعات بترخيص من الوزير المعني.\n5. مداخيل الأنشطة المختلفة للتعاونية [1][4].",
+   "latency": {
+    "search": 6.6461235450005915,
+    "generate": 1.9755669090009178,
+    "total": 8.62169045400151
+   },
+   "gen_cost": 0.000243,
+   "judge_cost": 0.00041640000000000004,
+   "n_citations": 2,
+   "top_score": 10.661785125732422,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts and numbers stated in the reference answer with additional detail.",
+   "cited_ids": [
+    "law-2016-32:ar:5",
+    "law-2016-32:ar:0"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q034-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les entreprises doivent rendre publics les rapports relatifs aux projets ayant été mis en œuvre et veiller à leur vulgarisation [1].",
+   "latency": {
+    "search": 5.393418137000481,
+    "generate": 0.9559067530008178,
+    "total": 6.349324890001299
+   },
+   "gen_cost": 0.00019575,
+   "judge_cost": 0.00021720000000000002,
+   "n_citations": 1,
+   "top_score": 8.533330917358398,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts: making reports public and ensuring their dissemination.",
+   "cited_ids": [
+    "law-2018-35:fr:5"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q034-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتعين على المؤسسات المعنية وفق الفصل 5 من القانون عدد 35 لسنة 2018 أن تسهر على نشر التقارير المتعلقة بالبرامج التي تم تنفيذها للعموم والتعريف بها [1].",
+   "latency": {
+    "search": 7.135244733999571,
+    "generate": 1.0568874050004524,
+    "total": 8.192132139000023
+   },
+   "gen_cost": 0.00021525,
+   "judge_cost": 0.000246,
+   "n_citations": 1,
+   "top_score": 9.011555671691895,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states that institutions must ensure the publication of reports related to implemented programs, matching the reference.",
+   "cited_ids": [
+    "law-2018-35:ar:5"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q035-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les cadeaux dont la valeur dépasse le seuil mentionné au numéro 1 de l’article 28 de la loi n° 2018-46 sont considérés comme propriété privée de l’Etat [1]. De plus, toute personne soumise aux dispositions de cette loi ayant accepté un cadeau en violation de ces dispositions est punie d’une amende équivalente à la valeur du cadeau reçu, avec prononcé d’une décision de confiscation du cadeau au profit de l’Etat [4].",
+   "latency": {
+    "search": 6.073439985999357,
+    "generate": 1.5034369960012555,
+    "total": 7.576876982000613
+   },
+   "gen_cost": 0.00022425,
+   "judge_cost": 0.00033160000000000004,
+   "n_citations": 2,
+   "top_score": 7.982838153839111,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer correctly states that gifts exceeding the threshold are considered state property, matching the reference answer.",
+   "cited_ids": [
+    "law-2018-46:fr:37",
+    "law-2018-46:fr:44"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q035-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تعتبر الهدايا التي تتجاوز الحد المشار إليه بالعدد 1 من الفصل 28 من القانون عدد 46 لسنة 2018 ملكا خاصا للدولة [2].",
+   "latency": {
+    "search": 6.866363783001361,
+    "generate": 1.1226186439998855,
+    "total": 7.988982427001247
+   },
+   "gen_cost": 0.00023205,
+   "judge_cost": 0.0002504,
+   "n_citations": 1,
+   "top_score": 7.510954856872559,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states that gifts exceeding the limit in Article 28 of Law 46/2018 become state property.",
+   "cited_ids": [
+    "law-2018-46:ar:29"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q036-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Sont considérées comme des missions spéciales dans la loi organique du budget (loi organique n° 2019-15) : \n- l’Assemblée des représentants du peuple, \n- le Conseil supérieur de la magistrature, \n- la Cour constitutionnelle, \n- les Instances juridictionnelles judiciaires, administratives et financières dont les lois organiques prévoient l'autonomie administrative et financière, \n- les instances constitutionnelles indépendantes, \n- les charges de financement, \n- les dépenses imprévues et non réparties [1].",
+   "latency": {
+    "search": 6.736097349999909,
+    "generate": 1.7679005640002288,
+    "total": 8.503997914000138
+   },
+   "gen_cost": 0.00024464999999999996,
+   "judge_cost": 0.00036040000000000003,
+   "n_citations": 1,
+   "top_score": 9.860522270202637,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate lists all key entities matching the reference, including ARP, Conseil supérieur de la magistrature, Cour constitutionnelle, autonomous judicial instances, independent constitutional bodies, financing charges, and unforeseen expenses.",
+   "cited_ids": [
+    "law-2019-15:fr:16"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q036-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تعتبر مهمات خاصة في القانون الأساسي للميزانية (القانون الأساسي عدد 15 لسنة 2019) كل من:\n\n1. مجلس نواب الشعب،\n2. المجلس الأعلى للقضاء،\n3. المحكمة الدستورية،\n4. الهياكل القضائية العدلية والإدارية والمالية التي تنص قوانينها الأساسية على الاستقلالية الإدارية والمالية،\n5. الهيئات الدستورية المستقلة،\n6. نفقات التمويل،\n7. النفقات الطارئة وغير الموزعة.\n\nكما يمكن أن تحتوي المهمات الخاصة على برنامج خصوصي أو أكثر، وتستثنى المهمات الخاصة من أحكام الفقرات الثانية والثالثة والرابعة من الفصل 18 من هذا القانون [1].",
+   "latency": {
+    "search": 6.935473134999484,
+    "generate": 2.587275726000371,
+    "total": 9.522748860999855
+   },
+   "gen_cost": 0.00034859999999999996,
+   "judge_cost": 0.0003464,
+   "n_citations": 1,
+   "top_score": 10.508526802062988,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key entities and details listed in the reference answer.",
+   "cited_ids": [
+    "law-2019-15:ar:13"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q037-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les personnes bénéficiant de protection peuvent élire domicile près du procureur de la République territorialement compétent lorsqu'elles sont appelées à faire des dépositions auprès des officiers de la police judiciaire, du juge d'instruction, ou de toute autre autorité judiciaire, conformément à l'article 52 de la loi n° 2016-61 [1].",
+   "latency": {
+    "search": 6.158287162999841,
+    "generate": 1.3042616100010491,
+    "total": 7.46254877300089
+   },
+   "gen_cost": 0.000204,
+   "judge_cost": 0.0002888,
+   "n_citations": 1,
+   "top_score": 10.595221519470215,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states that protected persons can elect domicile near the territorially competent public prosecutor when called to make statements, matching the reference's key fact.",
+   "cited_ids": [
+    "law-2016-61:fr:65"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q037-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يمكن للأشخاص المشمولين بالحماية تعيين محل مخابرتهم لدى وكيل الجمهورية المختص ترابيا عند دعوتهم للإدلاء بتصريحاتهم لدى مأموري الضابطة العدلية أو لدى قاضي التحقيق أو غيره من الهيئات القضائية [1][2].",
+   "latency": {
+    "search": 7.148755898999298,
+    "generate": 1.45262292499865,
+    "total": 8.601378823997948
+   },
+   "gen_cost": 0.0002286,
+   "judge_cost": 0.0003144,
+   "n_citations": 2,
+   "top_score": 10.563652992248535,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": false,
+   "why": "Candidate answer omits the requirement to record identities and original residences in a secret register.",
+   "cited_ids": [
+    "law-2016-61:ar:53",
+    "law-2016-61:fr:65"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q038-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "L'Instance du développement durable renforce la démocratie participative en mettant en place un ensemble de mécanismes nécessaires, déterminés par son règlement intérieur, qui servent de cadre de concertation et de dialogue avec les associations, les partis politiques, les organisations professionnelles et les représentants des collectivités locales [1]. \n\nElle peut organiser des consultations nationales et des tables rondes publiques ou sectorielles sur des sujets relevant de sa compétence, notamment lors de l'élaboration des politiques publiques, des projets de plans de développement et des stratégies et programmes de développement durable [1]. \n\nAinsi, l'Instance œuvre à impliquer divers acteurs de la société dans le processus décisionnel, favorisant ainsi une participation active et inclusive dans les questions de développement durable et des droits des générations futures [1][2].",
+   "latency": {
+    "search": 5.879075762000866,
+    "generate": 1.9948876050002582,
+    "total": 7.873963367001124
+   },
+   "gen_cost": 0.0002763,
+   "judge_cost": 0.000476,
+   "n_citations": 2,
+   "top_score": 10.405024528503418,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about mechanisms set by the internal regulations, the framework for consultation with associations, parties, professional organizations, and local representatives, as well as the organization of national consultations and round tables.",
+   "cited_ids": [
+    "law-2019-60:fr:3",
+    "law-2019-60:fr:4"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q038-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تدعم هيئة التنمية المستدامة الديمقراطية التشاركية من خلال عدة آليات، حيث تعمل الهيئة على دعم الديمقراطية التشاركية في جميع المسائل المتعلقة بمجال اختصاصها وفقًا للفصل 3 من القانون الأساسي عدد 60 لسنة 2019[1] . \n\nلتحقيق ذلك، تضع الهيئة مجموعة من الآليات الضرورية التي تضبطها في نظامها الداخلي، مما يوفر إطارًا للتشاور والحوار مع الجمعيات والأحزاب والمنظمات المهنية وممثلي الجماعات المحلية[1] . \n\nكما يمكن للهيئة تنظيم استشارات وطنية وحلقات نقاش عامة أو قطاعية حول المواضيع التي تعود لها بالنظر، وخاصة بمناسبة إعداد السياسات العمومية ومشاريع مخططات التنمية واستراتيجيات وبرامج التنمية المستدامة[1] .",
+   "latency": {
+    "search": 6.9699306170005,
+    "generate": 2.246073582000463,
+    "total": 9.216004199000963
+   },
+   "gen_cost": 0.00028604999999999993,
+   "judge_cost": 0.00039400000000000004,
+   "n_citations": 1,
+   "top_score": 10.614679336547852,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about mechanisms, internal regulations, consultation framework, and organizing national consultations and discussion forums.",
+   "cited_ids": [
+    "law-2019-60:ar:2"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q039-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La mission des établissements publics créés au sein de la catégorie définie par la loi n° 2018-54 consiste dans la réalisation des travaux de sondages hydrauliques et forage de puits profonds [1] . À cet effet, ils sont chargés notamment de : \n\n- entreprendre les travaux de sondages hydrauliques et forage de puits profonds pour le compte des instances publiques et privées,\n- intervenir sur les puits vétustes et en panne pour le compte des instances publiques et privées,\n- creuser des puits dans les zones éloignées et difficilement accessibles,\n- intervenir dans le domaine de sondages hydrauliques en tant que dispositif d'ajustement des prix,\n- entreprendre des tests techniques et des études et fournir des différents services afférents au domaine de sondages hydrauliques [1].",
+   "latency": {
+    "search": 5.681359699001405,
+    "generate": 2.1325432140001794,
+    "total": 7.813902913001584
+   },
+   "gen_cost": 0.00023789999999999998,
+   "judge_cost": 0.0004136,
+   "n_citations": 1,
+   "top_score": 10.90058422088623,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the missions: hydraulic surveys, deep well drilling, intervention on old wells, and drilling in remote areas.",
+   "cited_ids": [
+    "law-2018-54:fr:2"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q039-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تتمثل مهام المؤسسات العمومية المحدثة ضمن هذا الصنف في إنجاز أشغال التنقيب عن المياه وحفر الآبار العميقة، وهي مكلفة بالخصوص بـ: القيام بأشغال التنقيب وحفر الآبار العميقة لحساب الهيئات العمومية والخاصة، التدخل في الآبار القديمة والمعطلة لحساب الهيئات العمومية والخاصة، حفر الآبار بالمناطق النائية وذات المسالك الصعبة، التدخل في ميدان التنقيب عن المياه كجهاز لتعديل الأسعار، والقيام بالاختبارات الفنية والدراسات وإسداء الخدمات المختلفة المتصلة بميدان التنقيب عن المياه [1].",
+   "latency": {
+    "search": 6.123642078999183,
+    "generate": 2.0682065049986704,
+    "total": 8.191848583997853
+   },
+   "gen_cost": 0.00022605,
+   "judge_cost": 0.0003408,
+   "n_citations": 1,
+   "top_score": 10.930545806884766,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key tasks mentioned in the reference, with additional relevant details.",
+   "cited_ids": [
+    "law-2018-54:ar:1"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q040-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les dispositions de la loi n° 2025-5 prennent effet à compter du 19 avril 2024 [1].",
+   "latency": {
+    "search": 5.738752690000183,
+    "generate": 0.9044632009990892,
+    "total": 6.643215890999272
+   },
+   "gen_cost": 0.0001419,
+   "judge_cost": 0.0002484,
+   "n_citations": 1,
+   "top_score": 10.307554244995117,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same effective date as the reference answer.",
+   "cited_ids": [
+    "law-2025-5:fr:3"
+   ],
+   "faithful": false,
+   "unsupported": [
+    "Les dispositions de la loi n° 2025-5 prennent effet à compter du 19 avril 2024"
+   ]
+  },
+  {
+   "id": "q040-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يجري العمل بأحكام القانون عدد 5 لسنة 2025 ابتداء من 19 أفريل 2024 [1].",
+   "latency": {
+    "search": 6.398556968999401,
+    "generate": 1.0189337100000557,
+    "total": 7.417490678999457
+   },
+   "gen_cost": 0.00016815,
+   "judge_cost": 0.00024440000000000003,
+   "n_citations": 1,
+   "top_score": 10.88463306427002,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the correct date 19 أفريل 2024 as in the reference.",
+   "cited_ids": [
+    "law-2025-5:ar:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q041-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "En cas de décès du Président de la République, son conjoint survivant et ses enfants bénéficient des pensions des veuves et des orphelins, qui sont calculées sur la base de la rente viagère octroyée au Président après cessation de ses fonctions, selon les taux et les conditions mentionnés par la réglementation relative aux pensions civiles et militaires de retraite et des survivants dans le secteur public [1]. De plus, ils conservent le bénéfice des avantages des prestations sanitaires prévues par l'article premier de la loi n° 2015-38 [1].",
+   "latency": {
+    "search": 6.683399446999829,
+    "generate": 1.7125486329987325,
+    "total": 8.395948079998561
+   },
+   "gen_cost": 0.0002835,
+   "judge_cost": 0.0003148,
+   "n_citations": 1,
+   "top_score": 10.509635925292969,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about pensions and healthcare benefits as stated in the reference.",
+   "cited_ids": [
+    "law-2015-38:fr:4"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q041-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "ينتفع القرين الباقي على قيد الحياة والأبناء عند وفاة رئيس الجمهورية بجرايات الأرامل والأيتام، حيث تُحتسب هذه الجرايات على أساس الجراية العمرية المخولة لرئيس الجمهورية المنتهية مهامه ووفق النسب والشروط المنصوص عليها بالتشريع المتعلق بنظام الجرايات المدنية والعسكرية للتقاعد وللباقين على قيد الحياة في القطاع العمومي [1][2]. كما يواصلون الانتفاع بالعناية الصحية المشار إليها بالفصل الأول من هذا القانون [1][2].",
+   "latency": {
+    "search": 7.110445140999218,
+    "generate": 1.799319828998705,
+    "total": 8.909764969997923
+   },
+   "gen_cost": 0.00026430000000000003,
+   "judge_cost": 0.00037600000000000003,
+   "n_citations": 2,
+   "top_score": 10.877625465393066,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about pensions based on the former president's retirement pension and continuation of healthcare benefits.",
+   "cited_ids": [
+    "law-2015-38:ar:2",
+    "law-2015-38:fr:4"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q042-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les candidats au recrutement direct d'un individu par famille de chômeurs sont classés par ordre de mérite selon les critères suivants : l'âge du diplômé et l'année de l'obtention du diplôme [1][2][3].",
+   "latency": {
+    "search": 6.547191887000736,
+    "generate": 1.3388931219997176,
+    "total": 7.886085009000453
+   },
+   "gen_cost": 0.00017835,
+   "judge_cost": 0.0004580000000000001,
+   "n_citations": 3,
+   "top_score": 9.797781944274902,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts as the reference answer regarding the criteria for ranking candidates.",
+   "cited_ids": [
+    "law-2020-38:fr:3",
+    "law-2020-38:fr:1",
+    "law-2020-38:fr:2"
+   ],
+   "faithful": false,
+   "unsupported": [
+    "Les candidats au recrutement direct d'un individu par famille de chômeurs sont classés par ordre de mérite selon les critères suivants : l'âge du diplômé et l'année de l'obtention du diplôme"
+   ]
+  },
+  {
+   "id": "q042-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتم ترتيب المترشحين للانتداب المباشر لفرد من كل عائلة عاطلة عن العمل وفق مقياسي سن المتخرج وسنة التخرج، كما هو منصوص عليه في الفصل 3 من قانون عدد 38 لسنة 2020 [1][2].",
+   "latency": {
+    "search": 7.150304815999334,
+    "generate": 1.2460571430001437,
+    "total": 8.396361958999478
+   },
+   "gen_cost": 0.0001902,
+   "judge_cost": 0.000326,
+   "n_citations": 2,
+   "top_score": 10.40462875366211,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer states the same key facts about the two criteria and references the correct law.",
+   "cited_ids": [
+    "law-2020-38:ar:2",
+    "law-2020-38:fr:3"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q043-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Selon la loi organique n° 2015-26, les victimes du terrorisme bénéficient de la gratuité des soins et des traitements dans les établissements publics de santé [1]. La Commission nationale de lutte contre le terrorisme veille à fournir aux victimes l’assistance médicale nécessaire pour garantir leur réhabilitation physique et psychologique, en coordination avec les services et structures concernés [1]. De plus, la commission s'assure de fournir l’assistance sociale nécessaire pour faciliter leur réinsertion sociale, en tenant compte de l’âge, du sexe et des besoins spécifiques des victimes [1].",
+   "latency": {
+    "search": 5.5277024200004234,
+    "generate": 2.050072537000233,
+    "total": 7.577774957000656
+   },
+   "gen_cost": 0.00021480000000000002,
+   "judge_cost": 0.00032720000000000004,
+   "n_citations": 1,
+   "top_score": 9.288139343261719,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes the key facts of free care in public health establishments and medical and social assistance by the National Commission against Terrorism.",
+   "cited_ids": [
+    "law-2015-26:fr:113"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q043-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يتمتع ضحايا الإرهاب وفق القانون الأساسي عدد 26 لسنة 2015 بمجانية العلاج والتداوي في الهياكل الصحية العمومية، حيث تضمن اللجنة الوطنية لمكافحة الإرهاب بالتنسيق مع المصالح والهياكل المعنية توفير المساعدة الطبية اللازمة لضمان التعافي الجسدي والنفساني للضحايا الذين هم في حاجة إلى ذلك [1][2]. كما تضمن اللجنة بالتنسيق مع المصالح والهياكل المعنية توفير المساعدة الاجتماعية الضرورية للضحايا لتيسير إعادة إدماجهم في الحياة الاجتماعية، مع مراعاة سن الضحايا وجنسهم وحاجياتهم الخاصة [1].",
+   "latency": {
+    "search": 6.934624977999192,
+    "generate": 2.2151393860003736,
+    "total": 9.149764363999566
+   },
+   "gen_cost": 0.00032145,
+   "judge_cost": 0.0005028000000000001,
+   "n_citations": 2,
+   "top_score": 9.207982063293457,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about free treatment in public health structures and the National Committee's role in providing medical and social assistance.",
+   "cited_ids": [
+    "law-2015-26:ar:72",
+    "law-2015-26:ar:31"
+   ],
+   "faithful": false,
+   "unsupported": [
+    "وفق القانون الأساسي عدد 26 لسنة 2015"
+   ]
+  },
+  {
+   "id": "q044-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Lorsque les propriétaires n'ont pas exécuté la décision d'évacuation après le délai de trois mois, la commune intéressée se substitue obligatoirement à leur place pour évacuer le bâtiment, et ce, à leurs frais [1] . De plus, si les propriétaires ne peuvent évacuer et démolir le bâtiment, ils doivent informer la commune dans le même délai de trois mois pour solliciter l’aide de la force publique [2] . En cas de non-respect de la décision de démolition, la commune est également tenue de les substituer pour démolir l’immeuble, enlever les gravats et indemniser les occupants, toujours à leurs frais [3] . Enfin, tout propriétaire ou occupant qui ne se conforme pas à la décision d’évacuation ou de démolition est passible d'une amende de dix mille (10.000) dinars [5] .",
+   "latency": {
+    "search": 6.072317567999562,
+    "generate": 2.6517084860006435,
+    "total": 8.724026054000205
+   },
+   "gen_cost": 0.00025979999999999997,
+   "judge_cost": 0.0005816,
+   "n_citations": 4,
+   "top_score": 8.725525856018066,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.25,
+   "correct": true,
+   "why": "The candidate answer correctly states that the commune substitutes the owners to evacuate the building at their expense after three months, matching the reference answer's key facts.",
+   "cited_ids": [
+    "law-2024-33:fr:18",
+    "law-2024-33:fr:16",
+    "law-2024-33:fr:20",
+    "law-2024-33:fr:42"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q044-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "إذا لم ينفذ المالكون قرار الإخلاء بعد انقضاء أجل الثلاثة أشهر، تتولى البلدية المعنية وجوبا الحلول محلهم للقيام بإخلاء البناية وعلى نفقتهم، وذلك وفقاً للفصل 15 من القانون عدد 33 لسنة 2024 [1][5].",
+   "latency": {
+    "search": 6.87140227600139,
+    "generate": 1.3201393089984776,
+    "total": 8.191541584999868
+   },
+   "gen_cost": 0.00022004999999999998,
+   "judge_cost": 0.0003144,
+   "n_citations": 2,
+   "top_score": 7.969612121582031,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the municipality's mandatory intervention after the three-month period, matching the reference answer.",
+   "cited_ids": [
+    "law-2024-33:ar:14",
+    "law-2024-33:fr:18"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q045-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Les contrôles antidopage ne doivent pas être notifiés au sportif à l'avance, sauf en cas de circonstances exceptionnelles et justifiées, conformément au standard international pour les contrôles et les enquêtes en vigueur [1].",
+   "latency": {
+    "search": 5.789675493999312,
+    "generate": 1.0690641119999782,
+    "total": 6.85873960599929
+   },
+   "gen_cost": 0.0002205,
+   "judge_cost": 0.000272,
+   "n_citations": 1,
+   "top_score": 7.467783451080322,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer correctly states that doping controls are not notified in advance except for exceptional and justified circumstances, matching the reference.",
+   "cited_ids": [
+    "law-2024-11:fr:23"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q045-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "لا، لا يجب إعلام الرياضي مسبقا بعمليات مراقبة المنشطات، إلا في حالات استثنائية ومبررة طبقا للمعيار الدولي للمراقبة والتحري ساري المفعول [1].",
+   "latency": {
+    "search": 6.687455647999741,
+    "generate": 1.407294347000061,
+    "total": 8.094749994999802
+   },
+   "gen_cost": 0.0002565,
+   "judge_cost": 0.0002712,
+   "n_citations": 1,
+   "top_score": 9.878277778625488,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "Both answers state that doping controls are conducted without prior notice except in justified exceptional cases.",
+   "cited_ids": [
+    "law-2024-11:ar:18"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q046-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "L'État doit éliminer toutes les pratiques discriminatoires à l'égard des femmes, notamment au niveau de la rémunération et de la couverture sociale dans les différents secteurs, ainsi qu'interdire l'exploitation économique de la femme et l'employer dans des conditions de travail pénibles, dégradantes ou préjudiciables à sa santé, à sa sécurité et à sa dignité [1].",
+   "latency": {
+    "search": 5.749527583999225,
+    "generate": 1.4280103370001598,
+    "total": 7.177537920999384
+   },
+   "gen_cost": 0.00017790000000000001,
+   "judge_cost": 0.00028440000000000003,
+   "n_citations": 1,
+   "top_score": 10.724724769592285,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about eliminating discriminatory practices in remuneration, social coverage, economic exploitation, and harmful working conditions.",
+   "cited_ids": [
+    "law-2017-58:fr:9"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q046-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يجب على الدولة القضاء على كل الممارسات التمييزية ضد المرأة، خاصة على مستوى الأجر والتغطية الاجتماعية في جميع القطاعات، ومنع الاستغلال الاقتصادي للمرأة، وتشغيلها في ظروف قاسية أو مهينة أو مضرة بصحتها وسلامتها وكرامتها [1][2].",
+   "latency": {
+    "search": 7.053080181000041,
+    "generate": 1.3411678060001577,
+    "total": 8.394247987000199
+   },
+   "gen_cost": 0.00020489999999999997,
+   "judge_cost": 0.0002972,
+   "n_citations": 2,
+   "top_score": 10.334508895874023,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about discriminatory practices against women as stated in the reference.",
+   "cited_ids": [
+    "law-2017-58:ar:7",
+    "law-2017-58:fr:9"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q047-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Un dépôt d'investissement au sens de la loi n° 2016-48 est défini comme les montants logés par leurs titulaires dans un compte auprès d'une banque, par quelque moyen de paiement que ce soit, en vertu d'un contrat de « Moudaraba » ou « Wakala », en vue de les utiliser dans des investissements en actifs sur une période déterminée, avec ou sans restriction [1]. La banque ne garantit aucune perte de l'investissement, sauf en cas de négligence ou de manquement aux conditions contractuelles, dûment établis [1].",
+   "latency": {
+    "search": 5.581413677000455,
+    "generate": 1.7969337640006415,
+    "total": 7.378347441001097
+   },
+   "gen_cost": 0.00024164999999999996,
+   "judge_cost": 0.000362,
+   "n_citations": 1,
+   "top_score": 10.533872604370117,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the deposit being under Moudaraba or Wakala contracts, invested over a determined period, and the bank not guaranteeing losses except in cases of negligence or proven fault.",
+   "cited_ids": [
+    "law-2016-48:fr:18"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q047-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تعتبر الودائع الاستثمارية على معنى القانون عدد 48 لسنة 2016 المبالغ التي يضعها أصحابها بأية وسيلة من وسائل الدفع في حساب لدى بنك بمقتضى عقد مضاربة أو وكالة لاستثمارها لمدة محددة وبصفة مقيدة أو مطلقة في أصول [1] ولا يضمن البنك أية خسارة للاستثمار ما لم يَثبُت تقصيره أو مخالفته للشروط التعاقدية [1].",
+   "latency": {
+    "search": 6.501784361000318,
+    "generate": 1.4991823119999026,
+    "total": 8.000966673000221
+   },
+   "gen_cost": 0.00020625,
+   "judge_cost": 0.00031480000000000006,
+   "n_citations": 1,
+   "top_score": 10.750505447387695,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the definition, contract types, investment duration, and bank liability as stated in the reference.",
+   "cited_ids": [
+    "law-2016-48:ar:14"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q048-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "Le conseil de la concurrence apprécie si le projet de concentration économique ou l’opération de concentration économique apporte au progrès technique ou économique une contribution suffisante pour compenser les atteintes à la concurrence [1] . Il doit également prendre en considération la nécessité de la consolidation ou de la préservation de la compétitivité des entreprises nationales face à la concurrence internationale [1] .",
+   "latency": {
+    "search": 5.513475843999913,
+    "generate": 1.756551362999744,
+    "total": 7.270027206999657
+   },
+   "gen_cost": 0.00021989999999999998,
+   "judge_cost": 0.0002856,
+   "n_citations": 1,
+   "top_score": 10.904397010803223,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the contribution to technical or economic progress and the consideration of national companies' competitiveness against international competition.",
+   "cited_ids": [
+    "law-2015-36:fr:16"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q048-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "ينظر مجلس المنافسة في مدى مساهمة مشروع التركيز الاقتصادي أو عملية التركيز الاقتصادي في التقدم التقني أو الاقتصادي، وذلك لضمان التعويض الكافي عن الإخلال بالمنافسة [1] . كما يجب أن يأخذ المجلس في تقييمه بعين الاعتبار ضرورة تعزيز أو الحفاظ على القدرة التنافسية للمؤسسات الوطنية إزاء المنافسة الدولية [1] . في حالة عدم الموافقة على عملية التركيز، يمكن للوزير سحب الموافقة إذا خالفت المؤسسة المعنية أي من الشروط والتعهدات التي صدرت الموافقة بموجبها، أو إذا تبين أن المعلومات التي صدرت بموجبها الموافقة مضللة [1] .",
+   "latency": {
+    "search": 6.254581516999679,
+    "generate": 1.9326227479996305,
+    "total": 8.187204264999309
+   },
+   "gen_cost": 0.00030225,
+   "judge_cost": 0.0003784,
+   "n_citations": 1,
+   "top_score": 10.70661449432373,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts about the council's consideration of technical/economic progress and competitiveness of national firms, matching the reference.",
+   "cited_ids": [
+    "law-2015-36:ar:11"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q049-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "L'huissier de justice est radié du tableau par décision du ministre de la justice dans les cas suivants : suite à la démission conformément aux dispositions de l’article précédent, en raison de l'incapacité physique totale sur la base d'un dossier transmis par l'Ordre national des huissiers de justice, en cas de décès, ou en vertu d'une sanction disciplinaire [1].",
+   "latency": {
+    "search": 5.97179870599939,
+    "generate": 1.5028731679994962,
+    "total": 7.474671873998886
+   },
+   "gen_cost": 0.00021554999999999998,
+   "judge_cost": 0.0002852,
+   "n_citations": 1,
+   "top_score": 10.812682151794434,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts: resignation, total physical incapacity, death, disciplinary sanction, and decision by the Minister of Justice.",
+   "cited_ids": [
+    "law-2018-9:fr:17"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q049-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "يقع الشطب على العدل المنفذ من الجدول بقرار من وزير العدل في الحالات التالية: \n\n1. بموجب الاستقالة طبق أحكام الفصل المتقدم.\n2. العجز البدني التام بناء على ملف تحيله الهيئة الوطنية للعدول المنفذين.\n3. الوفاة.\n4. بموجب عقوبة تأديبية [1].",
+   "latency": {
+    "search": 6.869132368999999,
+    "generate": 1.6229141900003015,
+    "total": 8.4920465590003
+   },
+   "gen_cost": 0.00021524999999999997,
+   "judge_cost": 0.00025560000000000003,
+   "n_citations": 1,
+   "top_score": 10.91784381866455,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes all key facts and authorities as in the reference answer.",
+   "cited_ids": [
+    "law-2018-9:ar:13"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q050-fr",
+   "lang": "fr",
+   "answerable": true,
+   "abstained": false,
+   "answer": "La société prend en charge les montants des pensions de retraite ainsi que les contributions relatives à la bonification durant la période entre la date de mise à la retraite conformément aux dispositions de la loi n° 2014-48 et la date d'atteinte de l'âge légal de retraite [1]. Ces montants sont déduits de l'assiette de l'impôt sur les sociétés de l'année au titre de laquelle ils ont été payés à la caisse nationale de la retraite et de prévoyance sociale [1].",
+   "latency": {
+    "search": 5.248149308999928,
+    "generate": 1.714382726000622,
+    "total": 6.9625320350005495
+   },
+   "gen_cost": 0.00019245,
+   "judge_cost": 0.000308,
+   "n_citations": 1,
+   "top_score": 9.40487289428711,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 1.0,
+   "correct": true,
+   "why": "The candidate answer includes the same key facts about the company bearing the costs and the tax deduction as stated in the reference.",
+   "cited_ids": [
+    "law-2014-48:fr:5"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "q050-ar",
+   "lang": "ar",
+   "answerable": true,
+   "abstained": false,
+   "answer": "تتكفل الشركة بمبالغ الجرايات والمساهمات المتعلقة بمدة التنفيل طيلة المدة الفاصلة بين تاريخ الإحالة على التقاعد وتاريخ بلوغ السن القانونية للإحالة على التقاعد، وتطرح هذه المبالغ من قاعدة الضريبة على الشركات في سنة دفعها للصندوق الوطني للتقاعد والحيطة الاجتماعية [1][2].",
+   "latency": {
+    "search": 6.705112921999898,
+    "generate": 1.5888220329998148,
+    "total": 8.293934954999713
+   },
+   "gen_cost": 0.0001914,
+   "judge_cost": 0.0003256,
+   "n_citations": 2,
+   "top_score": 8.8466157913208,
+   "gold_retrieved": true,
+   "gold_cited": true,
+   "citation_precision": 0.5,
+   "correct": true,
+   "why": "The candidate answer correctly states that the company bears the amounts and deducts them from corporate tax base, matching the reference answer's key facts.",
+   "cited_ids": [
+    "law-2014-48:ar:8",
+    "law-2014-47:ar:20"
+   ],
+   "faithful": true,
+   "unsupported": []
+  },
+  {
+   "id": "u001-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": false,
+   "answer": "Le salaire minimum interprofessionnel garanti dans les secteurs non agricoles régis par le code du travail sera appliqué dans le calcul des pensions mensuelles accordées par l’Etablissement Fidaa à compter du 1er janvier 2026, mais le montant exact du SMIG pour 2025 n'est pas spécifié dans les sources fournies [1]. Je ne sais pas.",
+   "latency": {
+    "search": 6.825715424000009,
+    "generate": 1.6737067140002182,
+    "total": 8.499422138000227
+   },
+   "gen_cost": 0.00025005000000000003,
+   "judge_cost": 0.0,
+   "n_citations": 1,
+   "top_score": 5.256277561187744,
+   "correct": false
+  },
+  {
+   "id": "u001-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas.",
+   "latency": {
+    "search": 6.756464701000368,
+    "generate": 0.8049966229991696,
+    "total": 7.561461323999538
+   },
+   "gen_cost": 0.0002793,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 5.170132160186768,
+   "correct": true
+  },
+  {
+   "id": "u002-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.97506052999961,
+    "generate": 0.0,
+    "total": 6.97506052999961
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -3.444457769393921,
+   "correct": true
+  },
+  {
+   "id": "u002-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 6.898594502999913,
+    "generate": 0.0,
+    "total": 6.898594502999913
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -4.0428924560546875,
+   "correct": true
+  },
+  {
+   "id": "u003-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.048077030000059,
+    "generate": 0.0,
+    "total": 6.048077030000059
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -1.5007824897766113,
+   "correct": true
+  },
+  {
+   "id": "u003-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.116994022999279,
+    "generate": 0.72708248500021,
+    "total": 7.844076507999489
+   },
+   "gen_cost": 0.00022544999999999998,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 3.255964994430542,
+   "correct": true
+  },
+  {
+   "id": "u004-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 5.845355882000149,
+    "generate": 0.0,
+    "total": 5.845355882000149
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -0.6517218351364136,
+   "correct": true
+  },
+  {
+   "id": "u004-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.209079801999906,
+    "generate": 0.0,
+    "total": 7.209079801999906
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 0.0511636808514595,
+   "correct": true
+  },
+  {
+   "id": "u005-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 5.769750034000026,
+    "generate": 0.0,
+    "total": 5.769750034000026
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -0.6675277948379517,
+   "correct": true
+  },
+  {
+   "id": "u005-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 6.9158587219990295,
+    "generate": 0.0,
+    "total": 6.9158587219990295
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -1.630327582359314,
+   "correct": true
+  },
+  {
+   "id": "u006-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.617335151999214,
+    "generate": 0.0,
+    "total": 6.617335151999214
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -4.350790977478027,
+   "correct": true
+  },
+  {
+   "id": "u006-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.9646145070000784,
+    "generate": 0.0,
+    "total": 7.9646145070000784
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -4.592846870422363,
+   "correct": true
+  },
+  {
+   "id": "u007-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.992285049000202,
+    "generate": 0.0,
+    "total": 6.992285049000202
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -0.7663321495056152,
+   "correct": true
+  },
+  {
+   "id": "u007-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.875204898999073,
+    "generate": 0.0,
+    "total": 7.875204898999073
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -2.3701364994049072,
+   "correct": true
+  },
+  {
+   "id": "u008-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 7.653439858999263,
+    "generate": 0.0,
+    "total": 7.653439858999263
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 1.122936725616455,
+   "correct": true
+  },
+  {
+   "id": "u008-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.43396961200051,
+    "generate": 0.0,
+    "total": 7.43396961200051
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 1.4433300495147705,
+   "correct": true
+  },
+  {
+   "id": "u009-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 8.08776809900155,
+    "generate": 0.0,
+    "total": 8.08776809900155
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -5.0076727867126465,
+   "correct": true
+  },
+  {
+   "id": "u009-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.522767648999434,
+    "generate": 0.0,
+    "total": 7.522767648999434
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -5.041433334350586,
+   "correct": true
+  },
+  {
+   "id": "u010-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.5504649489994335,
+    "generate": 0.0,
+    "total": 6.5504649489994335
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -1.623984694480896,
+   "correct": true
+  },
+  {
+   "id": "u010-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.92683941299947,
+    "generate": 0.0,
+    "total": 7.92683941299947
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 0.554024338722229,
+   "correct": true
+  },
+  {
+   "id": "u011-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.722756067998489,
+    "generate": 0.0,
+    "total": 6.722756067998489
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -2.629755973815918,
+   "correct": true
+  },
+  {
+   "id": "u011-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 6.95304441999906,
+    "generate": 0.0,
+    "total": 6.95304441999906
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -0.554257333278656,
+   "correct": true
+  },
+  {
+   "id": "u012-fr",
+   "lang": "fr",
+   "answerable": false,
+   "abstained": true,
+   "answer": "Je ne sais pas",
+   "latency": {
+    "search": 6.253552976000719,
+    "generate": 0.0,
+    "total": 6.253552976000719
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": 1.9222759008407593,
+   "correct": true
+  },
+  {
+   "id": "u012-ar",
+   "lang": "ar",
+   "answerable": false,
+   "abstained": true,
+   "answer": "لا أعرف",
+   "latency": {
+    "search": 7.014281460000348,
+    "generate": 0.0,
+    "total": 7.014281460000348
+   },
+   "gen_cost": 0.0,
+   "judge_cost": 0.0,
+   "n_citations": 0,
+   "top_score": -1.1385310888290405,
+   "correct": true
+  }
+ ],
+ "by_lang": {
+  "ar": {
+   "n": 62,
+   "n_answerable": 50,
+   "n_unanswerable": 12,
+   "correctness": 0.96,
+   "faithfulness": 0.98,
+   "citation_hit": 1.0,
+   "citation_precision": 0.91,
+   "retrieval_hit": 1.0,
+   "abstain_when_unanswerable": 1.0,
+   "over_abstention": 0.0,
+   "latency_p50_s": 8.224687298499703,
+   "latency_p95_s": 9.216004199000963,
+   "cost_per_request_usd": 0.0001984524193548387,
+   "judge_cost_total_usd": 0.0163476
+  },
+  "fr": {
+   "n": 62,
+   "n_answerable": 50,
+   "n_unanswerable": 12,
+   "correctness": 0.94,
+   "faithfulness": 0.94,
+   "citation_hit": 0.98,
+   "citation_precision": 0.905,
+   "retrieval_hit": 1.0,
+   "abstain_when_unanswerable": 0.9166666666666666,
+   "over_abstention": 0.0,
+   "latency_p50_s": 7.495763423500193,
+   "latency_p95_s": 8.499422138000227,
+   "cost_per_request_usd": 0.0001754540322580645,
+   "judge_cost_total_usd": 0.016212
+  }
+ }
+}

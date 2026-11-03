@@ -1,7 +1,7 @@
 # Postmortem
 
-What went wrong in Project 2, what it cost, and what we would do differently. Written 3 Nov 2026; the
-section on generation failures is empty until the baseline run is in.
+What went wrong in Project 2, what it cost, and what we would do differently. Written 3 Nov 2026, with the generation
+results of the baseline and of the tuned run.
 
 ## 1. The corpus took longer than the code
 
@@ -79,11 +79,34 @@ machine and nothing else runs during them.
 - A French question was abstained from in Arabic (the "I don't know" phrase was fixed). Found by testing in both languages.
 - The container build of the service is untested because the development machine has no Docker.
 
-## 9. Generation failures **[TO FILL after the baseline run]**
+## 9. Generation failures
 
-To be completed from `results/generation_baseline.json`: the questions the judge marked wrong, whether they
-are retrieval misses, prompt problems or judge errors, how many unanswerable questions were answered anyway, how
-many answerable ones were refused, and whether the failures are concentrated in Arabic or French.
+From the baseline (`results/generation_baseline.json`) and the tuned run re-judged after fixing the judge
+(`results/generation_tuned_judgefix.json`).
+
+- **The metric was wrong before the system was.** Faithfulness read 83-85%, which looked like a real problem,
+  and many "unsupported claims" were the whole answer copied word for word from its source. The cause was in our
+  judge: it showed the cited sources as `[1]..[k]` while the answer cites their original positions
+  (`[3][4]`). After the fix faithfulness is **96%**. We would have spent the optimisation time on a defect that
+  did not exist. We found it only by reading the flagged rows.
+- **Wrong answers were mostly incomplete answers.** 11 of the 13 baseline errors dropped one fact the reference
+  had (a doubled fine, a breakdown of figures, where identities are recorded). Asking the model for complete
+  answers took correctness from 87% to 95-96%, with one new side effect: an answer that adds conditions from
+  another law (1 case) and lower citation precision (96% to 91%).
+- **Answers in the wrong language.** Three French questions were answered in Arabic, including 9 of 12 French
+  refusals ("لا أعرف" to a French question). A prompt rule fixed most of it; one Arabic question was still
+  refused in French, so the refusal phrase is now chosen in code from the question's language.
+- **One answer built on the wrong chunk.** For a French question on how senior posts are filled, the gold
+  article was among the 5 retrieved chunks but the answer used another one ("by government decree" instead of
+  "by order of the head of government"). Retrieval was right; generation picked the wrong source. It is the only
+  answer both wrong and unfaithful.
+- **A question the corpus cannot answer was answered.** The petrol price came back as fuel duties from a
+  finance law (5 millimes per litre, 41.382 dinars per hectolitre) presented as the price; the refusal threshold (2.0) fixed it. The minimum-wage question was answered
+  with "the amount is not specified in the sources" while citing a pension law: a refusal in substance that our
+  strict metric counts as an answer. The threshold was tuned on the same questions it is scored on, so the 23 of 24 is
+  optimistic until it is checked on the paraphrased set.
+- **No over-refusal on this set** (0 of 100 answerable questions refused), but that set reuses the laws' own
+  wording; whether 2.0 refuses real answers on paraphrased questions is not known.
 
 ## 10. What we would do differently
 
@@ -93,3 +116,4 @@ many answerable ones were refused, and whether the failures are concentrated in 
 4. Merge the Arabic and French versions of each law into one record (with the law number as key) so a question in one
    language can use the other.
 5. Keep latency measurements on a single idle machine and write down what else is running.
+6. When a metric looks bad, read the failing rows before changing the system: our worst number was a bug in the judge.

@@ -2,7 +2,7 @@
 
 CS496 AI Engineering, Fall 2026. A retrieval-augmented question answering service over Tunisian laws,
 in Arabic and French, with citations. Draft of 3 Nov 2026. Sections marked **[TO FILL]** depend on runs that
-are not done yet; nothing in them is estimated.
+are not done yet (Week 8, user feedback); nothing in them is estimated.
 
 ## 1. The corpus and its users
 
@@ -36,7 +36,7 @@ is the honest test. All were written by reading the French and Arabic articles s
 | Fusion | Reciprocal rank fusion (k=60) of the two top-30 lists | No score calibration needed |
 | Reranking | Cross-encoder `mmarco-mMiniLMv2` on the top 30 | Largest single accuracy gain, and the largest cost in time |
 | Generation | `gpt-4o-mini`, temperature 0, answers only from the 5 numbered chunks, a citation `[n]` after every claim, reply in the question's language, "I don't know" otherwise | Faithfulness over fluency |
-| Abstention | The model's instruction plus an optional reranker-score threshold (**[TO FILL]**: tuned value) | |
+| Abstention | The model's instruction, plus refusal when the best reranker score is below **2.0** | The threshold separates the answerable questions (lowest top score 2.99) from the two unanswerable ones the baseline answered (1.12 and 1.44). It was tuned on the same 124 questions it is scored on, so treat it as optimistic |
 
 ## 3. Retrieval results and the ablation
 
@@ -70,22 +70,51 @@ what is deployed: it builds in 3 minutes instead of an hour and the service need
 **Latency.** BM25 66 ms, vector 150 ms (e5, local) to 330 ms (OpenAI, one API call), hybrid 160-490 ms, and
 **hybrid + reranker 7-9 s per query** on this 8-core CPU, which dominates the whole request (section 5).
 
-## 4. Generation results **[TO FILL: generation eval, not run yet]**
+## 4. Generation results
 
-`eval/generation_eval.py` computes, for the 124 questions: answer correctness (LLM judge against the reference
-answer; judge `gpt-4.1-mini`), faithfulness (every claim supported by a cited chunk), citation accuracy (cited
-chunk is the gold article), abstention on the 24 unanswerable questions, and over-abstention. It is written and
-unit-tested but its first real run is still to do. A table of these numbers, by language, goes here, with a few
-judged failures.
+124 questions (100 answerable, 24 not), generator `gpt-4o-mini`, judge `gpt-4.1-mini`, same pipeline as section 3
+(hybrid + reranker, 5 chunks, OpenAI-embedding index). Correctness is judged against the reference answer,
+faithfulness against the chunks the answer cites, and "cited" means the gold article is among them.
 
-Smoke test of the deployed pipeline (5 questions, not a measurement): both off-topic questions (minimum wage,
-capital of France) were refused; legal questions were answered with the right article cited, at a cost of
-about $0.0002 and 7.5-8.8 s per request.
+| | baseline | + prompt fix, threshold 2.0 | same run, faithfulness judge fixed |
+|---|---|---|---|
+| Answer correctness | 87% | 96% | 95% |
+| Faithfulness (claims supported by the cited chunks) | 85% * | 83% * | **96%** |
+| Gold article cited | 99% | 99% | 99% |
+| Citation precision (cited chunks that are gold) | 96% | 91% | 91% |
+| Unanswerable questions refused | 22 of 24 | 23 of 24 | 23 of 24 |
+| Answerable questions refused wrongly | 0 | 0 | 0 |
+| Latency p50 / p95 | 4.9 s / 5.8 s | 4.9 s / 6.1 s | not comparable (other machine) |
+| Cost per request | $0.00021 | $0.00019 | $0.00019 |
+
+\* measured with a faithfulness judge that numbered the sources 1..k while the answer cites their original
+positions (`[3][4]`), so answers were checked against the wrong chunks. After the fix, faithfulness is 96%
+(Arabic 98%, French 94%); correctness by language is 96% (Arabic) and 94% (French).
+
+**What the baseline failures were, and what fixed them.** Of the 13 wrong answers in the baseline, 11 were
+incomplete, not false: the answer gave the main fact and dropped the doubled fine in case of repeat offence, the
+breakdown into expenses and surplus, or the register where identities are recorded. Three French questions were
+answered in Arabic, including 9 of 12 French refusals. One prompt change (give the complete answer; answer in the
+question's language even when the sources are in the other) and a refusal threshold took correctness to
+95-96%. The unanswerable questions the baseline answered were the petrol price, in both languages: it quoted fuel duties
+(5 millimes per litre, 41.382 dinars per hectolitre) as if they were the price.
+
+**What still fails** (5 of 100 answerable questions wrong; the run-to-run difference of one point is noise):
+three omissions (two budget figures without their breakdown, one register detail); one over-inclusion (extra
+conditions from another law, a side effect of asking for complete answers); and one real error, a French question
+on how civil senior posts are filled, answered "by government decree" where the law says "by order of the head of
+government": the gold article was among the retrieved chunks but the answer was built on another. The only
+unanswerable question not refused (minimum wage, French) was answered with "the amount is not specified in the
+sources", which is a refusal in substance but is counted as an answer because it cites a related law.
+
+**Limits.** One run, n = 100, an LLM judge, and reference answers that reward completeness. These are the
+numbers on the main set, whose questions reuse the laws' wording; the paraphrased set has not been run through
+generation, and the threshold has not been checked on it.
 
 ## 5. Week 8: what changed and what it saved **[TO FILL]**
 
-Baseline to beat (same test set before and after): reranked search 7-9 s of an 8-9 s request; generation about
-$0.0002 per request. Prepared options, all off by default and measured one at a time: fewer rerank candidates
+Baseline to beat (same test set before and after): p50 4.9 s and p95 6.1 s per request on DF's machine, almost all of it
+the reranker (7-9 s on a slower machine); generation $0.0002 per request, 95-96% correct. Prepared options, all off by default and measured one at a time: fewer rerank candidates
 (30 to 10), shorter rerank input, skipping the reranker when the first search is confident, a smaller generation
 model (`gpt-5-nano`), fewer chunks in the prompt, caching repeated questions, embeddings with fewer dimensions.
 The rule is a 50% cut in cost or p95 latency with at most 2 points of accuracy lost.
@@ -109,19 +138,18 @@ The rule is a 50% cut in cost or p95 latency with at most 2 points of accuracy l
 - **Coverage.** 2013-2026 only, none for 2022, and the Arabic side is thinner than the French.
 - **Latency.** The reranker makes every request 7-9 s on CPU.
 
-**Cost model** (preliminary: measured on 7 real service requests; `eval/cost_model.py` recomputes it from the
-generation baseline, full table in `results/cost_model.md`; list prices to be re-checked):
+**Cost model** (`eval/cost_model.py`, computed from the generation baseline; full table in `results/cost_model.md`;
+list prices to be re-checked):
 
 | Item | Value |
 |---|---|
 | Index build, once | $0.135 (6.76 M tokens), 166 s |
 | Question embedding | about 25 tokens: $0.0000005 per request |
-| Generation (`gpt-4o-mini`, 5 chunks, about 1,000 prompt tokens) | $0.00023 per request (refused Arabic questions had longer prompts) |
-| **Per request** | **about $0.00023, 7.6 s p50 / 8.8 s p95** |
-| Today: 100 requests per day (a class demo) | $0.68 per month in model fees; free CPU Space, 1 worker |
-| At 100 times: 10,000 requests per day | $68 per month in model fees; 4 workers at 25% utilisation, about $120 per month if a worker costs $30 (an assumed price) |
+| Generation (`gpt-4o-mini`, 5 chunks, about 1,000 prompt tokens) | $0.00021 per request (measured on the 124 baseline requests) |
+| **Per request** | **about $0.0002, 4.9 s p50 / 5.8 s p95** (124 requests, DF's machine) |
+| Today: 100 requests per day (a class demo) | $0.63 per month in model fees; free CPU Space, 1 worker |
+| At 100 times: 10,000 requests per day | $63 per month in model fees; 3 workers at 25% utilisation, about $90 per month if a worker costs $30 (an assumed price) |
 
 Hosting grows with the reranker's CPU time, not with model fees, which is why it is the Week 8 target.
 
-**[TO FILL]** after the generation eval and the Week 8 changes: measured cost per request with the judge's
-numbers, p50/p95 latency before and after, and feedback from real users.
+**[TO FILL]** after the Week 8 changes: p50/p95 latency and cost before and after, and feedback from real users.

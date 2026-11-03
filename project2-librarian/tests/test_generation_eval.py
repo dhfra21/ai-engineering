@@ -58,3 +58,20 @@ def test_score_row_passes_original_citation_numbers_to_the_judge(monkeypatch):
     o["cited"] = [2]
     row = score_row(ITEM, o)
     assert calls["numbers"] == [2] and row["faithful"] is True
+
+
+def test_refusal_is_always_in_the_questions_language(monkeypatch):
+    from src import generate
+
+    class R:
+        def search(self, q, **kw):
+            return [{"id": "x", "text": "t", "score": 9.0}]
+
+    monkeypatch.setattr(generate, "chat", lambda *a, **k: ("Je ne sais pas.", {"cost_usd": 0}))
+    ar = generate.answer("ما هو الأجر الأدنى؟", retriever=R())
+    fr = generate.answer("Quel est le prix ?", retriever=R())
+    assert ar["abstained"] and ar["answer"] == "لا أعرف"          # the model said it in French; the question is Arabic
+    assert fr["abstained"] and fr["answer"] == "Je ne sais pas"
+    monkeypatch.setattr(generate, "chat", lambda *a, **k: ("Le délai est d'un mois [1]. Je ne sais pas le reste.", {"cost_usd": 0}))
+    long = generate.answer("Quel délai ?", retriever=R())
+    assert not long["abstained"] and "[1]" in long["answer"]       # a real answer is never replaced
