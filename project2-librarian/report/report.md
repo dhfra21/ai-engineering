@@ -2,7 +2,7 @@
 
 CS496 AI Engineering, Fall 2026. A retrieval-augmented question answering service over Tunisian laws,
 in Arabic and French, with citations. Draft of 3 Nov 2026. Sections marked **[TO FILL]** depend on runs that
-are not done yet (Week 8, user feedback); nothing in them is estimated.
+are not done yet (Week 8); nothing in them is estimated.
 
 ## 1. The corpus and its users
 
@@ -17,7 +17,7 @@ and extract as junk.
 **Users.** Law students, lawyers, journalists and citizens who want the text of a rule, a delay, an authority or a
 penalty, in either language. The questions the system must handle look like *"in how many days must the Instance
 announce final election results?"* or *"can a candidate excluded by the parliamentary commission appeal?"*.
-Classmates will try the deployed service and vote on answers (section 5).
+The service has thumbs up/down and logs ready for user feedback, but **we did not collect feedback from real users**: every number in this report comes from our own question sets.
 
 **Evaluation data.** 124 questions (`data/eval/qa.jsonl`): 50 facts, each asked in Arabic and in French, plus 12
 questions the corpus cannot answer, in both languages. Each answerable question has a reference answer, the gold law
@@ -107,7 +107,7 @@ government": the gold article was among the retrieved chunks but the answer was 
 unanswerable question not refused (minimum wage, French) was answered with "the amount is not specified in the
 sources", which is a refusal in substance but is counted as an answer because it cites a related law.
 
-**Limits.** One run, n = 100, an LLM judge, and reference answers that reward completeness. These are the
+**Limits.** One run, n = 100, an LLM judge, reference answers that reward completeness, and no real-user feedback. These are the
 numbers on the main set, whose questions reuse the laws' wording; the paraphrased set has not been run through
 generation, and the threshold has not been checked on it.
 
@@ -152,4 +152,4 @@ list prices to be re-checked):
 
 Hosting grows with the reranker's CPU time, not with model fees, which is why it is the Week 8 target.
 
-**[TO FILL]** after the Week 8 changes: p50/p95 latency and cost before and after, and feedback from real users.
+**[TO FILL]** after the Week 8 changes: p50/p95 latency and cost before and after.

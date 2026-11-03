@@ -44,7 +44,7 @@ chunks and the local e5 embeddings). *Recall@5 / MRR@10.*
 
 Latency: search 0.1 to 0.5 s, but the reranker adds 7 to 9 s per query on CPU. Generation costs about $0.0002 per
 request. Generation results (correctness, faithfulness, citations, "I don't know"), the Week 8 optimisation and
-user feedback are **to be added** (`report/report.md`, `optimisation.md`).
+are **to be added** (`report/report.md`, `optimisation.md`). We did not collect feedback from real users.
 
 ## Rebuild the corpus and the evaluation
 

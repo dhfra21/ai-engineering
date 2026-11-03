@@ -4,7 +4,7 @@ Needs an account on huggingface.co (free). The Space runs the container in `../D
 CPU machine (16 GB RAM, enough for the reranker). The key stays a secret; it is never in the repo.
 
 1. **Create the Space.** huggingface.co/new-space → name `librarian` → SDK **Docker** → *Blank* →
-   hardware *CPU basic (free)* → visibility *Public* (needed for classmates) → Create.
+   hardware *CPU basic (free)* → visibility *Public* (so the instructor can open the URL) → Create.
 2. **Add secrets** (Space → Settings → *Variables and secrets* → *New secret*):
    - `OPENAI_API_KEY`: the course key. It is also used while the image builds, to create the index.
    - `ADMIN_TOKEN`: a long random string of your own. It protects `/admin/export`.
@@ -18,8 +18,8 @@ CPU machine (16 GB RAM, enough for the reranker). The key stays a secret; it is 
    ```
 4. **Wait for the build** (Space page → *Logs*; about 10 minutes the first time). The URL is
    `https://<your-user>-librarian.hf.space`. Check `/health`, then ask a question on the home page.
-5. **Collect feedback.** Share the URL with classmates (the page has thumbs up/down). Download what they
-   sent with:
+5. **Feedback (optional; the team decided not to run a classmate round).** The page has thumbs up/down. If anyone
+   uses it, download what they sent with:
    ```bash
    curl -H "Authorization: Bearer $ADMIN_TOKEN" "https://<your-user>-librarian.hf.space/admin/export?what=feedback" > feedback.jsonl
    curl -H "Authorization: Bearer $ADMIN_TOKEN" "https://<your-user>-librarian.hf.space/admin/export?what=requests" > requests.jsonl

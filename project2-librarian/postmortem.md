@@ -108,6 +108,13 @@ From the baseline (`results/generation_baseline.json`) and the tuned run re-judg
 - **No over-refusal on this set** (0 of 100 answerable questions refused), but that set reuses the laws' own
   wording; whether 2.0 refuses real answers on paraphrased questions is not known.
 
+## A limitation we chose
+
+The brief lists feedback from real users among the things to measure. We decided not to run a classmate round, so the
+service has thumbs up/down and logging (`/feedback`, `/admin/export`) but no user data, and every result in the
+report comes from our own 174 questions. A question set written by the team measures what we thought of, not
+what users ask; the paraphrased set narrows that gap a little but does not close it.
+
 ## 10. What we would do differently
 
 1. Check text extraction before choosing the corpus, and scrape one year first.
