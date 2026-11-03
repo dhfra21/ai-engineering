@@ -16,6 +16,12 @@ Answer ONLY from the numbered sources below. Rules:
 - Never use outside knowledge, and never invent an article or law number."""
 
 IDK = ("I don't know", "لا أعرف", "Je ne sais pas")
+_ARABIC = re.compile("[؀-ۿ]")
+
+
+def idk_for(question):
+    """The abstention phrase in the question's language (Arabic if it has Arabic letters, else French)."""
+    return IDK[1] if _ARABIC.search(question) else IDK[2]
 
 
 def build_prompt(question, chunks):
@@ -47,14 +53,17 @@ def chat(messages, model=None, max_tokens=500, retries=4):
 
 
 def answer(question, mode="hybrid+rerank", k=5, strategy="article", model=None, retriever=None,
-           min_score=None, lang=None, year=None):
-    """Full online pipeline. Returns answer text, cited chunks and per-stage timings/cost."""
+           min_score=None, lang=None, year=None, **search_kw):
+    """Full online pipeline. Returns answer text, cited chunks and per-stage timings/cost.
+
+    search_kw goes to Retriever.search (n_candidates, skip_rerank_gap).
+    """
     retriever = retriever or get_retriever(strategy)
     t0 = time.perf_counter()
-    hits = retriever.search(question, mode=mode, k=k, lang=lang, year=year)
+    hits = retriever.search(question, mode=mode, k=k, lang=lang, year=year, **search_kw)
     t_search = time.perf_counter() - t0
     if not hits or (min_score is not None and hits[0]["score"] < min_score):
-        return {"answer": IDK[0], "abstained": True, "citations": [], "hits": hits,
+        return {"answer": idk_for(question), "abstained": True, "citations": [], "hits": hits,
                 "latency": {"search": t_search, "generate": 0.0, "total": t_search}, "usage": {"cost_usd": 0.0}}
     t1 = time.perf_counter()
     text, usage = chat([{"role": "system", "content": SYSTEM},

@@ -24,6 +24,9 @@ from . import generate
 LOGS = Path(os.getenv("LOG_DIR", Path(__file__).resolve().parents[1] / "logs"))
 MODE = os.getenv("SEARCH_MODE", "hybrid+rerank")
 TOP_K = int(os.getenv("TOP_K", "5"))
+INDEX = os.getenv("INDEX", "article")
+N_CANDIDATES = int(os.getenv("N_CANDIDATES", "30"))
+SKIP_RERANK_GAP = float(os.environ["SKIP_RERANK_GAP"]) if os.getenv("SKIP_RERANK_GAP") else None
 ABSTAIN_SCORE = float(os.environ["ABSTAIN_SCORE"]) if os.getenv("ABSTAIN_SCORE") else None
 CACHE_ON = os.getenv("CACHE_ANSWERS", "0") == "1"   # off by default so the baseline is measurable
 
@@ -65,8 +68,9 @@ def ask(req: Ask):
         out = _cache[key]
     else:
         try:
-            out = generate.answer(req.question, mode=MODE, k=TOP_K, min_score=ABSTAIN_SCORE,
-                                  lang=req.lang, year=req.year)
+            out = generate.answer(req.question, mode=MODE, k=TOP_K, strategy=INDEX, min_score=ABSTAIN_SCORE,
+                                  lang=req.lang, year=req.year, n_candidates=N_CANDIDATES,
+                                  skip_rerank_gap=SKIP_RERANK_GAP)
         except RuntimeError as e:  # missing key, rate limit
             raise HTTPException(503, str(e))
         if CACHE_ON:
