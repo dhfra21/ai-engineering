@@ -101,12 +101,16 @@ From the baseline (`results/generation_baseline.json`) and the tuned run re-judg
   "by order of the head of government"). Retrieval was right; generation picked the wrong source. It is the only
   answer both wrong and unfaithful.
 - **A question the corpus cannot answer was answered.** The petrol price came back as fuel duties from a
-  finance law (5 millimes per litre, 41.382 dinars per hectolitre) presented as the price; the refusal threshold (2.0) fixed it. The minimum-wage question was answered
-  with "the amount is not specified in the sources" while citing a pension law: a refusal in substance that our
-  strict metric counts as an answer. The threshold was tuned on the same questions it is scored on, so the 23 of 24 is
-  optimistic until it is checked on the paraphrased set.
-- **No over-refusal on this set** (0 of 100 answerable questions refused), but that set reuses the laws' own
-  wording; whether 2.0 refuses real answers on paraphrased questions is not known.
+  finance law (5 millimes per litre, 41.382 dinars per hectolitre) presented as the price. The minimum-wage question
+  was answered with "the amount is not specified in the sources" while citing a pension law: a refusal in substance
+  that our strict metric counts as an answer.
+- **The refusal threshold was a trap, and we fell into the easy-set trap a second time.** A threshold of 2.0 on the best
+  reranker score fixed the petrol question and gave 23 of 24 with no wrong refusals on the main set. We then scored it
+  on the paraphrased questions without calling the LLM: it would refuse **74% of answerable questions** there, and
+  even a threshold of 0 refuses 40%. The reranker score tracks word overlap with the article, not whether an answer
+  exists, and the main set's questions reuse the articles' words. The deployed service does not use the threshold;
+  the model's own refusal (22 of 24) is the honest figure. A cheap check (no API calls) caught what a flattering
+  headline number would have hidden; we should have run it before tuning.
 
 ## A limitation we chose
 
@@ -124,3 +128,4 @@ what users ask; the paraphrased set narrows that gap a little but does not close
    language can use the other.
 5. Keep latency measurements on a single idle machine and write down what else is running.
 6. When a metric looks bad, read the failing rows before changing the system: our worst number was a bug in the judge.
+7. Tune every threshold on the hard questions, not the easy ones.

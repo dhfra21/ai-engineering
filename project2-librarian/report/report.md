@@ -4,6 +4,12 @@ CS496 AI Engineering, Fall 2026. A retrieval-augmented question answering servic
 in Arabic and French, with citations. Draft of 3 Nov 2026. Sections marked **[TO FILL]** depend on runs that
 are not done yet (Week 8); nothing in them is estimated.
 
+**At a glance.** 171 Arabic and 179 French laws (2013-2026), 15,831 article-level chunks, searched with keyword +
+vector + reranker. On our questions the right article is in the top 5 for 100% of the main set and 76% of the
+paraphrased set; answers are 95-96% correct, 96% faithful to their citations, and 23 of 24 unanswerable questions are
+refused (22-23 of 24, decided by the model; a score threshold does not generalise, section 4). A request takes about 5 s and costs
+$0.0002. Not done: real-user feedback; Week 8 numbers are pending.
+
 ## 1. The corpus and its users
 
 **Corpus.** Laws published in the *Journal Officiel de la République Tunisienne* (Imprimerie Officielle, iort.gov.tn),
@@ -36,7 +42,7 @@ is the honest test. All were written by reading the French and Arabic articles s
 | Fusion | Reciprocal rank fusion (k=60) of the two top-30 lists | No score calibration needed |
 | Reranking | Cross-encoder `mmarco-mMiniLMv2` on the top 30 | Largest single accuracy gain, and the largest cost in time |
 | Generation | `gpt-4o-mini`, temperature 0, answers only from the 5 numbered chunks, a citation `[n]` after every claim, reply in the question's language, "I don't know" otherwise | Faithfulness over fluency |
-| Abstention | The model's instruction, plus refusal when the best reranker score is below **2.0** | The threshold separates the answerable questions (lowest top score 2.99) from the two unanswerable ones the baseline answered (1.12 and 1.44). It was tuned on the same 124 questions it is scored on, so treat it as optimistic |
+| Abstention | The model's instruction: "I don't know" when the sources lack the answer. A refusal threshold on the best reranker score was tested (2.0) and **is not used in the deployed service** | It separates the main-set questions perfectly but would wrongly refuse 74% of paraphrased ones (section 4) |
 
 ## 3. Retrieval results and the ablation
 
@@ -95,8 +101,8 @@ positions (`[3][4]`), so answers were checked against the wrong chunks. After th
 incomplete, not false: the answer gave the main fact and dropped the doubled fine in case of repeat offence, the
 breakdown into expenses and surplus, or the register where identities are recorded. Three French questions were
 answered in Arabic, including 9 of 12 French refusals. One prompt change (give the complete answer; answer in the
-question's language even when the sources are in the other) and a refusal threshold took correctness to
-95-96%. The unanswerable questions the baseline answered were the petrol price, in both languages: it quoted fuel duties
+question's language even when the sources are in the other) took correctness to 95-96% (the threshold refused no
+answerable question on this set, so it did not move correctness). The unanswerable questions the baseline answered were the petrol price, in both languages: it quoted fuel duties
 (5 millimes per litre, 41.382 dinars per hectolitre) as if they were the price.
 
 **What still fails** (5 of 100 answerable questions wrong; the run-to-run difference of one point is noise):
@@ -107,17 +113,47 @@ government": the gold article was among the retrieved chunks but the answer was 
 unanswerable question not refused (minimum wage, French) was answered with "the amount is not specified in the
 sources", which is a refusal in substance but is counted as an answer because it cites a related law.
 
-**Limits.** One run, n = 100, an LLM judge, reference answers that reward completeness, and no real-user feedback. These are the
-numbers on the main set, whose questions reuse the laws' wording; the paraphrased set has not been run through
-generation, and the threshold has not been checked on it.
+**The refusal threshold does not generalise.** The 23-of-24 above includes a refusal when the best reranker score is below
+2.0. On the main set that costs nothing (0 of 100 answerable questions refused) and refuses 21 of the 24 unanswerable ones by
+score alone. On the paraphrased questions it would wrongly refuse **74% (37 of 50)** of answerable ones, and even a
+threshold of 0 would refuse 40% (`results/threshold_check.md`): the cross-encoder gives high scores when the question
+reuses the article's words and low ones when it does not, so its score measures wording overlap, not whether the
+answer exists. The threshold only looked good because the main set reuses the laws' wording. The deployed service
+therefore leaves it off and relies on the model's own refusal (22 of 24 in the baseline).
 
-## 5. Week 8: what changed and what it saved **[TO FILL]**
+**Limits.** One run, n = 100, an LLM judge, reference answers that reward completeness, and no real-user feedback.
+These are numbers on the main set, whose questions reuse the laws' wording; the paraphrased questions have not been run
+through generation (retrieval only: 76% recall@5), so answer quality there is unknown and probably lower.
 
-Baseline to beat (same test set before and after): p50 4.9 s and p95 6.1 s per request on DF's machine, almost all of it
-the reranker (7-9 s on a slower machine); generation $0.0002 per request, 95-96% correct. Prepared options, all off by default and measured one at a time: fewer rerank candidates
-(30 to 10), shorter rerank input, skipping the reranker when the first search is confident, a smaller generation
-model (`gpt-5-nano`), fewer chunks in the prompt, caching repeated questions, embeddings with fewer dimensions.
-The rule is a 50% cut in cost or p95 latency with at most 2 points of accuracy lost.
+## 5. Week 8: what changed and what it saved **[TO FILL by DF: every cell marked [DF]]**
+
+**Target.** Cut p95 latency or cost per request by 50% while losing at most 2 points of accuracy, measured before and
+after on the same 124 questions, on one machine with nothing else running. Accuracy here is answer correctness
+(95-96% before); faithfulness and the refusals on unanswerable questions are reported alongside.
+
+**Where the time and money go.** The reranker is almost all of the latency (about 7 s of the 8-9 s request on a
+slow machine; p50 4.9 s and p95 6.1 s on DF's). Generation costs $0.0002 per request, so latency is the larger
+target; the cost levers are a cheaper model, fewer chunks and caching.
+
+Each change is measured alone first, then the kept ones together (all switches are off by default):
+
+| # | change | how | p50 | p95 | cost per request | correctness | faithfulness | unanswerable refused | kept? |
+|---|---|---|---|---|---|---|---|---|---|
+| 0 | baseline (prompt fix, threshold 2.0) | none | 4.9 s | 6.1 s | $0.00019 | 96% | 96% | 23/24 | |
+| 1 | fewer rerank candidates | `--n-candidates 10` | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
+| 2 | shorter rerank input | `--rerank-max-length 256` | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
+| 3 | skip the reranker when the first search is confident | `--skip-rerank-gap` [DF: value] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
+| 4 | fewer chunks sent to the model | `--k 3` | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
+| 5 | cheaper generation model | `--model` [DF: e.g. `gpt-5-nano`] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
+| 6 | cache repeated questions | `CACHE_ANSWERS=1` | [DF] | [DF] | [DF] | n/a | n/a | n/a | [DF] |
+| **final** | the kept changes together | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | |
+
+**Result.** [DF: one sentence, for example "p95 latency fell from 6.1 s to X s (-Y%) and cost per request from
+$0.00019 to $Z (-W%), with correctness 96% to V% (-U points)", and whether the 50% target and the 2-point limit were met.]
+
+**What did not work** [DF: changes that lost more than 2 points or saved too little, with the numbers, and why].
+One thing to check when judging a change: the skip-reranker option returns fusion scores, not reranker scores. The
+refusal threshold is not used in the deployed service (section 4), so this only matters if one is added back.
 
 ## 6. Known failure cases and cost model
 
@@ -136,7 +172,7 @@ The rule is a 50% cut in cost or p95 latency with at most 2 points of accuracy l
 - **Paraphrased questions** lose most of keyword search, and Arabic vector search looked weaker than French
   with the OpenAI embeddings.
 - **Coverage.** 2013-2026 only, none for 2022, and the Arabic side is thinner than the French.
-- **Latency.** The reranker makes every request 7-9 s on CPU.
+- **Latency.** The reranker makes every request 5-9 s on CPU (about 5 s on DF's machine, 7-9 s on a slower one).
 
 **Cost model** (`eval/cost_model.py`, computed from the generation baseline; full table in `results/cost_model.md`;
 list prices to be re-checked):

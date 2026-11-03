@@ -19,7 +19,7 @@ need no measurement.
 | Choose and justify the vector DB / index | DF | 13 Nov | **Done**: flat files + brute-force cosine, justified in `design.md` |
 | Write `eval/generation_eval.py` | DF | 20 Nov | **Done**, first real run in progress (see "Currently running"). Rows now also store the top retrieval score, and the models are warmed up before timing |
 | Baseline numbers: p50/p95 latency, cost, accuracy | DF | 27 Nov | Running now on `article-oai`, 124 questions, `hybrid+rerank`, k = 5 → `results/generation_baseline.json` |
-| Tune abstention threshold, fix prompt failures | DF | 20 Nov | **Done by DF** (prompt fix + threshold 2.0: correctness 87% to 96%, refusals 22 to 23 of 24). **Still to check:** the threshold was tuned on the same 124 questions it is scored on; run the paraphrased set (`--set qa_hard`) to see whether 2.0 refuses real answers there |
+| Tune abstention threshold, fix prompt failures | DF | 20 Nov | **Prompt fix done** by DF (correctness 87% to 96%). **Threshold 2.0 should not be used:** it looks perfect on the main set but would wrongly refuse 74% of the paraphrased answerable questions (`results/threshold_check.md`). The service leaves it off (`ABSTAIN_SCORE` unset). DF: re-run the tuned prompt with no threshold on both question sets and use those numbers |
 | Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | Next. Switches now reach the whole pipeline: `--n-candidates`, `--rerank-max-length`, `--skip-rerank-gap` in both eval scripts, and `N_CANDIDATES` / `SKIP_RERANK_GAP` / `INDEX` env vars in the service. Plan: choose the variant on retrieval only (cheap), confirm with one generation run |
 | Record before/after numbers in `optimisation.md` | DF | 27 Nov | After the optimisation runs |
 | Write `design.md` | DF | 4 Dec | **Done**: chunking (with the ablation), index choice, retrieval, generation, 8 known failure cases. Generation results get added after the baseline |
@@ -53,6 +53,32 @@ not comparable). **DF: pull before the next run**, so it uses the fixed judge.
 
 On Windows, run Python with `PYTHONUTF8=1`: several `open()` calls rely on the default encoding,
 which is cp1252 there and fails on Arabic text.
+
+## Report handoff: what DF must supply when the Week 8 runs are done
+
+The report (`report/report.md`, 5 pages of 6) is finished except what needs DF's machine. Everything else is written
+from real runs. Open `report/report.md` section 5: every cell marked **[DF]** is yours.
+
+1. **Section 5 table** (one row per change, then the final combination). Columns: p50, p95, cost per request,
+   correctness, faithfulness, unanswerable refused, kept or not. Take them from `results/generation_<tag>.json`
+   (`summary`). Use `--tag` per variant, same 124 questions, same machine, nothing else running.
+2. **Row 0 must come from the same session as the variants.** Today it mixes DF's tuned run (latency, correctness 96%) with
+   OK's re-judged run (faithfulness 96%, different machine). Re-run the tuned configuration once after pulling the judge
+   fix (`--min-score 2.0`) and use that for row 0.
+3. **The "Result" sentence and "What did not work"** in section 5: the final latency and cost against the baseline,
+   in percent, and whether the 50% target and the 2-point limit were met; and the changes that failed, with numbers.
+4. **`optimisation.md`**: the same table with a sentence per change (the brief asks for it separately). Copy the numbers
+   from the report so the two agree.
+5. **The refusal threshold: do not use it.** `results/threshold_check.md` shows 2.0 would wrongly refuse 74% of the paraphrased
+   answerable questions (40% even at 0). Re-run the tuned prompt **without** `--min-score` on `qa` and, if you can, on `qa_hard`
+   (`--set qa_hard`), and use those numbers for section 4/5 (the report currently quotes the run with 2.0 and says so).
+6. **If the skip-reranker option is kept**, the returned scores are fusion scores, so the threshold must not be
+   applied to those answers (see the docstring in `src/retrieve.py`); say how you handled it.
+7. **The worker price** in the cost model ($30 per month, an assumption) can be replaced by a real quote:
+   `python -m eval.cost_model --worker-usd-month <price>`; then update the cost table in section 6.
+8. Rebuild the PDF with `python report/build_pdf.py` and check it is still at most 6 pages.
+
+OK: the deployed URL (README and report), then the final clean-clone check after the last push.
 
 ## The indexes
 
