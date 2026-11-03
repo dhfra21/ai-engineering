@@ -62,5 +62,5 @@ def answer(question, mode="hybrid+rerank", k=5, strategy="article", model=None, 
     t_gen = time.perf_counter() - t1
     cited = sorted({int(n) for n in re.findall(r"\[(\d+)\]", text) if 1 <= int(n) <= len(hits)})
     abstained = any(p in text for p in IDK) and not cited
-    return {"answer": text, "abstained": abstained, "citations": [hits[i - 1] for i in cited], "hits": hits,
+    return {"answer": text, "abstained": abstained, "citations": [hits[i - 1] for i in cited], "cited": cited, "hits": hits,
             "latency": {"search": t_search, "generate": t_gen, "total": t_search + t_gen}, "usage": usage}

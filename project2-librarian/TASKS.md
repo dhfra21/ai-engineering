@@ -10,7 +10,7 @@ Owners and due dates follow the team board. Status is as of 3 Nov 2026.
 |---|---|---|
 | Switch `config.py` / `generate.py` to OpenAI, key in `.env` | 6 Nov | **Done and checked with real calls** (generator `gpt-4o-mini`, judge `gpt-4.1-mini`; this project's key does not list `gpt-4o`) |
 | Get corpus approval from the instructor | 6 Nov | To review (not code) |
-| Test `answer()` end to end, Arabic and French | 13 Nov | Not started. Do it on an idle machine so latency numbers are clean |
+| Test `answer()` end to end, Arabic and French | 13 Nov | **Smoke-tested** through the service (3 legal questions answered with the right citation, 2 off-topic questions refused). Still to do: the systematic run, i.e. the generation eval |
 | Choose and justify the vector DB / index | 13 Nov | Implementation is flat files + brute-force cosine; the justification still has to go in `design.md` |
 | Write `eval/generation_eval.py` | 20 Nov | Written and unit-tested on fake data; **first real run still to do** (it also exercises the judge) |
 | Tune abstention threshold, fix prompt failures | 20 Nov | Not started (needs real runs) |
@@ -28,18 +28,17 @@ Owners and due dates follow the team board. Status is as of 3 Nov 2026.
 | Fixed-window index + chunking ablation (article vs fixed) | 13 Nov | **Done.** Article chunking is better at the top ranks (tables in `results/ablation.md`) |
 | Write `eval/ablation.py` for the final retrieval table | 13 Nov | **Done** (`python -m eval.ablation`) |
 | Add harder eval cases and re-run the ablation | 13 Nov | **Done.** 50 paraphrased questions in `data/eval/qa_hard.jsonl`; far harder (see below) |
-| Decide final chunking + search method from the ablation | 13 Nov | **Ready to decide.** Results so far favour article chunking, with the reranker; note hybrid is worse than vector-only on paraphrased questions |
-| FastAPI service: `/ask` and `/feedback` | 20 Nov | Written (`src/service.py`) and tested with a stubbed pipeline; never run with real models |
-| Web page: right-to-left Arabic, citations, thumbs up/down | 20 Nov | Written inline in the service; not yet looked at in a browser |
-| Deploy to a public URL and collect classmate feedback | 20 Nov | Not started (pick hosting first: CPU only, about 1-2 GB RAM for the models) |
+| Decide final chunking + search method from the ablation | 13 Nov | **Done:** article chunking, hybrid search + reranker, OpenAI embeddings (`article-oai`). Reasons in `report/report.md` section 3. Open question for DF: hybrid is worse than vector-only on paraphrased questions (a lower BM25 weight in the fusion may help) |
+| FastAPI service: `/ask` and `/feedback` | 20 Nov | **Done and run for real** (Arabic and French questions, feedback, protected `/admin/export` to download logs). 38 tests |
+| Web page: right-to-left Arabic, citations, thumbs up/down | 20 Nov | **Done.** Checked in headless Chrome: Arabic answers render right to left, numbered citations, thumbs; `/?q=...` asks directly |
+| Deploy to a public URL and collect classmate feedback | 20 Nov | **Files ready, not deployed.** `Dockerfile` + `deploy/DEPLOY.md` (Hugging Face Spaces, free CPU). The container build is untested (no Docker on the dev machine). Needs an HF account and the secrets `OPENAI_API_KEY`, `ADMIN_TOKEN`: a manual step |
 | pytest tests: chunking, gold matching, scraper parsers | 27 Nov | **Done:** 37 tests (`.venv/bin/python -m pytest -q`) |
-| Report (max 6 pages) + README with Contributions | 4 Dec | README updated; report not started |
+| Report (max 6 pages) + README with Contributions | 4 Dec | README done (confirm the Contributions names). Report draft is 3 pages (`report/report.md`, PDF with `python report/build_pdf.py`); sections 4 and 5 and the cost numbers are marked **[TO FILL]** and depend on DF's runs |
 
 ## Currently running (on Claude's machine, 3 Nov 2026)
 
-The retrieval evaluation of the new **OpenAI-embeddings index** (`article-oai`): main question set,
-then paraphrased set, about 15 minutes each (the reranker takes 7-9 s per query on CPU). When it is
-done, `python -m eval.ablation` will include it. Nothing else is running.
+Nothing. All retrieval evaluations are finished (article, fixed and `article-oai`, on both question sets;
+tables in `results/ablation.md`).
 
 ## The indexes
 

@@ -20,6 +20,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(service, "LOGS", tmp_path)
     monkeypatch.setattr(service.generate, "answer", fake_answer)
     service._cache.clear()
+    monkeypatch.setenv("WARM_UP", "0")
     return TestClient(service.app)
 
 
@@ -27,7 +28,7 @@ def test_ask_returns_answer_and_logs(client, tmp_path):
     r = client.post("/ask", json={"question": "Quel est le délai ?"})
     assert r.status_code == 200
     d = r.json()
-    assert d["answer"] == "Réponse [1]" and d["citations"][0]["ref"] == "Loi n° 2020-1" and d["cost_usd"] == 0.0002
+    assert d["answer"] == "Réponse [1]" and d["citations"][0]["ref"] == "Loi n° 2020-1" and d["citations"][0]["n"] == 1 and d["cost_usd"] == 0.0002
     logged = json.loads((tmp_path / "requests.jsonl").read_text().splitlines()[0])
     assert logged["request_id"] == d["request_id"] and logged["usage"]["cost_usd"] == 0.0002
 
@@ -60,3 +61,12 @@ def test_missing_key_gives_503(client, monkeypatch):
 def test_page_and_health(client):
     assert "The Librarian" in client.get("/").text
     assert client.get("/health").json()["status"] == "ok"
+
+
+def test_admin_export_needs_the_token(client, monkeypatch):
+    client.post("/ask", json={"question": "Une question ?"})
+    assert client.get("/admin/export?what=requests").status_code == 403           # disabled without a token
+    monkeypatch.setattr(service, "ADMIN_TOKEN", "s3cret")
+    assert client.get("/admin/export?what=requests", headers={"Authorization": "Bearer nope"}).status_code == 403
+    r = client.get("/admin/export?what=requests", headers={"Authorization": "Bearer s3cret"})
+    assert r.status_code == 200 and "Une question ?" in r.text
