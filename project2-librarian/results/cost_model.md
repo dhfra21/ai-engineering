@@ -1,4 +1,4 @@
-# Cost model (from DF's generation baseline: 124 questions, article-oai, hybrid+rerank, k=5)
+# Cost model (from the generation baseline)
 
 Measured on 124 requests; generator `gpt-4o-mini`. Abstained: 18%.
 
