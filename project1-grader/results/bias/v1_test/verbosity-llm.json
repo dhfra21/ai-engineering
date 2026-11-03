@@ -1,0 +1,84 @@
+{
+  "pad_mode": "llm",
+  "items": 101,
+  "errors": 0,
+  "length_ratio_words": 2.92,
+  "grade_changed": {
+    "n": 19,
+    "of": 101,
+    "pct": 18.8,
+    "ci95_pct": [
+      12.4,
+      27.5
+    ]
+  },
+  "judge_bad_became_good": {
+    "n": 13,
+    "of": 73,
+    "pct": 17.8,
+    "ci95_pct": [
+      10.7,
+      28.1
+    ]
+  },
+  "judge_good_became_bad": {
+    "n": 6,
+    "of": 28,
+    "pct": 21.4,
+    "ci95_pct": [
+      10.2,
+      39.5
+    ]
+  },
+  "human_bad_rescued_by_padding": {
+    "n": 5,
+    "of": 40,
+    "pct": 12.5,
+    "ci95_pct": [
+      5.5,
+      26.1
+    ]
+  },
+  "human_good_penalised_by_padding": {
+    "n": 5,
+    "of": 25,
+    "pct": 20.0,
+    "ci95_pct": [
+      8.9,
+      39.1
+    ]
+  },
+  "pairwise_verdicts": {
+    "padded": {
+      "n": 60,
+      "of": 202,
+      "pct": 29.7,
+      "ci95_pct": [
+        23.8,
+        36.3
+      ]
+    },
+    "original": {
+      "n": 31,
+      "of": 202,
+      "pct": 15.3,
+      "ci95_pct": [
+        11.0,
+        21.0
+      ]
+    },
+    "tie": {
+      "n": 111,
+      "of": 202,
+      "pct": 55.0,
+      "ci95_pct": [
+        48.1,
+        61.7
+      ]
+    }
+  },
+  "judge": "v1",
+  "judge_model": "gpt5mini",
+  "split": "test",
+  "limit": null
+}

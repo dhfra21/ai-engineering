@@ -42,21 +42,26 @@ def main():
     ap.add_argument("--strategy", default="article")
     ap.add_argument("--set", default="qa", help="qa (main) or qa_hard (paraphrased)")
     ap.add_argument("--modes", nargs="+", default=list(MODES))
+    ap.add_argument("--n-candidates", type=int, default=30)
+    ap.add_argument("--rerank-max-length", type=int, default=384)
+    ap.add_argument("--skip-rerank-gap", type=float, default=None)
+    ap.add_argument("--tag", default="", help="suffix for the output files, e.g. a Week 8 variant")
     a = ap.parse_args()
+    search_kw = {"n_candidates": a.n_candidates, "skip_rerank_gap": a.skip_rerank_gap}
     items = load_qa(answerable_only=True, name=a.set)
-    r = Retriever(a.strategy)
+    r = Retriever(a.strategy, a.rerank_max_length)
     # warm up models so load time is not counted as search latency
     for m in a.modes:
         r.search(items[0]["question"], mode=m, k=3)
     report = {}
     for mode in a.modes:
-        rows = evaluate(r, items, mode)
+        rows = evaluate(r, items, mode, **search_kw)
         report[mode] = {"all": summarise(rows)}
         for lang in ("ar", "fr"):
             report[mode][lang] = summarise([x for x in rows if x["lang"] == lang])
         print(f"{mode:15s}", {k: round(v, 3) for k, v in report[mode]["all"].items()}, flush=True)
-        (RESULTS / f"retrieval_{a.set}_{a.strategy}_{mode.replace('+', '_')}_rows.json").write_text(json.dumps(rows))
-    (RESULTS / f"retrieval_{a.set}_{a.strategy}.json").write_text(json.dumps(report, indent=1))
+        (RESULTS / f"retrieval_{a.set}_{a.strategy}{a.tag}_{mode.replace('+', '_')}_rows.json").write_text(json.dumps(rows))
+    (RESULTS / f"retrieval_{a.set}_{a.strategy}{a.tag}.json").write_text(json.dumps(report, indent=1))
 
 
 if __name__ == "__main__":

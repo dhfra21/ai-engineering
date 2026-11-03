@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL Explainer Evaluation</title>
+<style>
+  @page { size: A4; margin: 14mm 16mm; }
+  :root { --ink: #1a1a1a; --muted: #555; --rule: #d0d0d0; --accent: #1f4e79; --bg: #ffffff; --soft: #f3f6f9; }
+  body { background: var(--bg); color: var(--ink); font: 9.8pt/1.4 "Segoe UI", Arial, sans-serif; margin: 0; }
+  main { max-width: 178mm; margin: 0 auto; }
+  h1 { font-size: 15pt; margin: 0 0 1mm; color: var(--accent); }
+  .sub { color: var(--muted); margin: 0 0 3mm; font-size: 8.8pt; }
+  h2 { font-size: 11pt; color: var(--accent); margin: 3.5mm 0 1mm; padding-bottom: .5mm; border-bottom: 1px solid var(--rule); }
+  p { margin: 0 0 1.6mm; }
+  ul { margin: 0 0 1.6mm; padding-left: 5mm; }
+  li { margin: 0 0 .6mm; }
+  table { border-collapse: collapse; width: 100%; margin: 1mm 0 2mm; font-size: 9pt; }
+  th, td { border-bottom: 1px solid var(--rule); padding: .8mm 1.4mm; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  .box { background: var(--soft); border-left: 3px solid var(--accent); padding: 1.8mm 2.6mm; margin: 1.5mm 0 2mm; }
+  code { font: 8.6pt Consolas, monospace; background: var(--soft); padding: 0 .6mm; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Evaluating a SQL explainer with a golden set and an LLM judge</h1>
+<p class="sub">Project 1 · CS496 · 2026-10-21 · system prompt v3 on <code>gpt-5-nano</code> · judge v1 on <code>gpt-5-mini</code> (OpenAI) · details in README, CHANGELOG and postmortem</p>
+
+<div class="box">
+<b>Result.</b> System v3 is rated good on <b>77.2%</b> of 101 test queries (mean of 3 runs: 78, 76, 80), up from about 69% for the baseline prompt on dev. The judge that produces this score agrees with our golden labels on only <b>64% of test items (κ 0.33)</b>. It catches 93% of bad answers but fails about a third of good ones, so treat 77% as a judge-graded estimate that is likely on the low side. Running the system costs <b>$0.19 per 1,000 requests</b>.
+</div>
+
+<h2>Task and golden set</h2>
+<p>The system explains a SQLite query in plain words for a reader who doesn't know SQL. An explanation is good only if it is correct, complete, invents nothing and is clear. Word overlap can't grade this: on c-q117, two good answers share 42% of their words, while a wrong one ("skips the top <u>two</u> prices") shares 97% with a good one. We built 161 queries (60 dev / 101 test), each with one blind candidate: 73 baseline, 32 from a second model, and 56 with planted errors of six types. Two Claude labellers agreed on <b>157/161 (97.5%, κ 0.95)</b>. After adjudicating 4 disagreements and making 17 rule-based overrides, the set is <b>82 good / 79 bad</b>.</p>
+
+<h2>Judge reliability</h2>
+<table>
+<tr><th>Judge v1 vs golden labels</th><th class="n">Dev (60)</th><th class="n">Test (101)</th></tr>
+<tr><td>Agreement / Cohen's κ</td><td class="n">54/60 (90%) / 0.79</td><td class="n"><b>65/101 (64%) / 0.33</b></td></tr>
+<tr><td>Bad answers caught / "bad" calls that are right</td><td class="n">34/36 / 34/38</td><td class="n">40/43 / 40/73</td></tr>
+<tr><td>Agreement on hard queries</td><td class="n">86%</td><td class="n">39%</td></tr>
+</table>
+<ul>
+<li><b>Dev overstates reliability.</b> We fixed dev labels wherever the judge exposed a rule violation, but not test labels. Test disagreements repeat the patterns we fixed on dev (e.g. c-q035, c-q156). The judge is also too strict: about 23 of its 33 wrong "bad" calls demand details the guide says may be left out.</li>
+<li><b>It catches planted errors</b> (34/35 on test) but misses clause-by-clause SQL jargon (c-q120, c-q140).</li>
+<li><b>No position bias:</b> same verdict in both orders on 87/101 pairs; first slot won 30%, second 31%.</li>
+<li><b>No verbosity bias:</b> padding an answer to about 2.8× its length, with the content unchanged, rescued 2/40 bad answers, and the judge preferred the original 35 to 25.</li>
+</ul>
+
+<h2>System prompt history</h2>
+<p>gpt-5 models take no temperature, so two identical runs differ by about 3 points (19 items changed grade on dev), and we compared versions across reruns.</p>
+<table>
+<tr><th>Version</th><th>Change</th><th class="n">Dev</th><th class="n">Test</th></tr>
+<tr><td>v1</td><td>Baseline: "explain in plain words"</td><td class="n">43, 40 / 60</td><td class="n">—</td></tr>
+<tr><td>v2</td><td>Be exact about which rows are included (joins, filters)</td><td class="n">43 / 60</td><td class="n">—</td></tr>
+<tr><td><b>v3</b></td><td>v2 + describe row order only from <code>ORDER BY</code>, with its direction</td><td class="n"><b>51, 47 / 59</b></td><td class="n"><b>78, 76, 80 / 101</b></td></tr>
+</table>
+<p>v2's changes were within noise. v3 beat v1 in every run. Hard queries remain the weak spot (62% on test).</p>
+
+<h2>Cost</h2>
+<p>Per item: system $0.00019 (3.7 s median), judge $0.0021 (10 s median). Per 1,000 requests: <b>$0.19</b>, or <b>$0.39</b> if the judge grades a 10% sample. At an assumed 500 requests/day that's about $5.90/month, and about $588/month at 100×. The whole evaluation cost about $4 on OpenAI.</p>
+
+<h2>Main lessons</h2>
+<ul>
+<li>Measure the judge on a split whose labels it never influenced. Our dev agreement figure was inflated.</li>
+<li>With models that ignore temperature, one run isn't a measurement. Rerun before you believe a change.</li>
+</ul>
+
+</main>
+</body>
+</html>

@@ -1,6 +1,6 @@
 """One function every other module uses to call a model: `call_json`.
 
-- Talks to Groq's OpenAI-compatible endpoint with urllib (no SDK, no pip).
+- Talks to the OpenAI Chat Completions endpoint with urllib (no SDK, no pip).
 - Asks for structured output: strict `json_schema` where the model supports
   it, else `json_object` mode. Either way the reply is parsed and validated
   locally against the same schema (harness/schemas.py). A reply that fails
@@ -9,9 +9,10 @@
   by the exact request. Re-running a command after hitting the daily limit
   resumes where it stopped instead of re-spending quota. Pass use_cache=False
   to force fresh calls.
-- Paces requests to the free-tier requests/minute limit and retries 429/5xx.
-  If Groq says to wait longer than MAX_WAIT_S (the daily cap), it raises
-  DailyLimitReached so the caller can stop cleanly.
+- Paces requests to the requests/minute limit and retries 429/5xx. If
+  OpenAI says to wait longer than MAX_WAIT_S, or the key is out of credit
+  (insufficient_quota), it raises DailyLimitReached so the caller can stop
+  cleanly.
 
 Every call returns an LLMResult, including failures, so a bad call becomes a
 row in the results with its error — not a crash, and not a silent zero.
@@ -31,7 +32,7 @@ from typing import Any
 from harness import schemas
 from harness.config import CACHE_DIR, MODELS, TEMPERATURE, ModelSpec, is_mock, load_dotenv
 
-GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 MAX_RETRIES = 6
 MAX_WAIT_S = 120.0
 TIMEOUT_S = 120
@@ -114,14 +115,16 @@ def _payload(spec: ModelSpec, messages: list[dict], schema_name: str, schema: di
             "and nothing else:\n" + json.dumps(schema)
         )
         response_format = {"type": "json_object"}
-    return {
+    payload = {
         "model": spec.model_id,
         "messages": msgs,
-        "temperature": TEMPERATURE,
         "max_completion_tokens": max_tokens,
         "response_format": response_format,
         **spec.extra,
     }
+    if spec.temperature:
+        payload["temperature"] = TEMPERATURE
+    return payload
 
 
 def _cached_or_live(spec: ModelSpec, payload: dict, use_cache: bool) -> LLMResult:
@@ -134,21 +137,19 @@ def _cached_or_live(spec: ModelSpec, payload: dict, use_cache: bool) -> LLMResul
 
 
 def _live_call(spec: ModelSpec, payload: dict) -> LLMResult:
-    api_key = os.environ.get("GROQ_API_KEY")
+    api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
-        raise SystemExit("GROQ_API_KEY is not set. Copy .env.example to .env and add your key "
-                         "(free at console.groq.com/keys), or set GRADER_BACKEND=mock to try "
-                         "the pipeline offline.")
+        raise SystemExit("OPENAI_API_KEY is not set. Copy .env.example to .env and add the key, "
+                         "or set GRADER_BACKEND=mock to try the pipeline offline.")
 
     for attempt in range(MAX_RETRIES + 1):
         _pace(spec)
         req = urllib.request.Request(
-            GROQ_URL,
+            OPENAI_URL,
             data=json.dumps(payload).encode(),
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
-                # Groq sits behind Cloudflare, which blocks the default Python-urllib agent.
                 "User-Agent": "cs496-grader/1.0",
             },
             method="POST",
@@ -165,11 +166,15 @@ def _live_call(spec: ModelSpec, payload: dict) -> LLMResult:
                 print(f"    [{spec.key}] json_schema rejected — falling back to json_object mode")
                 _json_object_fallback.add(spec.key)
                 return _live_call(spec, _payload_to_json_object(spec, payload))
+            if e.code == 429 and "insufficient_quota" in detail:
+                raise DailyLimitReached(
+                    f"{spec.model_id}: the OpenAI key is out of credit (insufficient_quota). "
+                    f"Completed calls are cached; rerun the same command once it is topped up.")
             if e.code in (429, 500, 502, 503, 504) and attempt < MAX_RETRIES:
                 wait = _retry_after(e, attempt)
                 if e.code == 429 and wait > MAX_WAIT_S:
                     raise DailyLimitReached(
-                        f"{spec.model_id}: Groq asks to wait {wait:.0f}s — probably the daily "
+                        f"{spec.model_id}: OpenAI asks to wait {wait:.0f}s — probably a daily "
                         f"request/token cap. Completed calls are cached; rerun the same command "
                         f"later and it resumes. ({detail[:200]})")
                 print(f"    [{spec.key}] HTTP {e.code} — retrying in {wait:.0f}s "

@@ -1,25 +1,31 @@
 # Project 2: work split
 
-Owners and due dates follow the team board. Status is as of 3 Nov 2026.
+Owners and due dates follow the team board. Status is as of 3 Nov 2026, evening.
 **Each person needs the OpenAI key from the professor in their own `project2-librarian/.env`
 (copy `.env.example`; never commit it).** Most tasks in the right-hand column below need it.
 
 ## DF
 
-| Task | Due | Status |
-|---|---|---|
-| Switch `config.py` / `generate.py` to OpenAI, key in `.env` | 6 Nov | **Done and checked with real calls** (generator `gpt-4o-mini`, judge `gpt-4.1-mini`; this project's key does not list `gpt-4o`) |
-| Get corpus approval from the instructor | 6 Nov | To review (not code) |
-| Test `answer()` end to end, Arabic and French | 13 Nov | **Smoke-tested** through the service (3 legal questions answered with the right citation, 2 off-topic questions refused). Still to do: the systematic run, i.e. the generation eval |
-| Choose and justify the vector DB / index | 13 Nov | Implementation is flat files + brute-force cosine; the justification still has to go in `design.md` |
-| Write `eval/generation_eval.py` | 20 Nov | Written and unit-tested on fake data; **first real run still to do** (it also exercises the judge) |
-| Tune abstention threshold, fix prompt failures | 20 Nov | Not started (needs real runs) |
-| Cost model: tokens and $ per request, today and at 100x | 27 Nov | Not started. Per-request cost is already logged by the service; index build cost is in `meta.json` |
-| Baseline numbers: p50/p95 latency, cost, accuracy | 27 Nov | Retrieval baseline done (see below); generation baseline needs a real eval run |
-| Optimise: 50% cost or latency cut, at most 2 points lost | 27 Nov | Switches prepared in `src/retrieve.py` (skip reranker when confident, shorter rerank input, fewer candidates), all off by default. Main target: reranker at 7-9 s per query. Also candidate: OpenAI embeddings with fewer dimensions (`--dims`) |
-| Record before/after numbers in `optimisation.md` | 27 Nov | Not started |
-| Write `design.md`, `optimisation.md`, `postmortem.md` | 4 Dec | Not started. Known failure cases are already listed in `data/corpus/README.md` |
-| Final check: clean clone, no keys, no personal data | 4 Dec | Not started |
+Remaining DF work was split with OK on 3 Nov, since OK's own tasks are done and deployment is
+left for the last step. DF keeps everything that measures latency, because before/after numbers
+only compare when they come from the same machine (DF's). OK takes the write-ups and checks that
+need no measurement.
+
+| Task | Owner | Due | Status |
+|---|---|---|---|
+| Switch `config.py` / `generate.py` to OpenAI, key in `.env` | DF | 6 Nov | **Done and checked with real calls** (generator `gpt-4o-mini`, judge `gpt-4.1-mini`; this project's key does not list `gpt-4o`) |
+| Get corpus approval from the instructor | DF | 6 Nov | Message drafted; DF sends it |
+| Test `answer()` end to end, Arabic and French | DF | 13 Nov | **Done** on `article-oai`: both languages correct, citing the gold article; unanswerable questions abstain. Found one prompt failure: a French question abstained in Arabic. Fixed: low-score abstention now answers in the question's language (`idk_for` in `src/generate.py`) |
+| Choose and justify the vector DB / index | DF | 13 Nov | **Done**: flat files + brute-force cosine, justified in `design.md` |
+| Write `eval/generation_eval.py` | DF | 20 Nov | **Done**, first real run in progress (see "Currently running"). Rows now also store the top retrieval score, and the models are warmed up before timing |
+| Baseline numbers: p50/p95 latency, cost, accuracy | DF | 27 Nov | Running now on `article-oai`, 124 questions, `hybrid+rerank`, k = 5 → `results/generation_baseline.json` |
+| Tune abstention threshold, fix prompt failures | DF | 20 Nov | Next, from the baseline rows (threshold tuned offline on `top_score`, no re-run) |
+| Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | Next. Switches now reach the whole pipeline: `--n-candidates`, `--rerank-max-length`, `--skip-rerank-gap` in both eval scripts, and `N_CANDIDATES` / `SKIP_RERANK_GAP` / `INDEX` env vars in the service. Plan: choose the variant on retrieval only (cheap), confirm with one generation run |
+| Record before/after numbers in `optimisation.md` | DF | 27 Nov | After the optimisation runs |
+| Write `design.md` | DF | 4 Dec | **Done**: chunking (with the ablation), index choice, retrieval, generation, 8 known failure cases. Generation results get added after the baseline |
+| Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | Moved from DF. Inputs: per-request tokens and $ in `results/generation_baseline.json` (`gen_cost`, `cost_per_request_usd`), index build cost in `data/index/*/meta.json`, prices in `src/config.py`. Include the query-embedding call for `-oai` indexes and the hosting cost |
+| Write `postmortem.md` | **OK** | 4 Dec | Moved from DF. Material: the Windows `open()` encoding issue (needs `PYTHONUTF8=1`), the duplicated hour-long index builds before indexes were shared, the e5 vs OpenAI-embedding switch mid-project, the mislabelled source files, and whatever the baseline failures show |
+| Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | Moved from DF. Do it after the last push |
 
 ## OK
 
@@ -35,10 +41,15 @@ Owners and due dates follow the team board. Status is as of 3 Nov 2026.
 | pytest tests: chunking, gold matching, scraper parsers | 27 Nov | **Done:** 37 tests (`.venv/bin/python -m pytest -q`) |
 | Report (max 6 pages) + README with Contributions | 4 Dec | README done (confirm the Contributions names). Report draft is 3 pages (`report/report.md`, PDF with `python report/build_pdf.py`); sections 4 and 5 and the cost numbers are marked **[TO FILL]** and depend on DF's runs |
 
-## Currently running (on Claude's machine, 3 Nov 2026)
+## Currently running (on DF's machine, 3 Nov 2026)
 
-Nothing. All retrieval evaluations are finished (article, fixed and `article-oai`, on both question sets;
-tables in `results/ablation.md`).
+The generation baseline: `python -m eval.generation_eval --tag baseline --strategy article-oai`
+(124 questions, about 6 s each, done around 21:50). Intermediate count: 84 of 96 correct. Do not
+run heavy jobs on DF's machine until the optimisation runs are done, since they set the latency
+numbers.
+
+On Windows, run Python with `PYTHONUTF8=1`: several `open()` calls rely on the default encoding,
+which is cp1252 there and fails on Arabic text.
 
 ## The indexes
 

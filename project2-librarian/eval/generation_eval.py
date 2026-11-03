@@ -23,7 +23,8 @@ def score_row(item, out, do_judge=True):
     row = {"id": item["id"], "lang": item["lang"], "answerable": item["answerable"],
            "abstained": out["abstained"], "answer": out["answer"], "latency": out["latency"],
            "gen_cost": out["usage"].get("cost_usd", 0.0), "judge_cost": 0.0,
-           "n_citations": len(out["citations"])}
+           "n_citations": len(out["citations"]),
+           "top_score": out["hits"][0].get("score") if out["hits"] else None}
     if not item["answerable"]:
         row["correct"] = out["abstained"]          # the right behaviour is to abstain
         return row
@@ -78,15 +79,20 @@ def main():
     ap.add_argument("--model", default=None, help="generator model (default from config)")
     ap.add_argument("--min-score", type=float, default=None, help="abstain when the top rerank score is below this")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--n-candidates", type=int, default=30, help="chunks sent to the reranker")
+    ap.add_argument("--rerank-max-length", type=int, default=384, help="reranker input length in tokens")
+    ap.add_argument("--skip-rerank-gap", type=float, default=None, help="skip the reranker when RRF is this confident")
     a = ap.parse_args()
     items = load_qa(name=a.set)
     if a.limit:  # keep a mix of languages and answerable/unanswerable
         items = items[:: max(1, len(items) // a.limit)][: a.limit]
-    retriever = get_retriever(a.strategy)
+    retriever = get_retriever(a.strategy, a.rerank_max_length)
+    retriever.search("warm-up", mode=a.mode, k=a.k)  # load models so the first timed query is not a cold start
     rows = []
     for n, it in enumerate(items, 1):
         out = run_pipeline(it["question"], mode=a.mode, k=a.k, strategy=a.strategy, model=a.model,
-                           retriever=retriever, min_score=a.min_score)
+                           retriever=retriever, min_score=a.min_score, n_candidates=a.n_candidates,
+                           skip_rerank_gap=a.skip_rerank_gap)
         rows.append(score_row(it, out))
         print(f"{n}/{len(items)} {it['id']} correct={rows[-1].get('correct')} abstained={rows[-1]['abstained']}", flush=True)
     report = {"config": vars(a), "summary": summarise(rows), "rows": rows}

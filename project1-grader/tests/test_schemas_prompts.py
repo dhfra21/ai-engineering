@@ -21,7 +21,7 @@ class TestSchemas(unittest.TestCase):
                 schemas.validate(value, schemas.JUDGE)
 
     def test_strict_mode_shape(self):
-        # Groq strict mode: every property required, no additional properties.
+        # OpenAI strict mode: every property required, no additional properties.
         for name, s in schemas.BY_NAME.items():
             self.assertEqual(set(s["required"]), set(s["properties"]), name)
             self.assertIs(s["additionalProperties"], False, name)

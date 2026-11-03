@@ -1,0 +1,607 @@
+{
+  "n_items": 101,
+  "judge_errors": 0,
+  "human_vs_judge": {
+    "n": 101,
+    "agreement": {
+      "n": 65,
+      "of": 101,
+      "pct": 64.4,
+      "ci95_pct": [
+        54.6,
+        73.0
+      ]
+    },
+    "cohen_kappa": 0.331,
+    "confusion_rows_a_cols_b": {
+      "good": {
+        "good": 25,
+        "bad": 33
+      },
+      "bad": {
+        "good": 3,
+        "bad": 40
+      }
+    },
+    "a_bad_rate": {
+      "n": 43,
+      "of": 101,
+      "pct": 42.6,
+      "ci95_pct": [
+        33.4,
+        52.3
+      ]
+    },
+    "b_bad_rate": {
+      "n": 73,
+      "of": 101,
+      "pct": 72.3,
+      "ci95_pct": [
+        62.9,
+        80.1
+      ]
+    },
+    "recall_of_bad": {
+      "n": 40,
+      "of": 43,
+      "pct": 93.0,
+      "ci95_pct": [
+        81.4,
+        97.6
+      ]
+    },
+    "precision_of_bad": {
+      "n": 40,
+      "of": 73,
+      "pct": 54.8,
+      "ci95_pct": [
+        43.4,
+        65.7
+      ]
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "agreement": {
+        "n": 22,
+        "of": 28,
+        "pct": 78.6,
+        "ci95_pct": [
+          60.5,
+          89.8
+        ]
+      },
+      "bad_caught": {
+        "n": 10,
+        "of": 11,
+        "pct": 90.9,
+        "ci95_pct": [
+          62.3,
+          98.4
+        ]
+      }
+    },
+    "hard": {
+      "agreement": {
+        "n": 14,
+        "of": 36,
+        "pct": 38.9,
+        "ci95_pct": [
+          24.8,
+          55.1
+        ]
+      },
+      "bad_caught": {
+        "n": 9,
+        "of": 9,
+        "pct": 100.0,
+        "ci95_pct": [
+          70.1,
+          100.0
+        ]
+      }
+    },
+    "medium": {
+      "agreement": {
+        "n": 29,
+        "of": 37,
+        "pct": 78.4,
+        "ci95_pct": [
+          62.8,
+          88.6
+        ]
+      },
+      "bad_caught": {
+        "n": 21,
+        "of": 23,
+        "pct": 91.3,
+        "ci95_pct": [
+          73.2,
+          97.6
+        ]
+      }
+    }
+  },
+  "by_source": {
+    "baseline": {
+      "agreement": {
+        "n": 21,
+        "of": 41,
+        "pct": 51.2,
+        "ci95_pct": [
+          36.5,
+          65.7
+        ]
+      },
+      "bad_caught": {
+        "n": 5,
+        "of": 7,
+        "pct": 71.4,
+        "ci95_pct": [
+          35.9,
+          91.8
+        ]
+      }
+    },
+    "perturbed": {
+      "agreement": {
+        "n": 35,
+        "of": 38,
+        "pct": 92.1,
+        "ci95_pct": [
+          79.2,
+          97.3
+        ]
+      },
+      "bad_caught": {
+        "n": 34,
+        "of": 35,
+        "pct": 97.1,
+        "ci95_pct": [
+          85.5,
+          99.5
+        ]
+      }
+    },
+    "weak": {
+      "agreement": {
+        "n": 9,
+        "of": 22,
+        "pct": 40.9,
+        "ci95_pct": [
+          23.3,
+          61.3
+        ]
+      },
+      "bad_caught": {
+        "n": 1,
+        "of": 1,
+        "pct": 100.0,
+        "ci95_pct": [
+          20.7,
+          100.0
+        ]
+      }
+    }
+  },
+  "by_error_type": {
+    "invented_detail": {
+      "agreement": {
+        "n": 7,
+        "of": 7,
+        "pct": 100.0,
+        "ci95_pct": [
+          64.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 7,
+        "of": 7,
+        "pct": 100.0,
+        "ci95_pct": [
+          64.6,
+          100.0
+        ]
+      }
+    },
+    "jargon": {
+      "agreement": {
+        "n": 5,
+        "of": 6,
+        "pct": 83.3,
+        "ci95_pct": [
+          43.6,
+          97.0
+        ]
+      },
+      "bad_caught": {
+        "n": 5,
+        "of": 6,
+        "pct": 83.3,
+        "ci95_pct": [
+          43.6,
+          97.0
+        ]
+      }
+    },
+    "missing_condition": {
+      "agreement": {
+        "n": 8,
+        "of": 8,
+        "pct": 100.0,
+        "ci95_pct": [
+          67.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 7,
+        "of": 7,
+        "pct": 100.0,
+        "ci95_pct": [
+          64.6,
+          100.0
+        ]
+      }
+    },
+    "wrong_aggregation": {
+      "agreement": {
+        "n": 4,
+        "of": 6,
+        "pct": 66.7,
+        "ci95_pct": [
+          30.0,
+          90.3
+        ]
+      },
+      "bad_caught": {
+        "n": 4,
+        "of": 4,
+        "pct": 100.0,
+        "ci95_pct": [
+          51.0,
+          100.0
+        ]
+      }
+    },
+    "wrong_filter": {
+      "agreement": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 5,
+        "of": 5,
+        "pct": 100.0,
+        "ci95_pct": [
+          56.6,
+          100.0
+        ]
+      }
+    },
+    "wrong_join_semantics": {
+      "agreement": {
+        "n": 6,
+        "of": 6,
+        "pct": 100.0,
+        "ci95_pct": [
+          61.0,
+          100.0
+        ]
+      },
+      "bad_caught": {
+        "n": 6,
+        "of": 6,
+        "pct": 100.0,
+        "ci95_pct": [
+          61.0,
+          100.0
+        ]
+      }
+    }
+  },
+  "cost_usd_per_item": 0.00207109,
+  "latency_ms": {
+    "p50": 8878.4,
+    "p95": 16580.1
+  },
+  "disagreements": [
+    {
+      "item_id": "c-q002",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation implies a single product and doesn\u2019t say the query returns the price column for every row whose name exactly equals 'Dune' (so it may return multiple rows). Because it omits that detail it is incomplete and its singular wording is not fully correct for the SQL shown."
+    },
+    {
+      "item_id": "c-q018",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate but incomplete: it doesn\u2019t say the query uses an inner join, so categories with no products (and products without a matching category) are excluded. That join behavior changes which rows appear and must be mentioned to be complete."
+    },
+    {
+      "item_id": "c-q026",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is mostly accurate but omits two important details that affect the result: the query groups by product name (p.name), so rows for different product_ids that share the same name would be combined into one total; and only products appearing in order_items are counted (products with zero sales won\u2019t appear). Because those details change which rows/values appear, the explanation is not fully correct or complete."
+    },
+    {
+      "item_id": "c-q029",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that the query only includes customers who have at least one order (the JOIN excludes customers with zero orders) and it fails to say the grouping is by customer name \u2014 so different customers with the same name would be combined. Those omissions make the explanation incomplete and also cause the statement about \u201ceach customer\u201d to be incorrect for such name collisions."
+    },
+    {
+      "item_id": "c-q035",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that the query includes all orders regardless of order status (so cancelled orders are counted) and it uses the word \u201cpurchased,\u201d which incorrectly implies only completed purchases. It also doesn\u2019t explicitly state the lack of any date/status filter (completeness) and thus could mislead about which orders are considered."
+    },
+    {
+      "item_id": "c-q037",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says customers \u201chave purchased\u201d the chair (which implies completed purchases) but the query does not filter by order status \u2014 it will include orders regardless of status (pending/cancelled). It also states \u201ceach customer appears only once,\u201d but the query uses DISTINCT on the customer name, not on customer_id, so two different customers who share the same name would be collapsed into one output; that distinction is not mentioned. Because of these misleading/invented implications the explanation is not correct, not complete, and invents behavior the SQL does not guarantee."
+    },
+    {
+      "item_id": "c-q038",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that the query groups by customer name (GROUP BY c.name). Because the grouping is by name, different customer rows that share the same name would be combined into one result row \u2014 the explanation implies per-customer counts and doesn\u2019t mention this important detail. It therefore fails to be complete and correct."
+    },
+    {
+      "item_id": "c-q043",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that customers with zero orders are excluded: the CTE only contains customers who appear in the orders table, so the average is computed over customers with at least one order. That omission affects which customers are returned, so the explanation is incomplete."
+    },
+    {
+      "item_id": "c-q044",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits important details that affect the results: it doesn't say the revenue is rounded to 2 decimal places, it doesn't state the grouping is by product name (which can merge different product_ids that share a name), and it doesn't make explicit that the query only uses rows from order_items joined to products (so products with no sales are excluded). These omissions mean the explanation is incomplete."
+    },
+    {
+      "item_id": "c-q050",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits an important detail: the query uses an inner join and groups by order_id, so completed orders that have no order_items are excluded. Saying it averages the total of \u201call completed orders\u201d is therefore misleading (fails correct and complete). The rest of the description (sum quantity*unit_price per order, then average and round to 2 decimals) is accurate."
+    },
+    {
+      "item_id": "c-q053",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation invents a currency \u2014 it says \u201cten dollars,\u201d but the query only compares price < 10 with no currency specified in the schema. Because of that incorrect extra detail it fails the correctness and no_invention criteria. Otherwise the filter, columns and ordering are described accurately."
+    },
+    {
+      "item_id": "c-q057",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says it looks at \u201call available products,\u201d which implies a filter (e.g. in_stock) that the query does not apply. It also omits the tie behavior: if several products share the same lowest price the query returns only one (which one is not specified) \u2014 this changes which row is returned. Because of those issues the explanation is not fully correct, complete, or free of invented assumptions."
+    },
+    {
+      "item_id": "c-q060",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate and clear about which rows and columns are returned, but it omits the sort direction. The query orders by country then name in ascending order by default, and the explanation should state the ordering direction to be complete."
+    },
+    {
+      "item_id": "c-q061",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits a key detail about the WHERE clause: rows where customers.country is NULL are not returned because NULL comparisons fail, so the query does not include customers with an unknown/empty country. That makes the statement \u201call customers who are not located in Tunisia\u201d potentially misleading. Otherwise it correctly states that the query returns the names of customers whose country is not 'Tunisia'."
+    },
+    {
+      "item_id": "c-q078",
+      "source": "baseline",
+      "error_type": null,
+      "human": "bad",
+      "judge": "good",
+      "judge_reason": "The explanation correctly and completely says the query counts order_items whose unit_price is different from the products table\u2019s current price for the same product, and it\u2019s phrased clearly for a non\u2011SQL reader. It makes no extra claims beyond the SQL."
+    },
+    {
+      "item_id": "c-q085",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The text correctly describes the SUM(quantity * unit_price), the grouping by order status, the rounding to two decimals, and the revenue column. However it implies it counts \u201cevery item in every order\u201d without noting that the query uses an inner join between orders and order_items, so orders that have no order_items will not appear (and only statuses present in the joined rows are returned). This omission makes the explanation incorrect and incomplete."
+    },
+    {
+      "item_id": "c-q088",
+      "source": "baseline",
+      "error_type": null,
+      "human": "bad",
+      "judge": "good",
+      "judge_reason": "The explanation accurately and clearly states that the query uses order line items joined to products and categories, groups by category name, and computes the average order-item quantity per category (i.e. average of oi.quantity over the joined rows). It neither invents extra filters nor omits any grouping or aggregation that would change the results."
+    },
+    {
+      "item_id": "c-q114",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation says \u201cfor each customer\u201d but the query only looks at the orders table and therefore returns only customer_id values that have at least one order (customers with no orders are omitted). This omission makes the explanation incomplete and the \u201cfor each customer\u201d phrasing incorrect."
+    },
+    {
+      "item_id": "c-q118",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate about which rows and columns are returned and about DISTINCT removing duplicates, but it omits the ORDER BY direction. The query sorts by order_date in ascending order (default), and the explanation only says \u201csorted by date\u201d without stating the direction or that ties have no further guaranteed ordering. Because the ORDER BY direction is required for completeness, the explanation is incomplete."
+    },
+    {
+      "item_id": "c-q120",
+      "source": "perturbed",
+      "error_type": "jargon",
+      "human": "bad",
+      "judge": "good",
+      "judge_reason": "The explanation accurately describes the inner joins, the selected columns (customer and product names and COUNT(*) as times), the grouping by customer_id and product_id, and the HAVING filter (>1). It makes no claims beyond the SQL and the final plain\u2011language summary (\u201ccustomer\u2013product pairs that appear more than once in the order lines\u201d) is clear."
+    },
+    {
+      "item_id": "c-q122",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation misses important behaviors: the query joins products to categories (so categories with no products are not returned) and will return fewer than two rows for categories that have fewer than two products. It also omits that ROW_NUMBER() breaks ties arbitrarily, so when multiple products share the same price the choice of which ones appear in the top two is unspecified."
+    },
+    {
+      "item_id": "c-q123",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation correctly describes the per-day revenue and the cumulative (running) total, but it omits an important detail about which rows are included: the query uses an inner join between orders and order_items so any order that has no items is excluded. It also doesn\u2019t state that no WHERE filter is applied (so orders of any status are included). Because it fails to mention these row-affecting details it is incomplete."
+    },
+    {
+      "item_id": "c-q124",
+      "source": "perturbed",
+      "error_type": "wrong_aggregation",
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation incorrectly says the query \u201ccounts the total number of orders they have placed.\u201d The SQL uses ROW_NUMBER(), which assigns an ordinal (1,2,3,...) to each order per customer in date order, not an aggregate total of orders per customer. This incorrectly describes what the query returns (an ordinal per row) and therefore invents behaviour the query doesn\u2019t perform."
+    },
+    {
+      "item_id": "c-q129",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits an important effect of the query: it also returns customers who never placed any order (they are not in the subquery), so the result includes both customers with orders that simply never included a category\u20111 product and customers with no orders at all. Because that behavior changes which rows are returned, the explanation is incomplete."
+    },
+    {
+      "item_id": "c-q133",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that the query returns DISTINCT customer names (duplicate names are removed). The SQL\u2019s use of DISTINCT affects which rows appear and must be mentioned to be complete."
+    },
+    {
+      "item_id": "c-q136",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is close but omits two important behaviors that change the results: the denominator is the total value of all order items (including cancelled and pending orders), not only completed sales (so saying \"sold\" is misleading), and the query uses inner joins so countries with no orders (or with orders that have no order_items) are excluded from the output. It does correctly describe the cancelled-value numerator, the percent calculation, rounding to 1 decimal, grouping by country, and sorting from highest to lowest pct_cancelled."
+    },
+    {
+      "item_id": "c-q137",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate and clear about counting customers by their number of orders and the ascending sort, but it omits a key detail: customers who have placed zero orders are not included because the query groups only customers present in the orders table. That exclusion changes which rows appear and should be mentioned."
+    },
+    {
+      "item_id": "c-q139",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation wrongly restricts the sums to the 'first half of 2024' vs 'second half of 2024' \u2014 the SQL only uses the cutoff '2024-07-01' so h1 includes every order_date before that (including years other than 2024) and h2 includes every order_date on/after that (including later years). It also omits that the query uses inner joins (so products with no matching order_items are excluded) and that there is no filter on order status; these affect which rows are counted. Because of those inaccuracies and omissions the explanation is not correct or complete and it invents behavior the SQL does not enforce."
+    },
+    {
+      "item_id": "c-q143",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation implies a single top category per country, but the query uses RANK() and filters WHERE r = 1 so tied categories for a country will all be returned \u2014 that tie behavior is not mentioned. It also omits that units come from SUM(order_items.quantity) across all orders with no status/date filter and that the query\u2019s inner joins exclude customers/countries with no matching orders, so it\u2019s incomplete about which rows are considered."
+    },
+    {
+      "item_id": "c-q144",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation claims the query shows cumulative signups \u201cfor each day,\u201d but the SQL returns one row per customer (signup_date repeated for multiple customers) and computes a running count per row, not a single aggregated count per date. It also omits that the running total is computed over rows ordered by signup_date (ascending) so rows sharing the same date are distinguished by row order and will get different cumulative values. This invents per-day aggregation and leaves out the tie/ordering behavior, so it is incorrect and incomplete."
+    },
+    {
+      "item_id": "c-q146",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation uses the word \u201cbought,\u201d which implies completed purchases, but the query does not filter orders by status and will include order items from any order (completed, pending, or cancelled). Otherwise the explanation correctly and clearly describes the returned customer names meeting the two unit_price conditions."
+    },
+    {
+      "item_id": "c-q147",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is mostly right about the percentages and rounding, but it omits an important detail: the query uses inner joins through order_items and products, so it only considers orders that have matching order_items and products. As written it may not return customers who have no such orders (and the denominator is the distinct orders after those joins). Because of that omission the explanation is incomplete and a statement implying it applies to \u201ceach customer\u201d is not fully correct."
+    },
+    {
+      "item_id": "c-q148",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation omits that products that have never been sold are excluded. Because the query joins products to order_items and then requires p.price > MAX(oi.unit_price), products with no order_items (no sales) will not appear; the explanation should state this row-exclusion explicitly."
+    },
+    {
+      "item_id": "c-q152",
+      "source": "perturbed",
+      "error_type": "wrong_aggregation",
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation incorrectly implies it returns every product category by saying \u201clists each product category.\u201d The SQL uses inner joins and filters for orders with status = 'completed', so categories without products or without completed order items are excluded; only categories that have completed order items (and then only those with Q4 < Q3) appear. Otherwise the description of the two quarterly revenue sums and the HAVING filter is accurate."
+    },
+    {
+      "item_id": "c-q156",
+      "source": "baseline",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is misleading and omits important details: the per-order total is computed from order_items as SUM(quantity * unit_price) and orders with no items are excluded (the query uses an inner join), but the explanation says \u201cevery order\u201d which is wrong. It also fails to mention that the lifetime total uses all orders regardless of status (pending or cancelled are included), that the order total is rounded to 2 decimals and the percent to 1 decimal, and that results are ordered by customer_id (ascending) then percentage (descending)."
+    },
+    {
+      "item_id": "c-q160",
+      "source": "weak",
+      "error_type": null,
+      "human": "good",
+      "judge": "bad",
+      "judge_reason": "The explanation is accurate and clear about the filter, grouping, aggregates (including that it divides total quantity by unique orders) and the descending sort, but it omits that the numeric result is rounded to two decimal places and it doesn\u2019t note that only orders that have order_items (because of the inner join) are included. Those omissions change the displayed values and which orders contribute to the result."
+    }
+  ],
+  "judge_prompt": "judge/v1",
+  "judge_model": "gpt5mini",
+  "split": "test"
+}
