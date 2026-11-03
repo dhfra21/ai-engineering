@@ -40,9 +40,10 @@ def summarise(rows):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--strategy", default="article")
+    ap.add_argument("--set", default="qa", help="qa (main) or qa_hard (paraphrased)")
     ap.add_argument("--modes", nargs="+", default=list(MODES))
     a = ap.parse_args()
-    items = load_qa(answerable_only=True)
+    items = load_qa(answerable_only=True, name=a.set)
     r = Retriever(a.strategy)
     # warm up models so load time is not counted as search latency
     for m in a.modes:
@@ -54,8 +55,8 @@ def main():
         for lang in ("ar", "fr"):
             report[mode][lang] = summarise([x for x in rows if x["lang"] == lang])
         print(f"{mode:15s}", {k: round(v, 3) for k, v in report[mode]["all"].items()}, flush=True)
-        (RESULTS / f"retrieval_{a.strategy}_{mode.replace('+', '_')}_rows.json").write_text(json.dumps(rows))
-    (RESULTS / f"retrieval_{a.strategy}.json").write_text(json.dumps(report, indent=1))
+        (RESULTS / f"retrieval_{a.set}_{a.strategy}_{mode.replace('+', '_')}_rows.json").write_text(json.dumps(rows))
+    (RESULTS / f"retrieval_{a.set}_{a.strategy}.json").write_text(json.dumps(report, indent=1))
 
 
 if __name__ == "__main__":

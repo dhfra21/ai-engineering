@@ -25,10 +25,15 @@ def build_prompt(question, chunks):
 
 def chat(messages, model=None, max_tokens=500, retries=4):
     model = model or config.GENERATOR
+    body = {"model": model, "messages": messages, "temperature": 0}
+    # OpenAI's newer models want max_completion_tokens and some reject temperature
+    body["max_completion_tokens" if config.PROVIDER == "openai" else "max_tokens"] = max_tokens
     for attempt in range(retries):
-        r = httpx.post(config.GROQ_URL, timeout=60,
-                       headers={"Authorization": f"Bearer {config.groq_key()}"},
-                       json={"model": model, "messages": messages, "temperature": 0, "max_tokens": max_tokens})
+        r = httpx.post(config.LLM_URL, timeout=60, json=body,
+                       headers={"Authorization": f"Bearer {config.api_key()}"})
+        if r.status_code == 400 and "temperature" in r.text and "temperature" in body:
+            body.pop("temperature")
+            continue
         if r.status_code == 429 or r.status_code >= 500:
             time.sleep(2 ** attempt)
             continue
@@ -38,7 +43,7 @@ def chat(messages, model=None, max_tokens=500, retries=4):
         return data["choices"][0]["message"]["content"], {
             "prompt_tokens": u["prompt_tokens"], "completion_tokens": u["completion_tokens"],
             "cost_usd": config.cost_usd(model, u["prompt_tokens"], u["completion_tokens"])}
-    raise RuntimeError("Groq rate limit / server error after retries")
+    raise RuntimeError("LLM API rate limit / server error after retries")
 
 
 def answer(question, mode="hybrid+rerank", k=5, strategy="article", model=None, retriever=None,

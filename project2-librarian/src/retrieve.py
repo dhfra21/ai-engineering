@@ -6,7 +6,8 @@ from functools import lru_cache
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-from .index import EMBED_MODEL, index_dir
+from .embed import get_embedder, parse_index_name
+from .index import index_dir
 from .textnorm import tokenize
 
 RERANK_MODEL = "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"
@@ -14,25 +15,27 @@ MODES = ("bm25", "dense", "hybrid", "hybrid+rerank")
 
 
 class Retriever:
-    def __init__(self, strategy="article"):
+    def __init__(self, strategy="article", rerank_max_length=384):
+        self.rerank_max_length = rerank_max_length
         d = index_dir(strategy)
         self.chunks = [json.loads(l) for l in (d / "chunks.jsonl").open()]
         self.bm25 = BM25Okapi([json.loads(l) for l in (d / "tokens.jsonl").open()])
         self.vecs = np.load(d / "embeddings.npy").astype(np.float32)
+        meta_f = d / "meta.json"   # indexes built before meta.json existed used local e5
+        self.meta = json.loads(meta_f.read_text()) if meta_f.exists() else {"backend": parse_index_name(strategy)[1]}
         self._embedder = self._reranker = None
 
     @property
     def embedder(self):
         if self._embedder is None:
-            from sentence_transformers import SentenceTransformer
-            self._embedder = SentenceTransformer(EMBED_MODEL)
+            self._embedder = get_embedder(self.meta["backend"], self.meta.get("dims"))
         return self._embedder
 
     @property
     def reranker(self):
         if self._reranker is None:
             from sentence_transformers import CrossEncoder
-            self._reranker = CrossEncoder(RERANK_MODEL, max_length=384)
+            self._reranker = CrossEncoder(RERANK_MODEL, max_length=self.rerank_max_length)
         return self._reranker
 
     # each returns (chunk indices, scores) best first
@@ -42,13 +45,20 @@ class Retriever:
         return idx, s[idx]
 
     def dense_search(self, query, n):
-        q = self.embedder.encode(["query: " + query], normalize_embeddings=True)[0]
+        q = self.embedder.query(query)
         s = self.vecs @ q
         idx = np.argsort(-s)[:n]
         return idx, s[idx]
 
-    def search(self, query, mode="hybrid+rerank", k=5, n_candidates=30, rrf_k=60, lang=None, year=None):
-        """Return the top-k chunks (dicts with a 'score'). lang/year are metadata filters."""
+    def search(self, query, mode="hybrid+rerank", k=5, n_candidates=30, rrf_k=60, lang=None, year=None,
+               skip_rerank_gap=None):
+        """Return the top-k chunks (dicts with a 'score'). lang/year are metadata filters.
+
+        skip_rerank_gap: Week 8 option. If the best fused (RRF) score beats the runner-up by at
+        least this fraction, the first search is confident and the slow reranker is skipped.
+        Note: then 'score' is the fused RRF score, not a reranker score, so an abstention
+        threshold tuned on reranker scores must not be applied to those results.
+        """
         def allowed(i):
             c = self.chunks[i]
             return (lang is None or c["lang"] == lang) and (year is None or c["year"] == year)
@@ -67,13 +77,15 @@ class Retriever:
                     if allowed(i):
                         fused[i] = fused.get(i, 0) + 1 / (rrf_k + rank + 1)
             ranked = sorted(fused.items(), key=lambda x: -x[1])
-            if mode == "hybrid+rerank":
+            confident = (skip_rerank_gap is not None and len(ranked) > 1
+                         and (ranked[0][1] - ranked[1][1]) / ranked[0][1] >= skip_rerank_gap)
+            if mode == "hybrid+rerank" and not confident:
                 cand = [i for i, _ in ranked[:n_candidates]]
                 scores = self.reranker.predict([(query, self.chunks[i]["text"]) for i in cand])
                 ranked = sorted(zip(cand, scores), key=lambda x: -x[1])
         return [{**self.chunks[i], "score": float(s)} for i, s in ranked[:k]]
 
 
-@lru_cache(maxsize=1)
-def get_retriever(strategy="article"):
-    return Retriever(strategy)
+@lru_cache(maxsize=2)
+def get_retriever(strategy="article", rerank_max_length=384):
+    return Retriever(strategy, rerank_max_length)

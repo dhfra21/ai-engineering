@@ -164,7 +164,9 @@ AR_START = re.compile(r"[\u0621-\u064a]{3}")
 
 def french_text(page_html):
     """The two-language page holds the French text, then the Arabic one."""
-    body = re.sub(r"<SCRIPT.*?</SCRIPT>", "", page_html[page_html.find("</STYLE>"):], flags=re.S)
+    end_style = re.search(r"</style>", page_html, re.I)
+    body = re.sub(r"<script.*?</script>", "", page_html[end_style.end():] if end_style else page_html,
+                  flags=re.S | re.I)
     body = re.sub(r"<(br|BR|/p|/P|/TR|/tr|/div)[^>]*>", "\n", body)
     t = html.unescape(re.sub(r"<[^>]+>", " ", body))
     t = re.sub(r"[ \t\u00a0]+", " ", t)
