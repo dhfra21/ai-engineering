@@ -40,3 +40,4 @@ project2-librarian/data/corpus/raw/
 # Project 2: service logs (questions and feedback from real users)
 project2-librarian/logs/
 project2-librarian/dist/
+project2-librarian/results/cache/
