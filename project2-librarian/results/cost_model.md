@@ -1,19 +1,19 @@
-# Cost model (PRELIMINARY: 7 real service requests, not the baseline)
+# Cost model (from the generation baseline)
 
-Measured on 7 requests; generator `gpt-4o-mini`. Abstained: 29%.
+Measured on 124 requests; generator `gpt-4o-mini`. Abstained: 18%.
 
 | Item | Value |
 |---|---|
-| Generation per request | $0.00023 |
+| Generation per request | $0.00021 |
 | Question embedding per request (25 tokens) | $0.0000005 |
-| **Total per request** | **$0.00023** |
-| Latency p50 / p95 | 7.6 s / 8.8 s |
+| **Total per request** | **$0.00021** |
+| Latency p50 / p95 | 4.9 s / 5.8 s |
 | Index build, once | $0.135 |
 
 | Scenario | Requests per day | Model fees per month | Workers needed | Hosting per month |
 |---|---|---|---|---|
-| today | 100 | $0.68 | 1 | $0 (free CPU Space) |
-| 100x | 10,000 | $68.11 | 4 | $120 |
+| today | 100 | $0.63 | 1 | $0 (free CPU Space) |
+| 100x | 10,000 | $62.57 | 3 | $90 |
 
 **Assumptions** (change them with the options of `eval/cost_model.py`):
 - today = 100 requests per day (a class using it for a demo); 100x = 10,000.
