@@ -1,0 +1,13 @@
+.venv
+.env
+data/index
+data/corpus/raw
+data/eval
+results
+logs
+dist
+tests
+eval
+report
+__pycache__
+*.pyc

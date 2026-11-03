@@ -23,9 +23,9 @@ need no measurement.
 | Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | Next. Switches now reach the whole pipeline: `--n-candidates`, `--rerank-max-length`, `--skip-rerank-gap` in both eval scripts, and `N_CANDIDATES` / `SKIP_RERANK_GAP` / `INDEX` env vars in the service. Plan: choose the variant on retrieval only (cheap), confirm with one generation run |
 | Record before/after numbers in `optimisation.md` | DF | 27 Nov | After the optimisation runs |
 | Write `design.md` | DF | 4 Dec | **Done**: chunking (with the ablation), index choice, retrieval, generation, 8 known failure cases. Generation results get added after the baseline |
-| Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | Moved from DF. Inputs: per-request tokens and $ in `results/generation_baseline.json` (`gen_cost`, `cost_per_request_usd`), index build cost in `data/index/*/meta.json`, prices in `src/config.py`. Include the query-embedding call for `-oai` indexes and the hosting cost |
-| Write `postmortem.md` | **OK** | 4 Dec | Moved from DF. Material: the Windows `open()` encoding issue (needs `PYTHONUTF8=1`), the duplicated hour-long index builds before indexes were shared, the e5 vs OpenAI-embedding switch mid-project, the mislabelled source files, and whatever the baseline failures show |
-| Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | Moved from DF. Do it after the last push |
+| Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | **Script + preliminary numbers done**: `python -m eval.cost_model` writes `results/cost_model.md` (about $0.00023 per request, 7.6 s p50; $0.68/month today, $68/month fees + about $120 hosting at 100x, assumptions listed). Preliminary because it uses 7 real service requests. **Re-run on the baseline when DF pushes `results/generation_baseline.json`:** `python -m eval.cost_model` |
+| Write `postmortem.md` | **OK** | 4 Dec | **Written** (`postmortem.md`): corpus, scraper, index builds, embedding switch, easy eval set, amending laws, latency, smaller problems. Section 9 (generation failures) is **[TO FILL]** from the baseline rows |
+| Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | **Preliminary check done** on a fresh clone (see below). **Run it again after the last push** |
 
 ## OK
 
@@ -34,12 +34,12 @@ need no measurement.
 | Fixed-window index + chunking ablation (article vs fixed) | 13 Nov | **Done.** Article chunking is better at the top ranks (tables in `results/ablation.md`) |
 | Write `eval/ablation.py` for the final retrieval table | 13 Nov | **Done** (`python -m eval.ablation`) |
 | Add harder eval cases and re-run the ablation | 13 Nov | **Done.** 50 paraphrased questions in `data/eval/qa_hard.jsonl`; far harder (see below) |
-| Decide final chunking + search method from the ablation | 13 Nov | **Ready to decide.** Results so far favour article chunking, with the reranker; note hybrid is worse than vector-only on paraphrased questions |
-| FastAPI service: `/ask` and `/feedback` | 20 Nov | Written (`src/service.py`) and tested with a stubbed pipeline; never run with real models |
-| Web page: right-to-left Arabic, citations, thumbs up/down | 20 Nov | Written inline in the service; not yet looked at in a browser |
-| Deploy to a public URL and collect classmate feedback | 20 Nov | Not started (pick hosting first: CPU only, about 1-2 GB RAM for the models) |
+| Decide final chunking + search method from the ablation | 13 Nov | **Done:** article chunking, hybrid search + reranker, OpenAI embeddings (`article-oai`). Reasons in `report/report.md` section 3. Open question for DF: hybrid is worse than vector-only on paraphrased questions (a lower BM25 weight in the fusion may help) |
+| FastAPI service: `/ask` and `/feedback` | 20 Nov | **Done and run for real** (Arabic and French questions, feedback, protected `/admin/export` to download logs). 38 tests |
+| Web page: right-to-left Arabic, citations, thumbs up/down | 20 Nov | **Done.** Checked in headless Chrome: Arabic answers render right to left, numbered citations, thumbs; `/?q=...` asks directly |
+| Deploy to a public URL and collect classmate feedback | 20 Nov | **Files ready, not deployed.** `Dockerfile` + `deploy/DEPLOY.md` (Hugging Face Spaces, free CPU). The container build is untested (no Docker on the dev machine). Needs an HF account and the secrets `OPENAI_API_KEY`, `ADMIN_TOKEN`: a manual step |
 | pytest tests: chunking, gold matching, scraper parsers | 27 Nov | **Done:** 37 tests (`.venv/bin/python -m pytest -q`) |
-| Report (max 6 pages) + README with Contributions | 4 Dec | README updated; report not started |
+| Report (max 6 pages) + README with Contributions | 4 Dec | README done (confirm the Contributions names). Report draft is 3 pages (`report/report.md`, PDF with `python report/build_pdf.py`); sections 4 and 5 and the cost numbers are marked **[TO FILL]** and depend on DF's runs |
 
 ## Currently running (on DF's machine, 3 Nov 2026)
 
@@ -87,3 +87,20 @@ the honest test.
   first session of Week 9.
 - The scraper is polite (1 request per second) and idempotent. See `data/corpus/README.md`.
 - Do not run heavy jobs while a latency measurement is running; they skew each other.
+
+## Clean-clone check (OK, 3 Nov, commit `beaf9ca`)
+
+Done on a fresh clone of GitHub, following the README only:
+
+- **Secrets:** none in the tree or in the whole history (only placeholders such as `OPENAI_API_KEY=...`). `.env`,
+  `.venv`, indexes, raw PDFs and logs are not tracked.
+- **Personal data:** none (no emails; the phone-like matches in the corpus are budget amounts; the corpus is public
+  legal text).
+- **Setup command:** works (dependencies installed from `requirements.txt`).
+- **Tests:** 42 passed.
+- **Index:** `python -m src.index article-oai` built 15,831 chunks in 149 s for $0.135.
+- **Run:** the service started, `/health` ok, and a French question was answered with the right citation
+  (`Loi n° 2015-37, Art. 8`) in 7.1 s.
+
+Not covered: the Docker build (no Docker on this machine) and the deployed URL. **Run this check again after the
+last push**, when the baseline, `optimisation.md` and the final report are in.

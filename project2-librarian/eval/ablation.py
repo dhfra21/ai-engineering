@@ -35,7 +35,7 @@ def table(rep, title):
 def main():
     out = []
     for qset, desc in SETS.items():
-        for strategy in ("article", "fixed"):
+        for strategy in ("article", "fixed", "article-oai"):
             f = RESULTS / f"retrieval_{qset}_{strategy}.json"
             if f.exists():
                 out.append(table(json.loads(f.read_text()), f"{desc}, chunking = {strategy}"))
