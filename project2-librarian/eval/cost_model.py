@@ -70,7 +70,7 @@ def to_markdown(m, label, params):
           f"- one worker handles one request at a time for its whole latency (the reranker is CPU-bound), run at {int(100 * params['utilisation'])}% utilisation to leave headroom for peaks.",
           f"- a worker costs ${params['worker_usd_month']:.0f} per month (an assumed price for a small CPU VM, not a quote).",
           "- prices come from `src/config.py` (list prices); judge calls are an evaluation cost, not a serving cost.",
-          "- hosting grows with the reranker's CPU time (7-9 s per request), while model fees are cents per thousand requests: that is why the reranker is the Week 8 target."]
+          "- hosting grows with the reranker's CPU time (5-9 s per request depending on the machine), while model fees are cents per thousand requests: that is why the reranker is the Week 8 target."]
     return "\n".join(s) + "\n"
 
 

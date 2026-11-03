@@ -56,8 +56,14 @@ def judge_correct(question, reference, answer, model=None):
     return bool(v.get("correct")), v.get("reason", ""), r["usage"]["cost_usd"]
 
 
-def judge_faithful(answer, cited_chunks, model=None):
-    sources = "\n\n".join(f"[{i}] {c['text']}" for i, c in enumerate(cited_chunks, 1))
+def judge_faithful(answer, cited_chunks, numbers=None, model=None):
+    """Is every claim supported by the sources the answer cites?
+
+    numbers: the [n] each chunk had in the prompt. The answer cites those numbers, so the judge must see
+    the same ones (numbering them 1..k by position would make `[3]` point at the wrong source).
+    """
+    numbers = list(numbers) if numbers is not None else range(1, len(cited_chunks) + 1)
+    sources = "\n\n".join(f"[{n}] {c['text']}" for n, c in zip(numbers, cited_chunks))
     r = _call(FAITHFULNESS % {"sources": sources, "answer": answer}, model or config.JUDGE)
     v = _parse(r["text"])
     return bool(v.get("faithful")), v.get("unsupported", []), r["usage"]["cost_usd"]

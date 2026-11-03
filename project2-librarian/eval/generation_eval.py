@@ -38,8 +38,12 @@ def score_row(item, out, do_judge=True):
     if do_judge:
         ok, why, c1 = judge.judge_correct(item["question"], item["answer"], out["answer"])
         row["correct"], row["why"] = ok, why
-        cited = out["citations"] or out["hits"]
-        faithful, unsupported, c2 = judge.judge_faithful(out["answer"], cited)
+        if out["citations"]:
+            cited, numbers = out["citations"], out.get("cited")      # the [n] used in the answer text
+        else:                                                         # no [n] in the answer: judge against all sources
+            cited, numbers = out["hits"], None
+        row["cited_ids"] = [c["id"] for c in cited]
+        faithful, unsupported, c2 = judge.judge_faithful(out["answer"], cited, numbers)
         row["faithful"], row["unsupported"] = faithful, unsupported
         row["judge_cost"] = c1 + c2
     return row
