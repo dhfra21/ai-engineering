@@ -87,3 +87,20 @@ the honest test.
   first session of Week 9.
 - The scraper is polite (1 request per second) and idempotent. See `data/corpus/README.md`.
 - Do not run heavy jobs while a latency measurement is running; they skew each other.
+
+## Clean-clone check (OK, 3 Nov, commit `beaf9ca`)
+
+Done on a fresh clone of GitHub, following the README only:
+
+- **Secrets:** none in the tree or in the whole history (only placeholders such as `OPENAI_API_KEY=...`). `.env`,
+  `.venv`, indexes, raw PDFs and logs are not tracked.
+- **Personal data:** none (no emails; the phone-like matches in the corpus are budget amounts; the corpus is public
+  legal text).
+- **Setup command:** works (dependencies installed from `requirements.txt`).
+- **Tests:** 42 passed.
+- **Index:** `python -m src.index article-oai` built 15,831 chunks in 149 s for $0.135.
+- **Run:** the service started, `/health` ok, and a French question was answered with the right citation
+  (`Loi n° 2015-37, Art. 8`) in 7.1 s.
+
+Not covered: the Docker build (no Docker on this machine) and the deployed URL. **Run this check again after the
+last push**, when the baseline, `optimisation.md` and the final report are in.
