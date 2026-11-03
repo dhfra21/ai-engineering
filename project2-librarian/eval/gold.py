@@ -3,11 +3,11 @@ import json
 import re
 from pathlib import Path
 
-QA = Path(__file__).resolve().parents[1] / "data" / "eval" / "qa.jsonl"
+QA_DIR = Path(__file__).resolve().parents[1] / "data" / "eval"
 
 
-def load_qa(answerable_only=False):
-    rows = [json.loads(l) for l in QA.open()]
+def load_qa(answerable_only=False, name="qa"):
+    rows = [json.loads(l) for l in (QA_DIR / f"{name}.jsonl").open()]
     return [r for r in rows if r["answerable"]] if answerable_only else rows
 
 

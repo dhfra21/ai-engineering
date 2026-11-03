@@ -285,6 +285,61 @@ UNANSWERABLE = [
     ("Que dit la loi tunisienne sur le droit à l'oubli numérique ?", "ماذا ينص القانون التونسي على الحق في النسيان الرقمي؟"),
 ]
 
+# Paraphrased questions: same gold article as above, but written the way a user would ask
+# it, with no law number and little of the article's own wording. (doc, article, fr, ar)
+HARD = [
+    ("law-2016-41", 2, "Mon entreprise doit-elle embaucher des personnes en situation de handicap, et combien de temps avons-nous pour nous mettre en règle ?",
+     "هل تلزم مؤسستي بتشغيل أشخاص ذوي إعاقة وما المهلة المتاحة لتسوية وضعيتها؟"),
+    ("law-2015-37", 8, "Je publie un livre : combien de temps ai-je pour en remettre un exemplaire obligatoire aux autorités ?",
+     "أصدرت كتابا، كم من الوقت لدي لإيداع نسخ منه إيداعا قانونيا؟"),
+    ("law-2016-22", 24, "Une administration peut-elle me refuser un document public, et pour quelles raisons ?",
+     "هل يمكن لإدارة أن ترفض تمكيني من وثيقة عمومية ولأي أسباب؟"),
+    ("law-2014-16", 148, "Après les recours devant le tribunal administratif, en combien de temps connaît-on les résultats officiels d'un scrutin ?",
+     "بعد البت في الطعون أمام المحكمة الإدارية، في كم من الوقت تعلن النتائج الرسمية للاقتراع؟"),
+    ("law-2021-37", 12, "Comment une femme de ménage employée à domicile doit-elle être payée ?",
+     "كيف يجب أن تقبض العاملة المنزلية أجرها؟"),
+    ("law-2025-9", 6, "Mon contrat à durée déterminée dure depuis des années sans motif exceptionnel : est-il toujours précaire ?",
+     "عقد شغلي معين المدة متواصل منذ سنوات دون مبرر استثنائي، هل ما زال هشا؟"),
+    ("law-2024-33", 15, "Un immeuble voisin menace de s'effondrer et le propriétaire ne fait rien : qui peut intervenir pour le faire évacuer ?",
+     "بناية مجاورة آيلة للسقوط ولا يتحرك مالكها، من يمكنه التدخل لإخلائها؟"),
+    ("law-2024-11", 13, "Un athlète peut-il être testé à l'improviste ?",
+     "هل يمكن إخضاع رياضي لتحليل دون إعلامه مسبقا؟"),
+    ("law-2016-35", 35, "Que doit faire la banque centrale d'un bien immobilier récupéré à cause d'une dette impayée ?",
+     "ماذا يجب على البنك المركزي أن يفعل بعقار اقتناه بسبب دين متعثر؟"),
+    ("law-2015-50", 3, "Qui prend connaissance du bilan annuel de la plus haute juridiction constitutionnelle et à quelle période ?",
+     "من يطلع على الحصيلة السنوية لأعلى هيئة قضائية دستورية وفي أي فترة؟"),
+    ("law-2020-30", 16, "Les petites coopératives peuvent-elles obtenir une part des marchés de l'Etat ?",
+     "هل تحصل المؤسسات التضامنية على حصة من صفقات الدولة؟"),
+    ("law-2018-9", 21, "Quand un huissier perd-il le droit d'exercer ?",
+     "متى يفقد العدل المنفذ حق ممارسة مهنته؟"),
+    ("law-2016-48", 16, "Mon argent placé sur un compte avec un contrat de Moudaraba est-il garanti par la banque ?",
+     "هل يضمن البنك أموالي الموضوعة بحساب بمقتضى عقد مضاربة؟"),
+    ("law-2019-10", 11, "Combien reçoivent les familles pauvres chaque mois et qui décide du montant ?",
+     "كم تتقاضى العائلات الفقيرة شهريا ومن يحدد المبلغ؟"),
+    ("law-2017-13", 3, "Que risque un parent dont l'enfant a quitté l'école sans être inscrit en formation ?",
+     "ماذا يتعرض له ولي ترك ابنه المنقطع عن الدراسة دون تكوين؟"),
+    ("law-2018-46", 29, "Que devient un cadeau de grande valeur reçu par un responsable soumis à déclaration de patrimoine ?",
+     "ما مصير هدية باهظة القيمة يتلقاها مسؤول خاضع للتصريح بالمكاسب؟"),
+    ("law-2015-38", 3, "Que reçoit la veuve d'un ancien chef de l'Etat après son décès ?",
+     "ماذا تتقاضى أرملة رئيس الجمهورية بعد وفاته؟"),
+    ("law-2016-34", 26, "Quand un vote est-il invalidé lors de l'élection des juges ?",
+     "متى يبطل صوت في انتخابات القضاة؟"),
+    ("law-2018-47", 16, "De combien de temps dispose un nouvel organisme indépendant pour faire respecter un code de déontologie par son personnel ?",
+     "كم من الوقت لدى هيئة مستقلة جديدة لإلزام أعوانها بمدونة سلوك؟"),
+    ("law-2026-8", 41, "Quelle sanction pour un concert organisé sans respecter la loi sur les artistes ?",
+     "ما العقوبة المسلطة على من ينظم حفلا فنيا دون احترام قانون الفنان؟"),
+    ("law-2013-48", 8, "Un fonds d'investissement islamique doit-il se doter d'un organe qui vérifie sa conformité à la charia ?",
+     "هل يجب أن يكون لصندوق استثمار إسلامي جهاز يراقب مطابقته للشريعة؟"),
+    ("law-2017-59", 39, "Un candidat écarté par la commission du parlement peut-il contester la décision, et en combien de jours ?",
+     "مترشح أقصته اللجنة البرلمانية، هل يمكنه الطعن وفي كم يوما؟"),
+    ("law-2019-25", 66, "Un contrôleur sanitaire peut-il demander l'aide de la police ou de l'armée ?",
+     "هل يمكن لعون مراقبة صحية أن يطلب مساعدة الأمن أو الجيش؟"),
+    ("law-2016-53", 35, "Mon terrain est exproprié et je conteste le prix : puis-je toucher quelque chose en attendant le jugement ?",
+     "انتزعت أرضي وأعترض على الثمن، هل يمكنني قبض شيء قبل صدور الحكم؟"),
+    ("law-2018-51", 21, "Un témoin peut-il être entendu en secret par l'instance chargée des violations des droits de l'Homme ?",
+     "هل يمكن الاستماع إلى شاهد بسرية لدى الهيئة المكلفة بانتهاكات حقوق الإنسان؟"),
+]
+
 NUM = re.compile(r"\d+")
 
 
@@ -325,6 +380,21 @@ def main():
     with path.open("w") as f:
         for r in out:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    base = {(d, a): (fa, aa) for d, a, _, fa, _, aa, _ in ANSWERABLE}
+    hard = []
+    for i, (doc, art, fq, aq) in enumerate(HARD, 1):
+        fa, aa = base[(doc, art)]
+        for lang, q, a in (("fr", fq, fa), ("ar", aq, aa)):
+            ev = article_text(CORPUS / ("fr" if lang == "fr" else "txt") / f"{doc}.txt", lang, art)
+            if ev is None:
+                missing.append((doc, art, lang))
+            hard.append({"id": f"h{i:03d}-{lang}", "pair": f"h{i:03d}", "lang": lang, "question": q, "answer": a,
+                         "answerable": True, "gold_doc": doc, "gold_articles": [art],
+                         "tags": ["paraphrase"], "evidence": ev})
+    with (ROOT / "data" / "eval" / "qa_hard.jsonl").open("w") as f:
+        for r in hard:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"{len(hard)} paraphrased questions -> qa_hard.jsonl")
     n_ans = sum(r["answerable"] for r in out)
     print(f"{len(out)} questions ({n_ans} answerable, {len(out) - n_ans} unanswerable) -> {path}")
     print("evidence not found:", missing)

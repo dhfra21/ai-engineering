@@ -33,6 +33,21 @@ The scraper is polite (1 request per second) and idempotent. The site's own
 links are sometimes wired to the wrong file, so each document is named by what
 its text says it is; mismatches are logged in `data/corpus/mismatch.log`.
 
+## Share the index (GitHub release asset)
+
+Embedding is the slow/expensive step; everything else rebuilds in under a minute.
+
+```bash
+# owner: pack the embeddings, upload dist/librarian-index.tar.gz to a GitHub release (tag index-v1)
+scripts/pack_index.sh article-oai
+# teammate: download it and finish the index (checks a hash, re-embeds only on mismatch)
+scripts/fetch_index.sh https://github.com/dhfra21/ai-engineering/releases/download/index-v1/librarian-index.tar.gz article-oai
+```
+
+OpenAI embeddings (`article-oai`, `text-embedding-3-small`) build in a few minutes for about $0.1;
+the local e5 index (`article`) takes about an hour on CPU. Queries must use the model the index was built with
+(stored in `meta.json`), so a service using `article-oai` needs `OPENAI_API_KEY` at query time.
+
 ## Evaluate
 
 ```bash
