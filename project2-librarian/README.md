@@ -42,9 +42,13 @@ chunks and the local e5 embeddings). *Recall@5 / MRR@10.*
 | hybrid (RRF) | 94% / 0.89 | 58% / 0.39 |
 | hybrid + reranker | **100% / 0.98** | **76% / 0.61** |
 
-Latency: search 0.1 to 0.5 s, but the reranker adds 7 to 9 s per query on CPU. Generation costs about $0.0002 per
-request. Generation results (correctness, faithfulness, citations, "I don't know"), the Week 8 optimisation and
-are **to be added** (`report/report.md`, `optimisation.md`). We did not collect feedback from real users.
+Latency: search 0.1 to 0.5 s, but the reranker adds several seconds per query on CPU. Generation costs about $0.0002
+per request.
+
+Generation (124 questions, `results/generation_*.json`): 96% correct and 96% faithful to the cited chunks before
+Week 8, with the gold article cited 99% of the time; the model refuses 20-22 of the 24 unanswerable questions and no
+answerable one. Week 8 (`optimisation.md`): reranking 10 candidates instead of 30 cut p95 latency by 52% for 2 points
+of correctness (96% to 94%, the limit); cost per request did not move. We did not collect feedback from real users.
 
 ## Rebuild the corpus and the evaluation
 
@@ -73,7 +77,7 @@ checking a hash of the chunks. Or simply rebuild with your own key.
 `src/` pipeline (`ingest/` scraper, `chunking.py`, `index.py`, `embed.py`, `retrieve.py`, `generate.py`, `service.py`) ·
 `eval/` retrieval, generation and ablation scripts · `data/corpus/` source texts · `data/eval/` questions with answers
 and source passages · `results/` outputs · `report/` report · `tests/` · `deploy/` + `Dockerfile` · `TASKS.md` work split ·
-`design.md`, `optimisation.md`, `postmortem.md` still to write.
+`design.md`, `optimisation.md`, `postmortem.md`.
 
 ## Contributions
 
@@ -81,9 +85,10 @@ and source passages · `results/` outputs · `report/` report · `tests/` · `de
 
 - **OK (OKmimech)**: corpus scraping and the French/Arabic data, chunking and the index, retrieval and the ablation
   (article vs fixed chunks, embeddings, paraphrased questions), the 174 evaluation questions, the FastAPI service and
-  web page, deployment files, unit tests, the report draft.
-- **DF (dhfra21)**: OpenAI switch and `answer()` testing, generation evaluation and abstention tuning, cost model and
-  Week 8 optimisation, `design.md`, `optimisation.md`, `postmortem.md`, final clean-clone check.
+  web page, deployment files, unit tests, the report draft, the faithfulness-judge fix and threshold check, cost model,
+  `postmortem.md`, final clean-clone check.
+- **DF (dhfra21)**: OpenAI switch and `answer()` testing, generation evaluation runs, prompt fixes and abstention
+  tuning, Week 8 optimisation, `design.md`, `optimisation.md`, report sections 4-5.
 
 ## No API keys in this repo
 

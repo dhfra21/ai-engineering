@@ -113,6 +113,16 @@ and article numbers copied exactly, and exactly "I don't know" / "لا أعرف"
 parsed from the `[n]` markers and mapped back to chunks, so every claim links to a
 law and article.
 
+The prompt also asks for the *complete* answer (every condition, penalty, amount and
+breakdown attached to it). The first eval showed that 10 of 13 wrong answers were
+incomplete rather than false, and this rule took correctness from 87% to 96%. The
+refusal phrase is chosen in code from the question's language. There is no refusal
+threshold on the reranker score: it separated the main set perfectly but would refuse
+74% of paraphrased answerable questions (`results/threshold_check.md`). The deployed
+pipeline reranks 10 candidates instead of 30 (Week 8, `optimisation.md`): p95 -52%
+for 2 points of correctness. Results: 94% correct, 95% faithful, 22 of 24 unanswerable
+questions refused (`results/generation_w8_1_c10.json`).
+
 ## Known failure cases
 
 - **Tables.** Finance and budget-settlement laws are mostly tables that extract as

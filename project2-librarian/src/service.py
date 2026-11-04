@@ -26,9 +26,12 @@ LOGS = Path(os.getenv("LOG_DIR", Path(__file__).resolve().parents[1] / "logs"))
 MODE = os.getenv("SEARCH_MODE", "hybrid+rerank")
 TOP_K = int(os.getenv("TOP_K", "5"))
 INDEX = os.getenv("INDEX", "article-oai")        # which index to serve (the deployed one uses OpenAI embeddings)
-N_CANDIDATES = int(os.getenv("N_CANDIDATES", "30"))
+# Week 8 (optimisation.md): rerank 10 candidates instead of 30, p95 -52% for -2 points of correctness
+N_CANDIDATES = int(os.getenv("N_CANDIDATES", "10"))
+RERANK_MAX_LENGTH = int(os.getenv("RERANK_MAX_LENGTH", "384"))
 SKIP_RERANK_GAP = float(os.environ["SKIP_RERANK_GAP"]) if os.getenv("SKIP_RERANK_GAP") else None
-ABSTAIN_SCORE = float(os.environ["ABSTAIN_SCORE"]) if os.getenv("ABSTAIN_SCORE") else None
+_abstain = os.getenv("ABSTAIN_SCORE", "")   # off: a score threshold refuses 74% of paraphrased answerable questions (results/threshold_check.md)
+ABSTAIN_SCORE = float(_abstain) if _abstain else None
 CACHE_ON = os.getenv("CACHE_ANSWERS", "0") == "1"   # off by default so the baseline is measurable
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")               # protects /admin/export; unset = endpoint disabled
 
@@ -39,8 +42,7 @@ app = FastAPI(title="The Librarian: Tunisian law Q&A")
 def _warm_up():
     """Load the index and models once, so the first user does not wait for them."""
     if os.getenv("WARM_UP", "1") == "1":
-        get_retriever(INDEX)
-        get_retriever(INDEX).search("test", mode=MODE, k=1)
+        get_retriever(INDEX, RERANK_MAX_LENGTH).search("test", mode=MODE, k=1)
 
 _lock = threading.Lock()
 _cache = {}
@@ -80,6 +82,7 @@ def ask(req: Ask):
     else:
         try:
             out = generate.answer(req.question, mode=MODE, k=TOP_K, strategy=INDEX, min_score=ABSTAIN_SCORE,
+                                  retriever=get_retriever(INDEX, RERANK_MAX_LENGTH),
                                   lang=req.lang, year=req.year, n_candidates=N_CANDIDATES,
                                   skip_rerank_gap=SKIP_RERANK_GAP)
         except RuntimeError as e:  # missing key, rate limit

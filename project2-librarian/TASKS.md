@@ -17,12 +17,12 @@ need no measurement.
 | Get corpus approval from the instructor | DF | 6 Nov | Message drafted; DF sends it |
 | Test `answer()` end to end, Arabic and French | DF | 13 Nov | **Done** on `article-oai`: both languages correct, citing the gold article; unanswerable questions abstain. Found one prompt failure: a French question abstained in Arabic. Fixed: low-score abstention now answers in the question's language (`idk_for` in `src/generate.py`) |
 | Choose and justify the vector DB / index | DF | 13 Nov | **Done**: flat files + brute-force cosine, justified in `design.md` |
-| Write `eval/generation_eval.py` | DF | 20 Nov | **Done**, first real run in progress (see "Currently running"). Rows now also store the top retrieval score, and the models are warmed up before timing |
-| Baseline numbers: p50/p95 latency, cost, accuracy | DF | 27 Nov | Running now on `article-oai`, 124 questions, `hybrid+rerank`, k = 5 → `results/generation_baseline.json` |
-| Tune abstention threshold, fix prompt failures | DF | 20 Nov | **Prompt fix done** by DF (correctness 87% to 96%). **Threshold 2.0 should not be used:** it looks perfect on the main set but would wrongly refuse 74% of the paraphrased answerable questions (`results/threshold_check.md`). The service leaves it off (`ABSTAIN_SCORE` unset). DF: re-run the tuned prompt with no threshold on both question sets and use those numbers |
-| Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | Next. Switches now reach the whole pipeline: `--n-candidates`, `--rerank-max-length`, `--skip-rerank-gap` in both eval scripts, and `N_CANDIDATES` / `SKIP_RERANK_GAP` / `INDEX` env vars in the service. Plan: choose the variant on retrieval only (cheap), confirm with one generation run |
-| Record before/after numbers in `optimisation.md` | DF | 27 Nov | After the optimisation runs |
-| Write `design.md` | DF | 4 Dec | **Done**: chunking (with the ablation), index choice, retrieval, generation, 8 known failure cases. Generation results get added after the baseline |
+| Write `eval/generation_eval.py` | DF | 20 Nov | **Done** and run for real (baseline, tuned, Week 8 rows). Rows store the top retrieval score; models are warmed up before timing |
+| Baseline numbers: p50/p95 latency, cost, accuracy | DF | 27 Nov | **Done**: `results/generation_baseline.json` (87% correct, p95 5.75 s, $0.00021) and, for Week 8, row 0 re-run in the measuring session (`results/generation_w8_0_tuned.json`) |
+| Tune abstention threshold, fix prompt failures | DF | 20 Nov | **Done.** Prompt fix: 87% to 96% correct. Threshold 2.0 tested and **dropped** after OK's check (refuses 74% of paraphrased answerable questions); the service default is off |
+| Optimise: 50% cost or latency cut, at most 2 points lost | DF | 27 Nov | **Done: latency target met.** Reranking 10 candidates instead of 30: p95 -52%, correctness 96% to 94% (-2, the limit). Now the service default (`N_CANDIDATES=10`). Cost target not met (-3%). Next run to try: 10 candidates x 256 tokens |
+| Record before/after numbers in `optimisation.md` | DF | 27 Nov | **Done** (`optimisation.md`), and the same table in report section 5 |
+| Write `design.md` | DF | 4 Dec | **Done**, including generation results and the Week 8 setting |
 | Cost model: tokens and $ per request, today and at 100x | **OK** | 27 Nov | **Script + preliminary numbers done**: `python -m eval.cost_model` writes `results/cost_model.md` (about $0.00023 per request, 7.6 s p50; $0.68/month today, $68/month fees + about $120 hosting at 100x, assumptions listed). Preliminary because it uses 7 real service requests. **Re-run on the baseline when DF pushes `results/generation_baseline.json`:** `python -m eval.cost_model` |
 | Write `postmortem.md` | **OK** | 4 Dec | **Done** (including section 9, generation failures). Add anything the Week 8 runs teach us |
 | Final check: clean clone, no keys, no personal data | **OK** | 4 Dec | **Preliminary check done** on a fresh clone (see below). **Run it again after the last push** |
@@ -41,18 +41,15 @@ need no measurement.
 | pytest tests: chunking, gold matching, scraper parsers | 27 Nov | **Done:** 37 tests (`.venv/bin/python -m pytest -q`) |
 | Report (max 6 pages) + README with Contributions | 4 Dec | README done (confirm the Contributions names). Report draft is 3 pages (`report/report.md`, PDF with `python report/build_pdf.py`); sections 4 and 5 and the cost numbers are marked **[TO FILL]** and depend on DF's runs |
 
-## Currently running (3 Nov 2026, evening)
+## Currently running (4 Nov 2026)
 
-Nothing on OK's machine. On DF's machine: the Week 8 optimisation runs, when they start. Do not run heavy jobs
-on DF's machine while they run, since they set the latency numbers.
+Nothing. The Week 8 runs are done (`results/generation_w8_*.json`, `results/w8_runs.log`). They ran in one session
+during which DF's machine was steadily about 4x slower than the evening before, likely CPU throttling. So their
+**percentages** are comparable with each other and their absolute seconds are not comparable with other runs
+(explained in `optimisation.md`).
 
-Generation results so far (`results/`): `generation_baseline.json` (DF), `generation_tuned.json` (DF: prompt fix +
-threshold 2.0) and `generation_tuned_judgefix.json` (OK: the same configuration after fixing the faithfulness
-judge, which numbered the cited sources wrongly; faithfulness 83% -> 96%; its latency is from a slower machine and is
-not comparable). **DF: pull before the next run**, so it uses the fixed judge.
-
-On Windows, run Python with `PYTHONUTF8=1`: several `open()` calls rely on the default encoding,
-which is cp1252 there and fails on Arabic text.
+Report: sections 4-5 filled; `python report/build_pdf.py` now also finds Chrome on Windows (5 pages). OK: the
+deployed URL, then the final clean-clone check after this push.
 
 ## Report handoff: what DF must supply when the Week 8 runs are done
 

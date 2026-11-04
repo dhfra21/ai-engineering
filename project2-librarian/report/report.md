@@ -1,14 +1,14 @@
 # Project 2: The Librarian
 
 CS496 AI Engineering, Fall 2026. A retrieval-augmented question answering service over Tunisian laws,
-in Arabic and French, with citations. Draft of 3 Nov 2026. Sections marked **[TO FILL]** depend on runs that
-are not done yet (Week 8); nothing in them is estimated.
+in Arabic and French, with citations. 4 Nov 2026.
 
 **At a glance.** 171 Arabic and 179 French laws (2013-2026), 15,831 article-level chunks, searched with keyword +
 vector + reranker. On our questions the right article is in the top 5 for 100% of the main set and 76% of the
-paraphrased set; answers are 95-96% correct, 96% faithful to their citations, and 23 of 24 unanswerable questions are
-refused (22-23 of 24, decided by the model; a score threshold does not generalise, section 4). A request takes about 5 s and costs
-$0.0002. Not done: real-user feedback; Week 8 numbers are pending.
+paraphrased set. Before Week 8, answers were 96% correct and 96% faithful to their citations. Week 8 cut p95 latency by 52%
+by reranking 10 candidates instead of 30, at 94% correct (-2 points, the limit) and 95% faithful. The model alone refuses
+22 of 24 unanswerable questions; a score threshold does not generalise (section 4). A request costs $0.0002 and takes
+about 5 s on an unloaded CPU before Week 8 (section 5 has the before/after on one machine). Not done: real-user feedback.
 
 ## 1. The corpus and its users
 
@@ -125,35 +125,42 @@ therefore leaves it off and relies on the model's own refusal (22 of 24 in the b
 These are numbers on the main set, whose questions reuse the laws' wording; the paraphrased questions have not been run
 through generation (retrieval only: 76% recall@5), so answer quality there is unknown and probably lower.
 
-## 5. Week 8: what changed and what it saved **[TO FILL by DF: every cell marked [DF]]**
+## 5. Week 8: what changed and what it saved
 
-**Target.** Cut p95 latency or cost per request by 50% while losing at most 2 points of accuracy, measured before and
-after on the same 124 questions, on one machine with nothing else running. Accuracy here is answer correctness
-(95-96% before); faithfulness and the refusals on unanswerable questions are reported alongside.
+**Target.** Cut p95 latency or cost per request by 50% while losing at most 2 points of accuracy (answer
+correctness), before and after on the same 124 questions. Full details: `optimisation.md`.
 
-**Where the time and money go.** The reranker is almost all of the latency (about 7 s of the 8-9 s request on a
-slow machine; p50 4.9 s and p95 6.1 s on DF's). Generation costs $0.0002 per request, so latency is the larger
-target; the cost levers are a cheaper model, fewer chunks and caching.
-
-Each change is measured alone first, then the kept ones together (all switches are off by default):
+**How it was measured.** All rows come from one session on DF's machine, one run after another, with nothing else
+heavy running. Row 0 is the tuned system **without** the refusal threshold (section 4), re-run in that session. In
+that session the machine was steadily about 4x slower than in the evening runs above (row 0: p50 16.2 s against
+4.9 s for the same configuration, likely CPU throttling), but the slowdown was constant from the first question to the
+last. So the **percentages** are comparable and the absolute seconds are not. Search (the reranker) was 13.9 of the
+16.2 s at p50, and generation cost $0.00023 per request, so latency was the target.
 
 | # | change | how | p50 | p95 | cost per request | correctness | faithfulness | unanswerable refused | kept? |
 |---|---|---|---|---|---|---|---|---|---|
-| 0 | baseline (prompt fix, threshold 2.0) | none | 4.9 s | 6.1 s | $0.00019 | 96% | 96% | 23/24 | |
-| 1 | fewer rerank candidates | `--n-candidates 10` | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
-| 2 | shorter rerank input | `--rerank-max-length 256` | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
-| 3 | skip the reranker when the first search is confident | `--skip-rerank-gap` [DF: value] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
-| 4 | fewer chunks sent to the model | `--k 3` | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
-| 5 | cheaper generation model | `--model` [DF: e.g. `gpt-5-nano`] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] |
-| 6 | cache repeated questions | `CACHE_ANSWERS=1` | [DF] | [DF] | [DF] | n/a | n/a | n/a | [DF] |
-| **final** | the kept changes together | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | [DF] | |
+| 0 | before: rerank 30 candidates x 384 tokens, 5 chunks, no threshold | none | 16.2 s | 19.3 s | $0.000229 | 96% | 96% | 20/24 | |
+| 1 | fewer rerank candidates | `--n-candidates 10` | 7.7 s | 9.2 s (-52%) | $0.000223 | 94% (-2) | 95% | 22/24 | **yes** |
+| 2 | shorter rerank input | `--rerank-max-length 256` | 11.8 s | 13.4 s (-31%) | $0.000220 | 93% (-3) | 94% | 21/24 | no |
+| 3 | skip the reranker when the first search is confident | `--skip-rerank-gap` | not run | | | | | | no |
+| 4 | fewer chunks sent to the model | `--k 3` | 16.0 s | 17.9 s (-7%) | $0.000165 (-28%) | 92% (-4) | 96% | 22/24 | no |
+| 5 | cheaper generation model | `--model gpt-5-nano` | empty answers in a spot check | | $0.00021 | | | | no |
+| 6 | cache repeated questions | `CACHE_ANSWERS=1` | no repeats in the test set | | $0 per hit | n/a | n/a | n/a | off by default |
+| 1+2 | milder combination | `--n-candidates 15 --rerank-max-length 256` | 9.6 s | 11.0 s (-43%) | $0.000200 | 95% (-1) | 96% | 22/24 | no |
+| **final** | **row 1** | service default `N_CANDIDATES=10` | **7.7 s** | **9.2 s (-52%)** | $0.000223 (-3%) | **94% (-2)** | 95% | 22/24 | |
 
-**Result.** [DF: one sentence, for example "p95 latency fell from 6.1 s to X s (-Y%) and cost per request from
-$0.00019 to $Z (-W%), with correctness 96% to V% (-U points)", and whether the 50% target and the 2-point limit were met.]
+**Result.** p95 latency fell from 19.3 s to 9.2 s (**-52%**), and p50 by the same 52%, with correctness 96% to 94%
+(**-2 points**). The latency target is met, and the accuracy limit is met exactly, with no margin. Two runs of the
+same configuration differ by 1-2 points, so the true loss could be 0 to 4 points. The cost target was not met:
+cost per request fell 3%.
 
-**What did not work** [DF: changes that lost more than 2 points or saved too little, with the numbers, and why].
-One thing to check when judging a change: the skip-reranker option returns fusion scores, not reranker scores. The
-refusal threshold is not used in the deployed service (section 4), so this only matters if one is added back.
+**What did not work.** Fewer chunks (row 4) was the only cost lever that worked (-28%), but it lost 4 points: complete
+answers need the neighbouring articles (penalties, exceptions) that chunks 4-5 hold. `gpt-5-nano` spent its whole
+500-token budget on reasoning and returned empty answers, at about the price of `gpt-4o-mini`, and `gpt-4.1-nano` is
+not available on the course key. The shorter rerank input alone (row 2) saved too little. Combined with 15 candidates it
+kept accuracy (-1) but cut p95 by only 43%. Skipping the reranker was not run: it returns fusion scores instead of
+reranker scores and needed a separate confidence threshold, and the plain cut already met the target. The next run
+to make is 10 candidates x 256 tokens. Retrieval alone gave recall@5 99% and search p95 -66% against 30 x 384.
 
 ## 6. Known failure cases and cost model
 
@@ -188,4 +195,6 @@ list prices to be re-checked):
 
 Hosting grows with the reranker's CPU time, not with model fees, which is why it is the Week 8 target.
 
-**[TO FILL]** after the Week 8 changes: p50/p95 latency and cost before and after.
+After Week 8 (section 5): reranking 10 candidates instead of 30 cuts p95 latency by 52% at about the same cost per
+request ($0.000223 against $0.000229). Since hosting grows with the reranker's CPU time, the same traffic needs
+roughly half the worker time.
