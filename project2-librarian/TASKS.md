@@ -37,7 +37,7 @@ need no measurement.
 | Decide final chunking + search method from the ablation | 13 Nov | **Done:** article chunking, hybrid search + reranker, OpenAI embeddings (`article-oai`). Reasons in `report/report.md` section 3. Open question for DF: hybrid is worse than vector-only on paraphrased questions (a lower BM25 weight in the fusion may help) |
 | FastAPI service: `/ask` and `/feedback` | 20 Nov | **Done and run for real** (Arabic and French questions, feedback, protected `/admin/export` to download logs). 38 tests |
 | Web page: right-to-left Arabic, citations, thumbs up/down | 20 Nov | **Done.** Checked in headless Chrome: Arabic answers render right to left, numbered citations, thumbs; `/?q=...` asks directly |
-| Deploy to a public URL (classmate feedback **dropped by decision**; the service still logs thumbs up/down) | 20 Nov | **Files ready, not deployed.** `Dockerfile` + `deploy/DEPLOY.md` (Hugging Face Spaces, free CPU). The container build is untested (no Docker on the dev machine). Needs an HF account and the secrets `OPENAI_API_KEY`, `ADMIN_TOKEN`: a manual step |
+| Deploy to a public URL (classmate feedback **dropped by decision**; the service still logs thumbs up/down) | 20 Nov | **Done (DF, 4 Nov): http://158.158.120.189**, Azure VM, systemd service (`deploy/librarian.service`, `deploy/DEPLOY.md`). Tested from outside: health, home page, an Arabic and a French question with the right citations. HF Spaces was dropped: Docker Spaces now need HF PRO. The Docker build is still untested (not needed on the VM) |
 | pytest tests: chunking, gold matching, scraper parsers | 27 Nov | **Done:** 37 tests (`.venv/bin/python -m pytest -q`) |
 | Report (max 6 pages) + README with Contributions | 4 Dec | README done (confirm the Contributions names). Report draft is 3 pages (`report/report.md`, PDF with `python report/build_pdf.py`); sections 4 and 5 and the cost numbers are marked **[TO FILL]** and depend on DF's runs |
 
@@ -49,8 +49,8 @@ be measured with the new interleaved benchmark. **Open, about 15 minutes, any id
 `python -m eval.latency_bench`, then put its end-to-end p50/p95 in `optimisation.md` and report section 5.
 Optional: the paraphrased-set generation runs (`--set qa_hard`, with and without `--n-candidates 10`).
 
-Still open: corpus approval (DF sends the drafted message); deployment and the final clean-clone check (OK). The
-container build is still untested.
+Deployed on 4 Nov: **http://158.158.120.189** (see the OK table). Still open: corpus approval (DF sends the drafted
+message) and the final clean-clone check (OK).
 
 ## Report handoff: what DF must supply when the Week 8 runs are done
 

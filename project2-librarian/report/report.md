@@ -1,7 +1,7 @@
 # Project 2: The Librarian
 
 CS496 AI Engineering, Fall 2026. A retrieval-augmented question answering service over Tunisian laws,
-in Arabic and French, with citations. 4 Nov 2026.
+in Arabic and French, with citations. 4 Nov 2026. **Live service: http://158.158.120.189** (ask on the home page).
 
 **At a glance.** 171 Arabic and 179 French laws (2013-2026), 15,831 article-level chunks, searched with keyword +
 vector + reranker. On our questions the right article is in the top 5 for 100% of the main set and 76% of the

@@ -6,7 +6,7 @@ A question answering service over **Tunisian laws** (Journal Officiel, 2013 to 2
 It retrieves with BM25 + vector search + a reranker, answers with `gpt-4o-mini`, cites the law and article
 for every claim, and says "I don't know" when the corpus has no answer.
 
-*Corpus pending instructor OK.* Deployed URL: *to add after deployment* (see `deploy/DEPLOY.md`).
+*Corpus pending instructor OK.* Deployed: **http://158.158.120.189** (Azure VM, 2 vCPUs; `deploy/DEPLOY.md`).
 
 ## Setup (one command)
 
