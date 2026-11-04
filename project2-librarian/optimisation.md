@@ -99,3 +99,26 @@ logged latencies stay honest.
 - **The cost target was not reached.** Generation costs about $0.0002 per request, and the only lever that cut it
   (row 4) cost 4 points. At this price, latency and hosting matter more: the reranker's CPU time decides how many
   workers the service needs (`results/cost_model.md`).
+
+## Second session (4 Nov, morning): accuracy confirmed, latency method revised
+
+The machine was back to normal speed, so rows 0 and 1 and the untried 10 x 256 combination were re-run
+(`results/generation_w8b_*.json`). **Accuracy confirms the result**, with an even smaller loss:
+
+| setting | correctness | faithfulness | unanswerable refused | cost per request |
+|---|---|---|---|---|
+| 30 x 384 (before) | 95% | 97% | 22/24 | $0.000227 |
+| **10 x 384 (deployed)** | **94% (-1)** | 94% | 22/24 | $0.000223 |
+| 10 x 256 | 93% (-2) | 93% | 22/24 | $0.000219 |
+
+**Latency could not be compared from these runs.** In the middle of a run, the laptop's speed switched between normal
+and about 3.5x slower: row 1's search took 5.2 s per question for the first 60 questions, then 1.5 s, and the
+10 x 256 run did the opposite. Configurations run one after another can each catch a different phase. In matching
+normal-speed stretches, search took 3.5 s with 30 candidates, 1.5 s with 10, and 1.2 s with 10 x 256 (-57% and
+-66%). That agrees with the first session (-61%) and with the retrieval-only test (-66% for 10 x 256).
+
+The fair way to measure this is `eval/latency_bench.py` (added): it times every setting on each question back to
+back, in rotating order, so a slow phase hits all of them alike, and adds each question's measured generation time.
+**It has not been run in full yet**, for lack of time. Running it once on an idle machine
+(`python -m eval.latency_bench`, about 15 minutes, no LLM calls) gives the definitive end-to-end p50/p95 for the
+report. The paraphrased-set generation runs (hand-off item 5) were also stopped before finishing.

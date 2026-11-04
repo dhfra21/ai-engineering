@@ -43,13 +43,14 @@ need no measurement.
 
 ## Currently running (4 Nov 2026)
 
-Nothing. The Week 8 runs are done (`results/generation_w8_*.json`, `results/w8_runs.log`). They ran in one session
-during which DF's machine was steadily about 4x slower than the evening before, likely CPU throttling. So their
-**percentages** are comparable with each other and their absolute seconds are not comparable with other runs
-(explained in `optimisation.md`).
+Nothing. Week 8 is written up (`optimisation.md`, report section 5). A second, clean session on 4 Nov confirmed the
+accuracy (deployed setting 94% vs 95%, -1 point) but showed the laptop's speed switching mid-run, so latency must
+be measured with the new interleaved benchmark. **Open, about 15 minutes, any idle machine with the index:**
+`python -m eval.latency_bench`, then put its end-to-end p50/p95 in `optimisation.md` and report section 5.
+Optional: the paraphrased-set generation runs (`--set qa_hard`, with and without `--n-candidates 10`).
 
-Report: sections 4-5 filled; `python report/build_pdf.py` now also finds Chrome on Windows (5 pages). OK: the
-deployed URL, then the final clean-clone check after this push.
+Still open: corpus approval (DF sends the drafted message); deployment and the final clean-clone check (OK). The
+container build is still untested.
 
 ## Report handoff: what DF must supply when the Week 8 runs are done
 
