@@ -14,7 +14,7 @@ need no measurement.
 | Task | Owner | Due | Status |
 |---|---|---|---|
 | Switch `config.py` / `generate.py` to OpenAI, key in `.env` | DF | 6 Nov | **Done and checked with real calls** (generator `gpt-4o-mini`, judge `gpt-4.1-mini`; this project's key does not list `gpt-4o`) |
-| Get corpus approval from the instructor | DF | 6 Nov | Message drafted; DF sends it |
+| Get corpus approval from the instructor | DF | 6 Nov | **Done**: approved by the instructor (4 Nov) |
 | Test `answer()` end to end, Arabic and French | DF | 13 Nov | **Done** on `article-oai`: both languages correct, citing the gold article; unanswerable questions abstain. Found one prompt failure: a French question abstained in Arabic. Fixed: low-score abstention now answers in the question's language (`idk_for` in `src/generate.py`) |
 | Choose and justify the vector DB / index | DF | 13 Nov | **Done**: flat files + brute-force cosine, justified in `design.md` |
 | Write `eval/generation_eval.py` | DF | 20 Nov | **Done** and run for real (baseline, tuned, Week 8 rows). Rows store the top retrieval score; models are warmed up before timing |
@@ -49,8 +49,8 @@ be measured with the new interleaved benchmark. **Open, about 15 minutes, any id
 `python -m eval.latency_bench`, then put its end-to-end p50/p95 in `optimisation.md` and report section 5.
 Optional: the paraphrased-set generation runs (`--set qa_hard`, with and without `--n-candidates 10`).
 
-Deployed on 4 Nov: **http://158.158.120.189** (see the OK table). Still open: corpus approval (DF sends the drafted
-message) and the final clean-clone check (OK).
+Deployed on 4 Nov: **http://158.158.120.189** (see the OK table). Corpus approved by the instructor (4 Nov). Still open: the final
+clean-clone check (OK).
 
 ## Report handoff: what DF must supply when the Week 8 runs are done
 
