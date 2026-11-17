@@ -12,3 +12,6 @@ Workspace for AI engineering projects and experiments.
   harness, golden set and LLM judge (with position/verbosity bias checks)
   for explaining SQL queries in plain words. Reuses Project 0's database.
   See its README. Assignment brief: `project1-grader.pdf`.
+- [`project3-operator/`](project3-operator/) — CS496 Project 3: an email-triage agent with a sandboxed
+  mailbox, a human checkpoint before any send, a stop rule, a trajectory eval and an injection threat model.
+  Start with its README. Assignment brief: `project3-operator.pdf`.
