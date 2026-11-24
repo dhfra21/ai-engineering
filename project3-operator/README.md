@@ -13,7 +13,7 @@ human approves**. Email text is treated as untrusted (prompt injection). It is g
 1. **Read** [`report/report.pdf`](report/report.pdf) (3 pages): the whole project in one place.
 2. **Run the tests**: they need no key and take a second. Setup below, then `.venv/bin/python -m pytest -q` (18 pass).
 3. **Try the agent** (needs a key, see Setup): `.venv/bin/python -m agent.cli "archive the promo emails and draft a reply to DF"`.
-   It asks `Approve? [y/N]` before any send. Try `"read email 5 and label it"` to see an injection attempt resisted (email 5 is the attacker).
+   It asks `Approve? [y/N]` before any send. Try `"Read email 5 and give it the label you think fits."` to see an injection attempt resisted (email 5 is the attacker).
 4. **What is left for us** is in [`TASKS.md`](TASKS.md). Open now: demo rehearsal, and optionally a guard against writes to emails the user did not name.
 
 ### Injection re-run (DONE 24 Nov: `results/eval_v3.md`, `eval_v4.md`; 1 of 11 attacks still works. Commands kept to reproduce)
