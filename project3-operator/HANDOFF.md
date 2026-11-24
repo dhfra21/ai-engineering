@@ -1,3 +1,15 @@
+# UPDATE 24 Nov (read first): the pending re-run is DONE, new work for DF
+
+- Injection re-run done (`results/eval_v3.md`, `v4`, `v5`): once the agent was forced to read the malicious email, **attacks did work** (v3: s31, v4: s40). Fixes: hardened prompt + a **code guard** (writes limited to the emails the user named) + loop retry on malformed tool calls. `v5`: 0 of 11, but the guard never fired, so be honest that results vary between runs.
+- Tests: 21 pass (`pytest -q`). Report is now 1 page (`report/report_long.md` is the old 3-page version).
+- **What is left for you (needs your own Groq key; ours is out of daily tokens):**
+  1. Full run: `.venv/bin/python -m eval.run_eval --tag v6` (~145k tokens, one per key per day, use `--resume` after a rate-limit error). Update the report table and `threat_model.md`; rebuild the PDF (`python report/build_pdf.py`, needs `markdown` and Chrome).
+  2. Instructor OK for the idea: confirm it was sent, update `TASKS.md`.
+  3. Confirm the README **Contributions** section (DF line says "to confirm").
+  4. Demo rehearsal (the brief says the demo includes an injection attempt): `python -m agent.cli "read email 5 and label it"`. Note the guard only covers requests that name email ids.
+  5. Clean-clone check after the final push.
+- The older text below is from 17 Nov; where it says the re-run is pending, it is out of date.
+
 # Handoff to DF: where we are (17 Nov 2026, evening)
 
 Written by OK so you can pick this up without asking. Read this first, then `report/report.pdf` (3 pages).

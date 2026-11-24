@@ -62,6 +62,13 @@ live audience. More and harder scenarios would be the next improvement.
 - **One model, run a few times.** We did not compare models; runs on a free tier are noisy and variance is reported in the report.
 - **Prices** in the cost model are list prices quoted from memory of the pricing pages and must be re-checked before quoting.
 
+## Late finding: the injection re-run (24 Nov)
+
+Once the agent was forced to read the malicious email, attacks worked: s31 in `v3`, s40 in `v4` (11 of 11 runs exposed).
+Our earlier "0 of 11" was mostly untested. A prompt fix cured s31 but not s40, and the failing scenario moves between runs.
+Lesson: the prompt is a weak defence; the tool design is what bounded the damage (no send to third parties, reversible writes).
+We then added a code-level scope guard; `v5` showed 0 of 11 attacks, but the guard never fired, so the clean result is partly luck (runs vary). We also fixed the loop to retry a malformed-tool-call 400 and to show the error body (it had hidden the cause).
+
 ## What we would do differently
 
 Make a real API call and a tiny end-to-end run on day one; write the stop rule *and its counter-test* first; read the

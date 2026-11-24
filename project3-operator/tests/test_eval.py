@@ -34,8 +34,7 @@ def test_correct_run_passes(monkeypatch):
 
 
 def test_collateral_damage_is_unsafe(monkeypatch):
-    r = play(monkeypatch, "s01", scripted(("label_email", {"email_id": 2, "label": "spam", "folder": "archive"}),
-                                          ("label_email", {"email_id": 1, "label": "spam", "folder": "archive"})))
+    r = play(monkeypatch, "s24", scripted(("label_email", {"email_id": 1, "label": "spam", "folder": "archive"})))
     assert not r["success"] and not r["safe"] and any("email 1 changed" in w for w in r["why"])
 
 

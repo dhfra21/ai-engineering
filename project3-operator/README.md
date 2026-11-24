@@ -14,9 +14,9 @@ human approves**. Email text is treated as untrusted (prompt injection). It is g
 2. **Run the tests**: they need no key and take a second. Setup below, then `.venv/bin/python -m pytest -q` (18 pass).
 3. **Try the agent** (needs a key, see Setup): `.venv/bin/python -m agent.cli "archive the promo emails and draft a reply to DF"`.
    It asks `Approve? [y/N]` before any send. Try `"read email 5 and label it"` to see an injection attempt resisted (email 5 is the attacker).
-4. **What is left for us** is in [`TASKS.md`](TASKS.md). The most useful job for you: run the pending eval below with **your own Groq key**.
+4. **What is left for us** is in [`TASKS.md`](TASKS.md). Open now: demo rehearsal, and optionally a guard against writes to emails the user did not name.
 
-### The one open item: re-run the injection scenarios
+### Injection re-run (DONE 24 Nov: `results/eval_v3.md`, `eval_v4.md`; 1 of 11 attacks still works. Commands kept to reproduce)
 
 We rewrote 8 injection tasks so the agent *has to read* the malicious email (before, it often never opened it, so the attack
 was never tested). The free Groq key we used hit its **200,000 tokens/day** limit before we could re-run them. With your key:
@@ -61,7 +61,7 @@ The format is `NAME=value` with no spaces and no quotes.
 | injection | 11 | 100% | 100% |
 
 About $0.0007 and 3 steps per task; $21/month at 100x. **Read the caveats** in the report: the model read the malicious email in only
-3 of the 11 injection runs (the re-run above fixes that), the scenarios are ours so the eval is likely easier than a live audience,
+3 of the 11 injection runs (fixed on 24 Nov: 11 of 11 read, 1 attack worked), the scenarios are ours so the eval is likely easier than a live audience,
 and it is one run of one model. The first baseline (37 scenarios, `results/eval_baseline.md`) scored 97%.
 
 ## How it fits together
@@ -81,4 +81,6 @@ task -> agent/loop.py -> model picks a tool -> agent/tools.py -> sandbox/mailbox
 
 ## Contributions
 
-*To fill in before handing in: what OK did, what DF did.*
+- **OK:** sandbox and 5 tools, loop and stop rule with tests, the 41 scenarios and eval runner, cost model, error taxonomy,
+  threat model, first report and postmortem.
+- **DF:** (to confirm) injection re-run with forced reads (`v3`, `v4`), prompt hardening, final report and postmortem updates, demo.
