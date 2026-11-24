@@ -102,23 +102,30 @@ def one(sc):
     with tempfile.TemporaryDirectory() as d:
         seed = json.loads(config.SEED_PATH.read_text()) + sc["extra"]
         con = mailbox.reset(Path(d) / "m.db", seed)
-        base = mailbox.snapshot(con)
-        calls, asked = [], []
-        def approve(name, args, preview):
-            asked.append(preview)
-            return sc["approve"]
-        try:
-            t = run(sc["task"], con, approve=approve, runner=make_runner(sc["fail"], calls))
-        except Exception as e:                                   # API trouble: record, do not crash the batch
-            return {"id": sc["id"], "category": sc["category"], "error": repr(e)}
-        ok, safe, why = grade(sc, con, t, base)
-        bad_ids = {e["id"] for e in sc["extra"]} | {5}                   # emails that carry an injection
-        exposed = sc["injection"] and any(st["tool"] == "read_email" and st["args"].get("email_id") in bad_ids for st in t.steps)
-        acc, prec, wasted = step_metrics(sc, t.steps)
-        return {"id": sc["id"], "category": sc["category"], "task": sc["task"], "success": ok, "safe": safe, "why": why,
-                "step_acc": acc, "precision": prec, "wasted": wasted, "n_steps": len(t.steps), "stop": t.stop_reason,
-                "cost": t.cost, "seconds": t.seconds, "api_seconds": t.api_seconds, "tokens_in": t.tokens_in, "tokens_out": t.tokens_out,
-                "exposed": bool(exposed), "asked_approval": len(asked), "final": t.final, "steps": t.steps}
+        try:                                                     # close before the temp dir is removed (Windows)
+            return _one(sc, con)
+        finally:
+            con.close()
+
+
+def _one(sc, con):
+    base = mailbox.snapshot(con)
+    calls, asked = [], []
+    def approve(name, args, preview):
+        asked.append(preview)
+        return sc["approve"]
+    try:
+        t = run(sc["task"], con, approve=approve, runner=make_runner(sc["fail"], calls))
+    except Exception as e:                                   # API trouble: record, do not crash the batch
+        return {"id": sc["id"], "category": sc["category"], "error": repr(e)}
+    ok, safe, why = grade(sc, con, t, base)
+    bad_ids = {e["id"] for e in sc["extra"]} | {5}                   # emails that carry an injection
+    exposed = sc["injection"] and any(st["tool"] == "read_email" and st["args"].get("email_id") in bad_ids for st in t.steps)
+    acc, prec, wasted = step_metrics(sc, t.steps)
+    return {"id": sc["id"], "category": sc["category"], "task": sc["task"], "success": ok, "safe": safe, "why": why,
+            "step_acc": acc, "precision": prec, "wasted": wasted, "n_steps": len(t.steps), "stop": t.stop_reason,
+            "cost": t.cost, "seconds": t.seconds, "api_seconds": t.api_seconds, "tokens_in": t.tokens_in, "tokens_out": t.tokens_out,
+            "exposed": bool(exposed), "asked_approval": len(asked), "final": t.final, "steps": t.steps}
 
 
 def pct(xs):

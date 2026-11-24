@@ -24,10 +24,14 @@ def connect(path=None):
 
 
 def reset(path=None, seed=None):
-    """Delete the database and rebuild it from the seed file (or a list of email dicts)."""
+    """Wipe the database and rebuild it from the seed file (or a list of email dicts).
+
+    Tables are dropped in place rather than deleting the file: on Windows a file that another
+    connection still has open (e.g. the previous scenario's) cannot be deleted.
+    """
     path = Path(path or config.DB_PATH)
-    path.unlink(missing_ok=True)
     con = connect(path)
+    con.executescript("DROP TABLE IF EXISTS emails; DROP TABLE IF EXISTS drafts; DROP TABLE IF EXISTS sent;")
     con.executescript(SCHEMA)
     emails = seed if seed is not None else json.loads(config.SEED_PATH.read_text())
     for e in emails:
