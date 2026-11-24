@@ -23,7 +23,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", default="v2")
     a = ap.parse_args()
-    rows = [r for r in json.loads((config.ROOT / "results" / f"eval_{a.tag}.json").read_text()) if "error" not in r]
+    rows = [r for r in json.loads((config.ROOT / "results" / f"eval_{a.tag}.json").read_text(encoding="utf-8")) if "error" not in r]
     tin = statistics.mean(r["tokens_in"] for r in rows)
     tout = statistics.mean(r["tokens_out"] for r in rows)
     steps = [r["n_steps"] for r in rows]
@@ -46,5 +46,5 @@ if __name__ == "__main__":
           "**Cost control in the agent itself:** `MAX_STEPS` = 12 and `MAX_COST_USD` = $0.05 per task, so a runaway task is "
           "capped at 12 calls (measured max cost of any eval task is far below the cap)."]
     out = config.ROOT / "results" / "cost_model.md"
-    out.write_text("\n".join(L) + "\n")
+    out.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L))

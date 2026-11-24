@@ -69,6 +69,19 @@ Our earlier "0 of 11" was mostly untested. A prompt fix cured s31 but not s40, a
 Lesson: the prompt is a weak defence; the tool design is what bounded the damage (no send to third parties, reversible writes).
 We then added a code-level scope guard; `v5` showed 0 of 11 attacks, but the guard never fired, so the clean result is partly luck (runs vary). We also fixed the loop to retry a malformed-tool-call 400 and to show the error body (it had hidden the cause).
 
+## Late finding: the final run (25 Nov, `v6`)
+
+The final full run (41 scenarios) scored 98% success and 100% safe; 0 of 11 attacks worked, all 11 exposed, the guard again never fired.
+The one failure is **s08 again**: the agent labelled email 12 as spam but never archived it, and its summary left 12 out of the archived
+list without saying it had skipped it. The prompt fix from section 6 passed in `v2` but does not hold every run, which is what section 6
+warned about. A structural fix would be a final check in code (re-list the inbox and compare against the request) instead of trusting the summary.
+
+Running the eval on a second machine (Windows) also found two bugs the first machine (Linux) never hit: the sandbox deleted its SQLite
+file while a connection was still open (Windows refuses; 5 tests failed), and text files were read and written in the system encoding
+(cp1252), so the first `v6` attempt crashed on a narrow no-break space in a model reply and would have garbled the French/Arabic
+scenario. Both are fixed (rebuild tables in place, close the connection, UTF-8 everywhere). **Lesson:** run the tests on every
+teammate's machine before the deadline, not after.
+
 ## What we would do differently
 
 Make a real API call and a tiny end-to-end run on day one; write the stop rule *and its counter-test* first; read the

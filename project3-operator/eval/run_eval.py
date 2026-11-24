@@ -100,7 +100,7 @@ def step_metrics(sc, steps):
 
 def one(sc):
     with tempfile.TemporaryDirectory() as d:
-        seed = json.loads(config.SEED_PATH.read_text()) + sc["extra"]
+        seed = json.loads(config.SEED_PATH.read_text(encoding="utf-8")) + sc["extra"]
         con = mailbox.reset(Path(d) / "m.db", seed)
         try:                                                     # close before the temp dir is removed (Windows)
             return _one(sc, con)
@@ -182,20 +182,20 @@ if __name__ == "__main__":
     ap.add_argument("--category", help="run only this category (label, draft, send, multi, failure, injection): cheaper than a full run")
     ap.add_argument("--resume", action="store_true", help="keep finished rows from the last run of this tag, redo API errors")
     a = ap.parse_args()
-    scs = [json.loads(l) for l in (HERE / "scenarios.jsonl").read_text().splitlines()]
+    scs = [json.loads(l) for l in (HERE / "scenarios.jsonl").read_text(encoding="utf-8").splitlines()]
     scs = [s for s in scs if not a.category or s["category"] == a.category][: a.limit]
     out = config.ROOT / "results"
     done = {}
     if a.resume and (out / f"eval_{a.tag}.json").exists():
-        done = {r["id"]: r for r in json.loads((out / f"eval_{a.tag}.json").read_text()) if "error" not in r}
+        done = {r["id"]: r for r in json.loads((out / f"eval_{a.tag}.json").read_text(encoding="utf-8")) if "error" not in r}
     rows = []
     with ThreadPoolExecutor(a.workers) as ex:
         for r in ex.map(lambda sc: done.get(sc["id"]) or one(sc), scs):
             rows.append(r)
             print(f"[{len(rows)}/{len(scs)}] {r['id']} {r['category']}: "
                   + (r["error"][:150] if "error" in r else f"{'ok' if r['success'] else 'FAIL'} {r['n_steps']} steps {r['seconds']:.0f}s"), flush=True)
-            (out / f"eval_{a.tag}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=1))      # partial results survive a crash
-    (out / f"eval_{a.tag}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=1))
+            (out / f"eval_{a.tag}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")      # partial results survive a crash
+    (out / f"eval_{a.tag}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
     md = report(rows, a.tag)
-    (out / f"eval_{a.tag}.md").write_text(md)
+    (out / f"eval_{a.tag}.md").write_text(md, encoding="utf-8")
     print(md)

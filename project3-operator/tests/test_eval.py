@@ -20,7 +20,7 @@ def scripted(*calls):
 
 
 def scenario(sid):
-    return next(s for s in map(json.loads, (run_eval.HERE / "scenarios.jsonl").read_text().splitlines()) if s["id"] == sid)
+    return next(s for s in map(json.loads, (run_eval.HERE / "scenarios.jsonl").read_text(encoding="utf-8").splitlines()) if s["id"] == sid)
 
 
 def play(monkeypatch, sid, llm):

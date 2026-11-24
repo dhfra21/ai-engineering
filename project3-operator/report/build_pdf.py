@@ -1,4 +1,6 @@
 """Render report/report.md to report/report.pdf with Chrome."""
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -17,7 +19,21 @@ code { font-size: 8.6pt; background: #f2f2f2; padding: 0 2pt; } p { margin: 4pt 
 """
 out = here / "report.html"
 out.write_text(f"<!doctype html><meta charset='utf-8'><style>{css}</style>{html}", encoding="utf-8")
-subprocess.run(["google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
+def find_browser():
+    """Chrome (or Edge) on Linux, macOS or Windows; set CHROME=<path> to override."""
+    names = ["google-chrome", "google-chrome-stable", "chromium", "chrome", "msedge"]
+    paths = [r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+             r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+             os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
+             r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+             "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
+    for c in [os.getenv("CHROME")] + [shutil.which(n) for n in names] + paths:
+        if c and Path(c).exists():
+            return c
+    sys.exit("Chrome not found: set CHROME=<path to chrome or msedge>")
+
+
+subprocess.run([find_browser(), "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
                 f"--print-to-pdf={here / 'report.pdf'}", out.as_uri()], check=True, capture_output=True)
 out.unlink()
 print("wrote", here / "report.pdf")

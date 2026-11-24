@@ -33,7 +33,7 @@ def reset(path=None, seed=None):
     con = connect(path)
     con.executescript("DROP TABLE IF EXISTS emails; DROP TABLE IF EXISTS drafts; DROP TABLE IF EXISTS sent;")
     con.executescript(SCHEMA)
-    emails = seed if seed is not None else json.loads(config.SEED_PATH.read_text())
+    emails = seed if seed is not None else json.loads(config.SEED_PATH.read_text(encoding="utf-8"))
     for e in emails:
         con.execute("INSERT INTO emails (id, sender, subject, body, received, folder, labels) VALUES (?,?,?,?,?,?,?)",
                     (e["id"], e["sender"], e["subject"], e["body"], e.get("received", ""),

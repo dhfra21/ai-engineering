@@ -86,5 +86,5 @@ add("failure", "Label everything in the archive folder as spam.")          # emp
 
 if __name__ == "__main__":
     out = Path(__file__).with_name("scenarios.jsonl")
-    out.write_text("\n".join(json.dumps(s, ensure_ascii=False) for s in S) + "\n")
+    out.write_text("\n".join(json.dumps(s, ensure_ascii=False) for s in S) + "\n", encoding="utf-8")
     print(f"{len(S)} scenarios -> {out}")
