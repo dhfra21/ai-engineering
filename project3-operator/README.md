@@ -82,5 +82,7 @@ task -> agent/loop.py -> model picks a tool -> agent/tools.py -> sandbox/mailbox
 ## Contributions
 
 - **OK:** sandbox and 5 tools, loop and stop rule with tests, the 41 scenarios and eval runner, cost model, error taxonomy,
-  threat model, first report and postmortem.
-- **DF:** (to confirm) injection re-run with forced reads (`v3`, `v4`), prompt hardening, final report and postmortem updates, demo.
+  threat model, first report and postmortem; injection re-run with forced reads (`v3`, `v4`, `v5`), prompt hardening and the scope guard.
+- **DF:** instructor OK on the idea; final full eval run (`v6`, all 41 scenarios) and its write-up in the report, threat model,
+  postmortem and cost model; fixed the Windows-only bugs (SQLite file locking, text encoding, PDF build); demo rehearsal and
+  a working demo prompt; clean-clone check.
